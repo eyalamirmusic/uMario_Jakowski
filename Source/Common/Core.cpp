@@ -3,26 +3,8 @@
 #include "CFG.h"
 #include "SDL_mixer.h"
 
-Map* CCore::oMap = new Map();
-bool CCore::quitGame = false;
-
-bool CCore::movePressed = false;
-bool CCore::keyMenuPressed = false;
-bool CCore::keyS = false;
-bool CCore::keyW = false;
-bool CCore::keyA = false;
-bool CCore::keyD = false;
-bool CCore::keyShift = false;
-bool CCore::keyAPressed = false;
-bool CCore::keyDPressed = false;
-
 CCore::CCore()
 {
-    this->quitGame = false;
-    this->iFPS = 0;
-    this->iNumOfFPS = 0;
-    this->lFPSTime = 0;
-
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
 
     window = SDL_CreateWindow("uMario - www.LukaszJakowski.pl",
@@ -32,12 +14,8 @@ CCore::CCore()
                               CCFG::GAME_HEIGHT,
                               SDL_WINDOW_SHOWN);
 
-    if (window == NULL)
-    {
-        quitGame = true;
-    }
-
-    rR = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (window != nullptr)
+        rR = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     // ----- ICO
     std::string fileName = "files/images/ico.bmp";
@@ -53,16 +31,11 @@ CCore::CCore()
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-    oMap = new Map(rR);
+    Mario::getGameState(rR);
+
     CCFG::getMM()->setActiveOption(rR);
     CCFG::getSMBLOGO()->setIMG("super_mario_bros", rR);
-
     CCFG::getMusic()->playTrack();
-
-    this->keyMenuPressed = this->movePressed = this->keyS = this->keyW = this->keyA =
-        this->keyD = this->keyShift = false;
-
-    this->keyAPressed = this->keyDPressed = this->firstDir = false;
 
     CCFG::keyIDA = SDLK_a;
     CCFG::keyIDS = SDLK_s;
@@ -73,7 +46,6 @@ CCore::CCore()
 
 CCore::~CCore()
 {
-    delete oMap;
     delete mainEvent;
     SDL_DestroyRenderer(rR);
     SDL_DestroyWindow(window);
@@ -83,7 +55,7 @@ void CCore::mainLoop()
 {
     lFPSTime = SDL_GetTicks();
 
-    while (!quitGame && mainEvent->type != SDL_QUIT)
+    while (!Mario::getGameState().quitGame && mainEvent->type != SDL_QUIT)
     {
         frameTime = SDL_GetTicks();
         SDL_PollEvent(mainEvent);
@@ -93,14 +65,14 @@ void CCore::mainLoop()
         SDL_RenderFillRect(rR, nullptr);
 
         Input();
-        Update();
-        Draw();
+        update();
+        draw();
 
         SDL_RenderPresent(rR);
 
-        if (SDL_GetTicks() - frameTime < MIN_FRAME_TIME)
+        if (SDL_GetTicks() - frameTime < Consts::MIN_FRAME_TIME)
         {
-            SDL_Delay(MIN_FRAME_TIME - (SDL_GetTicks() - frameTime));
+            SDL_Delay(Consts::MIN_FRAME_TIME - (SDL_GetTicks() - frameTime));
         }
     }
 }
@@ -111,7 +83,7 @@ void CCore::Input()
     {
         case 2:
         case 7:
-            if (!oMap->getInEvent())
+            if (!getMap()->getInEvent())
             {
                 InputPlayer();
             }
@@ -222,7 +194,7 @@ void CCore::InputPlayer()
         }
     }
 
-    auto* player = oMap->getPlayer();
+    auto* player = getMap()->getPlayer();
 
     if (mainEvent->type == SDL_KEYUP)
     {
@@ -291,7 +263,7 @@ void CCore::InputPlayer()
             if (!keyS)
             {
                 keyS = true;
-                if (!oMap->getUnderWater() && !player->getInLevelAnimation())
+                if (!getMap()->getUnderWater() && !player->getInLevelAnimation())
                     player->setSquat(true);
             }
         }
@@ -384,28 +356,44 @@ void CCore::InputPlayer()
 
 void CCore::resetKeys()
 {
-    movePressed = keyMenuPressed = keyS = keyW = keyA = keyD = CCFG::keySpace =
-        keyShift = keyAPressed = keyDPressed = false;
+    //This static function used to be here to reset the keys.
+    //It's probably wrong to have it statically available like that so I'm keeping
+    //it here until I know why it was created
+
+    jassertfalse;
+    //    movePressed = keyMenuPressed = keyS = keyW = keyA = keyD = CCFG::keySpace =
+    //        keyShift = keyAPressed = keyDPressed = false;
 }
 
-void CCore::Update()
+void CCore::update()
 {
     CCFG::getMM()->Update();
 }
 
-void CCore::Draw()
+void CCore::draw()
 {
     CCFG::getMM()->Draw(rR);
 }
 
-/* ******************************************** */
-
 void CCore::resetMove()
 {
-    this->keyAPressed = this->keyDPressed = false;
+    keyAPressed = keyDPressed = false;
 }
 
 Map* CCore::getMap()
 {
-    return oMap;
+    return Mario::getGameState().map;
+}
+
+Mario::GameState& Mario::getGameState(SDL_Renderer* renderer)
+{
+    static EA::OwningPointer<GameState> state;
+
+    if (state == nullptr)
+    {
+        state.create(renderer);
+        state->map->loadLVL();
+    }
+
+    return *state;
 }

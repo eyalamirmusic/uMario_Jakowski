@@ -1,7 +1,32 @@
 #pragma once
 
 #include "Levels/Map.h"
+#include "CommonHeader.h"
 
+namespace Consts
+{
+constexpr int MIN_FRAME_TIME = 16;
+}
+
+namespace Mario
+{
+struct GameState
+{
+    explicit GameState(SDL_Renderer* renderer)
+    {
+        if (renderer == nullptr)
+            quitGame = true;
+        else
+            map.create(renderer);
+    }
+
+    bool quitGame = false;
+    EA::OwningPointer<Map> map;
+};
+
+extern GameState& getGameState(SDL_Renderer* renderer = nullptr);
+
+} // namespace Mario
 
 class CCore
 {
@@ -11,42 +36,42 @@ public:
 
     void mainLoop();
 
-    void Update();
-    void Draw();
+    void update();
+    void draw();
 
     void resetMove();
     static void resetKeys();
     static Map* getMap();
-
-    static bool quitGame;
 
 private:
     void Input();
     void InputPlayer();
     void InputMenu();
 
-    SDL_Window* window;
-    SDL_Renderer* rR;
-    SDL_Event* mainEvent;
+    SDL_Window* window = nullptr;
+    SDL_Renderer* rR = nullptr;
+    SDL_Event* mainEvent = nullptr;
 
     // ----- FPS -----
 
-    long frameTime;
-    static const int MIN_FRAME_TIME = 16;
+    long frameTime = 0;
 
-    unsigned long lFPSTime;
-    int iNumOfFPS, iFPS;
+    unsigned long lFPSTime = 0;
+    int iNumOfFPS = 0;
+    int iFPS = 0;
 
     // ----- FPS -----
 
-    // ----- INPUT
-    static bool movePressed, keyMenuPressed, keyS, keyW, keyA, keyD, keyShift;
+    bool movePressed = false;
+    bool keyMenuPressed = false;
+    bool keyS = false;
+    bool keyW = false;
+    bool keyA = false;
+    bool keyD = false;
+    bool keyShift = false;
 
-    static bool keyAPressed, keyDPressed;
+    bool keyAPressed = false;
+    bool keyDPressed = false;
     // ----- true = RIGHT, false = LEFT
-    bool firstDir;
-
-    // ----- INPUT
-
-    static Map* oMap;
+    bool firstDir = false;
 };

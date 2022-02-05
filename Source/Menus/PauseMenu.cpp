@@ -85,7 +85,7 @@ void PauseMenu::enter()
             CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
             break;
         case 3:
-            CCore::quitGame = true;
+            Mario::getGameState().quitGame = true;
             break;
     }
 }

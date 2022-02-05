@@ -64,7 +64,6 @@ Map::Map(SDL_Renderer* rR)
     srand((unsigned) time(NULL));
 
     loadGameData(rR);
-    loadLVL();
 }
 
 Map::~Map(void)
