@@ -2,7 +2,7 @@
 
 #include "Text.h"
 #include "Menus/MenuManager.h"
-#include "Music.h"
+#include "Music/Music.h"
 
 class CCFG
 {
