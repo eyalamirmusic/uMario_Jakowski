@@ -10798,14 +10798,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(204);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(204);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(205);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(205);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({204, 2});
+            oEvent->redraw.add({204, 3});
+            oEvent->redraw.add({205, 2});
+            oEvent->redraw.add({205, 3});
             break;
         }
         case 1:
@@ -10823,14 +10819,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(309);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(309);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(310);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(310);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({309, 2});
+            oEvent->redraw.add({309, 3});
+            oEvent->redraw.add({310, 2});
+            oEvent->redraw.add({310, 3});
             break;
         }
         case 2:
@@ -10853,14 +10845,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 32;
 
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(160);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(160);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({159, 2});
+            oEvent->redraw.add({159, 3});
+            oEvent->redraw.add({160, 2});
+            oEvent->redraw.add({160, 3});
             break;
         }
         case 4:
@@ -10878,14 +10866,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(207);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(207);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({206, 2});
+            oEvent->redraw.add({206, 3});
+            oEvent->redraw.add({207, 2});
+            oEvent->redraw.add({207, 3});
             break;
         }
         case 5:
@@ -10908,14 +10892,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 32;
 
-            oEvent->reDrawX.push_back(299);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(299);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(300);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(300);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({299, 2});
+            oEvent->redraw.add({299, 3});
+            oEvent->redraw.add({300, 2});
+            oEvent->redraw.add({300, 3});
             break;
         }
         case 6:
@@ -10937,14 +10917,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 32;
 
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(234);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(234);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({232, 2});
+            oEvent->redraw.add({232, 3});
+            oEvent->redraw.add({234, 2});
+            oEvent->redraw.add({234, 3});
             break;
         case 8:
             oEvent->newLevelType = 4;
@@ -10960,14 +10936,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(207);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(207);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({206, 2});
+            oEvent->redraw.add({206, 3});
+            oEvent->redraw.add({207, 2});
+            oEvent->redraw.add({207, 3});
             break;
         case 9:
             oEvent->newLevelType = 4;
@@ -10983,14 +10955,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(215);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(215);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(216);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(216);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({215, 2});
+            oEvent->redraw.add({215, 3});
+            oEvent->redraw.add({216, 2});
+            oEvent->redraw.add({216, 3});
             break;
         case 10:
             oEvent->newLevelType = 3;
@@ -11011,14 +10979,11 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(158);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(158);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({158, 2});
+            oEvent->redraw.add({158, 3});
+            oEvent->redraw.add({159, 2});
+            oEvent->redraw.add({159, 3});
+
             break;
         case 12:
         {
@@ -11035,14 +11000,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(231);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(231);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({231, 2});
+            oEvent->redraw.add({231, 3});
+            oEvent->redraw.add({232, 2});
+            oEvent->redraw.add({232, 3});
             break;
             case 13:
                 oEvent->newLevelType = 0;
@@ -11059,14 +11020,10 @@ void Map::EndUse()
 
                 oPlayer->setMoveDirection(true);
 
-                oEvent->reDrawX.push_back(419);
-                oEvent->reDrawY.push_back(2);
-                oEvent->reDrawX.push_back(419);
-                oEvent->reDrawY.push_back(3);
-                oEvent->reDrawX.push_back(420);
-                oEvent->reDrawY.push_back(2);
-                oEvent->reDrawX.push_back(420);
-                oEvent->reDrawY.push_back(3);
+                oEvent->redraw.add({419, 2});
+                oEvent->redraw.add({419, 3});
+                oEvent->redraw.add({420, 2});
+                oEvent->redraw.add({420, 3});
                 break;
             case 14:
                 oEvent->newLevelType = 3;
@@ -11087,14 +11044,10 @@ void Map::EndUse()
 
                 oPlayer->setMoveDirection(true);
 
-                oEvent->reDrawX.push_back(154);
-                oEvent->reDrawY.push_back(2);
-                oEvent->reDrawX.push_back(154);
-                oEvent->reDrawY.push_back(3);
-                oEvent->reDrawX.push_back(155);
-                oEvent->reDrawY.push_back(2);
-                oEvent->reDrawX.push_back(155);
-                oEvent->reDrawY.push_back(3);
+                oEvent->redraw.add({154, 2});
+                oEvent->redraw.add({154, 3});
+                oEvent->redraw.add({155, 2});
+                oEvent->redraw.add({155, 3});
                 break;
         }
         case 16:
@@ -11112,14 +11065,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(205);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(205);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(206);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({205, 2});
+            oEvent->redraw.add({205, 3});
+            oEvent->redraw.add({206, 2});
+            oEvent->redraw.add({206, 3});
             break;
         }
         case 17:
@@ -11137,14 +11086,11 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(286);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(286);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(287);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(287);
-            oEvent->reDrawY.push_back(3);
+
+            oEvent->redraw.add({286, 2});
+            oEvent->redraw.add({286, 3});
+            oEvent->redraw.add({287, 2});
+            oEvent->redraw.add({287, 3});
             break;
         }
         case 18:
@@ -11167,14 +11113,11 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(159);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(160);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(160);
-            oEvent->reDrawY.push_back(3);
+
+            oEvent->redraw.add({159, 2});
+            oEvent->redraw.add({159, 3});
+            oEvent->redraw.add({160, 2});
+            oEvent->redraw.add({160, 3});
             break;
         }
         case 20:
@@ -11197,14 +11140,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(194);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(194);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(195);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(195);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({194, 2});
+            oEvent->redraw.add({194, 3});
+            oEvent->redraw.add({195, 2});
+            oEvent->redraw.add({195, 3});
             break;
         }
         case 21:
@@ -11227,14 +11166,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(307);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(307);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(308);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(308);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({307, 2});
+            oEvent->redraw.add({307, 3});
+            oEvent->redraw.add({308, 2});
+            oEvent->redraw.add({308, 3});
             break;
         }
         case 22:
@@ -11257,14 +11192,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(174);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(174);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(175);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(175);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({174, 2});
+            oEvent->redraw.add({174, 3});
+            oEvent->redraw.add({175, 2});
+            oEvent->redraw.add({175, 3});
             break;
         }
         case 24:
@@ -11282,14 +11213,10 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(185);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(185);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(186);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(186);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({185, 2});
+            oEvent->redraw.add({185, 3});
+            oEvent->redraw.add({186, 2});
+            oEvent->redraw.add({186, 3});
             break;
         }
         case 25:
@@ -11312,14 +11239,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 32;
 
-            oEvent->reDrawX.push_back(299);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(299);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(300);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(300);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({299, 2});
+            oEvent->redraw.add({299, 3});
+            oEvent->redraw.add({300, 2});
+            oEvent->redraw.add({300, 3});
             break;
         }
         case 26:
@@ -11341,14 +11264,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 32;
 
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(232);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(233);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(233);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({232, 2});
+            oEvent->redraw.add({232, 3});
+            oEvent->redraw.add({233, 2});
+            oEvent->redraw.add({233, 3});
             break;
         case 28:
         {
@@ -11365,14 +11284,11 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(382);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(382);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(383);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(383);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({382, 2});
+            oEvent->redraw.add({382, 3});
+            oEvent->redraw.add({383, 2});
+            oEvent->redraw.add({383, 3});
+
             break;
         }
         case 29:
@@ -11390,14 +11306,11 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->reDrawX.push_back(222);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(222);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(223);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(223);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({222, 2});
+            oEvent->redraw.add({222, 3});
+            oEvent->redraw.add({223, 2});
+            oEvent->redraw.add({223, 3});
+
             break;
         }
         case 30:
@@ -11420,14 +11333,10 @@ void Map::EndUse()
 
             oFlag->castleFlagExtraXPos = 128;
 
-            oEvent->reDrawX.push_back(224);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(224);
-            oEvent->reDrawY.push_back(3);
-            oEvent->reDrawX.push_back(225);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(225);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({224, 2});
+            oEvent->redraw.add({224, 3});
+            oEvent->redraw.add({225, 2});
+            oEvent->redraw.add({225, 3});
             break;
         }
     }
@@ -11779,10 +11688,8 @@ void Map::startLevelAnimation()
             oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
             oEvent->vOLDLength.push_back(75);
 
-            oEvent->reDrawX.push_back(220);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(220);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({220, 2});
+            oEvent->redraw.add({220, 3});
             break;
         case 5:
             oEvent->resetData();
@@ -11813,10 +11720,8 @@ void Map::startLevelAnimation()
             oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
             oEvent->vOLDLength.push_back(75);
 
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({230, 2});
+            oEvent->redraw.add({230, 3});
             break;
         case 13:
             oEvent->resetData();
@@ -11846,10 +11751,8 @@ void Map::startLevelAnimation()
             oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
             oEvent->vOLDLength.push_back(75);
 
-            oEvent->reDrawX.push_back(250);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(250);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({250, 2});
+            oEvent->redraw.add({250, 3});
             break;
         case 25:
             oEvent->resetData();
@@ -11880,10 +11783,8 @@ void Map::startLevelAnimation()
             oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
             oEvent->vOLDLength.push_back(75);
 
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({230, 2});
+            oEvent->redraw.add({230, 3});
             break;
         case 26:
             oEvent->resetData();
@@ -11914,10 +11815,8 @@ void Map::startLevelAnimation()
             oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
             oEvent->vOLDLength.push_back(75);
 
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(2);
-            oEvent->reDrawX.push_back(230);
-            oEvent->reDrawY.push_back(3);
+            oEvent->redraw.add({230, 2});
+            oEvent->redraw.add({230, 3});
             break;
     }
 }

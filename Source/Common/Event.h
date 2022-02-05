@@ -47,8 +47,7 @@ public:
     Vector<Animations> vNEWDir;
     Vector<int> vNEWLength;
 
-    Vector<int> reDrawX;
-    Vector<int> reDrawY;
+    Vector<Point<int>> redraw;
 
     enum eventType
     {

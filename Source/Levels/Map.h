@@ -261,6 +261,7 @@ public:
 
     // ********** COLLISION
     Vector2* getBlockID(int nX, int nY);
+
     int getBlockIDX(int nX);
     int getBlockIDY(int nY);
 
@@ -366,6 +367,10 @@ public:
 
     Block* getBlock(int iID);
     Block* getMinionBlock(int iID);
+    MapLevel* getMapBlock(const juce::Point<int>& pos)
+    {
+        return getMapBlock(pos.x, pos.y);
+    }
     MapLevel* getMapBlock(int iX, int iY);
 
     Player* getPlayer();

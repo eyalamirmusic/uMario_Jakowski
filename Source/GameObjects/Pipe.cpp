@@ -63,7 +63,6 @@ void Pipe::checkUse()
     }
 }
 
-
 void Pipe::setEvent()
 {
     auto* map = CCore::getMap();
@@ -104,10 +103,8 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(leftBlockPos.x);
-            event->reDrawY.push_back(leftBlockPos.y - i);
-            event->reDrawX.push_back(rightBlockPos.x);
-            event->reDrawY.push_back(rightBlockPos.y - i);
+            event->redraw.add({leftBlockPos.x, leftBlockPos.y - i});
+            event->redraw.add({rightBlockPos.x, rightBlockPos.y - i});
         }
     }
     else if (iType == 1)
@@ -131,17 +128,16 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(leftBlockPos.x + i);
-            event->reDrawY.push_back(leftBlockPos.y);
-            event->reDrawX.push_back(rightBlockPos.x + i);
-            event->reDrawY.push_back(rightBlockPos.y);
+            event->redraw.add({leftBlockPos.x, leftBlockPos.y + i});
+            event->redraw.add({rightBlockPos.x, rightBlockPos.y + i});
 
-            event->reDrawX.push_back(
-                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
-            event->reDrawX.push_back(
-                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos) + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
+            auto xID = event->newPlayerXPos - event->newMapXPos;
+            auto x = map->getBlockIDX(xID);
+            auto nextX = map->getBlockIDX(xID + 1);
+            auto y = map->getBlockIDY(newPlayerPos.y) - 1 - i;
+
+            event->redraw.add({x, y});
+            event->redraw.add({nextX, y});
         }
     }
     else
@@ -156,17 +152,16 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(leftBlockPos.x);
-            event->reDrawY.push_back(leftBlockPos.y - i);
-            event->reDrawX.push_back(rightBlockPos.x);
-            event->reDrawY.push_back(rightBlockPos.y - i);
+            event->redraw.add({leftBlockPos.x, leftBlockPos.y - i});
+            event->redraw.add({rightBlockPos.x, rightBlockPos.y - i});
 
-            event->reDrawX.push_back(
-                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
-            event->reDrawX.push_back(
-                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos) + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
+            auto xID = event->newPlayerXPos - event->newMapXPos;
+            auto x = map->getBlockIDX(xID);
+            auto nextX = map->getBlockIDX(xID + 1);
+            auto y = map->getBlockIDY(newPlayerPos.y) - 1 - i;
+
+            event->redraw.add({x, y});
+            event->redraw.add({nextX, y});
         }
 
         event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);

@@ -7,17 +7,18 @@ void Event::draw(SDL_Renderer* rR)
 {
     auto* map = CCore::getMap();
 
-    for (int i = 0; i < reDrawX.size(); i++)
+    for (auto& point: redraw)
     {
-        auto x = reDrawX[i];
-        auto y = reDrawY[i];
-
-        if (x < map->getMapWidth())
+        if (point.x < map->getMapWidth())
         {
-            auto* block = map->getBlock(map->getMapBlock(x, y)->getBlockID());
+            auto id = map->getMapBlock(point)->getBlockID();
+            auto* block = map->getBlock(id);
             auto mapX = (int) map->getXPos();
 
-            block->Draw(rR, 32 * x + mapX, CCFG::GAME_HEIGHT - 32 * y - 16);
+            auto x = 32 * point.x + mapX;
+            auto y = CCFG::GAME_HEIGHT - 32 * point.y - 16;
+
+            block->Draw(rR, x, y);
         }
     }
 }
@@ -53,6 +54,7 @@ void Event::normal()
     auto map = CCore::getMap();
     auto player = map->getPlayer();
 
+    auto speed = (float)iSpeed;
     if (state)
     {
         if (vOLDDir.size() > stepID)
@@ -64,44 +66,44 @@ void Event::normal()
                 switch (vOLDDir[(int) stepID])
                 {
                     case Animations::eTOP: // TOP
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         break;
                     case Animations::eBOT:
-                        player->setYPos((float) player->getYPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() + speed);
+                        length -= speed;
                         break;
                     case Animations::eRIGHT:
-                        player->setXPos((float) player->getXPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setXPos((float) player->getXPos() + speed);
+                        length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(true);
                         break;
                     case Animations::eRIGHTEND:
-                        map->setXPos((float) map->getXPos() - iSpeed);
-                        length -= iSpeed;
+                        map->setXPos((float) map->getXPos() - speed);
+                        length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(true);
                         break;
                     case Animations::eLEFT:
-                        player->setXPos((float) player->getXPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setXPos((float) player->getXPos() - speed);
+                        length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(false);
                         break;
                     case Animations::eBOTRIGHTEND: // BOT & RIGHT
-                        player->setYPos((float) player->getYPos() + iSpeed);
-                        map->setXPos((float) map->getXPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() + speed);
+                        map->setXPos((float) map->getXPos() - speed);
+                        length -= speed;
                         player->moveAnimation();
                         break;
                     case Animations::eENDBOT1:
-                        player->setYPos((float) player->getYPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() + speed);
+                        length -= speed;
                         player->setMarioSpriteID(10);
                         break;
                     case Animations::eENDBOT2:
-                        length -= iSpeed;
+                        length -= speed;
                         player->setMoveDirection(false);
                         break;
                     case Animations::eENDPOINTS:
@@ -123,24 +125,24 @@ void Event::normal()
                         map->getFlag()->UpdateCastleFlag();
                         break;
                     case Animations::eDEATHNOTHING:
-                        length -= iSpeed;
+                        length -= speed;
                         player->setMarioSpriteID(0);
                         break;
                     case Animations::eDEATHTOP: // DEATH TOP
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         player->setMarioSpriteID(0);
                         break;
                     case Animations::eDEATHBOT: // DEATH BOT
-                        player->setYPos((float) player->getYPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() + speed);
+                        length -= speed;
                         player->setMarioSpriteID(0);
                         break;
                     case Animations::eNOTHING: // NOTHING YAY
                         length -= 1;
                         break;
                     case Animations::ePLAYPIPERIGHT:
-                        player->setXPos((float) player->getXPos() + iSpeed);
+                        player->setXPos((float) player->getXPos() + speed);
                         length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
@@ -237,8 +239,8 @@ void Event::normal()
                     case Animations::eBOTRIGHTBOSS: // BOT & RIGHT
                         player->moveAnimation();
                         player->playerPhysics();
-                        map->setXPos((float) map->getXPos() - iSpeed);
-                        length -= iSpeed;
+                        map->setXPos((float) map->getXPos() - speed);
+                        length -= speed;
                         break;
                     case Animations::eBOSSTEXT1:
                         map->addText(length,
@@ -272,13 +274,13 @@ void Event::normal()
                         length = 0;
                         break;
                     case Animations::eVINE1:
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         player->setMarioSpriteID(10);
                         break;
                     case Animations::eVINE2:
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         player->setMarioSpriteID(11);
                         break;
                     case Animations::eVINESPAWN:
@@ -339,26 +341,27 @@ void Event::normal()
         {
             if (vNEWLength[(int) stepID] > 0)
             {
-                auto& length = vNEWLength[(int) stepID];
+                auto& originalLength = vNEWLength[(int) stepID];
+                auto length = (float)originalLength;
 
                 switch (vNEWDir[(int) stepID])
                 {
                     case Animations::eTOP: // TOP
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         break;
                     case Animations::eBOT:
-                        player->setYPos((float) player->getYPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() + speed);
+                        length -= speed;
                         break;
                     case Animations::eRIGHT:
-                        player->setXPos((float) player->getXPos() + iSpeed);
-                        length -= iSpeed;
+                        player->setXPos((float) player->getXPos() + speed);
+                        length -= speed;
                         player->moveAnimation();
                         break;
                     case Animations::eLEFT:
-                        player->setXPos((float) player->getXPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setXPos((float) player->getXPos() - speed);
+                        length -= speed;
                         player->moveAnimation();
                         break;
                     case Animations::ePLAYPIPETOP:
@@ -369,13 +372,13 @@ void Event::normal()
                         length -= 1;
                         break;
                     case Animations::eVINE1:
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         player->setMarioSpriteID(10);
                         break;
                     case Animations::eVINE2:
-                        player->setYPos((float) player->getYPos() - iSpeed);
-                        length -= iSpeed;
+                        player->setYPos((float) player->getYPos() - speed);
+                        length -= speed;
                         player->setMarioSpriteID(11);
                         break;
                     case Animations::eRIGHTEND:
@@ -402,6 +405,8 @@ void Event::normal()
                     case Animations::eVINESPAWN:
                         break;
                 }
+
+                originalLength = (int)length;
             }
             else
             {
@@ -474,7 +479,6 @@ void Event::resetData()
 
 void Event::resetRedraw()
 {
-    reDrawX.clear();
-    reDrawY.clear();
+    redraw.clear();
 }
 } // namespace Mario
