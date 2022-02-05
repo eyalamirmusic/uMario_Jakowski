@@ -245,6 +245,7 @@ void Event::Normal() {
 						CCore::getMap()->addVine(vOLDLength[stepID], 0, 1, newLevelType == 0 || newLevelType == 4 ? 34 : 36);
 						vOLDLength[stepID] = 0;
 						break;
+                    case ePLAYPIPETOP: break;
 				}
 			} else {
 				++stepID;
@@ -316,7 +317,51 @@ void Event::Normal() {
 						vNEWLength[stepID] -= iSpeed;
 						CCore::getMap()->getPlayer()->setMarioSpriteID(11);
 						break;
-				}
+                    case eRIGHTEND:
+                        break;
+                    case eBOTRIGHTEND:
+                        break;
+                    case eENDBOT1:
+                        break;
+                    case eENDBOT2:
+                        break;
+                    case eENDPOINTS:
+                        break;
+                    case eDEATHNOTHING:
+                        break;
+                    case eDEATHTOP:
+                        break;
+                    case eDEATHBOT:
+                        break;
+                    case ePLAYPIPERIGHT:
+                        break;
+                    case eLOADINGMENU:
+                        break;
+                    case eGAMEOVER:
+                        break;
+                    case eBOSSEND1:
+                        break;
+                    case eBOSSEND2:
+                        break;
+                    case eBOSSEND3:
+                        break;
+                    case eBOSSEND4:
+                        break;
+                    case eBOTRIGHTBOSS:
+                        break;
+                    case eBOSSTEXT1:
+                        break;
+                    case eBOSSTEXT2:
+                        break;
+                    case eENDGAMEBOSSTEXT1:
+                        break;
+                    case eENDGAMEBOSSTEXT2:
+                        break;
+                    case eMARIOSPRITE1:
+                        break;
+                    case eVINESPAWN:
+                        break;
+                }
 			} else {
 				++stepID;
 			}

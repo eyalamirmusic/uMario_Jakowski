@@ -117,7 +117,11 @@ void MenuManager::setBackgroundColor(SDL_Renderer* rR) {
 		case eAbout:
 			oAboutMenu->setBackgroundColor(rR);
 			break;
-	}
+        case eOptions:
+            break;
+        case ePasue:
+            break;
+    }
 }
 
 /* ******************************************** */
@@ -139,13 +143,15 @@ void MenuManager::enter() {
 		case ePasue:
 			oPauseMenu->enter();
 			break;
-	}
+        case eGameLoading:
+            break;
+    }
 }
 
 void MenuManager::escape() {
 	switch(currentGameState) {
 		case eGame:
-			
+
 			break;
 		case eAbout:
 			oAboutMenu->enter();
@@ -159,7 +165,9 @@ void MenuManager::escape() {
 		case eMainMenu:
 			oMainMenu->escape();
 			break;
-	}
+        case eGameLoading:
+            break;
+    }
 }
 
 void MenuManager::setKey(int keyID) {
@@ -167,7 +175,13 @@ void MenuManager::setKey(int keyID) {
 		case eOptions:
 			oOptionsMenu->setKey(keyID);
 			break;
-	}
+        case eMainMenu:
+        case eGameLoading:
+        case eGame:
+        case eAbout:
+        case ePasue:
+            break;
+    }
 }
 
 void MenuManager::keyPressed(int iDir) {
@@ -181,7 +195,13 @@ void MenuManager::keyPressed(int iDir) {
 		case ePasue:
 			oPauseMenu->updateActiveButton(iDir);
 			break;
-	}
+        case eGameLoading:
+            break;
+        case eGame:
+            break;
+        case eAbout:
+            break;
+    }
 }
 
 void MenuManager::resetActiveOptionID(gameState ID) {
@@ -195,7 +215,13 @@ void MenuManager::resetActiveOptionID(gameState ID) {
 		case ePasue:
 			oPauseMenu->activeMenuOption = 0;
 			break;
-	}
+        case eGameLoading:
+            break;
+        case eGame:
+            break;
+        case eAbout:
+            break;
+    }
 }
 
 /* ******************************************** */
