@@ -2,9 +2,32 @@
 
 #include "Levels/Map.h"
 
+
 class CCore
 {
+public:
+    CCore();
+    ~CCore();
+
+    void mainLoop();
+
+    void Update();
+    void Draw();
+
+    void resetMove();
+    static void resetKeys();
+    static Map* getMap();
+
+    static bool quitGame;
+    static bool mouseLeftPressed, mouseRightPressed;
+    static int mouseX, mouseY;
+
 private:
+    void Input();
+    void MouseInput();
+    void InputPlayer();
+    void InputMenu();
+
     SDL_Window* window;
     SDL_Renderer* rR;
     SDL_Event* mainEvent;
@@ -29,32 +52,4 @@ private:
     // ----- INPUT
 
     static Map* oMap;
-
-    // ----- Methods
-
-    void Input();
-    void MouseInput();
-    void InputPlayer();
-    void InputMenu();
-
-public:
-    CCore(void);
-    ~CCore(void);
-
-    static bool quitGame;
-
-    void mainLoop();
-
-    void Update();
-    void Draw();
-
-    void resetMove();
-    static void resetKeys();
-
-    static bool mouseLeftPressed, mouseRightPressed;
-    static int mouseX, mouseY;
-
-    /* ----- get & set ----- */
-    static Map* getMap();
 };
-

@@ -5,7 +5,6 @@
 #include "LoadingMenu.h"
 #include "AboutMenu.h"
 #include "Console.h"
-#include "Levels/LevelEditor.h"
 #include "OptionsMenu.h"
 #include "PauseMenu.h"
 

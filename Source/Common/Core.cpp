@@ -3,7 +3,6 @@
 #include "CFG.h"
 #include "SDL_mixer.h"
 
-
 Map* CCore::oMap = new Map();
 bool CCore::mouseLeftPressed = false;
 bool CCore::mouseRightPressed = false;
@@ -21,7 +20,7 @@ bool CCore::keyShift = false;
 bool CCore::keyAPressed = false;
 bool CCore::keyDPressed = false;
 
-CCore::CCore(void)
+CCore::CCore()
 {
     this->quitGame = false;
     this->iFPS = 0;
@@ -78,15 +77,13 @@ CCore::CCore(void)
     CCFG::keyIDShift = SDLK_LSHIFT;
 }
 
-CCore::~CCore(void)
+CCore::~CCore()
 {
     delete oMap;
     delete mainEvent;
     SDL_DestroyRenderer(rR);
     SDL_DestroyWindow(window);
 }
-
-/* ******************************************** */
 
 void CCore::mainLoop()
 {
@@ -99,22 +96,12 @@ void CCore::mainLoop()
         SDL_RenderClear(rR);
 
         CCFG::getMM()->setBackgroundColor(rR);
-        SDL_RenderFillRect(rR, NULL);
+        SDL_RenderFillRect(rR, nullptr);
 
         Input();
         MouseInput();
         Update();
         Draw();
-
-        /*CCFG::getText()->Draw(rR, "FPS:" + std::to_string(iNumOfFPS), CCFG::GAME_WIDTH - CCFG::getText()->getTextWidth("FPS:" + std::to_string(iNumOfFPS), 8) - 8, 5, 8);
-
-        if(SDL_GetTicks() - 1000 >= lFPSTime) {
-            lFPSTime = SDL_GetTicks();
-            iNumOfFPS = iFPS;
-            iFPS = 0;
-        }
-
-        ++iFPS;*/
 
         SDL_RenderPresent(rR);
 
@@ -242,6 +229,8 @@ void CCore::InputPlayer()
         }
     }
 
+    auto* player = oMap->getPlayer();
+
     if (mainEvent->type == SDL_KEYUP)
     {
         if (mainEvent->key.keysym.sym == CCFG::keyIDD)
@@ -256,7 +245,7 @@ void CCore::InputPlayer()
 
         if (mainEvent->key.keysym.sym == CCFG::keyIDS)
         {
-            oMap->getPlayer()->setSquat(false);
+            player->setSquat(false);
             keyS = false;
         }
 
@@ -279,7 +268,7 @@ void CCore::InputPlayer()
         {
             if (keyShift)
             {
-                oMap->getPlayer()->resetRun();
+                player->resetRun();
                 keyShift = false;
             }
         }
@@ -309,9 +298,8 @@ void CCore::InputPlayer()
             if (!keyS)
             {
                 keyS = true;
-                if (!oMap->getUnderWater()
-                    && !oMap->getPlayer()->getInLevelAnimation())
-                    oMap->getPlayer()->setSquat(true);
+                if (!oMap->getUnderWater() && !player->getInLevelAnimation())
+                    player->setSquat(true);
             }
         }
 
@@ -328,7 +316,7 @@ void CCore::InputPlayer()
         {
             if (!CCFG::keySpace)
             {
-                oMap->getPlayer()->jump();
+                player->jump();
                 CCFG::keySpace = true;
             }
         }
@@ -337,7 +325,7 @@ void CCore::InputPlayer()
         {
             if (!keyShift)
             {
-                oMap->getPlayer()->startRun();
+                player->startRun();
                 keyShift = true;
             }
         }
@@ -367,39 +355,37 @@ void CCore::InputPlayer()
 
     if (keyAPressed)
     {
-        if (!oMap->getPlayer()->getMove() && firstDir == false
-            && !oMap->getPlayer()->getChangeMoveDirection()
-            && !oMap->getPlayer()->getSquat())
+        if (!player->getMove() && firstDir == false
+            && !player->getChangeMoveDirection() && !player->getSquat())
         {
-            oMap->getPlayer()->startMove();
-            oMap->getPlayer()->setMoveDirection(false);
+            player->startMove();
+            player->setMoveDirection(false);
         }
-        else if (!keyDPressed && oMap->getPlayer()->getMoveSpeed() > 0
-                 && firstDir != oMap->getPlayer()->getMoveDirection())
+        else if (!keyDPressed && player->getMoveSpeed() > 0
+                 && firstDir != player->getMoveDirection())
         {
-            oMap->getPlayer()->setChangeMoveDirection();
+            player->setChangeMoveDirection();
         }
     }
 
     if (keyDPressed)
     {
-        if (!oMap->getPlayer()->getMove() && firstDir == true
-            && !oMap->getPlayer()->getChangeMoveDirection()
-            && !oMap->getPlayer()->getSquat())
+        if (!player->getMove() && firstDir == true
+            && !player->getChangeMoveDirection() && !player->getSquat())
         {
-            oMap->getPlayer()->startMove();
-            oMap->getPlayer()->setMoveDirection(true);
+            player->startMove();
+            player->setMoveDirection(true);
         }
-        else if (!keyAPressed && oMap->getPlayer()->getMoveSpeed() > 0
-                 && firstDir != oMap->getPlayer()->getMoveDirection())
+        else if (!keyAPressed && player->getMoveSpeed() > 0
+                 && firstDir != player->getMoveDirection())
         {
-            oMap->getPlayer()->setChangeMoveDirection();
+            player->setChangeMoveDirection();
         }
     }
 
-    if (oMap->getPlayer()->getMove() && !keyAPressed && !keyDPressed)
+    if (player->getMove() && !keyAPressed && !keyDPressed)
     {
-        oMap->getPlayer()->resetMove();
+        player->resetMove();
     }
 }
 
