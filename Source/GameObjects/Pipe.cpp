@@ -19,13 +19,9 @@ Pipe::Pipe(int iType,
 {
     this->iType = iType;
 
-    this->iLX = iLX;
-    this->iLY = iLY;
-    this->iRX = iRX;
-    this->iRY = iRY;
-
-    this->newPlayerPosX = newPlayerPosX;
-    this->newPlayerPosY = newPlayerPosY;
+    leftBlockPos = {iLX, iLY};
+    rightBlockPos = {iRX, iRY};
+    newPlayerPos = {newPlayerPosX, newPlayerPosY};
 
     this->newCurrentLevel = newCurrentLevel;
     this->newLevelType = newLevelType;
@@ -44,11 +40,11 @@ void Pipe::checkUse()
         if (CCore::getMap()->getPlayer()->getSquat()
             && -(int) CCore::getMap()->getXPos()
                        + CCore::getMap()->getPlayer()->getXPos()
-                   >= iLX * 32 + 4
+                   >= leftBlockPos.x * 32 + 4
             && -(int) CCore::getMap()->getXPos()
                        + CCore::getMap()->getPlayer()->getXPos()
                        + CCore::getMap()->getPlayer()->getHitBoxX()
-                   < (iRX + 1) * 32 - 4)
+                   < (rightBlockPos.x + 1) * 32 - 4)
         {
             setEvent();
         }
@@ -60,11 +56,11 @@ void Pipe::checkUse()
                    -(int) CCore::getMap()->getXPos()
                    + CCore::getMap()->getPlayer()->getXPos()
                    + CCore::getMap()->getPlayer()->getHitBoxX() / 2 + 2)
-                   == iRX - 1
+                   == rightBlockPos.x - 1
             && CCore::getMap()->getBlockIDY(
                    CCore::getMap()->getPlayer()->getYPos()
                    + CCore::getMap()->getPlayer()->getHitBoxY() + 2)
-                   == iRY - 1)
+                   == rightBlockPos.y - 1)
         {
             setEvent();
         }
@@ -98,9 +94,9 @@ void Pipe::setEvent()
 
     event->newUnderWater = newUnderWater;
 
-    event->newMapXPos = (newPlayerPosX <= 32 * 2 ? 0 : -(newPlayerPosX - 32 * 2));
-    event->newPlayerXPos = (newPlayerPosX <= 32 * 2 ? newPlayerPosX : 32 * 2);
-    event->newPlayerYPos = newPlayerPosY;
+    event->newMapXPos = (newPlayerPos.x <= 32 * 2 ? 0 : -(newPlayerPos.x - 32 * 2));
+    event->newPlayerXPos = (newPlayerPos.x <= 32 * 2 ? newPlayerPos.x : 32 * 2);
+    event->newPlayerYPos = newPlayerPos.y;
 
     if (iType == 0)
     { // VERTICAL -> NONE
@@ -113,10 +109,10 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(iLX);
-            event->reDrawY.push_back(iLY - i);
-            event->reDrawX.push_back(iRX);
-            event->reDrawY.push_back(iRY - i);
+            event->reDrawX.push_back(leftBlockPos.x);
+            event->reDrawY.push_back(leftBlockPos.y - i);
+            event->reDrawX.push_back(rightBlockPos.x);
+            event->reDrawY.push_back(rightBlockPos.y - i);
         }
     }
     else if (iType == 1)
@@ -140,21 +136,21 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(iLX + i);
-            event->reDrawY.push_back(iLY);
-            event->reDrawX.push_back(iRX + i);
-            event->reDrawY.push_back(iRY);
+            event->reDrawX.push_back(leftBlockPos.x + i);
+            event->reDrawY.push_back(leftBlockPos.y);
+            event->reDrawX.push_back(rightBlockPos.x + i);
+            event->reDrawY.push_back(rightBlockPos.y);
 
             event->reDrawX.push_back(
                 map->getBlockIDX(
                 event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
                                      - i);
             event->reDrawX.push_back(
                 map->getBlockIDX(
                                          event->newPlayerXPos - event->newMapXPos)
                                      + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
                                      - i);
         }
     }
@@ -172,21 +168,21 @@ void Pipe::setEvent()
 
         for (int i = 0; i < 3; i++)
         {
-            event->reDrawX.push_back(iLX);
-            event->reDrawY.push_back(iLY - i);
-            event->reDrawX.push_back(iRX);
-            event->reDrawY.push_back(iRY - i);
+            event->reDrawX.push_back(leftBlockPos.x);
+            event->reDrawY.push_back(leftBlockPos.y - i);
+            event->reDrawX.push_back(rightBlockPos.x);
+            event->reDrawY.push_back(rightBlockPos.y - i);
 
             event->reDrawX.push_back(
                 map->getBlockIDX(
                 event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
                                      - i);
             event->reDrawX.push_back(
                 map->getBlockIDX(
                                          event->newPlayerXPos - event->newMapXPos)
                                      + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
                                      - i);
         }
 
