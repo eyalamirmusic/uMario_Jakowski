@@ -8,18 +8,19 @@
 class Squid : public Minion
 {
 private:
-	int moveXDistance, moveYDistance;
+    int moveXDistance, moveYDistance;
+
 public:
-	Squid(int iXPos, int iYPos);
-	~Squid(void);
-	
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    Squid(int iXPos, int iYPos);
+    ~Squid(void);
 
-	void minionPhysics();
-	void collisionWithPlayer(bool TOP);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void changeBlockID();
+    void minionPhysics();
+    void collisionWithPlayer(bool TOP);
+
+    void changeBlockID();
 };
 
 #endif

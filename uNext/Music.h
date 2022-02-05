@@ -10,82 +10,85 @@
 class Music
 {
 private:
-	std::vector<Mix_Music*> vMusic;
-	std::vector<Mix_Chunk*> vChunk;
+    std::vector<Mix_Music*> vMusic;
+    std::vector<Mix_Chunk*> vChunk;
 
-	int iVolume;
+    int iVolume;
+
 public:
-	Music(void);
-	~Music(void);
+    Music(void);
+    ~Music(void);
 
-	bool musicStopped;
+    bool musicStopped;
 
-	enum eMusic {
-		mNOTHING,
-		mOVERWORLD,
-		mOVERWORLDFAST,
-		mUNDERWORLD,
-		mUNDERWORLDFAST,
-		mUNDERWATER,
-		mUNDERWATERFAST,
-		mCASTLE,
-		mCASTLEFAST,
-		mLOWTIME,
-		mSTAR,
-		mSTARFAST,
-		mSCORERING,
-	};
+    enum eMusic
+    {
+        mNOTHING,
+        mOVERWORLD,
+        mOVERWORLDFAST,
+        mUNDERWORLD,
+        mUNDERWORLDFAST,
+        mUNDERWATER,
+        mUNDERWATERFAST,
+        mCASTLE,
+        mCASTLEFAST,
+        mLOWTIME,
+        mSTAR,
+        mSTARFAST,
+        mSCORERING,
+    };
 
-	eMusic currentMusic;
+    eMusic currentMusic;
 
-	enum eChunk {
-		cCOIN,
-		cBLOCKBREAK,
-		cBLOCKHIT,
-		cBOOM,
-		cBOWSERFALL,
-		cBRIDGEBREAK,
-		cBULLETBILL,
-		cDEATH,
-		cFIRE,
-		cFIREBALL,
-		cGAMEOVER,
-		cINTERMISSION,
-		cJUMP,
-		cJUMPBIG,
-		cLEVELEND,
-		cLOWTIME,
-		cMUSHROOMAPPER,
-		cMUSHROOMMEAT,
-		cONEUP,
-		cPASUE,
-		cPIPE,
-		cRAINBOOM,
-		cSHOT,
-		cSHRINK,
-		cSTOMP,
-		cSWIM,
-		cVINE,
-		cCASTLEEND,
-		cPRINCESSMUSIC,
-	};
+    enum eChunk
+    {
+        cCOIN,
+        cBLOCKBREAK,
+        cBLOCKHIT,
+        cBOOM,
+        cBOWSERFALL,
+        cBRIDGEBREAK,
+        cBULLETBILL,
+        cDEATH,
+        cFIRE,
+        cFIREBALL,
+        cGAMEOVER,
+        cINTERMISSION,
+        cJUMP,
+        cJUMPBIG,
+        cLEVELEND,
+        cLOWTIME,
+        cMUSHROOMAPPER,
+        cMUSHROOMMEAT,
+        cONEUP,
+        cPASUE,
+        cPIPE,
+        cRAINBOOM,
+        cSHOT,
+        cSHRINK,
+        cSTOMP,
+        cSWIM,
+        cVINE,
+        cCASTLEEND,
+        cPRINCESSMUSIC,
+    };
 
-	void changeMusic(bool musicByLevel, bool forceChange);
+    void changeMusic(bool musicByLevel, bool forceChange);
 
-	void PlayMusic();
-	void PlayMusic(eMusic musicID);
-	void StopMusic();
-	void PauseMusic();
+    void PlayMusic();
+    void PlayMusic(eMusic musicID);
+    void StopMusic();
+    void PauseMusic();
 
-	void PlayChunk(eChunk chunkID);
+    void PlayChunk(eChunk chunkID);
 
-	Mix_Music* loadMusic(std::string fileName);
-	Mix_Chunk* loadChunk(std::string fileName);
+    Mix_Music* loadMusic(std::string fileName);
+    Mix_Chunk* loadChunk(std::string fileName);
 
-	// -- get & set
+    // -- get & set
 
-	int getVolume();
-	void setVolume(int iVolume);
+    int getVolume();
+    void setVolume(int iVolume);
 };
 
 #endif

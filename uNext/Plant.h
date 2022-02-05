@@ -8,31 +8,31 @@
 class Plant : public Minion
 {
 private:
-	bool bWait;
-	unsigned int iTime;
+    bool bWait;
+    unsigned int iTime;
 
-	bool lockPlant;
+    bool lockPlant;
 
-	int iLength;
+    int iLength;
 
-	int X, Y;
+    int X, Y;
 
 public:
-	Plant(int fXPos, int fYPos, int iBlockID);
-	~Plant(void);
+    Plant(int fXPos, int fYPos, int iBlockID);
+    ~Plant(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void minionPhysics();
+    void minionPhysics();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void collisionEffect();
+    void collisionEffect();
 
-	void lockMinion();
+    void lockMinion();
 
-	void setMinionState(int minionState);
+    void setMinionState(int minionState);
 };
 
 #endif

@@ -8,17 +8,18 @@
 class LoadingMenu : public Menu
 {
 private:
-	unsigned int iTime;
+    unsigned int iTime;
+
 public:
-	LoadingMenu(void);
-	~LoadingMenu(void);
+    LoadingMenu(void);
+    ~LoadingMenu(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void updateTime();
+    void updateTime();
 
-	bool loadingType; // -- true = LOADING, false = GAME OVER
+    bool loadingType; // -- true = LOADING, false = GAME OVER
 };
 
 #endif

@@ -8,21 +8,22 @@
 class MainMenu : public Menu
 {
 private:
-	bool selectWorld;
-	int activeWorldID, activeSecondWorldID;
+    bool selectWorld;
+    int activeWorldID, activeSecondWorldID;
 
-	SDL_Rect rSelectWorld;
+    SDL_Rect rSelectWorld;
+
 public:
-	MainMenu(void);
-	~MainMenu(void);
+    MainMenu(void);
+    ~MainMenu(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void enter();
-	void escape();
+    void enter();
+    void escape();
 
-	void updateActiveButton(int iDir);
+    void updateActiveButton(int iDir);
 };
 
 #endif

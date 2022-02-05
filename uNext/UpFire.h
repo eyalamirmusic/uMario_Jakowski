@@ -8,19 +8,20 @@
 class UpFire : public Minion
 {
 private:
-	// moveDirection true = TOP, false = BOT
-	int iYJump;
-	int nextJumpFrameID;
+    // moveDirection true = TOP, false = BOT
+    int iYJump;
+    int nextJumpFrameID;
+
 public:
-	UpFire(int iXPos, int iYJump);
-	~UpFire(void);
+    UpFire(int iXPos, int iYJump);
+    ~UpFire(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void minionPhysics();
+    void minionPhysics();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 };
 
 #endif

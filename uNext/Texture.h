@@ -7,16 +7,14 @@
 class Texture
 {
 public:
-	Texture(std::string fileName);
-	~Texture(void);
+    Texture(std::string fileName);
+    ~Texture(void);
 
-	void Draw();
-	void Draw(int offsetX, int offsetY);
+    void Draw();
+    void Draw(int offsetX, int offsetY);
 
-	SDL_Texture* getTexture();
+    SDL_Texture* getTexture();
+
 private:
-	SDL_Texture* texture;
-
-
+    SDL_Texture* texture;
 };
-

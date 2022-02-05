@@ -8,32 +8,33 @@
 class AboutMenu : public Menu
 {
 private:
-	unsigned int iTime;
+    unsigned int iTime;
 
-	int cR, cG, cB, nR, nG, nB;
-	int colorStepID, iColorID;
+    int cR, cG, cB, nR, nG, nB;
+    int colorStepID, iColorID;
 
-	// ----- true = RIGHT, false = LEFT
-	bool moveDirection;
+    // ----- true = RIGHT, false = LEFT
+    bool moveDirection;
 
-	int iNumOfUnits;
+    int iNumOfUnits;
+
 public:
-	AboutMenu(void);
-	~AboutMenu(void);
+    AboutMenu(void);
+    ~AboutMenu(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void enter();
+    void enter();
 
-	void launch();
-	void reset();
+    void launch();
+    void reset();
 
-	void nextColor();
-	int getColorStep(int iOld, int iNew);
+    void nextColor();
+    int getColorStep(int iOld, int iNew);
 
-	void setBackgroundColor(SDL_Renderer* rR);
-	void updateTime();
+    void setBackgroundColor(SDL_Renderer* rR);
+    void updateTime();
 };
 
 #endif

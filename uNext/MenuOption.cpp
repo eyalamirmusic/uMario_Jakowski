@@ -2,31 +2,35 @@
 
 /* ******************************************** */
 
-MenuOption::MenuOption(std::string sText, int iXPos, int iYPos) {
-	this->sText = sText;
-	this->iXPos = iXPos;
-	this->iYPos = iYPos;
+MenuOption::MenuOption(std::string sText, int iXPos, int iYPos)
+{
+    this->sText = sText;
+    this->iXPos = iXPos;
+    this->iYPos = iYPos;
 }
 
-
-MenuOption::~MenuOption(void) {
-
+MenuOption::~MenuOption(void)
+{
 }
 
 /* ******************************************** */
 
-std::string MenuOption::getText() {
-	return sText;
+std::string MenuOption::getText()
+{
+    return sText;
 }
 
-void MenuOption::setText(std::string sText) {
-	this->sText = sText;
+void MenuOption::setText(std::string sText)
+{
+    this->sText = sText;
 }
 
-int MenuOption::getXPos() {
-	return iXPos;
+int MenuOption::getXPos()
+{
+    return iXPos;
 }
 
-int MenuOption::getYPos() {
-	return iYPos;
+int MenuOption::getYPos()
+{
+    return iYPos;
 }

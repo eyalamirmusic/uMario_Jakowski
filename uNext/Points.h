@@ -8,22 +8,23 @@
 class Points
 {
 private:
-	int iXPos, iYPos, iYLEFT;
+    int iXPos, iYPos, iYLEFT;
 
-	std::string sText;
+    std::string sText;
 
-	int iW, iH;
+    int iW, iH;
 
-	bool bDelete;
+    bool bDelete;
+
 public:
-	Points(int iXPos, int iYPos, std::string sText);
-	Points(int iXPos, int iYPos, std::string sText, int iW, int iH);
-	~Points(void);
+    Points(int iXPos, int iYPos, std::string sText);
+    Points(int iXPos, int iYPos, std::string sText, int iW, int iH);
+    ~Points(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	bool getDelete();
+    bool getDelete();
 };
 
 #endif

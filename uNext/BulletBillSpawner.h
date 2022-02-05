@@ -8,14 +8,15 @@
 class BulletBillSpawner : public Minion
 {
 private:
-	int nextBulletBillFrameID;
+    int nextBulletBillFrameID;
+
 public:
-	BulletBillSpawner(int iXPos, int iYPos, int minionState);
-	~BulletBillSpawner(void);
+    BulletBillSpawner(int iXPos, int iYPos, int minionState);
+    ~BulletBillSpawner(void);
 
-	void Update();
+    void Update();
 
-	void minionPhysics();
+    void minionPhysics();
 };
 
 #endif

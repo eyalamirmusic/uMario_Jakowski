@@ -8,19 +8,20 @@
 class Fire : public Minion
 {
 private:
-	// -- minionState, 0 = Alive, -1 = Dead
+    // -- minionState, 0 = Alive, -1 = Dead
 
-	int toYPos;
+    int toYPos;
+
 public:
-	Fire(float fXPos, float fYPos, int toYPos);
-	~Fire(void);
+    Fire(float fXPos, float fYPos, int toYPos);
+    ~Fire(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void minionPhysics();
+    void minionPhysics();
 };
 
 #endif

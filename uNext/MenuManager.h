@@ -15,56 +15,57 @@
 class MenuManager
 {
 private:
-	CIMG* activeOption;
+    CIMG* activeOption;
 
-	MainMenu* oMainMenu;
-	LoadingMenu* oLoadingMenu;
-	AboutMenu* oAboutMenu;
-	OptionsMenu* oOptionsMenu;
-	PauseMenu* oPauseMenu;
-	//Console* oConsole;
-	//LevelEditor* oLE;
+    MainMenu* oMainMenu;
+    LoadingMenu* oLoadingMenu;
+    AboutMenu* oAboutMenu;
+    OptionsMenu* oOptionsMenu;
+    PauseMenu* oPauseMenu;
+    //Console* oConsole;
+    //LevelEditor* oLE;
 
 public:
-	MenuManager(void);
-	~MenuManager(void);
+    MenuManager(void);
+    ~MenuManager(void);
 
-	enum gameState {
-		eMainMenu,
-		eGameLoading,
-		eGame,
-		eAbout,
-		eOptions,
-		ePasue,
-		//eLevelEditor,
-	};
+    enum gameState
+    {
+        eMainMenu,
+        eGameLoading,
+        eGame,
+        eAbout,
+        eOptions,
+        ePasue,
+        //eLevelEditor,
+    };
 
-	gameState currentGameState;
+    gameState currentGameState;
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void setBackgroundColor(SDL_Renderer* rR);
+    void setBackgroundColor(SDL_Renderer* rR);
 
-	void enter();
-	void escape();
-	void setKey(int keyID);
-	void keyPressed(int iDir);
+    void enter();
+    void escape();
+    void setKey(int keyID);
+    void keyPressed(int iDir);
 
-	void resetActiveOptionID(gameState ID);
+    void resetActiveOptionID(gameState ID);
 
-	int getViewID();
-	void setViewID(gameState viewID);
+    int getViewID();
+    void setViewID(gameState viewID);
 
-	CIMG* getActiveOption();
-	void setActiveOption(SDL_Renderer* rR);
+    CIMG* getActiveOption();
+    void setActiveOption(SDL_Renderer* rR);
 
-	LoadingMenu* getLoadingMenu();
-	AboutMenu* getAboutMenu();
+    LoadingMenu* getLoadingMenu();
+    AboutMenu* getAboutMenu();
 
-	//Console* getConsole();
-	//LevelEditor* getLE();
-	OptionsMenu* getOptions();
+    //Console* getConsole();
+    //LevelEditor* getLE();
+    OptionsMenu* getOptions();
 };
 
 #endif

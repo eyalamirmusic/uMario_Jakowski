@@ -8,27 +8,27 @@
 class FireBall : public Minion
 {
 private:
-	int radius; // -- r
-	double angle;
+    int radius; // -- r
+    double angle;
 
-	int iCenterX, iCenterY;
+    int iCenterX, iCenterY;
 
-	double slice;
+    double slice;
 
-	int sliceID;
+    int sliceID;
 
 public:
-	FireBall(int iXPos, int iYPos, int radius, int nSliceID, bool moveDirection);
-	~FireBall(void);
+    FireBall(int iXPos, int iYPos, int radius, int nSliceID, bool moveDirection);
+    ~FireBall(void);
 
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
-	void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
 
-	void updateXPos();
+    void updateXPos();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void minionPhysics();
+    void minionPhysics();
 };
 
 #endif

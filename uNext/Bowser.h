@@ -8,32 +8,33 @@
 class Bowser : public Minion
 {
 private:
-	// -- minionState, 0 = Normal, 1 = Shot, -1 = Dead
+    // -- minionState, 0 = Normal, 1 = Shot, -1 = Dead
 
-	int nextJumpFrameID;
+    int nextJumpFrameID;
 
-	bool spawnHammer;
-	int nextHammerFrameID, numOfHammers;
+    bool spawnHammer;
+    int nextHammerFrameID, numOfHammers;
 
-	int iMinBlockID, iMaxBlockID;
-	bool moveDir;
+    int iMinBlockID, iMaxBlockID;
+    bool moveDir;
 
-	int nextFireFrameID;
+    int nextFireFrameID;
 
-	int iYFireStart;
-	int iFireID;
+    int iYFireStart;
+    int iFireID;
+
 public:
-	Bowser(float fXPos, float fYPos, bool spawnHammer = false);
-	~Bowser(void);
+    Bowser(float fXPos, float fYPos, bool spawnHammer = false);
+    ~Bowser(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void minionPhysics();
+    void minionPhysics();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void createFire();
+    void createFire();
 };
 
 #endif

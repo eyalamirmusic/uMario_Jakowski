@@ -8,19 +8,20 @@
 class Vine : public Minion
 {
 private:
-	// -- minionState = 0 VINE START, minionState = 1 VINE END
+    // -- minionState = 0 VINE START, minionState = 1 VINE END
 
-	int iX, iY;
+    int iX, iY;
+
 public:
-	Vine(int iXPos, int iYPos, int minionState, int iBlockID);
-	~Vine(void);
+    Vine(int iXPos, int iYPos, int minionState, int iBlockID);
+    ~Vine(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void minionPhysics();
+    void minionPhysics();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 };
 
 #endif

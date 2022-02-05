@@ -8,19 +8,18 @@
 class LevelText
 {
 private:
+    int iXPos, iYPos;
 
-	int iXPos, iYPos;
-
-	std::string sText;
+    std::string sText;
 
 public:
-	LevelText(int iXPos, int iYPos, std::string sText);
-	~LevelText(void);
+    LevelText(int iXPos, int iYPos, std::string sText);
+    ~LevelText(void);
 
-	int getXPos();
-	int getYPos();
-	std::string getText();
-	void setText(std::string sText);
+    int getXPos();
+    int getYPos();
+    std::string getText();
+    void setText(std::string sText);
 };
 
 #endif

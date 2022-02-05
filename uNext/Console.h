@@ -9,19 +9,20 @@
 class Console
 {
 private:
-	SDL_Rect rRect;
+    SDL_Rect rRect;
 
-	std::vector<std::string> vPrint;
+    std::vector<std::string> vPrint;
 
-	unsigned int iMax;
+    unsigned int iMax;
+
 public:
-	Console(void);
-	~Console(void);
+    Console(void);
+    ~Console(void);
 
-	void Draw(SDL_Renderer* rR);
+    void Draw(SDL_Renderer* rR);
 
-	void print(int);
-	void print(std::string sPrint);
+    void print(int);
+    void print(std::string sPrint);
 };
 
 #endif

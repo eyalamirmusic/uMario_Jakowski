@@ -10,32 +10,37 @@
 
 class Block
 {
-private :
-	Sprite* sSprite;
+private:
+    Sprite* sSprite;
 
-	int iBlockID;
+    int iBlockID;
 
-	bool bCollision;
-	bool bDeath;
-	bool bUse;
-	bool bVisible;
+    bool bCollision;
+    bool bDeath;
+    bool bUse;
+    bool bVisible;
 
 public:
-	Block(void);
-	Block(int iBlockID, Sprite* sSprite, bool bCollision, bool bDeath, bool bUse, bool bVisible);
-	~Block(void);
+    Block(void);
+    Block(int iBlockID,
+          Sprite* sSprite,
+          bool bCollision,
+          bool bDeath,
+          bool bUse,
+          bool bVisible);
+    ~Block(void);
 
-	void Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY);
+    void Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY);
 
-	/* ----- get & set ----- */
-	int getBlockID();
-	void setBlockID(int iID);
+    /* ----- get & set ----- */
+    int getBlockID();
+    void setBlockID(int iID);
 
-	Sprite* getSprite();
-	bool getCollision();
-	bool getDeath();
-	bool getUse();
-	bool getVisible();
+    Sprite* getSprite();
+    bool getCollision();
+    bool getDeath();
+    bool getUse();
+    bool getVisible();
 };
 
 #endif

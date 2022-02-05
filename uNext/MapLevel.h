@@ -6,46 +6,46 @@
 class MapLevel
 {
 private:
-	int iBlockID;
+    int iBlockID;
 
-	bool spawnMushroom;
-	bool powerUP; // -- true = powerUP, false = 1UP
-	bool spawnStar;
-	int iNumOfUse;
+    bool spawnMushroom;
+    bool powerUP; // -- true = powerUP, false = 1UP
+    bool spawnStar;
+    int iNumOfUse;
 
-	// ----- Animation -----
+    // ----- Animation -----
 
-	bool blockAnimation;
-	int iYPos;
-	bool bYDirection;	// ----- true TOP, false BOTTOM
+    bool blockAnimation;
+    int iYPos;
+    bool bYDirection; // ----- true TOP, false BOTTOM
 
-	// ----- Animation -----
+    // ----- Animation -----
 
 public:
-	MapLevel(void);
-	MapLevel(int iBlockID);
-	~MapLevel(void);
+    MapLevel(void);
+    MapLevel(int iBlockID);
+    ~MapLevel(void);
 
-	void startBlockAnimation();
+    void startBlockAnimation();
 
-	int updateYPos();
+    int updateYPos();
 
-	/* ----- get & set ----- */
+    /* ----- get & set ----- */
 
-	int getBlockID();
-	void setBlockID(int iBlockID);
+    int getBlockID();
+    void setBlockID(int iBlockID);
 
-	int getYPos();
+    int getYPos();
 
-	int getNumOfUse();
-	void setNumOfUse(int iNumOfUse);
+    int getNumOfUse();
+    void setNumOfUse(int iNumOfUse);
 
-	bool getSpawnMushroom();
-	void setSpawnMushroom(bool spawnMushroom);
-	bool getPowerUP();
-	void setPowerUP(bool powerUP);
-	bool getSpawnStar();
-	void setSpawnStar(bool spawnStar);
+    bool getSpawnMushroom();
+    void setSpawnMushroom(bool spawnMushroom);
+    bool getPowerUP();
+    void setPowerUP(bool powerUP);
+    bool getSpawnStar();
+    void setSpawnStar(bool spawnStar);
 };
 
 #endif

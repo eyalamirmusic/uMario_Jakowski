@@ -9,92 +9,95 @@
 class Event
 {
 private:
-	bool bState; // true = OLD, false = NEW
-	unsigned int stepID;
+    bool bState; // true = OLD, false = NEW
+    unsigned int stepID;
+
 public:
-	Event(void);
-	~Event(void);
+    Event(void);
+    ~Event(void);
 
-	enum animationType {
-		eTOP,
-		eRIGHT,
-		eRIGHTEND,
-		eBOT,
-		eLEFT,
-		eBOTRIGHTEND,
-		eENDBOT1,
-		eENDBOT2,
-		eENDPOINTS,
-		eDEATHNOTHING,
-		eDEATHTOP,
-		eDEATHBOT,
-		eNOTHING,
-		ePLAYPIPERIGHT,
-		ePLAYPIPETOP,
-		eLOADINGMENU,
-		eGAMEOVER,
-		eBOSSEND1,
-		eBOSSEND2,
-		eBOSSEND3,
-		eBOSSEND4,
-		eBOTRIGHTBOSS,
-		eBOSSTEXT1,
-		eBOSSTEXT2,
-		eENDGAMEBOSSTEXT1,
-		eENDGAMEBOSSTEXT2,
-		eMARIOSPRITE1,
-		eVINE1,
-		eVINE2,
-		eVINESPAWN,
-	};
+    enum animationType
+    {
+        eTOP,
+        eRIGHT,
+        eRIGHTEND,
+        eBOT,
+        eLEFT,
+        eBOTRIGHTEND,
+        eENDBOT1,
+        eENDBOT2,
+        eENDPOINTS,
+        eDEATHNOTHING,
+        eDEATHTOP,
+        eDEATHBOT,
+        eNOTHING,
+        ePLAYPIPERIGHT,
+        ePLAYPIPETOP,
+        eLOADINGMENU,
+        eGAMEOVER,
+        eBOSSEND1,
+        eBOSSEND2,
+        eBOSSEND3,
+        eBOSSEND4,
+        eBOTRIGHTBOSS,
+        eBOSSTEXT1,
+        eBOSSTEXT2,
+        eENDGAMEBOSSTEXT1,
+        eENDGAMEBOSSTEXT2,
+        eMARIOSPRITE1,
+        eVINE1,
+        eVINE2,
+        eVINESPAWN,
+    };
 
-	std::vector<animationType> vOLDDir;
-	std::vector<int> vOLDLength;
+    std::vector<animationType> vOLDDir;
+    std::vector<int> vOLDLength;
 
-	std::vector<animationType> vNEWDir;
-	std::vector<int> vNEWLength;
+    std::vector<animationType> vNEWDir;
+    std::vector<int> vNEWLength;
 
-	std::vector<int> reDrawX;
-	std::vector<int> reDrawY;
+    std::vector<int> reDrawX;
+    std::vector<int> reDrawY;
 
-	enum eventType {
-		eNormal,
-		eEnd,
-		eBossEnd,
-	};
+    enum eventType
+    {
+        eNormal,
+        eEnd,
+        eBossEnd,
+    };
 
-	eventType eventTypeID;
+    eventType eventTypeID;
 
-	void Normal();
-	void end();
+    void Normal();
+    void end();
 
-	int iSpeed;
+    int iSpeed;
 
-	void resetData();
+    void resetData();
 
-	int newLevelType;
-	int newMapXPos;
-	int newPlayerXPos;
-	int newPlayerYPos;
-	bool newMoveMap;
+    int newLevelType;
+    int newMapXPos;
+    int newPlayerXPos;
+    int newPlayerYPos;
+    bool newMoveMap;
 
-	unsigned int iTime;
-	int iDelay;
+    unsigned int iTime;
+    int iDelay;
 
-	int newCurrentLevel;
-	bool inEvent;
-	bool newUnderWater;
+    int newCurrentLevel;
+    bool inEvent;
+    bool newUnderWater;
 
-	bool endGame;
+    bool endGame;
 
-	// ----- Methods
+    // ----- Methods
 
-	void Draw(SDL_Renderer* rR);
+    void Draw(SDL_Renderer* rR);
 
-	void Animation();
-	void newLevel();
+    void Animation();
+    void newLevel();
 
-	void resetRedraw();
+    void resetRedraw();
 };
 
 #endif

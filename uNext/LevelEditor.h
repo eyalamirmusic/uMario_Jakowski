@@ -8,23 +8,24 @@
 class LevelEditor
 {
 private:
-	SDL_Rect rBlock;
+    SDL_Rect rBlock;
 
-	SDL_Rect rDrag;
+    SDL_Rect rDrag;
 
-	int currentBlockID;
+    int currentBlockID;
+
 public:
-	LevelEditor(void);
-	~LevelEditor(void);
+    LevelEditor(void);
+    ~LevelEditor(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void mouseWheel(int Y);
-	
-	void editMap();
+    void mouseWheel(int Y);
 
-	void drawStruct(SDL_Renderer* rR);
+    void editMap();
+
+    void drawStruct(SDL_Renderer* rR);
 };
 
 #endif

@@ -8,18 +8,19 @@
 class PauseMenu : public Menu
 {
 private:
-	SDL_Rect rPause;
+    SDL_Rect rPause;
+
 public:
-	PauseMenu(void);
-	~PauseMenu(void);
+    PauseMenu(void);
+    ~PauseMenu(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	void enter();
-	void escape();
+    void enter();
+    void escape();
 
-	void updateActiveButton(int iDir);
+    void updateActiveButton(int iDir);
 };
 
 #endif

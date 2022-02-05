@@ -10,76 +10,76 @@
 class Minion
 {
 public:
-	Minion(void);
-	~Minion(void);
+    Minion(void);
+    ~Minion(void);
 
-	int minionState;
+    int minionState;
 
-	bool killOtherUnits;
+    bool killOtherUnits;
 
-	int iBlockID;
-	float fXPos, fYPos;
-	int iHitBoxX, iHitBoxY;
-	bool minionSpawned;
-	bool collisionOnlyWithPlayer;
+    int iBlockID;
+    float fXPos, fYPos;
+    int iHitBoxX, iHitBoxY;
+    bool minionSpawned;
+    bool collisionOnlyWithPlayer;
 
-	int deadTime;
+    int deadTime;
 
-	bool onAnotherMinion;
+    bool onAnotherMinion;
 
-	// ----- true = LEFT, false = RIGHT
-	bool moveDirection;
-	int moveSpeed;
+    // ----- true = LEFT, false = RIGHT
+    bool moveDirection;
+    int moveSpeed;
 
-	int jumpState;
+    int jumpState;
 
-	float startJumpSpeed;
-	float currentJumpSpeed;
-	float jumpDistance;
-	float currentJumpDistance;
-	float currentFallingSpeed;
+    float startJumpSpeed;
+    float currentJumpSpeed;
+    float jumpDistance;
+    float currentJumpDistance;
+    float currentFallingSpeed;
 
-	// ---------- Methods
-	virtual void Update();
-	virtual void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    // ---------- Methods
+    virtual void Update();
+    virtual void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	virtual void updateYPos(int iN);
-	virtual void updateXPos();
+    virtual void updateYPos(int iN);
+    virtual void updateXPos();
 
-	virtual bool updateMinion();
-	virtual void minionPhysics();
+    virtual bool updateMinion();
+    virtual void minionPhysics();
 
-	virtual void collisionEffect();
+    virtual void collisionEffect();
 
-	virtual void minionDeathAnimation();
+    virtual void minionDeathAnimation();
 
-	void physicsState1();
-	void physicsState2();
+    void physicsState1();
+    void physicsState2();
 
-	void Spawn();
-	void startJump(int iH);
-	void resetJump();
+    void Spawn();
+    void startJump(int iH);
+    void resetJump();
 
-	// ----- COLLISON
+    // ----- COLLISON
 
-	virtual void collisionWithPlayer(bool TOP);
-	virtual void points(int iPoints);
+    virtual void collisionWithPlayer(bool TOP);
+    virtual void points(int iPoints);
 
-	virtual void collisionWithAnotherUnit(); // -- PLAYERFIREBALL
+    virtual void collisionWithAnotherUnit(); // -- PLAYERFIREBALL
 
-	virtual void lockMinion();
+    virtual void lockMinion();
 
-	// ----- get & set -----
-	int getBloockID();
-	void setBlockID(int iBlockID);
-	int getMinionState();
+    // ----- get & set -----
+    int getBloockID();
+    void setBlockID(int iBlockID);
+    int getMinionState();
 
-	virtual void setMinionState(int minionState);
-	virtual bool getPowerUP();
+    virtual void setMinionState(int minionState);
+    virtual bool getPowerUP();
 
-	int getXPos();
-	int getYPos();
-	void setYPos(int iYPos);
+    int getXPos();
+    int getYPos();
+    void setYPos(int iYPos);
 };
 
-#endif 
+#endif

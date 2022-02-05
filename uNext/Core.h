@@ -8,56 +8,57 @@
 class CCore
 {
 private:
-	SDL_Window* window;
-	SDL_Renderer* rR;
-	SDL_Event* mainEvent;
+    SDL_Window* window;
+    SDL_Renderer* rR;
+    SDL_Event* mainEvent;
 
-	// ----- FPS -----
+    // ----- FPS -----
 
-	long frameTime;
-	static const int MIN_FRAME_TIME = 16;
+    long frameTime;
+    static const int MIN_FRAME_TIME = 16;
 
-	unsigned long lFPSTime;
-	int iNumOfFPS, iFPS;
+    unsigned long lFPSTime;
+    int iNumOfFPS, iFPS;
 
-	// ----- FPS -----
+    // ----- FPS -----
 
-	// ----- INPUT
-	static bool movePressed, keyMenuPressed, keyS, keyW, keyA, keyD, keyShift;
+    // ----- INPUT
+    static bool movePressed, keyMenuPressed, keyS, keyW, keyA, keyD, keyShift;
 
-	static bool keyAPressed, keyDPressed;
-	// ----- true = RIGHT, false = LEFT
-	bool firstDir;
+    static bool keyAPressed, keyDPressed;
+    // ----- true = RIGHT, false = LEFT
+    bool firstDir;
 
-	// ----- INPUT
+    // ----- INPUT
 
-	static Map* oMap;
+    static Map* oMap;
 
-	// ----- Methods
+    // ----- Methods
 
-	void Input();
-	void MouseInput();
-	void InputPlayer();
-	void InputMenu();
+    void Input();
+    void MouseInput();
+    void InputPlayer();
+    void InputMenu();
+
 public:
-	CCore(void);
-	~CCore(void);
+    CCore(void);
+    ~CCore(void);
 
-	static bool quitGame;
+    static bool quitGame;
 
-	void mainLoop();
+    void mainLoop();
 
-	void Update();
-	void Draw();
+    void Update();
+    void Draw();
 
-	void resetMove();
-	static void resetKeys();
+    void resetMove();
+    static void resetKeys();
 
-	static bool mouseLeftPressed, mouseRightPressed;
-	static int mouseX, mouseY;
-	
-	/* ----- get & set ----- */
-	static Map* getMap();
+    static bool mouseLeftPressed, mouseRightPressed;
+    static int mouseX, mouseY;
+
+    /* ----- get & set ----- */
+    static Map* getMap();
 };
 
 #endif

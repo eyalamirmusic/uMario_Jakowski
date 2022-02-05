@@ -8,25 +8,26 @@
 class Coin
 {
 private:
-	int iXPos, iYPos;
-	int iLEFT;
+    int iXPos, iYPos;
+    int iLEFT;
 
-	int iSpriteID;
-	int iStepID;
+    int iSpriteID;
+    int iStepID;
 
-	bool bTOP;
+    bool bTOP;
 
-	bool bDelete;
+    bool bDelete;
+
 public:
-	Coin(int iXPos, int iYPos);
-	~Coin(void);
+    Coin(int iXPos, int iYPos);
+    ~Coin(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR);
+    void Update();
+    void Draw(SDL_Renderer* rR);
 
-	int getXPos();
-	int getYPos();
-	bool getDelete();
+    int getXPos();
+    int getYPos();
+    bool getDelete();
 };
 
 #endif

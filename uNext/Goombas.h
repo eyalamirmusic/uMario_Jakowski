@@ -8,18 +8,17 @@
 class Goombas : public Minion
 {
 private:
-	// ----- MinionState, 0 = Alive, 1 = Dead, -1 = Destroy
+    // ----- MinionState, 0 = Alive, 1 = Dead, -1 = Destroy
 public:
-	Goombas(int iX, int iY, int iBlockID, bool moveDirection);
-	~Goombas(void);
+    Goombas(int iX, int iY, int iBlockID, bool moveDirection);
+    ~Goombas(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void setMinionState(int minionState);
+    void setMinionState(int minionState);
 };
 
-
-#endif 
+#endif

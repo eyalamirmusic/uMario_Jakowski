@@ -8,26 +8,27 @@
 class PlayerFireBall : public Minion
 {
 private:
-	bool bDestroy;
-	int destroyFrameID;
+    bool bDestroy;
+    int destroyFrameID;
+
 public:
-	PlayerFireBall(int X, int Y, bool moveDirection);
-	~PlayerFireBall(void);
+    PlayerFireBall(int X, int Y, bool moveDirection);
+    ~PlayerFireBall(void);
 
-	void Update();
-	void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void Update();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
 
-	void updateXPos();
+    void updateXPos();
 
-	void minionPhysics();
+    void minionPhysics();
 
-	void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP);
 
-	void collisionWithAnotherUnit();
+    void collisionWithAnotherUnit();
 
-	void collisionEffect();
+    void collisionEffect();
 
-	void setMinionState(int minionState);
+    void setMinionState(int minionState);
 };
 
 #endif
