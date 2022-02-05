@@ -3,10 +3,7 @@
 #include "Levels/Map.h"
 #include "CommonHeader.h"
 
-namespace Consts
-{
-constexpr int MIN_FRAME_TIME = 16;
-}
+
 
 namespace Mario
 {

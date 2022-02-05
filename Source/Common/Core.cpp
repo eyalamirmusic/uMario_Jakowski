@@ -3,6 +3,14 @@
 #include "CFG.h"
 #include "SDL_mixer.h"
 
+namespace Mario
+{
+namespace Consts
+{
+constexpr int MIN_FRAME_TIME = 16;
+}
+}
+
 CCore::CCore()
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
@@ -70,9 +78,9 @@ void CCore::mainLoop()
 
         SDL_RenderPresent(rR);
 
-        if (SDL_GetTicks() - frameTime < Consts::MIN_FRAME_TIME)
+        if (SDL_GetTicks() - frameTime < Mario::Consts::MIN_FRAME_TIME)
         {
-            SDL_Delay(Consts::MIN_FRAME_TIME - (SDL_GetTicks() - frameTime));
+            SDL_Delay(Mario::Consts::MIN_FRAME_TIME - (SDL_GetTicks() - frameTime));
         }
     }
 }

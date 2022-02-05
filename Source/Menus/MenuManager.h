@@ -8,22 +8,11 @@
 #include "OptionsMenu.h"
 #include "PauseMenu.h"
 
+
+
 class MenuManager
 {
-private:
-    CIMG* activeOption;
-
-    MainMenu* oMainMenu;
-    LoadingMenu* oLoadingMenu;
-    AboutMenu* oAboutMenu;
-    OptionsMenu* oOptionsMenu;
-    PauseMenu* oPauseMenu;
-    //Console* oConsole;
-    //LevelEditor* oLE;
-
 public:
-    MenuManager(void);
-    ~MenuManager(void);
 
     enum gameState
     {
@@ -36,7 +25,7 @@ public:
         //eLevelEditor,
     };
 
-    gameState currentGameState;
+    gameState currentGameState = eMainMenu;
 
     void Update();
     void Draw(SDL_Renderer* rR);
@@ -50,7 +39,7 @@ public:
 
     void resetActiveOptionID(gameState ID);
 
-    int getViewID();
+    int getViewID() const;
     void setViewID(gameState viewID);
 
     CIMG* getActiveOption();
@@ -62,4 +51,15 @@ public:
     //Console* getConsole();
     //LevelEditor* getLE();
     OptionsMenu* getOptions();
+
+private:
+    CIMG* activeOption;
+
+    MainMenu oMainMenu;
+    LoadingMenu oLoadingMenu;
+    AboutMenu oAboutMenu;
+    OptionsMenu oOptionsMenu;
+    PauseMenu oPauseMenu;
+    //Console* oConsole;
+    //LevelEditor* oLE;
 };
