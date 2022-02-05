@@ -20,11 +20,11 @@ void Menu::Draw(SDL_Renderer* rR)
 {
     for (unsigned int i = 0; i < lMO.size(); i++)
     {
-        CCFG::getText()->Draw(
+        getCFG().getText()->Draw(
             rR, lMO[i]->getText(), lMO[i]->getXPos(), lMO[i]->getYPos());
     }
 
-    CCFG::getMM()->getActiveOption()->Draw(
+    getCFG().getMM()->getActiveOption()->Draw(
         rR, lMO[activeMenuOption]->getXPos() - 32, lMO[activeMenuOption]->getYPos());
 }
 

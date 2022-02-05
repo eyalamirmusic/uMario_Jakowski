@@ -31,7 +31,7 @@ void Spring::Update()
 {
     if (inAnimation)
     {
-        if (CCFG::keySpace)
+        if (getCFG().keySpace)
         {
             extraJump = true;
             CCore::getMap()->getPlayer()->resetJump();
@@ -111,7 +111,7 @@ void Spring::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->setNextFallFrameID(16);
             inAnimation = true;
             extraJump = false;
-            CCFG::keySpace = false;
+            getCFG().keySpace = false;
         }
         else
         {

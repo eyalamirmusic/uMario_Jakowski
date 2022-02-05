@@ -50,12 +50,12 @@ void PauseMenu::Draw(SDL_Renderer* rR)
     {
         if (i == activeMenuOption)
         {
-            CCFG::getText()->DrawCenterX(
+            getCFG().getText()->DrawCenterX(
                 rR, lMO[i]->getText(), lMO[i]->getYPos(), 16, 255, 255, 255);
         }
         else
         {
-            CCFG::getText()->DrawCenterX(
+            getCFG().getText()->DrawCenterX(
                 rR, lMO[i]->getText(), lMO[i]->getYPos(), 16, 90, 90, 90);
         }
     }
@@ -71,18 +71,18 @@ void PauseMenu::enter()
     switch (activeMenuOption)
     {
         case 0:
-            CCFG::getMM()->setViewID(Mario::GameStates::eGame);
-            CCFG::getMusic()->playTrack();
+            getCFG().getMM()->setViewID(Mario::GameStates::eGame);
+            getCFG().getMusic()->playTrack();
             break;
         case 1:
-            CCFG::getMM()->getOptions()->setEscapeToMainMenu(false);
-            CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
-            CCFG::getMM()->getOptions()->updateVolumeRect();
-            CCFG::getMM()->setViewID(Mario::GameStates::eOptions);
+            getCFG().getMM()->getOptions()->setEscapeToMainMenu(false);
+            getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
+            getCFG().getMM()->getOptions()->updateVolumeRect();
+            getCFG().getMM()->setViewID(Mario::GameStates::eOptions);
             break;
         case 2:
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
             break;
         case 3:
             Mario::getGameState().quitGame = true;
@@ -92,8 +92,8 @@ void PauseMenu::enter()
 
 void PauseMenu::escape()
 {
-    CCFG::getMM()->setViewID(Mario::GameStates::eGame);
-    CCFG::getMusic()->pauseTrack();
+    getCFG().getMM()->setViewID(Mario::GameStates::eGame);
+    getCFG().getMusic()->pauseTrack();
 }
 
 void PauseMenu::updateActiveButton(int iDir)

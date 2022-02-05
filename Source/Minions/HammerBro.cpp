@@ -117,7 +117,7 @@ void HammerBro::Update()
             jumpDistance = 16;
             nextJumpFrameID = rand() % 295 + 215;
             jumpState = 1;
-            if (fYPos + iHitBoxY < CCFG::GAME_HEIGHT - 16 - 4 * 32)
+            if (fYPos + iHitBoxY < getCFG().GAME_HEIGHT - 16 - 4 * 32)
             {
                 newY = rand() % 3 == 0;
             }

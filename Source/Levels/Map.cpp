@@ -56,7 +56,7 @@ Map::Map(SDL_Renderer* rR)
 
     this->bTP = false;
 
-    CCFG::getText()->setFont(rR, "font");
+    getCFG().getText()->setFont(rR, "font");
 
     oEvent = new Mario::Event();
     oFlag = nullptr;
@@ -107,12 +107,12 @@ void Map::Update()
                     --iMapTime;
                     if (iMapTime == 90)
                     {
-                        CCFG::getMusic()->stopTrack();
-                        CCFG::getMusic()->playEffect(Mario::Music::Effects::LowTime);
+                        getCFG().getMusic()->stopTrack();
+                        getCFG().getMusic()->playEffect(Mario::Music::Effects::LowTime);
                     }
                     else if (iMapTime == 86)
                     {
-                        CCFG::getMusic()->changeMusic(true, true);
+                        getCFG().getMusic()->changeMusic(true, true);
                     }
 
                     if (iMapTime <= 0)
@@ -671,7 +671,7 @@ void Map::Draw(SDL_Renderer* rR)
 
     for (unsigned int i = 0; i < vLevelText.size(); i++)
     {
-        CCFG::getText()->Draw(rR,
+        getCFG().getText()->Draw(rR,
                               vLevelText[i]->getText(),
                               vLevelText[i]->getXPos() + (int) fXPos,
                               vLevelText[i]->getYPos());
@@ -715,7 +715,7 @@ void Map::DrawMap(SDL_Renderer* rR)
                 vBlock[lMap[i][j]->getBlockID()]->Draw(
                     rR,
                     32 * i + (int) fXPos,
-                    CCFG::GAME_HEIGHT - 32 * j - 16 - lMap[i][j]->updateYPos());
+                    getCFG().GAME_HEIGHT - 32 * j - 16 - lMap[i][j]->updateYPos());
             }
         }
     }
@@ -735,41 +735,41 @@ void Map::DrawMinions(SDL_Renderer* rR)
             lMinion[i][j]->Draw(
                 rR,
                 vMinion[lMinion[i][j]->getBloockID()]->getSprite()->getTexture());
-            //CCFG::getText()->DrawWS(rR, std::to_string(i), lMinion[i][j]->getXPos() + (int)fXPos, lMinion[i][j]->getYPos(), 0, 0, 0, 8);
+            //getCFG().getText()->DrawWS(rR, std::to_string(i), lMinion[i][j]->getXPos() + (int)fXPos, lMinion[i][j]->getYPos(), 0, 0, 0, 8);
         }
     }
 }
 
 void Map::DrawGameLayout(SDL_Renderer* rR)
 {
-    CCFG::getText()->Draw(rR, "MARIO", 54, 16);
+    getCFG().getText()->Draw(rR, "MARIO", 54, 16);
 
     if (oPlayer->getScore() < 100)
     {
-        CCFG::getText()->Draw(
+        getCFG().getText()->Draw(
             rR, "00000" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 1000)
     {
-        CCFG::getText()->Draw(
+        getCFG().getText()->Draw(
             rR, "000" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 10000)
     {
-        CCFG::getText()->Draw(
+        getCFG().getText()->Draw(
             rR, "00" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 100000)
     {
-        CCFG::getText()->Draw(rR, "0" + std::to_string(oPlayer->getScore()), 54, 32);
+        getCFG().getText()->Draw(rR, "0" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else
     {
-        CCFG::getText()->Draw(rR, std::to_string(oPlayer->getScore()), 54, 32);
+        getCFG().getText()->Draw(rR, std::to_string(oPlayer->getScore()), 54, 32);
     }
 
-    CCFG::getText()->Draw(rR, "WORLD", 462, 16);
-    CCFG::getText()->Draw(rR, getLevelName(), 480, 32);
+    getCFG().getText()->Draw(rR, "WORLD", 462, 16);
+    getCFG().getText()->Draw(rR, getLevelName(), 480, 32);
 
     if (iLevelType != 1)
     {
@@ -779,28 +779,28 @@ void Map::DrawGameLayout(SDL_Renderer* rR)
     {
         vBlock[57]->Draw(rR, 268, 32);
     }
-    CCFG::getText()->Draw(rR, "y", 286, 32);
-    CCFG::getText()->Draw(rR,
+    getCFG().getText()->Draw(rR, "y", 286, 32);
+    getCFG().getText()->Draw(rR,
                           (oPlayer->getCoins() < 10 ? "0" : "")
                               + std::to_string(oPlayer->getCoins()),
                           302,
                           32);
 
-    CCFG::getText()->Draw(rR, "TIME", 672, 16);
+    getCFG().getText()->Draw(rR, "TIME", 672, 16);
 
-    if (CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
+    if (getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
     {
         if (iMapTime > 100)
         {
-            CCFG::getText()->Draw(rR, std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->Draw(rR, std::to_string(iMapTime), 680, 32);
         }
         else if (iMapTime > 10)
         {
-            CCFG::getText()->Draw(rR, "0" + std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->Draw(rR, "0" + std::to_string(iMapTime), 680, 32);
         }
         else
         {
-            CCFG::getText()->Draw(rR, "00" + std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->Draw(rR, "00" + std::to_string(iMapTime), 680, 32);
         }
     }
 }
@@ -810,45 +810,45 @@ void Map::DrawLines(SDL_Renderer* rR)
     SDL_SetRenderDrawBlendMode(rR, SDL_BLENDMODE_BLEND); // APLHA ON !
     SDL_SetRenderDrawColor(rR, 255, 255, 255, 128);
 
-    for (int i = 0; i < CCFG::GAME_WIDTH / 32 + 1; i++)
+    for (int i = 0; i < getCFG().GAME_WIDTH / 32 + 1; i++)
     {
         SDL_RenderDrawLine(rR,
                            32 * i - (-(int) fXPos) % 32,
                            0,
                            32 * i - (-(int) fXPos) % 32,
-                           CCFG::GAME_HEIGHT);
+                           getCFG().GAME_HEIGHT);
     }
 
-    for (int i = 0; i < CCFG::GAME_HEIGHT / 32 + 1; i++)
+    for (int i = 0; i < getCFG().GAME_HEIGHT / 32 + 1; i++)
     {
         SDL_RenderDrawLine(rR,
                            0,
                            32 * i - 16 + (int) fYPos,
-                           CCFG::GAME_WIDTH,
+                           getCFG().GAME_WIDTH,
                            32 * i - 16 + (int) fYPos);
     }
 
-    for (int i = 0; i < CCFG::GAME_WIDTH / 32 + 1; i++)
+    for (int i = 0; i < getCFG().GAME_WIDTH / 32 + 1; i++)
     {
-        for (int j = 0; j < CCFG::GAME_HEIGHT / 32; j++)
+        for (int j = 0; j < getCFG().GAME_HEIGHT / 32; j++)
         {
-            CCFG::getText()->Draw(
+            getCFG().getText()->Draw(
                 rR,
                 std::to_string(i + (-((int) fXPos + (-(int) fXPos) % 32)) / 32),
                 32 * i + 16 - (-(int) fXPos) % 32
-                    - CCFG::getText()->getTextWidth(
+                    - getCFG().getText()->getTextWidth(
                           std::to_string(
                               i + (-((int) fXPos + (-(int) fXPos) % 32)) / 32),
                           8)
                           / 2,
-                CCFG::GAME_HEIGHT - 9 - 32 * j,
+                getCFG().GAME_HEIGHT - 9 - 32 * j,
                 8);
-            CCFG::getText()->Draw(
+            getCFG().getText()->Draw(
                 rR,
                 std::to_string(j),
                 32 * i + 16 - (-(int) fXPos) % 32
-                    - CCFG::getText()->getTextWidth(std::to_string(j), 8) / 2 + 1,
-                CCFG::GAME_HEIGHT - 32 * j,
+                    - getCFG().getText()->getTextWidth(std::to_string(j), 8) / 2 + 1,
+                getCFG().GAME_HEIGHT - 32 * j,
                 8);
         }
     }
@@ -878,7 +878,7 @@ int Map::getStartBlock()
 
 int Map::getEndBlock()
 {
-    return (int) (-fXPos - (-(int) fXPos) % 32 + CCFG::GAME_WIDTH) / 32 + 2;
+    return (int) (-fXPos - (-(int) fXPos) % 32 + getCFG().GAME_WIDTH) / 32 + 2;
 }
 
 /* ******************************************** */
@@ -889,9 +889,9 @@ int Map::getEndBlock()
 Vector2* Map::getBlockID(int nX, int nY)
 {
     return new Vector2((int) (nX < 0 ? 0 : nX) / 32,
-                       (int) (nY > CCFG::GAME_HEIGHT - 16
+                       (int) (nY > getCFG().GAME_HEIGHT - 16
                                   ? 0
-                                  : (CCFG::GAME_HEIGHT - 16 - nY + 32) / 32));
+                                  : (getCFG().GAME_HEIGHT - 16 - nY + 32) / 32));
 }
 
 int Map::getBlockIDX(int nX)
@@ -901,9 +901,9 @@ int Map::getBlockIDX(int nX)
 
 int Map::getBlockIDY(int nY)
 {
-    return (int) (nY > CCFG::GAME_HEIGHT - 16
+    return (int) (nY > getCFG().GAME_HEIGHT - 16
                       ? 0
-                      : (CCFG::GAME_HEIGHT - 16 - nY + 32) / 32);
+                      : (getCFG().GAME_HEIGHT - 16 - nY + 32) / 32);
 }
 
 bool Map::checkCollisionLB(int nX, int nY, int nHitBoxY, bool checkVisible)
@@ -976,8 +976,8 @@ void Map::checkCollisionOnTopOfTheBlock(int nX, int nY)
         case 72:
         case 73: // COIN
             lMap[nX][nY + 1]->setBlockID(0);
-            lCoin.push_back(new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+            lCoin.push_back(new Coin(nX * 32 + 7, getCFG().GAME_HEIGHT - nY * 32 - 48));
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
             oPlayer->setCoins(oPlayer->getCoins() + 1);
             return;
             break;
@@ -997,9 +997,9 @@ void Map::checkCollisionOnTopOfTheBlock(int nX, int nY)
                                <= nX * 32 + 32)))
             {
                 if (lMinion[i][j]->getYPos() + lMinion[i][j]->iHitBoxY
-                        >= CCFG::GAME_HEIGHT - 24 - nY * 32
+                        >= getCFG().GAME_HEIGHT - 24 - nY * 32
                     && lMinion[i][j]->getYPos() + lMinion[i][j]->iHitBoxY
-                           <= CCFG::GAME_HEIGHT - nY * 32 + 16)
+                           <= getCFG().GAME_HEIGHT - nY * 32 + 16)
                 {
                     lMinion[i][j]->moveDirection = !lMinion[i][j]->moveDirection;
                     lMinion[i][j]->setMinionState(-2);
@@ -1153,20 +1153,20 @@ void Map::addVine(int X, int Y, int minionState, int iBlockID)
     lMinion[getListID(X)].push_back(new Vine(X, Y, minionState, iBlockID));
     if (minionState == 0)
     {
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::Vine);
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::Vine);
     }
 }
 
 void Map::addSpring(int X, int Y)
 {
     lMinion[getListID(X)].push_back(new Spring(X, Y));
-    //lMap[X/32][(CCFG::GAME_HEIGHT - 16 - Y)/32 - 1]->setBlockID(83);
+    //lMap[X/32][(getCFG().GAME_HEIGHT - 16 - Y)/32 - 1]->setBlockID(83);
 }
 
 void Map::addBulletBillSpawner(int X, int Y, int minionState)
 {
     lMinion[getListID(X * 32)].push_back(
-        new BulletBillSpawner(X * 32, CCFG::GAME_HEIGHT - Y * 32, minionState));
+        new BulletBillSpawner(X * 32, getCFG().GAME_HEIGHT - Y * 32, minionState));
 }
 
 void Map::addBulletBill(int X, int Y, bool moveDirection, int minionState)
@@ -3266,12 +3266,12 @@ void Map::loadMinionsLVL_1_2()
     addKoppa(146 * 32, 368, 1, false);
 
     this->iLevelType = 1;
-    addPlant(103 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(109 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(115 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(103 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(109 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(115 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
     this->iLevelType = 0;
-    addPlant(284 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(284 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
     this->iLevelType = 1;
 }
@@ -3282,35 +3282,35 @@ void Map::loadMinionsLVL_1_3()
 
     this->iLevelType = 3;
 
-    addKoppa(30 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
-    addKoppa(110 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 8 * 32, 1, true);
+    addKoppa(30 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(110 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 8 * 32, 1, true);
 
-    addKoppa(74 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 3, false);
-    addKoppa(114 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 9 * 32, 3, false);
+    addKoppa(74 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 3, false);
+    addKoppa(114 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 9 * 32, 3, false);
 
-    addKoppa(133 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(133 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
     this->iLevelType = 0;
 
-    addGoombas(44 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, true);
-    addGoombas(46 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, true);
-    addGoombas(80 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, true);
+    addGoombas(44 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, true);
+    addGoombas(46 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, true);
+    addGoombas(80 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, true);
 }
 
 void Map::loadMinionsLVL_1_4()
 {
     clearMinions();
 
-    addBowser(135 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
+    addBowser(135 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
 
-    addToad(153 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(153 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(30 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
-    addFireBall(49 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(60 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(67 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(76 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(84 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(88 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
+    addFireBall(30 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
+    addFireBall(49 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(60 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(67 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(76 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(84 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(88 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
 }
 
 void Map::loadMinionsLVL_2_1()
@@ -3319,83 +3319,83 @@ void Map::loadMinionsLVL_2_1()
 
     addSpring(188 * 32, 336);
 
-    addGoombas(24 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, true);
+    addGoombas(24 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, true);
 
-    addGoombas(42 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(43 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(42 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(43 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(59 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(60 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(59 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(60 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(68 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(69 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(71 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(68 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(69 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(71 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(87 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(88 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(90 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(87 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(88 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(90 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(102 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(114 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 4 * 32, true);
+    addGoombas(102 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(114 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 4 * 32, true);
 
-    addGoombas(120 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(120 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(162 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(163 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(162 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(163 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addKoppa(32 * 32 - 2, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(33 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(32 * 32 - 2, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(33 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addKoppa(55 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 1, true);
-    addKoppa(66 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(55 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 1, true);
+    addKoppa(66 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addKoppa(137 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(151 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(169 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(171 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(137 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(151 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(169 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(171 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
 
-    addKoppa(185 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(185 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addPlant(46 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(74 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(103 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(115 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(122 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(130 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 6 * 32);
-    addPlant(176 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(46 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(74 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(103 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(115 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(122 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(130 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 6 * 32);
+    addPlant(176 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
 }
 
 void Map::loadMinionsLVL_2_2()
 {
     clearMinions();
 
-    addSquid(22 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(46 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32);
-    addSquid(55 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(83 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
-    addSquid(94 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32);
-    addSquid(105 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(22 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(46 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32);
+    addSquid(55 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(83 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
+    addSquid(94 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32);
+    addSquid(105 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 
-    addCheep(75 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(78 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 7 * 32, 0, 1);
-    addCheep(81 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 2 * 32 - 28, 0, 1);
-    addCheep(94 * 32 + 14, CCFG::GAME_HEIGHT - 16 - 8 * 32, 0, 1);
-    addCheep(101 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(97 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 11 * 32, 1, 1);
-    addCheep(117 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 0, 1);
-    addCheep(127 * 32 + 24, CCFG::GAME_HEIGHT - 16 - 4 * 32, 1, 1);
-    addCheep(131 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 3 * 32 - 4, 0, 1);
-    addCheep(136 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 6 * 32, 0, 1);
-    addCheep(145 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(149 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 8 * 32 - 4, 1, 1);
-    addCheep(164 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 0, 1);
-    addCheep(167 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 1, 1);
-    addCheep(175 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32 - 4, 0, 1);
-    addCheep(183 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, 1);
-    addCheep(186 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 7 * 32, 1, 1);
+    addCheep(75 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(78 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 7 * 32, 0, 1);
+    addCheep(81 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 2 * 32 - 28, 0, 1);
+    addCheep(94 * 32 + 14, getCFG().GAME_HEIGHT - 16 - 8 * 32, 0, 1);
+    addCheep(101 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(97 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 11 * 32, 1, 1);
+    addCheep(117 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 0, 1);
+    addCheep(127 * 32 + 24, getCFG().GAME_HEIGHT - 16 - 4 * 32, 1, 1);
+    addCheep(131 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4, 0, 1);
+    addCheep(136 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 6 * 32, 0, 1);
+    addCheep(145 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(149 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 8 * 32 - 4, 1, 1);
+    addCheep(164 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 0, 1);
+    addCheep(167 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 1, 1);
+    addCheep(175 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32 - 4, 0, 1);
+    addCheep(183 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, 1);
+    addCheep(186 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 7 * 32, 1, 1);
 
     this->iLevelType = 0;
-    addPlant(274 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(274 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
     this->iLevelType = 2;
 }
@@ -3411,16 +3411,16 @@ void Map::loadMinionsLVL_2_4()
 {
     clearMinions();
 
-    addBowser(135 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
+    addBowser(135 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
 
-    addToad(153 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(153 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(49 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(55 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, true);
-    addFireBall(61 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(73 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(82 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(92 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
+    addFireBall(49 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(55 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, true);
+    addFireBall(61 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(73 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(82 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(92 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
 
     addUpFire(16 * 32 + 4, 9 * 32);
     addUpFire(30 * 32, 9 * 32);
@@ -3432,104 +3432,104 @@ void Map::loadMinionsLVL_3_1()
 
     addSpring(126 * 32, 336);
 
-    addGoombas(37 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(53 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(54 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(56 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(82 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(83 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(85 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(94 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(95 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(139 * 32 - 4, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(140 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, true);
-    addGoombas(154 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(155 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(157 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(37 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(53 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(54 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(56 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(82 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(83 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(85 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(94 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(95 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(139 * 32 - 4, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(140 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, true);
+    addGoombas(154 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(155 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(157 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addPlant(32 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(38 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(57 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(67 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(103 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(32 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(38 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(57 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(67 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(103 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
 
-    addKoppa(25 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(28 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(65 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(101 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(149 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(152 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
-    addKoppa(165 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(168 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(170 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 1, true);
-    addKoppa(171 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(188 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 1, true);
-    addKoppa(191 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(25 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(28 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(65 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(101 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(149 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(152 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(165 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(168 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(170 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 1, true);
+    addKoppa(171 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(188 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 1, true);
+    addKoppa(191 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
 
-    addHammerBro(113 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(116 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(113 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(116 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 }
 
 void Map::loadMinionsLVL_3_2()
 {
     clearMinions();
 
-    addKoppa(17 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(33 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(34 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(36 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(43 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(44 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(66 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(78 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(98 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(111 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(134 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(140 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(141 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(143 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(150 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(151 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(162 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(163 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(165 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(175 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(17 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(33 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(34 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(36 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(43 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(44 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(66 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(78 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(98 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(111 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(134 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(140 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(141 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(143 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(150 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(151 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(162 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(163 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(165 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(175 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addGoombas(24 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(25 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(27 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(71 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(72 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(74 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(119 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(120 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(122 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(179 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(180 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(182 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(188 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(189 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(191 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(24 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(25 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(27 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(71 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(72 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(74 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(119 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(120 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(122 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(179 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(180 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(182 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(188 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(189 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(191 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addPlant(169 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(169 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
 }
 
 void Map::loadMinionsLVL_3_3()
 {
     clearMinions();
 
-    addGoombas(26 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, true);
+    addGoombas(26 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, true);
 
     iLevelType = 3;
 
-    addKoppa(52 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 1, true);
-    addKoppa(54 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 1, true);
-    addKoppa(73 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(52 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 1, true);
+    addKoppa(54 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 1, true);
+    addKoppa(73 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addKoppa(114 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 9 * 32, 3, false);
+    addKoppa(114 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 9 * 32, 3, false);
 
-    addKoppa(124 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 1, true);
-    addKoppa(126 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 1, true);
+    addKoppa(124 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 1, true);
+    addKoppa(126 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 1, true);
 
     iLevelType = 4;
 }
@@ -3538,19 +3538,19 @@ void Map::loadMinionsLVL_3_4()
 {
     clearMinions();
 
-    addBowser(135 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
+    addBowser(135 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
 
-    addToad(153 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(153 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(19 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(24 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(29 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(54 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(54 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
-    addFireBall(64 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(64 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
-    addFireBall(80 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
-    addFireBall(80 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
+    addFireBall(19 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(24 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(29 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(54 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(54 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
+    addFireBall(64 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(64 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
+    addFireBall(80 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(80 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, false);
 
     addUpFire(16 * 32, 9 * 32);
     addUpFire(26 * 32, 9 * 32);
@@ -3564,45 +3564,45 @@ void Map::loadMinionsLVL_4_1()
 {
     clearMinions();
 
-    addPlant(21 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(116 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(132 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(163 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(21 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(116 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(132 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(163 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
-    addLakito(26 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 207 * 32);
+    addLakito(26 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 207 * 32);
 }
 
 void Map::loadMinionsLVL_4_2()
 {
     clearMinions();
 
-    addGoombas(43 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(44 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(46 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(43 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(44 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(46 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
 
-    addKoppa(77 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(100 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(101 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(137 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(168 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(169 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(77 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(100 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(101 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(137 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(168 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(169 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addPlant(72 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(78 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
-    addPlant(84 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(107 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(138 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(142 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(180 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(72 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(78 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(84 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(107 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(138 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(142 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(180 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
 
-    addBeetle(83 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(88 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(154 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, true);
-    addBeetle(179 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(83 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(88 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(154 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, true);
+    addBeetle(179 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
     this->iLevelType = 0;
 
-    addPlant(394 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(394 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
     this->iLevelType = 1;
 }
@@ -3613,13 +3613,13 @@ void Map::loadMinionsLVL_4_3()
 
     this->iLevelType = 3;
 
-    addKoppa(28 * 32 - 2, CCFG::GAME_HEIGHT - 16 - 6 * 32, 1, true);
-    addKoppa(29 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 1, true);
-    addKoppa(39 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 1, true);
-    addKoppa(68 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(78 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(28 * 32 - 2, getCFG().GAME_HEIGHT - 16 - 6 * 32, 1, true);
+    addKoppa(29 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 1, true);
+    addKoppa(39 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 1, true);
+    addKoppa(68 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(78 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
 
-    addKoppa(35 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 3, false);
+    addKoppa(35 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 3, false);
 
     this->iLevelType = 0;
 }
@@ -3628,21 +3628,21 @@ void Map::loadMinionsLVL_4_4()
 {
     clearMinions();
 
-    addBowser(167 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
+    addBowser(167 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
 
-    addToad(186 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(186 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(53 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(60 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, false);
-    addFireBall(115 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(122 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
-    addFireBall(162 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
+    addFireBall(53 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(60 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, false);
+    addFireBall(115 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(122 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
+    addFireBall(162 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
 
     addUpFire(165 * 32, 9 * 32);
 
     this->iLevelType = 1;
 
-    addPlant(40 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(40 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
 
     this->iLevelType = 3;
 }
@@ -3651,88 +3651,88 @@ void Map::loadMinionsLVL_5_1()
 {
     clearMinions();
 
-    addGoombas(19 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(20 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(22 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(30 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(31 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(33 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(65 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(66 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(68 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(76 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(77 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(103 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(104 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(106 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(121 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(122 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(124 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(135 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(136 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(138 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(19 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(20 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(22 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(30 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(31 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(33 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(65 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(66 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(68 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(76 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(77 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(103 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(104 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(106 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(121 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(122 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(124 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(135 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(136 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(138 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addKoppa(16 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(41 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(42 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(61 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(87 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(127 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(144 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(145 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(178 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(182 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 1, true);
+    addKoppa(16 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(41 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(42 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(61 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(87 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(127 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(144 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(145 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(178 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(182 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 1, true);
 
-    addPlant(44 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(51 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(156 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 7 * 32);
-    addPlant(163 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(44 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(51 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(156 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 7 * 32);
+    addPlant(163 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 }
 
 void Map::loadMinionsLVL_5_2()
 {
     clearMinions();
 
-    addGoombas(143 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, true);
-    addGoombas(145 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
-    addGoombas(235 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(236 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(143 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, true);
+    addGoombas(145 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
+    addGoombas(235 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(236 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addKoppa(103 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(120 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(186 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(243 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(246 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(266 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 0, true);
+    addKoppa(103 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(120 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(186 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(243 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(246 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(266 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 0, true);
 
-    addHammerBro(126 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
-    addHammerBro(161 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(200 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(204 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32);
+    addHammerBro(126 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
+    addHammerBro(161 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(200 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(204 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32);
 
-    addPlant(135 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(195 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(135 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(195 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
-    addBeetle(216 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(217 * 32 + 4, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(218 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(216 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(217 * 32 + 4, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(218 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
     this->iLevelType = 3;
 
-    addKoppa(237 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(237 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
 
     this->iLevelType = 0;
 
     // -- MAP 5-2-2
 
-    addSquid(17 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(34 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(43 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(17 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(34 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(43 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 4 * 32);
 
-    addCheep(27 * 32 + 16, CCFG::GAME_HEIGHT - 9 * 32, 0, 1);
-    addCheep(38 * 32 + 28, CCFG::GAME_HEIGHT - 4 * 32, 0, 1);
-    addCheep(48 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, 1, 1);
-    addCheep(53 * 32 + 16, CCFG::GAME_HEIGHT - 11 * 32, 0, 1);
+    addCheep(27 * 32 + 16, getCFG().GAME_HEIGHT - 9 * 32, 0, 1);
+    addCheep(38 * 32 + 28, getCFG().GAME_HEIGHT - 4 * 32, 0, 1);
+    addCheep(48 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, 1, 1);
+    addCheep(53 * 32 + 16, getCFG().GAME_HEIGHT - 11 * 32, 0, 1);
 }
 
 void Map::loadMinionsLVL_5_3()
@@ -3741,18 +3741,18 @@ void Map::loadMinionsLVL_5_3()
 
     this->iLevelType = 3;
 
-    addKoppa(30 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, true);
-    addKoppa(110 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 8 * 32, 1, true);
+    addKoppa(30 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, true);
+    addKoppa(110 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 8 * 32, 1, true);
 
-    addKoppa(74 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 3, false);
-    addKoppa(114 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 9 * 32, 3, false);
+    addKoppa(74 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 3, false);
+    addKoppa(114 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 9 * 32, 3, false);
 
-    addKoppa(133 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(133 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
     this->iLevelType = 0;
 
-    addGoombas(44 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, true);
-    addGoombas(46 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, true);
-    addGoombas(80 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, true);
+    addGoombas(44 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, true);
+    addGoombas(46 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, true);
+    addGoombas(80 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, true);
 
     addBulletBillSpawner(174, 3, 1);
 }
@@ -3761,24 +3761,24 @@ void Map::loadMinionsLVL_5_4()
 {
     clearMinions();
 
-    addBowser(135 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
+    addBowser(135 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
 
-    addToad(153 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(153 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(49 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(55 * 32, CCFG::GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, true);
-    addFireBall(61 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(73 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(82 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(92 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
+    addFireBall(49 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(55 * 32, getCFG().GAME_HEIGHT - 16 - 9 * 32, 6, rand() % 360, true);
+    addFireBall(61 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(73 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(82 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(92 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
 
-    addFireBall(23 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 12, rand() % 360, true);
+    addFireBall(23 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 12, rand() % 360, true);
 
-    addFireBall(43 * 32, CCFG::GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, false);
-    addFireBall(55 * 32, CCFG::GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, false);
-    addFireBall(67 * 32, CCFG::GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, true);
+    addFireBall(43 * 32, getCFG().GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, false);
+    addFireBall(55 * 32, getCFG().GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, false);
+    addFireBall(67 * 32, getCFG().GAME_HEIGHT - 16 - 1 * 32, 6, rand() % 360, true);
 
-    addFireBall(103 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
+    addFireBall(103 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 6, rand() % 360, true);
 
     addUpFire(16 * 32 + 4, 9 * 32);
     addUpFire(30 * 32, 9 * 32);
@@ -3794,9 +3794,9 @@ void Map::loadMinionsLVL_6_1()
 
     this->iLevelType = 0;
 
-    addLakito(23 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 176 * 32);
+    addLakito(23 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 176 * 32);
 
-    addPlant(102 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(102 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
 
     this->iLevelType = 4;
 }
@@ -3805,53 +3805,53 @@ void Map::loadMinionsLVL_6_2()
 {
     clearMinions();
 
-    addSquid(17 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(34 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(43 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(17 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(34 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(43 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 4 * 32);
 
-    addCheep(27 * 32 + 16, CCFG::GAME_HEIGHT - 9 * 32, 0, 1);
-    addCheep(38 * 32 + 28, CCFG::GAME_HEIGHT - 4 * 32, 0, 1);
-    addCheep(48 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, 1, 1);
-    addCheep(53 * 32 + 16, CCFG::GAME_HEIGHT - 11 * 32, 0, 1);
+    addCheep(27 * 32 + 16, getCFG().GAME_HEIGHT - 9 * 32, 0, 1);
+    addCheep(38 * 32 + 28, getCFG().GAME_HEIGHT - 4 * 32, 0, 1);
+    addCheep(48 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, 1, 1);
+    addCheep(53 * 32 + 16, getCFG().GAME_HEIGHT - 11 * 32, 0, 1);
 
-    addKoppa(111 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(128 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(291 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 0, true);
+    addKoppa(111 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(128 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(291 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 0, true);
 
-    addPlant(104 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(113 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(117 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
-    addPlant(120 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(122 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(131 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(141 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 6 * 32);
-    addPlant(147 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 7 * 32);
-    addPlant(152 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(165 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(169 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(172 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 7 * 32);
-    addPlant(179 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(190 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(196 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
-    addPlant(200 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(216 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(220 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(238 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(252 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
-    addPlant(259 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(264 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(266 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(268 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(274 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(286 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(104 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(113 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(117 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(120 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(122 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(131 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(141 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 6 * 32);
+    addPlant(147 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 7 * 32);
+    addPlant(152 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(165 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(169 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(172 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 7 * 32);
+    addPlant(179 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(190 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(196 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(200 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(216 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(220 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(238 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(252 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(259 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(264 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(266 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(268 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(274 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(286 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
 
-    addBeetle(139 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(177 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(205 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, true);
-    addBeetle(248 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(139 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(177 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(205 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, true);
+    addBeetle(248 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(152 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, true);
-    addGoombas(254 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(152 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, true);
+    addGoombas(254 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 }
 
 void Map::loadMinionsLVL_6_3()
@@ -3865,22 +3865,22 @@ void Map::loadMinionsLVL_6_4()
 {
     clearMinions();
 
-    addBowser(135 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
+    addBowser(135 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
 
-    addToad(153 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(153 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 
-    addFireBall(30 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
-    addFireBall(49 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(60 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(67 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(76 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(84 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
-    addFireBall(88 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
+    addFireBall(30 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, true);
+    addFireBall(49 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(60 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(67 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(76 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(84 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(88 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
 
-    addFireBall(23 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(37 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(80 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
-    addFireBall(92 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
+    addFireBall(23 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(37 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(80 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 6, rand() % 360, false);
+    addFireBall(92 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 6, rand() % 360, true);
 
     addUpFire(27 * 32, 9 * 32);
     addUpFire(33 * 32, 9 * 32);
@@ -3891,65 +3891,65 @@ void Map::loadMinionsLVL_7_1()
 {
     clearMinions();
 
-    addKoppa(26 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(44 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(53 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(65 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(26 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(44 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(53 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(65 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
 
-    addKoppa(114 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(114 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addPlant(76 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(93 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(109 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(115 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(128 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(76 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(93 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(109 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(115 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(128 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
-    addHammerBro(85 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(87 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32);
-    addHammerBro(137 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(135 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(85 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(87 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32);
+    addHammerBro(137 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(135 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 
-    addBeetle(169 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, true);
+    addBeetle(169 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, true);
 }
 
 void Map::loadMinionsLVL_7_2()
 {
     clearMinions();
 
-    addSquid(22 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(24 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addSquid(46 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32);
-    addSquid(52 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addSquid(55 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(77 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32);
-    addSquid(83 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
-    addSquid(90 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(94 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32);
-    addSquid(105 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(150 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32);
-    addSquid(173 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(179 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(22 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(24 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addSquid(46 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32);
+    addSquid(52 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addSquid(55 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(77 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32);
+    addSquid(83 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
+    addSquid(90 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(94 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32);
+    addSquid(105 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(150 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32);
+    addSquid(173 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(179 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 
-    addCheep(75 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(78 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 7 * 32, 0, 1);
-    addCheep(81 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 2 * 32 - 28, 0, 1);
-    addCheep(94 * 32 + 14, CCFG::GAME_HEIGHT - 16 - 8 * 32, 0, 1);
-    addCheep(101 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(97 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 11 * 32, 1, 1);
-    addCheep(117 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 10 * 32, 0, 1);
-    addCheep(127 * 32 + 24, CCFG::GAME_HEIGHT - 16 - 4 * 32, 1, 1);
-    addCheep(131 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 3 * 32 - 4, 0, 1);
-    addCheep(136 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 6 * 32, 0, 1);
-    addCheep(145 * 32 + 8, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, 1);
-    addCheep(149 * 32 + 28, CCFG::GAME_HEIGHT - 16 - 8 * 32 - 4, 1, 1);
-    addCheep(164 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 0, 1);
-    addCheep(167 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 1, 1);
-    addCheep(175 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32 - 4, 0, 1);
-    addCheep(183 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 1, 1);
-    addCheep(186 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 7 * 32, 1, 1);
+    addCheep(75 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(78 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 7 * 32, 0, 1);
+    addCheep(81 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 2 * 32 - 28, 0, 1);
+    addCheep(94 * 32 + 14, getCFG().GAME_HEIGHT - 16 - 8 * 32, 0, 1);
+    addCheep(101 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(97 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 11 * 32, 1, 1);
+    addCheep(117 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 10 * 32, 0, 1);
+    addCheep(127 * 32 + 24, getCFG().GAME_HEIGHT - 16 - 4 * 32, 1, 1);
+    addCheep(131 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4, 0, 1);
+    addCheep(136 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 6 * 32, 0, 1);
+    addCheep(145 * 32 + 8, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, 1);
+    addCheep(149 * 32 + 28, getCFG().GAME_HEIGHT - 16 - 8 * 32 - 4, 1, 1);
+    addCheep(164 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 0, 1);
+    addCheep(167 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 1, 1);
+    addCheep(175 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32 - 4, 0, 1);
+    addCheep(183 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 1, 1);
+    addCheep(186 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 7 * 32, 1, 1);
 
     this->iLevelType = 0;
-    addPlant(274 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(274 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
     this->iLevelType = 2;
 }
@@ -3960,15 +3960,15 @@ void Map::loadMinionsLVL_7_3()
 
     addCheepSpawner(5 * 32, 200 * 32);
 
-    addKoppa(52 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 0, true);
-    addKoppa(140 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 0, true);
-    addKoppa(156 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 0, true);
+    addKoppa(52 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 0, true);
+    addKoppa(140 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 0, true);
+    addKoppa(156 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 0, true);
 
     this->iLevelType = 3;
 
-    addKoppa(79 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 1, true);
-    addKoppa(95 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, 1, true);
-    addKoppa(119 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(79 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 1, true);
+    addKoppa(95 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, 1, true);
+    addKoppa(119 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
     this->iLevelType = 0;
 }
@@ -3980,192 +3980,192 @@ void Map::loadMinionsLVL_7_4()
     addUpFire(20 * 32, 9 * 32);
     addUpFire(260 * 32, 9 * 32);
 
-    addFireBall(167 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, true);
+    addFireBall(167 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, true);
 
-    addBowser(263 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
+    addBowser(263 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
 
-    addToad(281 * 32, CCFG::GAME_HEIGHT - 3 * 32, false);
+    addToad(281 * 32, getCFG().GAME_HEIGHT - 3 * 32, false);
 }
 
 void Map::loadMinionsLVL_8_1()
 {
     clearMinions();
 
-    addGoombas(23 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(24 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(26 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(30 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(31 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(33 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(69 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(70 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(72 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(108 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(109 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(111 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(148 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(149 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(151 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(232 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(233 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(235 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(257 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(258 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(260 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(264 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(265 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(267 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(272 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(273 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(23 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(24 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(26 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(30 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(31 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(33 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(69 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(70 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(72 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(108 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(109 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(111 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(148 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(149 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(151 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(232 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(233 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(235 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(257 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(258 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(260 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(264 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(265 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(267 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(272 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(273 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addKoppa(43 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(44 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(61 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(119 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(124 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(125 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(127 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(130 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(131 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(133 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(161 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(172 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(177 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(207 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(208 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(305 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(332 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(339 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(340 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
-    addKoppa(342 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(43 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(44 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(61 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(119 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(124 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(125 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(127 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(130 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(131 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(133 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(161 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(172 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(177 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(207 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(208 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(305 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(332 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(339 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(340 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(342 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addBeetle(18 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(81 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(254 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(283 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(18 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(81 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(254 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(283 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addPlant(35 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(76 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(82 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(94 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(104 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(140 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(238 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(242 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(344 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(355 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(35 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(76 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(82 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(94 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(104 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(140 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(238 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(242 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(344 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(355 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 }
 
 void Map::loadMinionsLVL_8_2()
 {
     clearMinions();
 
-    addGoombas(184 * 32, CCFG::GAME_HEIGHT - 16 - 5 * 32, true);
-    addGoombas(186 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, true);
+    addGoombas(184 * 32, getCFG().GAME_HEIGHT - 16 - 5 * 32, true);
+    addGoombas(186 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, true);
 
-    addKoppa(18 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 5 * 32, 0, true);
-    addKoppa(24 * 32, CCFG::GAME_HEIGHT - 16 - 10 * 32, 0, true);
-    addKoppa(57 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(66 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(69 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(92 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(95 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(139 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 0, true);
-    addKoppa(170 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(172 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(175 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 0, true);
-    addKoppa(203 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 0, true);
+    addKoppa(18 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 5 * 32, 0, true);
+    addKoppa(24 * 32, getCFG().GAME_HEIGHT - 16 - 10 * 32, 0, true);
+    addKoppa(57 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(66 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(69 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(92 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(95 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(139 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 0, true);
+    addKoppa(170 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(172 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(175 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 0, true);
+    addKoppa(203 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 0, true);
 
-    addBeetle(111 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(121 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(123 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(189 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(111 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(121 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(123 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(189 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addLakito(16 * 32, CCFG::GAME_HEIGHT - 16 - 11 * 32, 216 * 32);
+    addLakito(16 * 32, getCFG().GAME_HEIGHT - 16 - 11 * 32, 216 * 32);
 
-    addPlant(131 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(142 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(156 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(163 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(131 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(131 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(142 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(156 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(163 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(131 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 }
 
 void Map::loadMinionsLVL_8_3()
 {
     clearMinions();
 
-    addKoppa(30 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(93 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(137 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, 1, true);
+    addKoppa(30 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(93 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(137 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, 1, true);
 
-    addPlant(53 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(126 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 5 * 32);
-    addPlant(168 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(53 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(126 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 5 * 32);
+    addPlant(168 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
 
-    addHammerBro(63 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addHammerBro(65 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(117 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32);
-    addHammerBro(119 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addHammerBro(146 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addHammerBro(159 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addHammerBro(177 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addHammerBro(185 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(63 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(65 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(117 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32);
+    addHammerBro(119 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(146 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(159 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(177 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(185 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 }
 
 void Map::loadMinionsLVL_8_4()
 {
     clearMinions();
 
-    addPlant(19 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(51 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(81 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 6 * 32);
-    addPlant(126 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(133 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(143 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(153 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 4 * 32);
-    addPlant(163 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 8 * 32);
-    addPlant(215 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(302 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
-    addPlant(224 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 6 * 32);
-    addPlant(232 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 7 * 32);
-    addPlant(248 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 6 * 32);
-    addPlant(309 * 32 + 16, CCFG::GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(19 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(51 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(81 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 6 * 32);
+    addPlant(126 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(133 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(143 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(153 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 4 * 32);
+    addPlant(163 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 8 * 32);
+    addPlant(215 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(302 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
+    addPlant(224 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 6 * 32);
+    addPlant(232 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 7 * 32);
+    addPlant(248 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 6 * 32);
+    addPlant(309 * 32 + 16, getCFG().GAME_HEIGHT - 10 - 3 * 32);
 
-    addBeetle(139 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addBeetle(141 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(139 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addBeetle(141 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addGoombas(56 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(57 * 32 + 16, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
-    addGoombas(59 * 32, CCFG::GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(56 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(57 * 32 + 16, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
+    addGoombas(59 * 32, getCFG().GAME_HEIGHT - 16 - 2 * 32, true);
 
-    addHammerBro(316 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
+    addHammerBro(316 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
 
     this->iLevelType = 1;
 
-    addKoppa(150 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
-    addKoppa(152 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(165 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 3 * 32, 0, true);
-    addKoppa(167 * 32 - 8, CCFG::GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(150 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
+    addKoppa(152 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(165 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 3 * 32, 0, true);
+    addKoppa(167 * 32 - 8, getCFG().GAME_HEIGHT - 16 - 4 * 32, 0, true);
 
     this->iLevelType = 3;
 
     addCheepSpawner(224 * 32, 237 * 32);
 
-    addBowser(338 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, true);
+    addBowser(338 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, true);
 
-    addToad(356 * 32, CCFG::GAME_HEIGHT - 3 * 32, true);
+    addToad(356 * 32, getCFG().GAME_HEIGHT - 3 * 32, true);
 
     addUpFire(332 * 32, 9 * 32);
 
-    addFireBall(410 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, true);
-    addFireBall(421 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
-    addFireBall(430 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
-    addFireBall(446 * 32, CCFG::GAME_HEIGHT - 16 - 6 * 32, 6, rand() % 360, true);
-    addFireBall(454 * 32, CCFG::GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, false);
+    addFireBall(410 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, true);
+    addFireBall(421 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32, 6, rand() % 360, false);
+    addFireBall(430 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, 6, rand() % 360, true);
+    addFireBall(446 * 32, getCFG().GAME_HEIGHT - 16 - 6 * 32, 6, rand() % 360, true);
+    addFireBall(454 * 32, getCFG().GAME_HEIGHT - 16 - 7 * 32, 6, rand() % 360, false);
 
-    addSquid(418 * 32, CCFG::GAME_HEIGHT - 16 - 3 * 32);
-    addSquid(441 * 32, CCFG::GAME_HEIGHT - 16 - 4 * 32);
-    addSquid(443 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32);
+    addSquid(418 * 32, getCFG().GAME_HEIGHT - 16 - 3 * 32);
+    addSquid(441 * 32, getCFG().GAME_HEIGHT - 16 - 4 * 32);
+    addSquid(443 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32);
 }
 
 void Map::createMap()
@@ -4434,7 +4434,7 @@ int Map::getSpawnPointYPos(int iID)
                 case 0:
                     return 64;
                 case 1:
-                    return CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+                    return getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
                     ;
             }
         case 3:
@@ -4448,7 +4448,7 @@ int Map::getSpawnPointYPos(int iID)
             return 150;
     }
 
-    return CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+    return getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
 }
 
 void Map::setSpawnPoint()
@@ -4627,7 +4627,7 @@ void Map::loadPipeEventsLVL_1_1()
                              253,
                              2,
                              163 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4647,7 +4647,7 @@ void Map::loadPipeEventsLVL_1_2()
                              253,
                              2,
                              115 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              1,
                              true,
@@ -4661,7 +4661,7 @@ void Map::loadPipeEventsLVL_1_2()
                              166,
                              5,
                              284 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4671,13 +4671,13 @@ void Map::loadPipeEventsLVL_1_2()
 
     // -- WARP ZONE 2
     lPipe.push_back(new Pipe(
-        0, 186, 4, 187, 4, 84, CCFG::GAME_HEIGHT - 80, 4, 0, true, 350, 1, false));
+        0, 186, 4, 187, 4, 84, getCFG().GAME_HEIGHT - 80, 4, 0, true, 350, 1, false));
     // -- WARP ZONE 3
     lPipe.push_back(new Pipe(
-        0, 182, 4, 183, 4, 84, CCFG::GAME_HEIGHT - 80, 8, 4, true, 350, 1, false));
+        0, 182, 4, 183, 4, 84, getCFG().GAME_HEIGHT - 80, 8, 4, true, 350, 1, false));
     // -- WARP ZONE 4
     lPipe.push_back(new Pipe(
-        0, 178, 4, 179, 4, 84, CCFG::GAME_HEIGHT - 80, 12, 0, true, 350, 1, false));
+        0, 178, 4, 179, 4, 84, getCFG().GAME_HEIGHT - 80, 12, 0, true, 350, 1, false));
 }
 
 void Map::loadPipeEventsLVL_2_1()
@@ -4691,7 +4691,7 @@ void Map::loadPipeEventsLVL_2_1()
                              243,
                              2,
                              115 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4708,7 +4708,7 @@ void Map::loadPipeEventsLVL_2_2()
                              189,
                              6,
                              274 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4728,7 +4728,7 @@ void Map::loadPipeEventsLVL_3_1()
                              253,
                              2,
                              67 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              4,
                              true,
@@ -4748,7 +4748,7 @@ void Map::loadPipeEventsLVL_4_1()
                              263,
                              2,
                              163 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4768,7 +4768,7 @@ void Map::loadPipeEventsLVL_4_2()
                              283,
                              2,
                              131 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              1,
                              true,
@@ -4782,7 +4782,7 @@ void Map::loadPipeEventsLVL_4_2()
                              187,
                              5,
                              394 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4792,16 +4792,16 @@ void Map::loadPipeEventsLVL_4_2()
 
     // -- WARP ZONE 5
     lPipe.push_back(new Pipe(
-        0, 214, 4, 215, 4, 84, CCFG::GAME_HEIGHT - 80, 16, 0, true, 350, 1, false));
+        0, 214, 4, 215, 4, 84, getCFG().GAME_HEIGHT - 80, 16, 0, true, 350, 1, false));
     // -- WARP ZONE 6
     lPipe.push_back(new Pipe(
-        0, 368, 4, 369, 4, 84, CCFG::GAME_HEIGHT - 80, 20, 4, true, 350, 1, false));
+        0, 368, 4, 369, 4, 84, getCFG().GAME_HEIGHT - 80, 20, 4, true, 350, 1, false));
     // -- WARP ZONE 7
     lPipe.push_back(new Pipe(
-        0, 364, 4, 365, 4, 84, CCFG::GAME_HEIGHT - 80, 24, 0, true, 350, 1, false));
+        0, 364, 4, 365, 4, 84, getCFG().GAME_HEIGHT - 80, 24, 0, true, 350, 1, false));
     // -- WARP ZONE 8
     lPipe.push_back(new Pipe(
-        0, 360, 4, 361, 4, 84, CCFG::GAME_HEIGHT - 80, 28, 0, true, 350, 1, false));
+        0, 360, 4, 361, 4, 84, getCFG().GAME_HEIGHT - 80, 28, 0, true, 350, 1, false));
 }
 
 void Map::loadPipeEventsLVL_5_1()
@@ -4815,7 +4815,7 @@ void Map::loadPipeEventsLVL_5_1()
                              241,
                              2,
                              163 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4835,7 +4835,7 @@ void Map::loadPipeEventsLVL_5_2()
                              62,
                              6,
                              195 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4855,7 +4855,7 @@ void Map::loadPipeEventsLVL_6_2()
                              62,
                              6,
                              200 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              4,
                              true,
@@ -4872,7 +4872,7 @@ void Map::loadPipeEventsLVL_6_2()
                              343,
                              2,
                              120 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              4,
                              true,
@@ -4889,7 +4889,7 @@ void Map::loadPipeEventsLVL_6_2()
                              373,
                              2,
                              264 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              4,
                              true,
@@ -4909,7 +4909,7 @@ void Map::loadPipeEventsLVL_7_1()
                              223,
                              2,
                              115 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4926,7 +4926,7 @@ void Map::loadPipeEventsLVL_7_2()
                              189,
                              6,
                              274 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4946,7 +4946,7 @@ void Map::loadPipeEventsLVL_8_1()
                              423,
                              2,
                              115 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4966,7 +4966,7 @@ void Map::loadPipeEventsLVL_8_2()
                              253,
                              2,
                              163 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              0,
                              true,
@@ -4983,7 +4983,7 @@ void Map::loadPipeEventsLVL_8_4()
                              82,
                              6,
                              126 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -4997,7 +4997,7 @@ void Map::loadPipeEventsLVL_8_4()
                              164,
                              8,
                              215 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5011,7 +5011,7 @@ void Map::loadPipeEventsLVL_8_4()
                              249,
                              6,
                              393 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              2,
                              true,
@@ -5024,7 +5024,7 @@ void Map::loadPipeEventsLVL_8_4()
                              458,
                              6,
                              302 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5038,7 +5038,7 @@ void Map::loadPipeEventsLVL_8_4()
                              52,
                              4,
                              19 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5051,7 +5051,7 @@ void Map::loadPipeEventsLVL_8_4()
                              144,
                              3,
                              19 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5064,7 +5064,7 @@ void Map::loadPipeEventsLVL_8_4()
                              232,
                              7,
                              19 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5077,7 +5077,7 @@ void Map::loadPipeEventsLVL_8_4()
                              310,
                              3,
                              19 * 32,
-                             CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                             getCFG().GAME_HEIGHT - 16 - 3 * 32,
                              currentLevelID,
                              3,
                              true,
@@ -5305,7 +5305,7 @@ void Map::loadLVL_1_2()
                                      139 * 32 + 16,
                                      139 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      139 * 32 + 16,
                                      9 * 32 + 16,
                                      true));
@@ -5314,7 +5314,7 @@ void Map::loadLVL_1_2()
                                      139 * 32 + 16,
                                      139 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      139 * 32 + 16,
                                      1 * 32 + 16,
                                      true));
@@ -5324,7 +5324,7 @@ void Map::loadLVL_1_2()
                                      154 * 32 + 16,
                                      154 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      154 * 32 + 16,
                                      10 * 32,
                                      true));
@@ -5333,20 +5333,20 @@ void Map::loadLVL_1_2()
                                      154 * 32 + 16,
                                      154 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      154 * 32 + 16,
                                      2 * 32,
                                      true));
 
     vLevelText.push_back(new LevelText(
-        178 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
+        178 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
 
     vLevelText.push_back(
-        new LevelText(178 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "4"));
+        new LevelText(178 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "4"));
     vLevelText.push_back(
-        new LevelText(182 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "3"));
+        new LevelText(182 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "3"));
     vLevelText.push_back(
-        new LevelText(186 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "2"));
+        new LevelText(186 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "2"));
 
     // ----- GND -----
 
@@ -5557,40 +5557,40 @@ void Map::loadLVL_1_3()
                                      2,
                                      55 * 32,
                                      55 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                     CCFG::GAME_HEIGHT - 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 32,
                                      55 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 32,
+                                     (float) getCFG().GAME_HEIGHT - 32,
                                      true));
 
     vPlatform.push_back(new Platform(6,
                                      3,
                                      83 * 32 - 16,
                                      86 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      83 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true));
 
     vPlatform.push_back(new Platform(6,
                                      3,
                                      91 * 32 - 16,
                                      93 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      93 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      false));
 
     vPlatform.push_back(new Platform(6,
                                      3,
                                      127 * 32 - 16,
                                      131 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      127 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     // ----- CLOUDS
@@ -5697,10 +5697,10 @@ void Map::loadLVL_1_4()
                                      3,
                                      136 * 32 - 16,
                                      138 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      136 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     structGND(0, 0, 3, 8);
@@ -5942,10 +5942,10 @@ void Map::loadLVL_2_1()
                                      4,
                                      286 * 32 + 16,
                                      335 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      286 * 32.0f + 16,
-                                     CCFG::GAME_HEIGHT - 16.0f - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16.0f - 4 * 32,
                                      true));
 
     // -- BONUS END
@@ -6240,7 +6240,7 @@ void Map::loadLVL_2_4()
                                      85 * 32 + 24,
                                      85 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      85 * 32 + 24,
                                      9 * 32 + 16,
                                      true));
@@ -6249,7 +6249,7 @@ void Map::loadLVL_2_4()
                                      85 * 32 + 24,
                                      85 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      85 * 32 + 24,
                                      1 * 32 + 16,
                                      true));
@@ -6259,7 +6259,7 @@ void Map::loadLVL_2_4()
                                      88 * 32 + 24,
                                      88 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      88 * 32 + 24,
                                      10 * 32,
                                      true));
@@ -6268,7 +6268,7 @@ void Map::loadLVL_2_4()
                                      88 * 32 + 24,
                                      88 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      88 * 32 + 24,
                                      2 * 32,
                                      true));
@@ -6277,10 +6277,10 @@ void Map::loadLVL_2_4()
                                      3,
                                      136 * 32 - 16,
                                      138 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      136 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     structGND(32, 0, 52, 2);
@@ -6570,10 +6570,10 @@ void Map::loadLVL_3_1()
                                      4,
                                      286 * 32 + 16,
                                      355 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      286 * 32.0f + 16,
-                                     CCFG::GAME_HEIGHT - 16.0f - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16.0f - 4 * 32,
                                      true));
 
     // -- END
@@ -6793,20 +6793,20 @@ void Map::loadLVL_3_3()
                                      6,
                                      81 * 32,
                                      81 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      81 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      true,
                                      1));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      88 * 32,
                                      88 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      88 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true,
                                      0));
 
@@ -6815,20 +6815,20 @@ void Map::loadLVL_3_3()
                                      6,
                                      136 * 32,
                                      136 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      136 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      3));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      140 * 32,
                                      140 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      140 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true,
                                      2));
     // -- SEESAW
@@ -6837,65 +6837,65 @@ void Map::loadLVL_3_3()
                                      3,
                                      27 * 32 - 16,
                                      30 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 10 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 10 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 10 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 10 * 32,
                                      27 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 10 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 10 * 32,
                                      false));
     vPlatform.push_back(new Platform(6,
                                      3,
                                      30 * 32 - 16,
                                      33 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      33 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true));
     vPlatform.push_back(new Platform(6,
                                      3,
                                      91 * 32 - 32,
                                      94 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      94 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true));
     vPlatform.push_back(new Platform(6,
                                      3,
                                      92 * 32,
                                      96 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      92 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      false));
     vPlatform.push_back(new Platform(6,
                                      3,
                                      100 * 32 - 16,
                                      103 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      103 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      true));
     vPlatform.push_back(new Platform(6,
                                      3,
                                      129 * 32 - 16,
                                      132 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      132 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      true));
 
     vPlatform.push_back(new Platform(6,
                                      5,
                                      60 * 32,
                                      60 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      60 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      true));
 
     this->iLevelType = 4;
@@ -6919,10 +6919,10 @@ void Map::loadLVL_3_4()
                                      3,
                                      136 * 32 - 16,
                                      138 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      136 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     structGND(0, 0, 16, 5);
@@ -7231,7 +7231,7 @@ void Map::loadLVL_4_2()
                                      58 * 32 + 16,
                                      58 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      58 * 32 + 16,
                                      9 * 32 + 16,
                                      true));
@@ -7240,7 +7240,7 @@ void Map::loadLVL_4_2()
                                      58 * 32 + 16,
                                      58 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      58 * 32 + 16,
                                      1 * 32 + 16,
                                      true));
@@ -7250,7 +7250,7 @@ void Map::loadLVL_4_2()
                                      114 * 32 + 16,
                                      114 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      114 * 32 + 16,
                                      9 * 32 + 16,
                                      true));
@@ -7259,7 +7259,7 @@ void Map::loadLVL_4_2()
                                      114 * 32 + 16,
                                      114 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      114 * 32 + 16,
                                      1 * 32 + 16,
                                      true));
@@ -7269,7 +7269,7 @@ void Map::loadLVL_4_2()
                                      124 * 32,
                                      124 * 32,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      124 * 32,
                                      10 * 32,
                                      true));
@@ -7278,7 +7278,7 @@ void Map::loadLVL_4_2()
                                      124 * 32,
                                      124 * 32,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      124 * 32,
                                      2 * 32,
                                      true));
@@ -7288,7 +7288,7 @@ void Map::loadLVL_4_2()
                                      156 * 32,
                                      156 * 32,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      156 * 32,
                                      9 * 32 + 16,
                                      true));
@@ -7297,16 +7297,16 @@ void Map::loadLVL_4_2()
                                      156 * 32,
                                      156 * 32,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      156 * 32,
                                      1 * 32 + 16,
                                      true));
 
     vLevelText.push_back(new LevelText(
-        210 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
+        210 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
 
     vLevelText.push_back(
-        new LevelText(214 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "5"));
+        new LevelText(214 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "5"));
 
     // -- MAP 4-2-2
 
@@ -7388,14 +7388,14 @@ void Map::loadLVL_4_2()
     structCoins(345, 5, 2, 1);
 
     vLevelText.push_back(new LevelText(
-        360 * 32, CCFG::GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
+        360 * 32, getCFG().GAME_HEIGHT - 16 - 8 * 32, "WELCOME TO WARP ZONEz"));
 
     vLevelText.push_back(
-        new LevelText(360 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "8"));
+        new LevelText(360 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "8"));
     vLevelText.push_back(
-        new LevelText(364 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "7"));
+        new LevelText(364 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "7"));
     vLevelText.push_back(
-        new LevelText(368 * 32 + 16, CCFG::GAME_HEIGHT - 6 * 32, "6"));
+        new LevelText(368 * 32 + 16, getCFG().GAME_HEIGHT - 6 * 32, "6"));
 
     for (int i = 0; i < 19; i++)
     {
@@ -7529,20 +7529,20 @@ void Map::loadLVL_4_3()
                                      6,
                                      48 * 32,
                                      48 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      48 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      1));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      55 * 32,
                                      55 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      55 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true,
                                      0));
 
@@ -7551,20 +7551,20 @@ void Map::loadLVL_4_3()
                                      6,
                                      80 * 32,
                                      80 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      80 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      3));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      88 * 32,
                                      88 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      88 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      2));
 
@@ -7573,20 +7573,20 @@ void Map::loadLVL_4_3()
                                      6,
                                      91 * 32,
                                      91 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      91 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      5));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      96 * 32,
                                      96 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      96 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      4));
 
@@ -7595,20 +7595,20 @@ void Map::loadLVL_4_3()
                                      6,
                                      102 * 32,
                                      102 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      102 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      7));
     vPlatform.push_back(new Platform(6,
                                      6,
                                      108 * 32,
                                      108 * 32,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      108 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      6));
     // -- SEESAW
@@ -7617,28 +7617,28 @@ void Map::loadLVL_4_3()
                                      2,
                                      58 * 32,
                                      58 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 10 * 32,
-                                     CCFG::GAME_HEIGHT - 64,
+                                     getCFG().GAME_HEIGHT - 16 - 10 * 32,
+                                     getCFG().GAME_HEIGHT - 64,
                                      58 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 64,
+                                     (float) getCFG().GAME_HEIGHT - 64,
                                      true));
     vPlatform.push_back(new Platform(6,
                                      2,
                                      62 * 32,
                                      62 * 32,
-                                     CCFG::GAME_HEIGHT - 12 * 32,
-                                     CCFG::GAME_HEIGHT - 128,
+                                     getCFG().GAME_HEIGHT - 12 * 32,
+                                     getCFG().GAME_HEIGHT - 128,
                                      62 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
     vPlatform.push_back(new Platform(6,
                                      2,
                                      136 * 32,
                                      136 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                     CCFG::GAME_HEIGHT - 48,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 48,
                                      136 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 6 * 32,
                                      false));
 
     structCastleSmall(0, 2);
@@ -8099,19 +8099,19 @@ void Map::loadLVL_5_2()
                                      2,
                                      22 * 32,
                                      22 * 32,
-                                     CCFG::GAME_HEIGHT - 12 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 12 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      22 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      true));
     vPlatform.push_back(new Platform(6,
                                      2,
                                      28 * 32,
                                      28 * 32,
-                                     CCFG::GAME_HEIGHT - 12 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 12 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      28 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
 
     this->iLevelType = 0;
@@ -8140,10 +8140,10 @@ void Map::loadLVL_5_2()
                                      4,
                                      341 * 32 + 16,
                                      390 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      341 * 32.0f + 16,
-                                     CCFG::GAME_HEIGHT - 16.0f - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16.0f - 4 * 32,
                                      true));
 }
 
@@ -8168,40 +8168,40 @@ void Map::loadLVL_5_3()
                                      2,
                                      55 * 32,
                                      55 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                     CCFG::GAME_HEIGHT - 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 32,
                                      55 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 32,
+                                     (float) getCFG().GAME_HEIGHT - 32,
                                      true));
 
     vPlatform.push_back(new Platform(4,
                                      3,
                                      83 * 32 - 16,
                                      86 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      83 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true));
 
     vPlatform.push_back(new Platform(4,
                                      3,
                                      91 * 32 - 16,
                                      93 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      93 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      false));
 
     vPlatform.push_back(new Platform(4,
                                      3,
                                      127 * 32 - 16,
                                      131 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      127 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     // ----- CLOUDS
@@ -8309,7 +8309,7 @@ void Map::loadLVL_5_4()
                                      85 * 32 + 24,
                                      85 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      85 * 32 + 24,
                                      9 * 32 + 16,
                                      true));
@@ -8318,7 +8318,7 @@ void Map::loadLVL_5_4()
                                      85 * 32 + 24,
                                      85 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      85 * 32 + 24,
                                      1 * 32 + 16,
                                      true));
@@ -8328,7 +8328,7 @@ void Map::loadLVL_5_4()
                                      88 * 32 + 24,
                                      88 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      88 * 32 + 24,
                                      10 * 32,
                                      true));
@@ -8337,7 +8337,7 @@ void Map::loadLVL_5_4()
                                      88 * 32 + 24,
                                      88 * 32 + 16,
                                      -32,
-                                     CCFG::GAME_HEIGHT + 32,
+                                     getCFG().GAME_HEIGHT + 32,
                                      88 * 32 + 24,
                                      2 * 32,
                                      true));
@@ -8346,10 +8346,10 @@ void Map::loadLVL_5_4()
                                      3,
                                      136 * 32 - 16,
                                      138 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      136 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     structGND(32, 0, 52, 2);
@@ -8727,19 +8727,19 @@ void Map::loadLVL_6_2()
                                      2,
                                      22 * 32,
                                      22 * 32,
-                                     CCFG::GAME_HEIGHT - 12 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 12 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      22 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      2,
                                      28 * 32,
                                      28 * 32,
-                                     CCFG::GAME_HEIGHT - 12 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 3 * 32,
+                                     getCFG().GAME_HEIGHT - 12 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 3 * 32,
                                      28 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
 
     // -- MAP 6-2-3
@@ -8825,10 +8825,10 @@ void Map::loadLVL_6_2()
                                      4,
                                      406 * 32 + 16,
                                      475 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 4 * 32,
                                      406 * 32.0f + 16,
-                                     CCFG::GAME_HEIGHT - 16.0f - 4 * 32,
+                                     getCFG().GAME_HEIGHT - 16.0f - 4 * 32,
                                      true));
 
     // -- END
@@ -8914,20 +8914,20 @@ void Map::loadLVL_6_3()
                                      6,
                                      70 * 32 + 16,
                                      70 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      70 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      1));
     vPlatform.push_back(new Platform(4,
                                      6,
                                      74 * 32 + 16,
                                      74 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      74 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      0));
 
@@ -8937,20 +8937,20 @@ void Map::loadLVL_6_3()
                                      6,
                                      78 * 32 + 16,
                                      78 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      78 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      3));
     vPlatform.push_back(new Platform(4,
                                      6,
                                      81 * 32 + 16,
                                      81 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      81 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      2));
 
@@ -8960,20 +8960,20 @@ void Map::loadLVL_6_3()
                                      6,
                                      126 * 32 + 16,
                                      126 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      126 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      true,
                                      5));
     vPlatform.push_back(new Platform(4,
                                      6,
                                      129 * 32 + 16,
                                      129 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16,
-                                     CCFG::GAME_HEIGHT - 16 - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16,
+                                     getCFG().GAME_HEIGHT - 16 - 11 * 32,
                                      129 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 5 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 5 * 32,
                                      true,
                                      4));
 
@@ -8983,94 +8983,94 @@ void Map::loadLVL_6_3()
                                      2,
                                      28 * 32,
                                      28 * 32,
-                                     CCFG::GAME_HEIGHT - 11 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 2 * 32,
+                                     getCFG().GAME_HEIGHT - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 2 * 32,
                                      28 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
 
     vPlatform.push_back(new Platform(4,
                                      3,
                                      39 * 32 + 16,
                                      45 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 9 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      39 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 9 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 9 * 32,
                                      false));
     vPlatform.push_back(new Platform(4,
                                      3,
                                      45 * 32 + 16,
                                      49 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 7 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      45 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 7 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 7 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      3,
                                      51 * 32,
                                      56 * 32,
-                                     CCFG::GAME_HEIGHT - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      51 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 8 * 32,
                                      false));
 
     vPlatform.push_back(new Platform(4,
                                      2,
                                      60 * 32,
                                      60 * 32,
-                                     CCFG::GAME_HEIGHT - 11 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 2 * 32,
+                                     getCFG().GAME_HEIGHT - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 2 * 32,
                                      60 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
     vPlatform.push_back(new Platform(4,
                                      2,
                                      121 * 32 + 16,
                                      121 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 11 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 2 * 32,
+                                     getCFG().GAME_HEIGHT - 11 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 2 * 32,
                                      121 * 32 + 16,
-                                     (float) CCFG::GAME_HEIGHT - 12 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 12 * 32,
                                      false));
 
     vPlatform.push_back(new Platform(4,
                                      5,
                                      141 * 32,
                                      141 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      141 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      5,
                                      145 * 32,
                                      145 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      145 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      5,
                                      149 * 32,
                                      149 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      149 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      5,
                                      153 * 32,
                                      153 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      153 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      true));
 
     addSpring(38 * 32, 336);
@@ -9118,10 +9118,10 @@ void Map::loadLVL_6_4()
                                      3,
                                      136 * 32 - 16,
                                      138 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      136 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 8 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 8 * 32,
                                      false));
 
     structGND(0, 0, 3, 8);
@@ -9677,19 +9677,19 @@ void Map::loadLVL_7_4()
                                      5,
                                      18 * 32,
                                      18 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      18 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      true));
     vPlatform.push_back(new Platform(4,
                                      5,
                                      22 * 32,
                                      22 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      22 * 32,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      true));
 
     lMap[167][7]->setBlockID(56);
@@ -10355,10 +10355,10 @@ void Map::loadLVL_8_4()
                                      3,
                                      68 * 32 - 16,
                                      71 * 32 + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 32,
-                                     CCFG::GAME_HEIGHT - 16 - 32,
+                                     getCFG().GAME_HEIGHT - 16 - 32,
+                                     getCFG().GAME_HEIGHT - 16 - 32,
                                      68 * 32 - 16,
-                                     (float) CCFG::GAME_HEIGHT - 16 - 30,
+                                     (float) getCFG().GAME_HEIGHT - 16 - 30,
                                      true));
 
     for (int i = 0; i < 10; i++)
@@ -10448,7 +10448,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         {
                             lMinion[getListID(32 * nX)].push_back(
                                 new Mushroom(32 * nX,
-                                             CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                             getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                              true,
                                              nX,
                                              nY));
@@ -10456,27 +10456,27 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         else
                         {
                             lMinion[getListID(32 * nX)].push_back(new Flower(
-                                32 * nX, CCFG::GAME_HEIGHT - 16 - 32 * nY, nX, nY));
+                                32 * nX, getCFG().GAME_HEIGHT - 16 - 32 * nY, nX, nY));
                         }
                     }
                     else
                     {
                         lMinion[getListID(32 * nX)].push_back(
                             new Mushroom(32 * nX,
-                                         CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                         getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                          false,
                                          nX,
                                          nY));
                     }
-                    CCFG::getMusic()->playEffect(
+                    getCFG().getMusic()->playEffect(
                         Mario::Music::Effects::MushroomMapper);
                 }
                 else
                 {
                     lCoin.push_back(
-                        new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
+                        new Coin(nX * 32 + 7, getCFG().GAME_HEIGHT - nY * 32 - 48));
                     oPlayer->setScore(oPlayer->getScore() + 200);
-                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+                    getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
                     oPlayer->setCoins(oPlayer->getCoins() + 1);
                 }
 
@@ -10504,9 +10504,9 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                              : iLevelType == 1                  ? 56
                                                                : 80);
                     lMinion[getListID(32 * nX)].push_back(
-                        new Star(32 * nX, CCFG::GAME_HEIGHT - 16 - 32 * nY, nX, nY));
+                        new Star(32 * nX, getCFG().GAME_HEIGHT - 16 - 32 * nY, nX, nY));
                     lMap[nX][nY]->startBlockAnimation();
-                    CCFG::getMusic()->playEffect(
+                    getCFG().getMusic()->playEffect(
                         Mario::Music::Effects::MushroomMapper);
                 }
                 else if (lMap[nX][nY]->getSpawnMushroom())
@@ -10520,7 +10520,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         {
                             lMinion[getListID(32 * nX)].push_back(
                                 new Mushroom(32 * nX,
-                                             CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                             getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                              true,
                                              nX,
                                              nY));
@@ -10528,26 +10528,26 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         else
                         {
                             lMinion[getListID(32 * nX)].push_back(new Flower(
-                                32 * nX, CCFG::GAME_HEIGHT - 16 - 32 * nY, nX, nY));
+                                32 * nX, getCFG().GAME_HEIGHT - 16 - 32 * nY, nX, nY));
                         }
                     }
                     else
                     {
                         lMinion[getListID(32 * nX)].push_back(
                             new Mushroom(32 * nX,
-                                         CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                         getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                          false,
                                          nX,
                                          nY));
                     }
                     lMap[nX][nY]->startBlockAnimation();
-                    CCFG::getMusic()->playEffect(
+                    getCFG().getMusic()->playEffect(
                         Mario::Music::Effects::MushroomMapper);
                 }
                 else if (lMap[nX][nY]->getNumOfUse() > 0)
                 {
                     lCoin.push_back(
-                        new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
+                        new Coin(nX * 32 + 7, getCFG().GAME_HEIGHT - nY * 32 - 48));
                     oPlayer->setScore(oPlayer->getScore() + 200);
                     oPlayer->setCoins(oPlayer->getCoins() + 1);
 
@@ -10560,7 +10560,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                                                    : 80);
                     }
 
-                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+                    getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
 
                     lMap[nX][nY]->startBlockAnimation();
                 }
@@ -10570,14 +10570,14 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                     {
                         lMap[nX][nY]->setBlockID(0);
                         lBlockDebris.push_back(new BlockDebris(
-                            nX * 32, CCFG::GAME_HEIGHT - 48 - nY * 32));
-                        CCFG::getMusic()->playEffect(
+                            nX * 32, getCFG().GAME_HEIGHT - 48 - nY * 32));
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BlockBreak);
                     }
                     else
                     {
                         lMap[nX][nY]->startBlockAnimation();
-                        CCFG::getMusic()->playEffect(
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BlockHit);
                     }
                 }
@@ -10593,7 +10593,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         {
                             lMinion[getListID(32 * nX)].push_back(
                                 new Mushroom(32 * nX,
-                                             CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                             getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                              true,
                                              nX,
                                              nY));
@@ -10601,28 +10601,28 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         else
                         {
                             lMinion[getListID(32 * nX)].push_back(new Flower(
-                                32 * nX, CCFG::GAME_HEIGHT - 16 - 32 * nY, nX, nY));
+                                32 * nX, getCFG().GAME_HEIGHT - 16 - 32 * nY, nX, nY));
                         }
                     }
                     else
                     {
                         lMinion[getListID(32 * nX)].push_back(
                             new Mushroom(32 * nX,
-                                         CCFG::GAME_HEIGHT - 16 - 32 * nY,
+                                         getCFG().GAME_HEIGHT - 16 - 32 * nY,
                                          false,
                                          nX,
                                          nY));
                     }
-                    CCFG::getMusic()->playEffect(
+                    getCFG().getMusic()->playEffect(
                         Mario::Music::Effects::MushroomMapper);
                 }
                 else
                 {
                     lCoin.push_back(
-                        new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
+                        new Coin(nX * 32 + 7, getCFG().GAME_HEIGHT - nY * 32 - 48));
                     oPlayer->setCoins(oPlayer->getCoins() + 1);
                     oPlayer->setScore(oPlayer->getScore() + 200);
-                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+                    getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
 
                     lMap[nX][nY]->startBlockAnimation();
                 }
@@ -10683,7 +10683,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
         case 73: // COIN
             lMap[nX][nY]->setBlockID(iLevelType == 2 ? 94 : 0);
             oPlayer->addCoin();
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
             return false;
             break;
         case 36:
@@ -10733,24 +10733,24 @@ void Map::EndUse()
 
     oEvent->newUnderWater = false;
 
-    CCFG::getMusic()->stopTrack();
-    CCFG::getMusic()->playEffect(Mario::Music::Effects::LevelEnd);
+    getCFG().getMusic()->stopTrack();
+    getCFG().getMusic()->playEffect(Mario::Music::Effects::LevelEnd);
 
     oEvent->eventTypeID = Mario::EventType::End;
 
-    if (oPlayer->getYPos() < CCFG::GAME_HEIGHT - 16 - 10 * 32)
+    if (oPlayer->getYPos() < getCFG().GAME_HEIGHT - 16 - 10 * 32)
     {
         oFlag->iPoints = 5000;
     }
-    else if (oPlayer->getYPos() < CCFG::GAME_HEIGHT - 16 - 8 * 32)
+    else if (oPlayer->getYPos() < getCFG().GAME_HEIGHT - 16 - 8 * 32)
     {
         oFlag->iPoints = 2000;
     }
-    else if (oPlayer->getYPos() < CCFG::GAME_HEIGHT - 16 - 6 * 32)
+    else if (oPlayer->getYPos() < getCFG().GAME_HEIGHT - 16 - 6 * 32)
     {
         oFlag->iPoints = 500;
     }
-    else if (oPlayer->getYPos() < CCFG::GAME_HEIGHT - 16 - 4 * 32)
+    else if (oPlayer->getYPos() < getCFG().GAME_HEIGHT - 16 - 4 * 32)
     {
         oFlag->iPoints = 200;
     }
@@ -10763,11 +10763,11 @@ void Map::EndUse()
     oEvent->vOLDLength.push_back(oPlayer->getHitBoxX());
 
     oEvent->vOLDDir.push_back(Mario::Animations::EndBot1);
-    oEvent->vOLDLength.push_back((CCFG::GAME_HEIGHT - 16 - 32 * 2)
+    oEvent->vOLDLength.push_back((getCFG().GAME_HEIGHT - 16 - 32 * 2)
                                  - oPlayer->getYPos() - oPlayer->getHitBoxY() - 2);
 
     oEvent->vOLDDir.push_back(Mario::Animations::EndBot2);
-    oEvent->vOLDLength.push_back((CCFG::GAME_HEIGHT - 16 - 32 * 2)
+    oEvent->vOLDLength.push_back((getCFG().GAME_HEIGHT - 16 - 32 * 2)
                                  - oPlayer->getYPos() - oPlayer->getHitBoxY() - 2);
 
     oEvent->vOLDDir.push_back(Mario::Animations::RightEnd);
@@ -10793,7 +10793,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -210 * 32;
             oEvent->newPlayerXPos = 64;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = false;
 
             oPlayer->setMoveDirection(true);
@@ -10814,7 +10814,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -10861,7 +10861,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -220 * 32;
             oEvent->newPlayerXPos = 64;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = false;
 
             oPlayer->setMoveDirection(true);
@@ -10882,7 +10882,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -10931,7 +10931,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -10950,7 +10950,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -10995,7 +10995,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -240 * 32;
             oEvent->newPlayerXPos = 64;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = false;
 
             oPlayer->setMoveDirection(true);
@@ -11015,7 +11015,7 @@ void Map::EndUse()
                 oEvent->newMapXPos = 0;
                 oEvent->newPlayerXPos = 84;
                 oEvent->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+                    getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
                 oEvent->newMoveMap = true;
 
                 oPlayer->setMoveDirection(true);
@@ -11060,7 +11060,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -80 * 32;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -11081,7 +11081,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -11130,7 +11130,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -85 * 32;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oEvent->vOLDDir.push_back(Mario::Animations::Right);
@@ -11156,7 +11156,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oEvent->vOLDDir.push_back(Mario::Animations::Right);
@@ -11208,7 +11208,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = -220 * 32;
             oEvent->newPlayerXPos = 64;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = false;
 
             oPlayer->setMoveDirection(true);
@@ -11229,7 +11229,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -11279,7 +11279,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -11301,7 +11301,7 @@ void Map::EndUse()
 
             oEvent->newMapXPos = 0;
             oEvent->newPlayerXPos = 84;
-            oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+            oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
             oPlayer->setMoveDirection(true);
@@ -11364,8 +11364,8 @@ void Map::EndBoss()
             oEvent->endGame = true;
             break;
         default:
-            CCFG::getMusic()->stopTrack();
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::CastleEnd);
+            getCFG().getMusic()->stopTrack();
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::CastleEnd);
             break;
     }
 
@@ -11381,7 +11381,7 @@ void Map::EndBoss()
 
     oEvent->newMapXPos = 0;
     oEvent->newPlayerXPos = 64;
-    oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
+    oEvent->newPlayerYPos = getCFG().GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
     oEvent->newMoveMap = true;
 
     switch (currentLevelID)
@@ -11402,17 +11402,17 @@ void Map::EndBoss()
         == 82)
     {
         oEvent->vOLDDir.push_back(Mario::Animations::Bot);
-        oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - 16 - 5 * 32
+        oEvent->vOLDLength.push_back(getCFG().GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
     }
     else
     {
         oEvent->vOLDDir.push_back(Mario::Animations::BotRightEnd);
-        oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - 16 - 5 * 32
+        oEvent->vOLDLength.push_back(getCFG().GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
 
         oEvent->vOLDDir.push_back(Mario::Animations::Right);
-        oEvent->vOLDLength.push_back(32 - CCFG::GAME_HEIGHT - 16 - 5 * 32
+        oEvent->vOLDLength.push_back(32 - getCFG().GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
         addOne = true;
     }
@@ -11451,8 +11451,8 @@ void Map::EndBoss()
 
     if (currentLevelID == 31)
     {
-        CCFG::getMusic()->stopTrack();
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::PrincessMusic);
+        getCFG().getMusic()->stopTrack();
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::PrincessMusic);
     }
 
     oEvent->vOLDDir.push_back(Mario::Animations::BotRightBoss);
@@ -11609,7 +11609,7 @@ void Map::playerDeath(bool animation, bool instantDeath)
             oEvent->vOLDLength.push_back(64);
 
             oEvent->vOLDDir.push_back(Mario::Animations::DeathBot);
-            oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - oPlayer->getYPos()
+            oEvent->vOLDLength.push_back(getCFG().GAME_HEIGHT - oPlayer->getYPos()
                                          + 128);
         }
         else
@@ -11631,8 +11631,8 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
 
-            CCFG::getMusic()->stopTrack();
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Death);
+            getCFG().getMusic()->stopTrack();
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Death);
         }
         else
         {
@@ -11641,8 +11641,8 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
 
-            CCFG::getMusic()->stopTrack();
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Death);
+            getCFG().getMusic()->stopTrack();
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Death);
         }
     }
     else if (!oPlayer->getUnkillAble())

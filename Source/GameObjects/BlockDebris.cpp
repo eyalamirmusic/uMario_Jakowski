@@ -63,7 +63,7 @@ void BlockDebris::Update()
     fSpeedY *= 1.09f;
     fSpeedX *= 1.005f;
 
-    if (vPositionL->getY() >= CCFG::GAME_HEIGHT)
+    if (vPositionL->getY() >= getCFG().GAME_HEIGHT)
     {
         debrisState = -1;
     }

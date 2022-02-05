@@ -77,7 +77,7 @@ void Text::Draw(SDL_Renderer* rR,
 void Text::DrawCenterX(
     SDL_Renderer* rR, std::string sText, int Y, int fontSize, int iR, int iG, int iB)
 {
-    int X = CCFG::GAME_WIDTH / 2 - getTextWidth(sText, fontSize) / 2;
+    int X = getCFG().GAME_WIDTH / 2 - getTextWidth(sText, fontSize) / 2;
 
     Draw(rR, sText, X, Y, fontSize, iR, iG, iB);
 }

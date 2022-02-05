@@ -87,7 +87,7 @@ void PlayerFireBall::Update()
 
                 jumpState = 2;
 
-                if (fYPos >= CCFG::GAME_HEIGHT)
+                if (fYPos >= getCFG().GAME_HEIGHT)
                 {
                     minionState = -1;
                 }
@@ -134,7 +134,7 @@ void PlayerFireBall::updateXPos()
         {
             bDestroy = true;
             collisionOnlyWithPlayer = true;
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {
@@ -151,7 +151,7 @@ void PlayerFireBall::updateXPos()
         {
             bDestroy = true;
             collisionOnlyWithPlayer = true;
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {

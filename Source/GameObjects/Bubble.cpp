@@ -22,7 +22,7 @@ Bubble::~Bubble(void)
 
 void Bubble::Update()
 {
-    if (iYPos < CCFG::GAME_HEIGHT - 12 * 32 - 8)
+    if (iYPos < getCFG().GAME_HEIGHT - 12 * 32 - 8)
     {
         bDestoy = true;
     }

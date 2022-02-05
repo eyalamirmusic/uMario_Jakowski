@@ -71,7 +71,7 @@ void Squid::Update()
                 changeBlockID();
             fXPos += moveDirection ? 2 : -2;
 
-            if (fYPos > CCFG::GAME_HEIGHT - 12 * 32 - 4)
+            if (fYPos > getCFG().GAME_HEIGHT - 12 * 32 - 4)
             {
                 fYPos -= 2;
             }

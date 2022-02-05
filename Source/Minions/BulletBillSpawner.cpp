@@ -37,7 +37,7 @@ void BulletBillSpawner::Update()
         if (minionState == 0)
         {
             if (fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 64
+                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
                                + iHitBoxX)
             {
                 if (!(CCore::getMap()->getPlayer()->getXPos()
@@ -58,7 +58,7 @@ void BulletBillSpawner::Update()
         else
         {
             CCore::getMap()->addBulletBill((int) (-CCore::getMap()->getXPos()
-                                                  + CCFG::GAME_WIDTH + iHitBoxX * 2),
+                                                  + getCFG().GAME_WIDTH + iHitBoxX * 2),
                                            (int) fYPos - rand() % 9 * 32 - 16,
                                            true,
                                            minionState);

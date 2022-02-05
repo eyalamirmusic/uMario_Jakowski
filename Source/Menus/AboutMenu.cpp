@@ -55,47 +55,47 @@ void AboutMenu::Update()
         if (rand() % 10 < 6)
         {
             CCore::getMap()->addGoombas(-(int) CCore::getMap()->getXPos()
-                                            + rand() % (CCFG::GAME_WIDTH + 128),
+                                            + rand() % (getCFG().GAME_WIDTH + 128),
                                         -32,
                                         rand() % 2 == 0);
             CCore::getMap()->addGoombas(-(int) CCore::getMap()->getXPos()
-                                            + rand() % (CCFG::GAME_WIDTH + 128),
+                                            + rand() % (getCFG().GAME_WIDTH + 128),
                                         -32,
                                         rand() % 2 == 0);
         }
         else if (rand() % 10 < 8)
         {
             CCore::getMap()->addKoppa(-(int) CCore::getMap()->getXPos()
-                                          + rand() % (CCFG::GAME_WIDTH + 128),
+                                          + rand() % (getCFG().GAME_WIDTH + 128),
                                       -32,
                                       0,
                                       rand() % 2 == 0);
             CCore::getMap()->addKoppa(-(int) CCore::getMap()->getXPos()
-                                          + rand() % (CCFG::GAME_WIDTH + 128),
+                                          + rand() % (getCFG().GAME_WIDTH + 128),
                                       -32,
                                       0,
                                       rand() % 2 == 0);
         }
         else if (rand() % 6 < 4)
         {
-            CCore::getMap()->addFire(-CCore::getMap()->getXPos() + CCFG::GAME_WIDTH
+            CCore::getMap()->addFire(-CCore::getMap()->getXPos() + getCFG().GAME_WIDTH
                                          + 128,
-                                     CCFG::GAME_HEIGHT - 16.0f - rand() % 16 * 32,
-                                     CCFG::GAME_HEIGHT - 16 - rand() % 16 * 32);
+                                     getCFG().GAME_HEIGHT - 16.0f - rand() % 16 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32);
         }
         else if (rand() % 6 < 4)
         {
             CCore::getMap()->addBulletBill(
-                (int) (-CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 128),
-                CCFG::GAME_HEIGHT - 16 - rand() % 16 * 32,
+                (int) (-CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 128),
+                getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32,
                 true,
                 1);
         }
         else
         {
             CCore::getMap()->addFireBall(-(int) CCore::getMap()->getXPos()
-                                             + rand() % (CCFG::GAME_WIDTH + 128) + 8,
-                                         CCFG::GAME_HEIGHT - 16 - rand() % 16 * 32,
+                                             + rand() % (getCFG().GAME_WIDTH + 128) + 8,
+                                         getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32,
                                          rand() % 8 + 4 + 8,
                                          rand() % 360,
                                          rand() % 2 == 0);
@@ -107,7 +107,7 @@ void AboutMenu::Update()
     }
 
     if (moveDirection
-        && CCFG::GAME_WIDTH - CCore::getMap()->getXPos()
+        && getCFG().GAME_WIDTH - CCore::getMap()->getXPos()
                >= (CCore::getMap()->getMapWidth() - 20) * 32)
     {
         moveDirection = !moveDirection;
@@ -124,25 +124,25 @@ void AboutMenu::Update()
 
 void AboutMenu::Draw(SDL_Renderer* rR)
 {
-    CCFG::getText()->DrawWS(rR, "MARIO V 1.03 - C++ AND SDL2", 150, 128, 0, 0, 0);
-    CCFG::getText()->DrawWS(rR, "AUTOR: LUKASZ JAKOWSKI", 150, 146, 0, 0, 0);
+    getCFG().getText()->DrawWS(rR, "MARIO V 1.03 - C++ AND SDL2", 150, 128, 0, 0, 0);
+    getCFG().getText()->DrawWS(rR, "AUTOR: LUKASZ JAKOWSKI", 150, 146, 0, 0, 0);
 
-    CCFG::getText()->DrawWS(rR, "INFORMATYKA INZ 2012-2016", 150, 188, 0, 0, 0);
-    CCFG::getText()->DrawWS(
+    getCFG().getText()->DrawWS(rR, "INFORMATYKA INZ 2012-2016", 150, 188, 0, 0, 0);
+    getCFG().getText()->DrawWS(
         rR, "UNIWERSYTET SLASKI W KATOWICACH", 150, 206, 0, 0, 0);
-    CCFG::getText()->DrawWS(rR, "MAJ 2014", 150, 224, 0, 0, 0);
+    getCFG().getText()->DrawWS(rR, "MAJ 2014", 150, 224, 0, 0, 0);
 
-    CCFG::getText()->DrawWS(rR, "WWW.LUKASZJAKOWSKI.PL", 150, 264, 0, 0, 0);
+    getCFG().getText()->DrawWS(rR, "WWW.LUKASZJAKOWSKI.PL", 150, 264, 0, 0, 0);
 
-    //CCFG::getText()->DrawWS(rR, std::to_string(iNumOfUnits), 5, CCFG::GAME_HEIGHT - 21, 0, 0, 0);
+    //getCFG().getText()->DrawWS(rR, std::to_string(iNumOfUnits), 5, getCFG().GAME_HEIGHT - 21, 0, 0, 0);
 
     for (unsigned int i = 0; i < lMO.size(); i++)
     {
-        CCFG::getText()->DrawWS(
+        getCFG().getText()->DrawWS(
             rR, lMO[i]->getText(), lMO[i]->getXPos(), lMO[i]->getYPos(), 0, 0, 0);
     }
 
-    CCFG::getMM()->getActiveOption()->Draw(
+    getCFG().getMM()->getActiveOption()->Draw(
         rR, lMO[activeMenuOption]->getXPos() - 32, lMO[activeMenuOption]->getYPos());
 }
 
@@ -150,10 +150,10 @@ void AboutMenu::Draw(SDL_Renderer* rR)
 
 void AboutMenu::enter()
 {
-    CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eMainMenu);
-    CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
+    getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eMainMenu);
+    getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
     reset();
-    CCFG::getMusic()->stopTrack();
+    getCFG().getMusic()->stopTrack();
 }
 
 /* ******************************************** */

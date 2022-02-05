@@ -91,7 +91,7 @@ void Hammer::minionPhysics()
 
         fYPos += currentFallingSpeed;
 
-        if (fYPos >= CCFG::GAME_HEIGHT)
+        if (fYPos >= getCFG().GAME_HEIGHT)
         {
             minionState = -1;
         }

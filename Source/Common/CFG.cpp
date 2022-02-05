@@ -1,53 +1,25 @@
 #include "CFG.h"
 
-CCFG::~CCFG()
+namespace Mario
 {
-    delete oText;
-    delete oMM;
-    delete tSMBLOGO;
-}
-
-/* ******************************************** */
-
-int CCFG::GAME_WIDTH = 800;
-int CCFG::GAME_HEIGHT = 448;
-
-Text* CCFG::oText = new Text();
-CIMG* CCFG::tSMBLOGO = new CIMG();
-
-Mario::MenuManager* CCFG::oMM = new Mario::MenuManager();
-Mario::Music::Manager* CCFG::oMusic = new Mario::Music::Manager();
-
-bool CCFG::keySpace = false;
-
-int CCFG::keyIDA = 0;
-int CCFG::keyIDD = 0;
-int CCFG::keyIDS = 0;
-int CCFG::keyIDSpace = 0;
-int CCFG::keyIDShift = 0;
-
-bool CCFG::canMoveBackward = true;
-
-/* ******************************************** */
-
 Text* CCFG::getText()
 {
-    return oText;
+    return &oText;
 }
 
 Mario::MenuManager* CCFG::getMM()
 {
-    return oMM;
+    return &oMM;
 }
 
 Mario::Music::Manager* CCFG::getMusic()
 {
-    return oMusic;
+    return &oMusic;
 }
 
 CIMG* CCFG::getSMBLOGO()
 {
-    return tSMBLOGO;
+    return &tSMBLOGO;
 }
 
 std::string CCFG::getKeyString(int keyID)
@@ -89,4 +61,12 @@ std::string CCFG::getKeyString(int keyID)
     }
 
     return "NONE";
+}
+
+} // namespace Mario
+
+Mario::CCFG& getCFG()
+{
+    static Mario::CCFG cfg;
+    return cfg;
 }

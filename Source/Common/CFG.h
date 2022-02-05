@@ -4,30 +4,38 @@
 #include "Menus/MenuManager.h"
 #include "Music/Music.h"
 
+namespace Mario
+{
 class CCFG
 {
 public:
-    ~CCFG();
-
-    static int GAME_WIDTH, GAME_HEIGHT;
-    static bool keySpace;
-    static int keyIDA, keyIDS, keyIDD, keyIDSpace, keyIDShift;
-
     static std::string getKeyString(int keyID);
 
-    static CIMG* getSMBLOGO();
+    CIMG* getSMBLOGO();
 
-    static Text* getText();
+    Text* getText();
 
-    static Mario::MenuManager* getMM();
-    static Mario::Music::Manager* getMusic();
+    MenuManager* getMM();
+    Music::Manager* getMusic();
 
-    static bool canMoveBackward;
+    int GAME_WIDTH = 800;
+    int GAME_HEIGHT = 448;
+    bool keySpace = false;
+    int keyIDA = 0;
+    int keyIDS = 0;
+    int keyIDD = 0;
+    int keyIDSpace = 0;
+    int keyIDShift = 0;
+
+    bool canMoveBackward = true;
 
 private:
-    static Mario::MenuManager* oMM;
-    static Text* oText;
-    static CIMG* tSMBLOGO;
-    static Mario::Music::Manager* oMusic;
-
+    MenuManager oMM;
+    Text oText;
+    CIMG tSMBLOGO;
+    Music::Manager oMusic;
 };
+
+}
+
+Mario::CCFG& getCFG();

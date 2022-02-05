@@ -77,7 +77,7 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
     {
         if (i == activeMenuOption)
         {
-            CCFG::getText()->Draw(rR,
+            getCFG().getText()->Draw(rR,
                                   lMO[i]->getText(),
                                   lMO[i]->getXPos(),
                                   lMO[i]->getYPos(),
@@ -88,7 +88,7 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
         }
         else
         {
-            CCFG::getText()->Draw(rR,
+            getCFG().getText()->Draw(rR,
                                   lMO[i]->getText(),
                                   lMO[i]->getXPos(),
                                   lMO[i]->getYPos(),
@@ -120,40 +120,40 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
         SDL_RenderDrawRect(rR, &rVolumeBG);
     }
 
-    CCFG::getText()->Draw(rR,
-                          CCFG::getKeyString(CCFG::keyIDA),
+    getCFG().getText()->Draw(rR,
+                          getCFG().getKeyString(getCFG().keyIDA),
                           185,
                           89,
                           16,
                           activeMenuOption == 1 ? 255 : 90,
                           activeMenuOption == 1 ? 255 : 90,
                           activeMenuOption == 1 ? 255 : 90);
-    CCFG::getText()->Draw(rR,
-                          CCFG::getKeyString(CCFG::keyIDS),
+    getCFG().getText()->Draw(rR,
+                          getCFG().getKeyString(getCFG().keyIDS),
                           185,
                           113,
                           16,
                           activeMenuOption == 2 ? 255 : 90,
                           activeMenuOption == 2 ? 255 : 90,
                           activeMenuOption == 2 ? 255 : 90);
-    CCFG::getText()->Draw(rR,
-                          CCFG::getKeyString(CCFG::keyIDD),
+    getCFG().getText()->Draw(rR,
+                          getCFG().getKeyString(getCFG().keyIDD),
                           185,
                           137,
                           16,
                           activeMenuOption == 3 ? 255 : 90,
                           activeMenuOption == 3 ? 255 : 90,
                           activeMenuOption == 3 ? 255 : 90);
-    CCFG::getText()->Draw(rR,
-                          CCFG::getKeyString(CCFG::keyIDSpace),
+    getCFG().getText()->Draw(rR,
+                          getCFG().getKeyString(getCFG().keyIDSpace),
                           185,
                           161,
                           16,
                           activeMenuOption == 4 ? 255 : 90,
                           activeMenuOption == 4 ? 255 : 90,
                           activeMenuOption == 4 ? 255 : 90);
-    CCFG::getText()->Draw(rR,
-                          CCFG::getKeyString(CCFG::keyIDShift),
+    getCFG().getText()->Draw(rR,
+                          getCFG().getKeyString(getCFG().keyIDShift),
                           185,
                           185,
                           16,
@@ -161,8 +161,8 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
                           activeMenuOption == 5 ? 255 : 90,
                           activeMenuOption == 5 ? 255 : 90);
 
-    CCFG::getText()->Draw(rR,
-                          CCFG::canMoveBackward ? "TRUE" : "FALSE",
+    getCFG().getText()->Draw(rR,
+                          getCFG().canMoveBackward ? "TRUE" : "FALSE",
                           357,
                           209,
                           16,
@@ -185,7 +185,7 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
         rSetKeyRect.h += 2;
         rSetKeyRect.w += 2;
 
-        CCFG::getText()->Draw(rR,
+        getCFG().getText()->Draw(rR,
                               "PRESS KEY FOR " + lMO[activeMenuOption]->getText(),
                               92,
                               rSetKeyRect.y + 16,
@@ -193,7 +193,7 @@ void OptionsMenu::Draw(SDL_Renderer* rR)
                               255,
                               255,
                               255);
-        CCFG::getText()->Draw(
+        getCFG().getText()->Draw(
             rR, "PRESS ESC TO CANCEL", 92, rSetKeyRect.y + 40, 16, 255, 255, 255);
     }
 
@@ -208,7 +208,7 @@ void OptionsMenu::enter()
     switch (activeMenuOption)
     {
         case 0:
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
             break;
         case 1:
         case 2:
@@ -218,11 +218,11 @@ void OptionsMenu::enter()
             inSetKey = true;
             break;
         case 6:
-            CCFG::canMoveBackward = !CCFG::canMoveBackward;
+            getCFG().canMoveBackward = !getCFG().canMoveBackward;
             break;
         case 7:
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
             break;
     }
 }
@@ -238,11 +238,11 @@ void OptionsMenu::escape()
         if (escapeToMainMenu)
         {
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
         }
         else
         {
-            CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
+            getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
         }
     }
 }
@@ -255,59 +255,59 @@ void OptionsMenu::setKey(int keyID)
         switch (activeMenuOption)
         {
             case 1:
-                CCFG::keyIDA = keyID;
-                if (CCFG::keyIDD == keyID)
-                    CCFG::keyIDD = 0;
-                if (CCFG::keyIDS == keyID)
-                    CCFG::keyIDS = 0;
-                if (CCFG::keyIDSpace == keyID)
-                    CCFG::keyIDSpace = 0;
-                if (CCFG::keyIDShift == keyID)
-                    CCFG::keyIDShift = 0;
+                getCFG().keyIDA = keyID;
+                if (getCFG().keyIDD == keyID)
+                    getCFG().keyIDD = 0;
+                if (getCFG().keyIDS == keyID)
+                    getCFG().keyIDS = 0;
+                if (getCFG().keyIDSpace == keyID)
+                    getCFG().keyIDSpace = 0;
+                if (getCFG().keyIDShift == keyID)
+                    getCFG().keyIDShift = 0;
                 break;
             case 2:
-                CCFG::keyIDS = keyID;
-                if (CCFG::keyIDA == keyID)
-                    CCFG::keyIDA = 0;
-                if (CCFG::keyIDD == keyID)
-                    CCFG::keyIDD = 0;
-                if (CCFG::keyIDSpace == keyID)
-                    CCFG::keyIDSpace = 0;
-                if (CCFG::keyIDShift == keyID)
-                    CCFG::keyIDShift = 0;
+                getCFG().keyIDS = keyID;
+                if (getCFG().keyIDA == keyID)
+                    getCFG().keyIDA = 0;
+                if (getCFG().keyIDD == keyID)
+                    getCFG().keyIDD = 0;
+                if (getCFG().keyIDSpace == keyID)
+                    getCFG().keyIDSpace = 0;
+                if (getCFG().keyIDShift == keyID)
+                    getCFG().keyIDShift = 0;
                 break;
             case 3:
-                CCFG::keyIDD = keyID;
-                if (CCFG::keyIDA == keyID)
-                    CCFG::keyIDA = 0;
-                if (CCFG::keyIDS == keyID)
-                    CCFG::keyIDS = 0;
-                if (CCFG::keyIDSpace == keyID)
-                    CCFG::keyIDSpace = 0;
-                if (CCFG::keyIDShift == keyID)
-                    CCFG::keyIDShift = 0;
+                getCFG().keyIDD = keyID;
+                if (getCFG().keyIDA == keyID)
+                    getCFG().keyIDA = 0;
+                if (getCFG().keyIDS == keyID)
+                    getCFG().keyIDS = 0;
+                if (getCFG().keyIDSpace == keyID)
+                    getCFG().keyIDSpace = 0;
+                if (getCFG().keyIDShift == keyID)
+                    getCFG().keyIDShift = 0;
                 break;
             case 4:
-                CCFG::keyIDSpace = keyID;
-                if (CCFG::keyIDA == keyID)
-                    CCFG::keyIDA = 0;
-                if (CCFG::keyIDS == keyID)
-                    CCFG::keyIDS = 0;
-                if (CCFG::keyIDD == keyID)
-                    CCFG::keyIDD = 0;
-                if (CCFG::keyIDShift == keyID)
-                    CCFG::keyIDShift = 0;
+                getCFG().keyIDSpace = keyID;
+                if (getCFG().keyIDA == keyID)
+                    getCFG().keyIDA = 0;
+                if (getCFG().keyIDS == keyID)
+                    getCFG().keyIDS = 0;
+                if (getCFG().keyIDD == keyID)
+                    getCFG().keyIDD = 0;
+                if (getCFG().keyIDShift == keyID)
+                    getCFG().keyIDShift = 0;
                 break;
             case 5:
-                CCFG::keyIDShift = keyID;
-                if (CCFG::keyIDA == keyID)
-                    CCFG::keyIDA = 0;
-                if (CCFG::keyIDS == keyID)
-                    CCFG::keyIDS = 0;
-                if (CCFG::keyIDD == keyID)
-                    CCFG::keyIDD = 0;
-                if (CCFG::keyIDSpace == keyID)
-                    CCFG::keyIDSpace = 0;
+                getCFG().keyIDShift = keyID;
+                if (getCFG().keyIDA == keyID)
+                    getCFG().keyIDA = 0;
+                if (getCFG().keyIDS == keyID)
+                    getCFG().keyIDS = 0;
+                if (getCFG().keyIDD == keyID)
+                    getCFG().keyIDD = 0;
+                if (getCFG().keyIDSpace == keyID)
+                    getCFG().keyIDSpace = 0;
                 break;
         }
         resetSetKey = true;
@@ -325,28 +325,28 @@ void OptionsMenu::updateActiveButton(int iDir)
         switch (iDir)
         {
             case 1:
-                if (CCFG::getMusic()->getVolume() < 100)
+                if (getCFG().getMusic()->getVolume() < 100)
                 {
-                    CCFG::getMusic()->setVolume(CCFG::getMusic()->getVolume() + 5);
+                    getCFG().getMusic()->setVolume(getCFG().getMusic()->getVolume() + 5);
                 }
                 else
                 {
-                    CCFG::getMusic()->setVolume(100);
+                    getCFG().getMusic()->setVolume(100);
                 }
                 break;
             case 3:
-                if (CCFG::getMusic()->getVolume() > 0)
+                if (getCFG().getMusic()->getVolume() > 0)
                 {
-                    CCFG::getMusic()->setVolume(CCFG::getMusic()->getVolume() - 5);
+                    getCFG().getMusic()->setVolume(getCFG().getMusic()->getVolume() - 5);
                 }
                 else
                 {
-                    CCFG::getMusic()->setVolume(0);
+                    getCFG().getMusic()->setVolume(0);
                 }
                 break;
         }
         updateVolumeRect();
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::Coin);
     }
     if (!inSetKey)
     {
@@ -356,7 +356,7 @@ void OptionsMenu::updateActiveButton(int iDir)
 
 void OptionsMenu::updateVolumeRect()
 {
-    rVolume.w = CCFG::getMusic()->getVolume() * 2;
+    rVolume.w = getCFG().getMusic()->getVolume() * 2;
 }
 
 void OptionsMenu::setEscapeToMainMenu(bool escapeToMainMenu)

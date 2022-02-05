@@ -139,7 +139,7 @@ void Platform::Update()
             }
             break;
         case 7:
-            if (fYPos < CCFG::GAME_HEIGHT + 32)
+            if (fYPos < getCFG().GAME_HEIGHT + 32)
             {
                 fYPos += 4;
             }

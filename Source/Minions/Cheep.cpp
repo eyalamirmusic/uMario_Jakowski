@@ -72,7 +72,7 @@ void Cheep::Update()
             {
                 if (jumpDistance > 0)
                 {
-                    if (fYPos > CCFG::GAME_HEIGHT - 12 * 32 + 8)
+                    if (fYPos > getCFG().GAME_HEIGHT - 12 * 32 + 8)
                     {
                         fYPos -= 0.25f;
                     }
@@ -211,7 +211,7 @@ void Cheep::Update()
                 jumpDistance -= 8;
             }
 
-            if (fYPos > CCFG::GAME_HEIGHT)
+            if (fYPos > getCFG().GAME_HEIGHT)
             {
                 minionState = -1;
             }
@@ -248,7 +248,7 @@ void Cheep::collisionWithPlayer(bool TOP)
         setMinionState(-2);
         this->minionState = -2;
         moveYDIR = false;
-        this->jumpDistance = CCFG::GAME_HEIGHT - fYPos;
+        this->jumpDistance = getCFG().GAME_HEIGHT - fYPos;
     }
     else
     {

@@ -6,7 +6,7 @@
 Vine::Vine(int iXPos, int iYPos, int minionState, int iBlockID)
 {
     this->fXPos = (float) iXPos * 32 + 4;
-    this->fYPos = (float) (CCFG::GAME_HEIGHT - 16 - iYPos * 32);
+    this->fYPos = (float) (getCFG().GAME_HEIGHT - 16 - iYPos * 32);
 
     this->iX = iXPos;
     this->iY = iYPos;
@@ -35,7 +35,7 @@ void Vine::Update()
 {
     if (minionState == 0)
     {
-        if (CCFG::GAME_HEIGHT + 16 - iY * 32 >= jumpDistance)
+        if (getCFG().GAME_HEIGHT + 16 - iY * 32 >= jumpDistance)
         {
             jumpDistance += 2;
             iHitBoxY += 2;
@@ -61,7 +61,7 @@ void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
             ->getMinionBlock(iBlockID - 1)
             ->Draw(rR,
                    (int) (iX * 32 + CCore::getMap()->getXPos()),
-                   (int) (CCFG::GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
+                   (int) (getCFG().GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
     }
     else
     {
@@ -69,13 +69,13 @@ void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
             ->getMinionBlock(iBlockID - 1)
             ->Draw(rR,
                    (int) (iX * 32 + CCore::getMap()->getXPos()),
-                   (int) (CCFG::GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
+                   (int) (getCFG().GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
         for (int i = 0; i < jumpDistance / 32 - 1; i++)
         {
             iIMG->Draw(
                 rR,
                 (int) (iX * 32 + CCore::getMap()->getXPos()),
-                (int) (CCFG::GAME_HEIGHT + 16 - iY * 32 + i * 32 - jumpDistance),
+                (int) (getCFG().GAME_HEIGHT + 16 - iY * 32 + i * 32 - jumpDistance),
                 false);
         }
     }
@@ -86,7 +86,7 @@ void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
         ->Draw(
             rR,
             (int) (iX * 32 + CCore::getMap()->getXPos()),
-            (int) (CCFG::GAME_HEIGHT - iY * 32 - 16
+            (int) (getCFG().GAME_HEIGHT - iY * 32 - 16
                    - CCore::getMap()->getMapBlock((int) iX, (int) iY)->getYPos()));
 }
 
@@ -154,7 +154,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newMapXPos = -270 * 32;
                 event->newPlayerXPos = 128;
                 event->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                    getCFG().GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->vOLDDir.push_back(
                     Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(274);
@@ -166,7 +166,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newMapXPos = -270 * 32;
                 event->newPlayerXPos = 128;
                 event->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                    getCFG().GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->vOLDDir.push_back(
                     Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(274);
@@ -178,7 +178,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newMapXPos = -310 * 32;
                 event->newPlayerXPos = 128;
                 event->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                    getCFG().GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->newLevelType = 0;
 
                 event->vOLDDir.push_back(
@@ -191,7 +191,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newMapXPos = -325 * 32;
                 event->newPlayerXPos = 128;
                 event->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                    getCFG().GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->newLevelType = 0;
 
                 event->vOLDDir.push_back(
@@ -204,7 +204,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newMapXPos = -390 * 32;
                 event->newPlayerXPos = 128;
                 event->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                    getCFG().GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->newLevelType = 4;
 
                 event->vOLDDir.push_back(

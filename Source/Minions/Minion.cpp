@@ -111,7 +111,7 @@ void Minion::physicsState2()
 
     jumpState = 2;
 
-    if (fYPos >= CCFG::GAME_HEIGHT)
+    if (fYPos >= getCFG().GAME_HEIGHT)
     {
         minionState = -1;
     }
@@ -129,9 +129,9 @@ void Minion::updateXPos()
         {
             moveDirection = !moveDirection;
             if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 64
+                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
                                + iHitBoxX)
-                CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+                getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {
@@ -148,9 +148,9 @@ void Minion::updateXPos()
         {
             moveDirection = !moveDirection;
             if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 64
+                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
                                + iHitBoxX)
-                CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+                getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {
@@ -230,9 +230,9 @@ void Minion::lockMinion()
 void Minion::Spawn()
 {
     if ((fXPos >= -CCore::getMap()->getXPos()
-         && fXPos <= -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH)
+         && fXPos <= -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH)
         || (fXPos + iHitBoxX >= -CCore::getMap()->getXPos()
-            && fXPos + iHitBoxX <= -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH))
+            && fXPos + iHitBoxX <= -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH))
     {
         minionSpawned = true;
     }
@@ -276,7 +276,7 @@ void Minion::minionDeathAnimation()
         --deadTime;
     }
 
-    if (fYPos > CCFG::GAME_HEIGHT)
+    if (fYPos > getCFG().GAME_HEIGHT)
     {
         minionState = -1;
     }
@@ -323,7 +323,7 @@ void Minion::setMinionState(int minionState)
         fYPos -= iHitBoxY / 4;
         points(200);
         collisionOnlyWithPlayer = true;
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::Shot);
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::Shot);
     }
 }
 

@@ -18,8 +18,8 @@ CCore::CCore()
     window = SDL_CreateWindow("uMario - www.LukaszJakowski.pl",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              CCFG::GAME_WIDTH,
-                              CCFG::GAME_HEIGHT,
+                              getCFG().GAME_WIDTH,
+                              getCFG().GAME_HEIGHT,
                               SDL_WINDOW_SHOWN);
 
     if (window != nullptr)
@@ -41,15 +41,15 @@ CCore::CCore()
 
     Mario::getGameState(rR);
 
-    CCFG::getMM()->setActiveOption(rR);
-    CCFG::getSMBLOGO()->setIMG("super_mario_bros", rR);
-    CCFG::getMusic()->playTrack();
+    getCFG().getMM()->setActiveOption(rR);
+    getCFG().getSMBLOGO()->setIMG("super_mario_bros", rR);
+    getCFG().getMusic()->playTrack();
 
-    CCFG::keyIDA = SDLK_a;
-    CCFG::keyIDS = SDLK_s;
-    CCFG::keyIDD = SDLK_d;
-    CCFG::keyIDSpace = SDLK_SPACE;
-    CCFG::keyIDShift = SDLK_LSHIFT;
+    getCFG().keyIDA = SDLK_a;
+    getCFG().keyIDS = SDLK_s;
+    getCFG().keyIDD = SDLK_d;
+    getCFG().keyIDSpace = SDLK_SPACE;
+    getCFG().keyIDShift = SDLK_LSHIFT;
 }
 
 CCore::~CCore()
@@ -69,7 +69,7 @@ void CCore::mainLoop()
         SDL_PollEvent(mainEvent);
         SDL_RenderClear(rR);
 
-        CCFG::getMM()->setBackgroundColor(rR);
+        getCFG().getMM()->setBackgroundColor(rR);
         SDL_RenderFillRect(rR, nullptr);
 
         Input();
@@ -87,7 +87,7 @@ void CCore::mainLoop()
 
 void CCore::Input()
 {
-    if (CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
+    if (getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
     {
         if (!getMap()->getInEvent())
             InputPlayer();
@@ -102,7 +102,7 @@ void CCore::InputMenu()
 {
     if (mainEvent->type == SDL_KEYDOWN)
     {
-        CCFG::getMM()->setKey(mainEvent->key.keysym.sym);
+        getCFG().getMM()->setKey(mainEvent->key.keysym.sym);
 
         switch (mainEvent->key.keysym.sym)
         {
@@ -110,7 +110,7 @@ void CCore::InputMenu()
             case SDLK_DOWN:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->keyPressed(2);
+                    getCFG().getMM()->keyPressed(2);
                     keyMenuPressed = true;
                 }
                 break;
@@ -118,7 +118,7 @@ void CCore::InputMenu()
             case SDLK_UP:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->keyPressed(0);
+                    getCFG().getMM()->keyPressed(0);
                     keyMenuPressed = true;
                 }
                 break;
@@ -126,14 +126,14 @@ void CCore::InputMenu()
             case SDLK_RETURN:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->enter();
+                    getCFG().getMM()->enter();
                     keyMenuPressed = true;
                 }
                 break;
             case SDLK_ESCAPE:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->escape();
+                    getCFG().getMM()->escape();
                     keyMenuPressed = true;
                 }
                 break;
@@ -141,7 +141,7 @@ void CCore::InputMenu()
             case SDLK_d:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->keyPressed(3);
+                    getCFG().getMM()->keyPressed(3);
                     keyMenuPressed = true;
                 }
                 break;
@@ -149,7 +149,7 @@ void CCore::InputMenu()
             case SDLK_a:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->keyPressed(1);
+                    getCFG().getMM()->keyPressed(1);
                     keyMenuPressed = true;
                 }
                 break;
@@ -186,10 +186,10 @@ void CCore::InputPlayer()
         switch (mainEvent->window.event)
         {
             case SDL_WINDOWEVENT_FOCUS_LOST:
-                CCFG::getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
-                CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
-                CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
-                CCFG::getMusic()->pauseTrack();
+                getCFG().getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
+                getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
+                getCFG().getMusic()->playEffect(Mario::Music::Effects::Pause);
+                getCFG().getMusic()->pauseTrack();
                 break;
         }
     }
@@ -198,7 +198,7 @@ void CCore::InputPlayer()
 
     if (mainEvent->type == SDL_KEYUP)
     {
-        if (mainEvent->key.keysym.sym == CCFG::keyIDD)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDD)
         {
             if (firstDir)
             {
@@ -208,13 +208,13 @@ void CCore::InputPlayer()
             keyDPressed = false;
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDS)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDS)
         {
             player->setSquat(false);
             keyS = false;
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDA)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDA)
         {
             if (!firstDir)
             {
@@ -224,12 +224,12 @@ void CCore::InputPlayer()
             keyAPressed = false;
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDSpace)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDSpace)
         {
-            CCFG::keySpace = false;
+            getCFG().keySpace = false;
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDShift)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDShift)
         {
             if (keyShift)
             {
@@ -249,7 +249,7 @@ void CCore::InputPlayer()
 
     if (mainEvent->type == SDL_KEYDOWN)
     {
-        if (mainEvent->key.keysym.sym == CCFG::keyIDD)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDD)
         {
             keyDPressed = true;
             if (!keyAPressed)
@@ -258,7 +258,7 @@ void CCore::InputPlayer()
             }
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDS)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDS)
         {
             if (!keyS)
             {
@@ -268,7 +268,7 @@ void CCore::InputPlayer()
             }
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDA)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDA)
         {
             keyAPressed = true;
             if (!keyDPressed)
@@ -277,16 +277,16 @@ void CCore::InputPlayer()
             }
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDSpace)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDSpace)
         {
-            if (!CCFG::keySpace)
+            if (!getCFG().keySpace)
             {
                 player->jump();
-                CCFG::keySpace = true;
+                getCFG().keySpace = true;
             }
         }
 
-        if (mainEvent->key.keysym.sym == CCFG::keyIDShift)
+        if (mainEvent->key.keysym.sym == getCFG().keyIDShift)
         {
             if (!keyShift)
             {
@@ -301,17 +301,17 @@ void CCore::InputPlayer()
             case SDLK_RETURN:
                 if (!keyMenuPressed)
                 {
-                    CCFG::getMM()->enter();
+                    getCFG().getMM()->enter();
                     keyMenuPressed = true;
                 }
             case SDLK_ESCAPE:
                 if (!keyMenuPressed
-                    && CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
+                    && getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
                 {
-                    CCFG::getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
-                    CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
-                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
-                    CCFG::getMusic()->pauseTrack();
+                    getCFG().getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
+                    getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
+                    getCFG().getMusic()->playEffect(Mario::Music::Effects::Pause);
+                    getCFG().getMusic()->pauseTrack();
                     keyMenuPressed = true;
                 }
                 break;
@@ -361,18 +361,18 @@ void CCore::resetKeys()
     //it here until I know why it was created
 
     jassertfalse;
-    //    movePressed = keyMenuPressed = keyS = keyW = keyA = keyD = CCFG::keySpace =
+    //    movePressed = keyMenuPressed = keyS = keyW = keyA = keyD = getCFG().keySpace =
     //        keyShift = keyAPressed = keyDPressed = false;
 }
 
 void CCore::update()
 {
-    CCFG::getMM()->Update();
+    getCFG().getMM()->Update();
 }
 
 void CCore::draw()
 {
-    CCFG::getMM()->Draw(rR);
+    getCFG().getMM()->Draw(rR);
 }
 
 void CCore::resetMove()

@@ -30,10 +30,10 @@ void Console::Draw(SDL_Renderer* rR)
 
         for (int i = vPrint.size() - 1, j = 0; i >= 0; i--, j++)
         {
-            CCFG::getText()->Draw(rR,
+            getCFG().getText()->Draw(rR,
                                   vPrint[i],
                                   rRect.x + rRect.w - 5
-                                      - CCFG::getText()->getTextWidth(vPrint[i], 8),
+                                      - getCFG().getText()->getTextWidth(vPrint[i], 8),
                                   rRect.y + rRect.h - 5 - 8 * (j + 1) - 4 * j,
                                   8);
         }

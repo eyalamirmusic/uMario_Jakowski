@@ -406,7 +406,7 @@ void Player::playerPhysics()
                 currentJumpSpeed = 2.5f;
             }
 
-            if (!CCFG::keySpace && currentJumpDistance > 64 && !springJump)
+            if (!getCFG().keySpace && currentJumpDistance > 64 && !springJump)
             {
                 jumpDistance = 16;
                 currentJumpDistance = 0;
@@ -542,7 +542,7 @@ void Player::playerPhysics()
 
         if (jumpState == 1)
         {
-            if (fYPos > CCFG::GAME_HEIGHT - 12 * 32 - 16)
+            if (fYPos > getCFG().GAME_HEIGHT - 12 * 32 - 16)
             {
                 updateYPos(-2);
                 currentJumpDistance += 2;
@@ -882,7 +882,7 @@ void Player::createFireBall()
                 (int) (fYPos + getHitBoxY() / 2),
                 !moveDirection);
             nextFireBallFrameID = 16;
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Fireball);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Fireball);
         }
     }
 }
@@ -920,18 +920,18 @@ void Player::startJump(int iH)
             setMarioSpriteID(8);
             swimingAnimation();
         }
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::Swim);
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::Swim);
     }
 
     if (iH > 1)
     {
         if (powerLVL == 0)
         {
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Jump);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Jump);
         }
         else
         {
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::JumpBig);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::JumpBig);
         }
     }
 
@@ -1010,7 +1010,7 @@ void Player::updateXPos(int iN)
                                   true))))
         {
             if (fXPos <= 192 && CCore::getMap()->getXPos()
-                && CCore::getMap()->getMoveMap() && CCFG::canMoveBackward)
+                && CCore::getMap()->getMoveMap() && getCFG().canMoveBackward)
             {
                 CCore::getMap()->moveMap(-iN, 0);
             }
@@ -1018,7 +1018,7 @@ void Player::updateXPos(int iN)
             {
                 fXPos += iN;
             }
-            else if (CCFG::canMoveBackward && fXPos >= 0)
+            else if (getCFG().canMoveBackward && fXPos >= 0)
             {
                 updateXPos(iN + 1);
             }
@@ -1291,7 +1291,7 @@ void Player::updateYPos(int iN)
         fYPos += 1;
     }
 
-    if (!CCore::getMap()->getInEvent() && fYPos - getHitBoxY() > CCFG::GAME_HEIGHT)
+    if (!CCore::getMap()->getInEvent() && fYPos - getHitBoxY() > getCFG().GAME_HEIGHT)
     {
         CCore::getMap()->playerDeath(false, true);
         fYPos = -80;
@@ -1522,7 +1522,7 @@ void Player::Draw(SDL_Renderer* rR)
 int Player::getMarioSpriteID()
 {
     if (starEffect && !inLevelAnimation
-        && CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
+        && getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
     {
         if (unKillAbleTimeFrameID <= 0)
         {
@@ -1531,7 +1531,7 @@ int Player::getMarioSpriteID()
 
         if (unKillAbleTimeFrameID == 35)
         {
-            CCFG::getMusic()->changeMusic(true, true);
+            getCFG().getMusic()->changeMusic(true, true);
         }
 
         ++unKillAbleFrameID;
@@ -1660,7 +1660,7 @@ void Player::setPowerLVL(int powerLVL)
     {
         if (this->powerLVL < powerLVL)
         {
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::MushroomMeat);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::MushroomMeat);
             setScore(getScore() + 1000);
             CCore::getMap()->addPoints(
                 (int) (fXPos - CCore::getMap()->getXPos() + getHitBoxX() / 2),
@@ -1676,7 +1676,7 @@ void Player::setPowerLVL(int powerLVL)
         }
         else if (this->powerLVL > 0)
         {
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Shrink);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Shrink);
             inLevelDownAnimation = true;
             inLevelDownAnimationFrameID = 180;
             inLevelAnimation = true;
@@ -1694,7 +1694,7 @@ void Player::setPowerLVL(int powerLVL)
             "1UP",
             10,
             14);
-        CCFG::getMusic()->playEffect(Mario::Music::Effects::OneUp);
+        getCFG().getMusic()->playEffect(Mario::Music::Effects::OneUp);
     }
 }
 
@@ -1718,7 +1718,7 @@ void Player::setStarEffect(bool starEffect)
 {
     if (starEffect && this->starEffect != starEffect)
     {
-        CCFG::getMusic()->playTrack(Mario::Music::Tracks::Star);
+        getCFG().getMusic()->playTrack(Mario::Music::Tracks::Star);
     }
     this->starEffect = starEffect;
     this->unKillAble = starEffect;

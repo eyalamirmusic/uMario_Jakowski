@@ -73,7 +73,7 @@ void Pipe::setEvent()
     player->stopMove();
     player->resetJump();
 
-    CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
+    getCFG().getMusic()->playEffect(Mario::Music::Effects::Pipe);
 
     event->eventTypeID = Mario::EventType::Normal;
 

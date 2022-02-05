@@ -16,7 +16,7 @@ void Event::draw(SDL_Renderer* rR)
             auto mapX = (int) map->getXPos();
 
             auto x = 32 * point.x + mapX;
-            auto y = CCFG::GAME_HEIGHT - 32 * point.y - 16;
+            auto y = getCFG().GAME_HEIGHT - 32 * point.y - 16;
 
             block->Draw(rR, x, y);
         }
@@ -112,16 +112,16 @@ void Event::normal()
                         {
                             map->setMapTime(map->getMapTime() - 1);
                             player->setScore(player->getScore() + 50);
-                            if (!CCFG::getMusic()->isMusicPlaying())
+                            if (!getCFG().getMusic()->isMusicPlaying())
                             {
-                                CCFG::getMusic()->playTrack(
+                                getCFG().getMusic()->playTrack(
                                     Mario::Music::Tracks::Scorering);
                             }
                         }
                         else
                         {
                             length = 0;
-                            CCFG::getMusic()->stopTrack();
+                            getCFG().getMusic()->stopTrack();
                         }
                         map->getFlag()->UpdateCastleFlag();
                         break;
@@ -145,7 +145,7 @@ void Event::normal()
                     case Animations::PlayPipeRight:
                         player->setXPos((float) player->getXPos() + speed);
                         length -= 1;
-                        CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
+                        getCFG().getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
                     case Animations::LoadingMenu:
                         length -= 1;
@@ -156,9 +156,9 @@ void Event::normal()
                             inEvent = false;
                             player->stopMove();
 
-                            CCFG::getMM()->getLoadingMenu()->loadingType = true;
-                            CCFG::getMM()->getLoadingMenu()->updateTime();
-                            CCFG::getMM()->setViewID(GameStates::eGameLoading);
+                            getCFG().getMM()->getLoadingMenu()->loadingType = true;
+                            getCFG().getMM()->getLoadingMenu()->updateTime();
+                            getCFG().getMM()->setViewID(GameStates::eGameLoading);
                         }
                         break;
                     case Animations::GameOver:
@@ -170,11 +170,11 @@ void Event::normal()
                             inEvent = false;
                             player->stopMove();
 
-                            CCFG::getMM()->getLoadingMenu()->loadingType = false;
-                            CCFG::getMM()->getLoadingMenu()->updateTime();
-                            CCFG::getMM()->setViewID(GameStates::eGameLoading);
+                            getCFG().getMM()->getLoadingMenu()->loadingType = false;
+                            getCFG().getMM()->getLoadingMenu()->updateTime();
+                            getCFG().getMM()->setViewID(GameStates::eGameLoading);
 
-                            CCFG::getMusic()->playEffect(
+                            getCFG().getMusic()->playEffect(
                                 Mario::Music::Effects::GameOver);
                         }
                         break;
@@ -189,7 +189,7 @@ void Event::normal()
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos()) + vOLDLength[stepID] - 1), 6)->setBlockID(0);
                         map->clearPlatforms();
-                        CCFG::getMusic()->playEffect(
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
                         length = 0;
                         player->setMoveDirection(false);
@@ -213,7 +213,7 @@ void Event::normal()
                                 break;
                             }
                         }
-                        CCFG::getMusic()->playEffect(
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
                         length = 0;
                         break;
@@ -227,13 +227,13 @@ void Event::normal()
                             }
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - vOLDLength[stepID], 4)->setBlockID(0);
-                        CCFG::getMusic()->playEffect(
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
                         player->setMoveDirection(true);
                         length = 0;
                         break;
                     case Animations::BossEnd4:
-                        CCFG::getMusic()->playEffect(
+                        getCFG().getMusic()->playEffect(
                             Mario::Music::Effects::BowserFall);
                         length = 0;
                         break;
@@ -245,28 +245,28 @@ void Event::normal()
                         break;
                     case Animations::BossText1:
                         map->addText(length,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      "THANK YOU MARIOz");
                         length = 0;
                         break;
                     case Animations::BossText2:
                         map->addText(length + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      "BUT OUR PRINCESS IS IN");
                         map->addText(length + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 6 * 32,
                                      "ANOTHER CASTLEz");
                         length = 0;
                         break;
                     case Animations::EndGameBossText1:
                         map->addText(length,
-                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 9 * 32,
                                      "THANK YOU MARIOz");
                         length = 0;
                         break;
                     case Animations::EndGameBossText2:
                         map->addText(length + 16,
-                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     getCFG().GAME_HEIGHT - 16 - 7 * 32,
                                      "YOUR QUEST IS OVER.");
                         length = 0;
                         break;
@@ -314,23 +314,23 @@ void Event::normal()
                     player->stopMove();
                     if (inEvent)
                     {
-                        CCFG::getMM()->getLoadingMenu()->updateTime();
-                        CCFG::getMM()->getLoadingMenu()->loadingType = true;
-                        CCFG::getMM()->setViewID(GameStates::eGameLoading);
+                        getCFG().getMM()->getLoadingMenu()->updateTime();
+                        getCFG().getMM()->getLoadingMenu()->loadingType = true;
+                        getCFG().getMM()->setViewID(GameStates::eGameLoading);
                         map->startLevelAnimation();
                     }
 
-                    CCFG::keySpace = false;
+                    getCFG().keySpace = false;
                 }
             }
             else
             {
                 map->resetGameData();
-                CCFG::getMM()->setViewID(GameStates::eMainMenu);
+                getCFG().getMM()->setViewID(GameStates::eMainMenu);
                 map->setInEvent(false);
                 player->stopMove();
                 inEvent = false;
-                CCFG::keySpace = false;
+                getCFG().keySpace = false;
                 endGame = false;
                 stepID = 0;
             }
@@ -371,7 +371,7 @@ void Event::normal()
 
                     case Animations::PlayPipeTop:
                         length -= 1;
-                        CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
+                        getCFG().getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
 
                     case Animations::Nothing: // NOTHING YAY
@@ -426,9 +426,9 @@ void Event::normal()
         {
             map->setInEvent(false);
             player->stopMove();
-            CCFG::getMusic()->changeMusic(true, true);
+            getCFG().getMusic()->changeMusic(true, true);
             inEvent = false;
-            CCFG::keySpace = false;
+            getCFG().keySpace = false;
             CCore::resetKeys();
         }
     }
@@ -438,7 +438,7 @@ void Event::end()
 {
     auto* flag = CCore::getMap()->getFlag();
 
-    if (flag != nullptr && flag->iYPos < CCFG::GAME_HEIGHT - 16 - 3 * 32 - 4)
+    if (flag != nullptr && flag->iYPos < getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4)
     {
         flag->Update();
     }
@@ -457,7 +457,7 @@ void Event::newLevel() const
     
     if (map->getCurrentLevelID() != newCurrentLevel)
     {
-        auto* mm = CCFG::getMM();
+        auto* mm = getCFG().getMM();
 
         mm->getLoadingMenu()->updateTime();
         mm->getLoadingMenu()->loadingType = true;

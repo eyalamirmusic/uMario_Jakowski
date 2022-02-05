@@ -51,8 +51,8 @@ void CheepSpawner::spawnCheep()
                < iXEnd)
     {
         CCore::getMap()->addCheep((int) (-CCore::getMap()->getXPos() + 64
-                                         + rand() % (CCFG::GAME_WIDTH - 128)),
-                                  CCFG::GAME_HEIGHT - 4,
+                                         + rand() % (getCFG().GAME_WIDTH - 128)),
+                                  getCFG().GAME_HEIGHT - 4,
                                   2,
                                   2 + rand() % 32,
                                   !(rand() % 4 == 0));

@@ -8,7 +8,7 @@
 UpFire::UpFire(int iXPos, int iYJump)
 {
     this->fXPos = (float) iXPos;
-    this->fYPos = (float) CCFG::GAME_HEIGHT + 16;
+    this->fYPos = (float) getCFG().GAME_HEIGHT + 16;
 
     this->moveDirection = true;
 

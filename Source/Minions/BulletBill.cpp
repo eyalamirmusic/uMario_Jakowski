@@ -35,7 +35,7 @@ BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState
                           ? 303 * 32
                           : CCore::getMap()->getMapWidth() * 32; // -- MAX X
 
-    CCFG::getMusic()->playEffect(Mario::Music::Effects::BulletBill);
+    getCFG().getMusic()->playEffect(Mario::Music::Effects::BulletBill);
 }
 
 BulletBill::~BulletBill(void)
@@ -80,7 +80,7 @@ void BulletBill::Draw(SDL_Renderer* rR, CIMG* iIMG)
         CCore::getMap()->getBlock(145)->getSprite()->getTexture()->Draw(
             rR,
             (int) (currentJumpSpeed * 32 + CCore::getMap()->getXPos()),
-            (int) (CCFG::GAME_HEIGHT - 16 - currentFallingSpeed * 32) + 32);
+            (int) (getCFG().GAME_HEIGHT - 16 - currentFallingSpeed * 32) + 32);
 }
 
 void BulletBill::minionPhysics()

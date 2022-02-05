@@ -72,7 +72,7 @@ void Goombas::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->resetJump();
             CCore::getMap()->getPlayer()->startJump(1);
             points(100);
-            CCFG::getMusic()->playEffect(Mario::Music::Effects::Stomp);
+            getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
     }
     else

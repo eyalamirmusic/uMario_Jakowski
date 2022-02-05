@@ -30,19 +30,19 @@ MainMenu::~MainMenu(void)
 
 void MainMenu::Update()
 {
-    CCFG::getMusic()->stopTrack();
+    getCFG().getMusic()->stopTrack();
 
     Menu::Update();
 }
 
 void MainMenu::Draw(SDL_Renderer* rR)
 {
-    CCFG::getSMBLOGO()->Draw(rR, 80, 48);
+    getCFG().getSMBLOGO()->Draw(rR, 80, 48);
     Menu::Draw(rR);
-    CCFG::getText()->Draw(
-        rR, "WWW.LUKASZJAKOWSKI.PL", 4, CCFG::GAME_HEIGHT - 4 - 8, 8, 0, 0, 0);
-    CCFG::getText()->Draw(
-        rR, "WWW.LUKASZJAKOWSKI.PL", 5, CCFG::GAME_HEIGHT - 5 - 8, 8, 255, 255, 255);
+    getCFG().getText()->Draw(
+        rR, "WWW.LUKASZJAKOWSKI.PL", 4, getCFG().GAME_HEIGHT - 4 - 8, 8, 0, 0, 0);
+    getCFG().getText()->Draw(
+        rR, "WWW.LUKASZJAKOWSKI.PL", 5, getCFG().GAME_HEIGHT - 5 - 8, 8, 255, 255, 255);
 
     if (selectWorld)
     {
@@ -60,10 +60,10 @@ void MainMenu::Draw(SDL_Renderer* rR)
         rSelectWorld.h += 2;
         rSelectWorld.w += 2;
 
-        CCFG::getText()->Draw(rR,
+        getCFG().getText()->Draw(rR,
                               "SELECT WORLD",
                               rSelectWorld.x + rSelectWorld.w / 2
-                                  - CCFG::getText()->getTextWidth("SELECT WORLD")
+                                  - getCFG().getText()->getTextWidth("SELECT WORLD")
                                         / 2,
                               rSelectWorld.y + 16,
                               16,
@@ -75,7 +75,7 @@ void MainMenu::Draw(SDL_Renderer* rR)
         {
             if (i == activeWorldID)
             {
-                CCFG::getText()->Draw(rR,
+                getCFG().getText()->Draw(rR,
                                       std::to_string(i + 1) + "-"
                                           + std::to_string(activeSecondWorldID + 1),
                                       rSelectWorld.x + 16 * (i + 1) + 16 * i
@@ -90,15 +90,15 @@ void MainMenu::Draw(SDL_Renderer* rR)
 
                 /*for(int j = 0; j < 4; j++) {
                     if(j == activeSecondWorldID) {
-                        CCFG::getText()->Draw(rR, std::to_string(j + 1), rSelectWorld.x + 16*(i + 1) + 16*i, rSelectWorld.y + 40 + 24*j, 16, 255, 255, 255);
+                        getCFG().getText()->Draw(rR, std::to_string(j + 1), rSelectWorld.x + 16*(i + 1) + 16*i, rSelectWorld.y + 40 + 24*j, 16, 255, 255, 255);
                     } else {
-                        CCFG::getText()->Draw(rR, std::to_string(j + 1), rSelectWorld.x + 16*(i + 1) + 16*i, rSelectWorld.y + 40 + 24*j, 16, 90, 90, 90);
+                        getCFG().getText()->Draw(rR, std::to_string(j + 1), rSelectWorld.x + 16*(i + 1) + 16*i, rSelectWorld.y + 40 + 24*j, 16, 90, 90, 90);
                     }
                 }*/
             }
             else
             {
-                CCFG::getText()->Draw(rR,
+                getCFG().getText()->Draw(rR,
                                       std::to_string(i + 1),
                                       rSelectWorld.x + 16 * (i + 1) + 16 * i
                                           + extraX,
@@ -128,26 +128,26 @@ void MainMenu::enter()
             }
             else
             {
-                CCFG::getMM()->getLoadingMenu()->updateTime();
+                getCFG().getMM()->getLoadingMenu()->updateTime();
                 CCore::getMap()->resetGameData();
                 CCore::getMap()->setCurrentLevelID(activeWorldID * 4
                                                    + activeSecondWorldID);
-                CCFG::getMM()->setViewID(Mario::GameStates::eGameLoading);
-                CCFG::getMM()->getLoadingMenu()->loadingType = true;
+                getCFG().getMM()->setViewID(Mario::GameStates::eGameLoading);
+                getCFG().getMM()->getLoadingMenu()->loadingType = true;
                 CCore::getMap()->setSpawnPointID(0);
                 selectWorld = false;
             }
             break;
         case 1:
-            CCFG::getMM()->getOptions()->setEscapeToMainMenu(true);
-            CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
-            CCFG::getMM()->getOptions()->updateVolumeRect();
-            CCFG::getMM()->setViewID(Mario::GameStates::eOptions);
+            getCFG().getMM()->getOptions()->setEscapeToMainMenu(true);
+            getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
+            getCFG().getMM()->getOptions()->updateVolumeRect();
+            getCFG().getMM()->setViewID(Mario::GameStates::eOptions);
             break;
         case 2:
-            CCFG::getMM()->getAboutMenu()->updateTime();
-            CCFG::getMM()->setViewID(Mario::GameStates::eAbout);
-            CCFG::getMusic()->playTrack(Mario::Music::Tracks::Overworld);
+            getCFG().getMM()->getAboutMenu()->updateTime();
+            getCFG().getMM()->setViewID(Mario::GameStates::eAbout);
+            getCFG().getMusic()->playTrack(Mario::Music::Tracks::Overworld);
             break;
     }
 }
