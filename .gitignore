@@ -29,3 +29,5 @@
 
 # CMake
 build
+cmake-build*
+.idea
