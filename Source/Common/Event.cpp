@@ -1,24 +1,8 @@
 #include "Event.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
-Event::Event(void)
+namespace Mario
 {
-    this->iDelay = 0;
-    this->newUnderWater = false;
-    this->endGame = false;
-    this->iTime = 0;
-    this->bState = true;
-    this->stepID = 0;
-}
-
-Event::~Event(void)
-{
-}
-
-/* ******************************************** */
-
 void Event::Draw(SDL_Renderer* rR)
 {
     for (unsigned int i = 0; i < reDrawX.size(); i++)
@@ -42,98 +26,87 @@ void Event::Animation()
     {
         case eNormal:
         {
-            Normal();
+            normal();
             break;
         }
         case eEnd:
         {
-            Normal();
+            normal();
             end();
             break;
         }
         case eBossEnd:
         {
-            Normal();
+            normal();
             break;
         }
         default:
-            Normal();
+            normal();
             break;
     }
 }
 
-void Event::Normal()
+void Event::normal()
 {
-    if (bState)
+    auto map = CCore::getMap();
+    auto player = map->getPlayer();
+
+    if (state)
     {
         if (vOLDDir.size() > stepID)
         {
-            if (vOLDLength[stepID] > 0)
+            if (vOLDLength[(int) stepID] > 0)
             {
-                switch (vOLDDir[stepID])
+                auto& length = vOLDLength[(int) stepID];
+
+                switch (vOLDDir[(int) stepID])
                 {
-                    case eTOP: // TOP
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
+                    case Animations::eTOP: // TOP
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
                         break;
-                    case eBOT:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            + iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
+                    case Animations::eBOT:
+                        player->setYPos((float) player->getYPos() + iSpeed);
+                        length -= iSpeed;
                         break;
-                    case eRIGHT:
-                        CCore::getMap()->getPlayer()->setXPos(
-                            (float) CCore::getMap()->getPlayer()->getXPos()
-                            + iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
-                        CCore::getMap()->getPlayer()->setMoveDirection(true);
+                    case Animations::eRIGHT:
+                        player->setXPos((float) player->getXPos() + iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
+                        player->setMoveDirection(true);
                         break;
-                    case eRIGHTEND:
-                        CCore::getMap()->setXPos((float) CCore::getMap()->getXPos()
-                                                 - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
-                        CCore::getMap()->getPlayer()->setMoveDirection(true);
+                    case Animations::eRIGHTEND:
+                        map->setXPos((float) map->getXPos() - iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
+                        player->setMoveDirection(true);
                         break;
-                    case eLEFT:
-                        CCore::getMap()->getPlayer()->setXPos(
-                            (float) CCore::getMap()->getPlayer()->getXPos()
-                            - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
-                        CCore::getMap()->getPlayer()->setMoveDirection(false);
+                    case Animations::eLEFT:
+                        player->setXPos((float) player->getXPos() - iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
+                        player->setMoveDirection(false);
                         break;
-                    case eBOTRIGHTEND: // BOT & RIGHT
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            + iSpeed);
-                        CCore::getMap()->setXPos((float) CCore::getMap()->getXPos()
-                                                 - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
+                    case Animations::eBOTRIGHTEND: // BOT & RIGHT
+                        player->setYPos((float) player->getYPos() + iSpeed);
+                        map->setXPos((float) map->getXPos() - iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
                         break;
-                    case eENDBOT1:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            + iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(10);
+                    case Animations::eENDBOT1:
+                        player->setYPos((float) player->getYPos() + iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(10);
                         break;
-                    case eENDBOT2:
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMoveDirection(false);
+                    case Animations::eENDBOT2:
+                        length -= iSpeed;
+                        player->setMoveDirection(false);
                         break;
-                    case eENDPOINTS:
-                        if (CCore::getMap()->getMapTime() > 0)
+                    case Animations::eENDPOINTS:
+                        if (map->getMapTime() > 0)
                         {
-                            CCore::getMap()->setMapTime(CCore::getMap()->getMapTime()
-                                                        - 1);
-                            CCore::getMap()->getPlayer()->setScore(
-                                CCore::getMap()->getPlayer()->getScore() + 50);
+                            map->setMapTime(map->getMapTime() - 1);
+                            player->setScore(player->getScore() + 50);
                             if (!CCFG::getMusic()->isMusicPlaying())
                             {
                                 CCFG::getMusic()->playTrack(
@@ -142,61 +115,55 @@ void Event::Normal()
                         }
                         else
                         {
-                            vOLDLength[stepID] = 0;
+                            length = 0;
                             CCFG::getMusic()->stopTrack();
                         }
-                        CCore::getMap()->getFlag()->UpdateCastleFlag();
+                        map->getFlag()->UpdateCastleFlag();
                         break;
-                    case eDEATHNOTHING:
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(0);
+                    case Animations::eDEATHNOTHING:
+                        length -= iSpeed;
+                        player->setMarioSpriteID(0);
                         break;
-                    case eDEATHTOP: // DEATH TOP
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(0);
+                    case Animations::eDEATHTOP: // DEATH TOP
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(0);
                         break;
-                    case eDEATHBOT: // DEATH BOT
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            + iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(0);
+                    case Animations::eDEATHBOT: // DEATH BOT
+                        player->setYPos((float) player->getYPos() + iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(0);
                         break;
-                    case eNOTHING: // NOTHING YAY
-                        vOLDLength[stepID] -= 1;
+                    case Animations::eNOTHING: // NOTHING YAY
+                        length -= 1;
                         break;
-                    case ePLAYPIPERIGHT:
-                        CCore::getMap()->getPlayer()->setXPos(
-                            (float) CCore::getMap()->getPlayer()->getXPos()
-                            + iSpeed);
-                        vOLDLength[stepID] -= 1;
+                    case Animations::ePLAYPIPERIGHT:
+                        player->setXPos((float) player->getXPos() + iSpeed);
+                        length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
-                    case eLOADINGMENU:
-                        vOLDLength[stepID] -= 1;
+                    case Animations::eLOADINGMENU:
+                        length -= 1;
 
-                        if (vOLDLength[stepID] < 2)
+                        if (length < 2)
                         {
-                            CCore::getMap()->setInEvent(false);
+                            map->setInEvent(false);
                             inEvent = false;
-                            CCore::getMap()->getPlayer()->stopMove();
+                            player->stopMove();
 
                             CCFG::getMM()->getLoadingMenu()->loadingType = true;
                             CCFG::getMM()->getLoadingMenu()->updateTime();
                             CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
                         }
                         break;
-                    case eGAMEOVER:
-                        vOLDLength[stepID] -= 1;
+                    case Animations::eGAMEOVER:
+                        length -= 1;
 
-                        if (vOLDLength[stepID] < 2)
+                        if (length < 2)
                         {
-                            CCore::getMap()->setInEvent(false);
+                            map->setInEvent(false);
                             inEvent = false;
-                            CCore::getMap()->getPlayer()->stopMove();
+                            player->stopMove();
 
                             CCFG::getMM()->getLoadingMenu()->loadingType = false;
                             CCFG::getMM()->getLoadingMenu()->updateTime();
@@ -206,130 +173,121 @@ void Event::Normal()
                                 Mario::Music::Effects::GameOver);
                         }
                         break;
-                    case eBOSSEND1:
-                        for (int i = CCore::getMap()->getMapWidth() - 1; i > 0; i--)
+                    case Animations::eBOSSEND1:
+                        for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
-                            if (CCore::getMap()->getMapBlock(i, 6)->getBlockID()
-                                == 82)
+                            if (map->getMapBlock(i, 6)->getBlockID() == 82)
                             {
-                                CCore::getMap()->getMapBlock(i, 6)->setBlockID(0);
+                                map->getMapBlock(i, 6)->setBlockID(0);
                                 break;
                             }
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos()) + vOLDLength[stepID] - 1), 6)->setBlockID(0);
-                        CCore::getMap()->clearPlatforms();
+                        map->clearPlatforms();
                         CCFG::getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
-                        vOLDLength[stepID] = 0;
-                        CCore::getMap()->getPlayer()->setMoveDirection(false);
+                        length = 0;
+                        player->setMoveDirection(false);
                         break;
-                    case eBOSSEND2:
+                    case Animations::eBOSSEND2:
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - 1, 5)->setBlockID(0);
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - 1, 4)->setBlockID(0);
-                        for (int i = CCore::getMap()->getMapWidth() - 1; i > 0; i--)
+                        for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
-                            if (CCore::getMap()->getMapBlock(i, 5)->getBlockID()
-                                == 79)
+                            if (map->getMapBlock(i, 5)->getBlockID() == 79)
                             {
-                                CCore::getMap()->getMapBlock(i, 5)->setBlockID(0);
+                                map->getMapBlock(i, 5)->setBlockID(0);
                                 break;
                             }
                         }
-                        for (int i = CCore::getMap()->getMapWidth() - 1; i > 0; i--)
+                        for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
-                            if (CCore::getMap()->getMapBlock(i, 4)->getBlockID()
-                                == 76)
+                            if (map->getMapBlock(i, 4)->getBlockID() == 76)
                             {
-                                CCore::getMap()->getMapBlock(i, 4)->setBlockID(0);
+                                map->getMapBlock(i, 4)->setBlockID(0);
                                 break;
                             }
                         }
                         CCFG::getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
-                        vOLDLength[stepID] = 0;
+                        length = 0;
                         break;
-                    case eBOSSEND3:
-                        for (int i = CCore::getMap()->getMapWidth() - 1; i > 0; i--)
+                    case Animations::eBOSSEND3:
+                        for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
-                            if (CCore::getMap()->getMapBlock(i, 4)->getBlockID()
-                                == 76)
+                            if (map->getMapBlock(i, 4)->getBlockID() == 76)
                             {
-                                CCore::getMap()->getMapBlock(i, 4)->setBlockID(0);
+                                map->getMapBlock(i, 4)->setBlockID(0);
                                 break;
                             }
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - vOLDLength[stepID], 4)->setBlockID(0);
                         CCFG::getMusic()->playEffect(
                             Mario::Music::Effects::BridgeBreak);
-                        CCore::getMap()->getPlayer()->setMoveDirection(true);
-                        vOLDLength[stepID] = 0;
+                        player->setMoveDirection(true);
+                        length = 0;
                         break;
-                    case eBOSSEND4:
+                    case Animations::eBOSSEND4:
                         CCFG::getMusic()->playEffect(
                             Mario::Music::Effects::BowserFall);
-                        vOLDLength[stepID] = 0;
+                        length = 0;
                         break;
-                    case eBOTRIGHTBOSS: // BOT & RIGHT
-                        CCore::getMap()->getPlayer()->moveAnimation();
-                        CCore::getMap()->getPlayer()->playerPhysics();
-                        CCore::getMap()->setXPos((float) CCore::getMap()->getXPos()
-                                                 - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
+                    case Animations::eBOTRIGHTBOSS: // BOT & RIGHT
+                        player->moveAnimation();
+                        player->playerPhysics();
+                        map->setXPos((float) map->getXPos() - iSpeed);
+                        length -= iSpeed;
                         break;
-                    case eBOSSTEXT1:
-                        CCore::getMap()->addText(vOLDLength[stepID],
-                                                 CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                                 "THANK YOU MARIOz");
-                        vOLDLength[stepID] = 0;
+                    case Animations::eBOSSTEXT1:
+                        map->addText(length,
+                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     "THANK YOU MARIOz");
+                        length = 0;
                         break;
-                    case eBOSSTEXT2:
-                        CCore::getMap()->addText(vOLDLength[stepID] + 16,
-                                                 CCFG::GAME_HEIGHT - 16 - 7 * 32,
-                                                 "BUT OUR PRINCESS IS IN");
-                        CCore::getMap()->addText(vOLDLength[stepID] + 16,
-                                                 CCFG::GAME_HEIGHT - 16 - 6 * 32,
-                                                 "ANOTHER CASTLEz");
-                        vOLDLength[stepID] = 0;
+                    case Animations::eBOSSTEXT2:
+                        map->addText(length + 16,
+                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     "BUT OUR PRINCESS IS IN");
+                        map->addText(length + 16,
+                                     CCFG::GAME_HEIGHT - 16 - 6 * 32,
+                                     "ANOTHER CASTLEz");
+                        length = 0;
                         break;
-                    case eENDGAMEBOSSTEXT1:
-                        CCore::getMap()->addText(vOLDLength[stepID],
-                                                 CCFG::GAME_HEIGHT - 16 - 9 * 32,
-                                                 "THANK YOU MARIOz");
-                        vOLDLength[stepID] = 0;
+                    case Animations::eENDGAMEBOSSTEXT1:
+                        map->addText(length,
+                                     CCFG::GAME_HEIGHT - 16 - 9 * 32,
+                                     "THANK YOU MARIOz");
+                        length = 0;
                         break;
-                    case eENDGAMEBOSSTEXT2:
-                        CCore::getMap()->addText(vOLDLength[stepID] + 16,
-                                                 CCFG::GAME_HEIGHT - 16 - 7 * 32,
-                                                 "YOUR QUEST IS OVER.");
-                        vOLDLength[stepID] = 0;
+                    case Animations::eENDGAMEBOSSTEXT2:
+                        map->addText(length + 16,
+                                     CCFG::GAME_HEIGHT - 16 - 7 * 32,
+                                     "YOUR QUEST IS OVER.");
+                        length = 0;
                         break;
-                    case eMARIOSPRITE1:
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(1);
-                        vOLDLength[stepID] = 0;
+                    case Animations::eMARIOSPRITE1:
+                        player->setMarioSpriteID(1);
+                        length = 0;
                         break;
-                    case eVINE1:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(10);
+                    case Animations::eVINE1:
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(10);
                         break;
-                    case eVINE2:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vOLDLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(11);
+                    case Animations::eVINE2:
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(11);
                         break;
-                    case eVINESPAWN:
-                        CCore::getMap()->addVine(
-                            vOLDLength[stepID],
-                            0,
-                            1,
-                            newLevelType == 0 || newLevelType == 4 ? 34 : 36);
-                        vOLDLength[stepID] = 0;
+                    case Animations::eVINESPAWN:
+                        map->addVine(length,
+                                     0,
+                                     1,
+                                     newLevelType == 0 || newLevelType == 4 ? 34
+                                                                            : 36);
+                        length = 0;
                         break;
-                    case ePLAYPIPETOP:
+                    case Animations::ePLAYPIPETOP:
                         break;
                 }
             }
@@ -345,16 +303,16 @@ void Event::Normal()
             {
                 if (SDL_GetTicks() >= iTime + iDelay)
                 {
-                    bState = false;
+                    state = false;
                     stepID = 0;
                     newLevel();
-                    CCore::getMap()->getPlayer()->stopMove();
+                    player->stopMove();
                     if (inEvent)
                     {
                         CCFG::getMM()->getLoadingMenu()->updateTime();
                         CCFG::getMM()->getLoadingMenu()->loadingType = true;
                         CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
-                        CCore::getMap()->startLevelAnimation();
+                        map->startLevelAnimation();
                     }
 
                     CCFG::keySpace = false;
@@ -362,10 +320,10 @@ void Event::Normal()
             }
             else
             {
-                CCore::getMap()->resetGameData();
+                map->resetGameData();
                 CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
-                CCore::getMap()->setInEvent(false);
-                CCore::getMap()->getPlayer()->stopMove();
+                map->setInEvent(false);
+                player->stopMove();
                 inEvent = false;
                 CCFG::keySpace = false;
                 endGame = false;
@@ -377,100 +335,69 @@ void Event::Normal()
     {
         if (vNEWDir.size() > stepID)
         {
-            if (vNEWLength[stepID] > 0)
+            if (vNEWLength[(int) stepID] > 0)
             {
-                switch (vNEWDir[stepID])
+                auto& length = vNEWLength[(int) stepID];
+
+                switch (vNEWDir[(int) stepID])
                 {
-                    case eTOP: // TOP
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
+                    case Animations::eTOP: // TOP
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
                         break;
-                    case eBOT:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            + iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
+                    case Animations::eBOT:
+                        player->setYPos((float) player->getYPos() + iSpeed);
+                        length -= iSpeed;
                         break;
-                    case eRIGHT:
-                        CCore::getMap()->getPlayer()->setXPos(
-                            (float) CCore::getMap()->getPlayer()->getXPos()
-                            + iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
+                    case Animations::eRIGHT:
+                        player->setXPos((float) player->getXPos() + iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
                         break;
-                    case eLEFT:
-                        CCore::getMap()->getPlayer()->setXPos(
-                            (float) CCore::getMap()->getPlayer()->getXPos()
-                            - iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->moveAnimation();
+                    case Animations::eLEFT:
+                        player->setXPos((float) player->getXPos() - iSpeed);
+                        length -= iSpeed;
+                        player->moveAnimation();
                         break;
-                    case ePLAYPIPETOP:
-                        vNEWLength[stepID] -= 1;
+                    case Animations::ePLAYPIPETOP:
+                        length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
-                    case eNOTHING: // NOTHING YAY
-                        vNEWLength[stepID] -= 1;
+                    case Animations::eNOTHING: // NOTHING YAY
+                        length -= 1;
                         break;
-                    case eVINE1:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(10);
+                    case Animations::eVINE1:
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(10);
                         break;
-                    case eVINE2:
-                        CCore::getMap()->getPlayer()->setYPos(
-                            (float) CCore::getMap()->getPlayer()->getYPos()
-                            - iSpeed);
-                        vNEWLength[stepID] -= iSpeed;
-                        CCore::getMap()->getPlayer()->setMarioSpriteID(11);
+                    case Animations::eVINE2:
+                        player->setYPos((float) player->getYPos() - iSpeed);
+                        length -= iSpeed;
+                        player->setMarioSpriteID(11);
                         break;
-                    case eRIGHTEND:
-                        break;
-                    case eBOTRIGHTEND:
-                        break;
-                    case eENDBOT1:
-                        break;
-                    case eENDBOT2:
-                        break;
-                    case eENDPOINTS:
-                        break;
-                    case eDEATHNOTHING:
-                        break;
-                    case eDEATHTOP:
-                        break;
-                    case eDEATHBOT:
-                        break;
-                    case ePLAYPIPERIGHT:
-                        break;
-                    case eLOADINGMENU:
-                        break;
-                    case eGAMEOVER:
-                        break;
-                    case eBOSSEND1:
-                        break;
-                    case eBOSSEND2:
-                        break;
-                    case eBOSSEND3:
-                        break;
-                    case eBOSSEND4:
-                        break;
-                    case eBOTRIGHTBOSS:
-                        break;
-                    case eBOSSTEXT1:
-                        break;
-                    case eBOSSTEXT2:
-                        break;
-                    case eENDGAMEBOSSTEXT1:
-                        break;
-                    case eENDGAMEBOSSTEXT2:
-                        break;
-                    case eMARIOSPRITE1:
-                        break;
-                    case eVINESPAWN:
+                    case Animations::eRIGHTEND:
+                    case Animations::eBOTRIGHTEND:
+                    case Animations::eENDBOT1:
+                    case Animations::eENDBOT2:
+                    case Animations::eENDPOINTS:
+                    case Animations::eDEATHNOTHING:
+                    case Animations::eDEATHTOP:
+                    case Animations::eDEATHBOT:
+                    case Animations::ePLAYPIPERIGHT:
+                    case Animations::eLOADINGMENU:
+                    case Animations::eGAMEOVER:
+                    case Animations::eBOSSEND1:
+                    case Animations::eBOSSEND2:
+                    case Animations::eBOSSEND3:
+                    case Animations::eBOSSEND4:
+                    case Animations::eBOTRIGHTBOSS:
+                    case Animations::eBOSSTEXT1:
+                    case Animations::eBOSSTEXT2:
+                    case Animations::eENDGAMEBOSSTEXT1:
+                    case Animations::eENDGAMEBOSSTEXT2:
+                    case Animations::eMARIOSPRITE1:
+                    case Animations::eVINESPAWN:
                         break;
                 }
             }
@@ -481,8 +408,8 @@ void Event::Normal()
         }
         else
         {
-            CCore::getMap()->setInEvent(false);
-            CCore::getMap()->getPlayer()->stopMove();
+            map->setInEvent(false);
+            player->stopMove();
             CCFG::getMusic()->changeMusic(true, true);
             inEvent = false;
             CCFG::keySpace = false;
@@ -536,7 +463,7 @@ void Event::resetData()
 
     this->eventTypeID = eNormal;
 
-    this->bState = true;
+    this->state = true;
     this->stepID = 0;
     this->inEvent = false;
     this->endGame = false;
@@ -548,3 +475,4 @@ void Event::resetRedraw()
     reDrawX.clear();
     reDrawY.clear();
 }
+} // namespace Mario

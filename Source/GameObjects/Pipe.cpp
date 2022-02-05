@@ -81,151 +81,130 @@ void Pipe::checkUse()
 
 void Pipe::setEvent()
 {
-    CCore::getMap()->getEvent()->resetData();
-    CCore::getMap()->getPlayer()->stopMove();
-    CCore::getMap()->getPlayer()->resetJump();
+    auto* map = CCore::getMap();
+    auto* event = map->getEvent();
+    
+    event->resetData();
+    auto* player = map->getPlayer();
+    player->stopMove();
+    player->resetJump();
 
     CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
 
-    CCore::getMap()->getEvent()->eventTypeID = CCore::getMap()->getEvent()->eNormal;
+    event->eventTypeID = Mario::Event::eventType::eNormal;
 
-    CCore::getMap()->getEvent()->newCurrentLevel = newCurrentLevel;
-    CCore::getMap()->getEvent()->newLevelType = newLevelType;
-    CCore::getMap()->getEvent()->newMoveMap = newMoveMap;
+    event->newCurrentLevel = newCurrentLevel;
+    event->newLevelType = newLevelType;
+    event->newMoveMap = newMoveMap;
 
-    CCore::getMap()->getEvent()->iSpeed = iSpeed;
-    CCore::getMap()->getEvent()->iDelay = iDelay;
+    event->iSpeed = iSpeed;
+    event->iDelay = iDelay;
 
-    CCore::getMap()->getEvent()->inEvent = false;
+    event->inEvent = false;
 
-    CCore::getMap()->getEvent()->newUnderWater = newUnderWater;
+    event->newUnderWater = newUnderWater;
 
-    CCore::getMap()->getEvent()->newMapXPos =
-        (newPlayerPosX <= 32 * 2 ? 0 : -(newPlayerPosX - 32 * 2));
-    CCore::getMap()->getEvent()->newPlayerXPos =
-        (newPlayerPosX <= 32 * 2 ? newPlayerPosX : 32 * 2);
-    CCore::getMap()->getEvent()->newPlayerYPos = newPlayerPosY;
+    event->newMapXPos = (newPlayerPosX <= 32 * 2 ? 0 : -(newPlayerPosX - 32 * 2));
+    event->newPlayerXPos = (newPlayerPosX <= 32 * 2 ? newPlayerPosX : 32 * 2);
+    event->newPlayerYPos = newPlayerPosY;
 
     if (iType == 0)
     { // VERTICAL -> NONE
-        CCore::getMap()->getEvent()->newPlayerYPos -=
-            CCore::getMap()->getPlayer()->getPowerLVL() > 0 ? 32 : 0;
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eBOT);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(
-            CCore::getMap()->getPlayer()->getHitBoxY());
+        event->newPlayerYPos -= player->getPowerLVL() > 0 ? 32 : 0;
+        event->vOLDDir.push_back(Mario::Animations::eBOT);
+        event->vOLDLength.push_back(player->getHitBoxY());
 
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(35);
+        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDLength.push_back(35);
 
         for (int i = 0; i < 3; i++)
         {
-            CCore::getMap()->getEvent()->reDrawX.push_back(iLX);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iLY - i);
-            CCore::getMap()->getEvent()->reDrawX.push_back(iRX);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iRY - i);
+            event->reDrawX.push_back(iLX);
+            event->reDrawY.push_back(iLY - i);
+            event->reDrawX.push_back(iRX);
+            event->reDrawY.push_back(iRY - i);
         }
     }
     else if (iType == 1)
     {
-        CCore::getMap()->getEvent()->newPlayerXPos +=
-            32 - CCore::getMap()->getPlayer()->getHitBoxX() / 2;
+        event->newPlayerXPos += 32 - player->getHitBoxX() / 2;
 
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eRIGHT);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(
-            CCore::getMap()->getPlayer()->getHitBoxX());
+        event->vOLDDir.push_back(Mario::Animations::eRIGHT);
+        event->vOLDLength.push_back(player->getHitBoxX());
 
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(35);
+        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDLength.push_back(35);
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->ePLAYPIPETOP);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(1);
+        event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);
+        event->vNEWLength.push_back(1);
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(35);
+        event->vNEWDir.push_back(Mario::Animations::eNOTHING);
+        event->vNEWLength.push_back(35);
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->eTOP);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(
-            CCore::getMap()->getPlayer()->getHitBoxY());
+        event->vNEWDir.push_back(Mario::Animations::eTOP);
+        event->vNEWLength.push_back(player->getHitBoxY());
 
         for (int i = 0; i < 3; i++)
         {
-            CCore::getMap()->getEvent()->reDrawX.push_back(iLX + i);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iLY);
-            CCore::getMap()->getEvent()->reDrawX.push_back(iRX + i);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iRY);
+            event->reDrawX.push_back(iLX + i);
+            event->reDrawY.push_back(iLY);
+            event->reDrawX.push_back(iRX + i);
+            event->reDrawY.push_back(iRY);
 
-            CCore::getMap()->getEvent()->reDrawX.push_back(
-                CCore::getMap()->getBlockIDX(
-                    CCore::getMap()->getEvent()->newPlayerXPos
-                    - CCore::getMap()->getEvent()->newMapXPos));
-            CCore::getMap()->getEvent()->reDrawY.push_back(
-                CCore::getMap()->getBlockIDY(newPlayerPosY) - 1 - i);
-            CCore::getMap()->getEvent()->reDrawX.push_back(
-                CCore::getMap()->getBlockIDX(
-                    CCore::getMap()->getEvent()->newPlayerXPos
-                    - CCore::getMap()->getEvent()->newMapXPos)
-                + 1);
-            CCore::getMap()->getEvent()->reDrawY.push_back(
-                CCore::getMap()->getBlockIDY(newPlayerPosY) - 1 - i);
+            event->reDrawX.push_back(
+                map->getBlockIDX(
+                event->newPlayerXPos - event->newMapXPos));
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+                                     - i);
+            event->reDrawX.push_back(
+                map->getBlockIDX(
+                                         event->newPlayerXPos - event->newMapXPos)
+                                     + 1);
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+                                     - i);
         }
     }
     else
     { // -- VERT -> VERT
-        CCore::getMap()->getEvent()->newPlayerXPos -=
-            CCore::getMap()->getPlayer()->getPowerLVL() > 0
+        event->newPlayerXPos -=
+            player->getPowerLVL() > 0
                 ? 32
-                : 0 - CCore::getMap()->getPlayer()->getHitBoxX() / 2;
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eBOT);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(
-            CCore::getMap()->getPlayer()->getHitBoxY());
+                : 0 - player->getHitBoxX() / 2;
+        event->vOLDDir.push_back(Mario::Animations::eBOT);
+        event->vOLDLength.push_back(player->getHitBoxY());
 
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(55);
+        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDLength.push_back(55);
 
         for (int i = 0; i < 3; i++)
         {
-            CCore::getMap()->getEvent()->reDrawX.push_back(iLX);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iLY - i);
-            CCore::getMap()->getEvent()->reDrawX.push_back(iRX);
-            CCore::getMap()->getEvent()->reDrawY.push_back(iRY - i);
+            event->reDrawX.push_back(iLX);
+            event->reDrawY.push_back(iLY - i);
+            event->reDrawX.push_back(iRX);
+            event->reDrawY.push_back(iRY - i);
 
-            CCore::getMap()->getEvent()->reDrawX.push_back(
-                CCore::getMap()->getBlockIDX(
-                    CCore::getMap()->getEvent()->newPlayerXPos
-                    - CCore::getMap()->getEvent()->newMapXPos));
-            CCore::getMap()->getEvent()->reDrawY.push_back(
-                CCore::getMap()->getBlockIDY(newPlayerPosY) - 1 - i);
-            CCore::getMap()->getEvent()->reDrawX.push_back(
-                CCore::getMap()->getBlockIDX(
-                    CCore::getMap()->getEvent()->newPlayerXPos
-                    - CCore::getMap()->getEvent()->newMapXPos)
-                + 1);
-            CCore::getMap()->getEvent()->reDrawY.push_back(
-                CCore::getMap()->getBlockIDY(newPlayerPosY) - 1 - i);
+            event->reDrawX.push_back(
+                map->getBlockIDX(
+                event->newPlayerXPos - event->newMapXPos));
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+                                     - i);
+            event->reDrawX.push_back(
+                map->getBlockIDX(
+                                         event->newPlayerXPos - event->newMapXPos)
+                                     + 1);
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPosY) - 1
+                                     - i);
         }
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->ePLAYPIPETOP);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(1);
+        event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);
+        event->vNEWLength.push_back(1);
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(35);
+        event->vNEWDir.push_back(Mario::Animations::eNOTHING);
+        event->vNEWLength.push_back(35);
 
-        CCore::getMap()->getEvent()->vNEWDir.push_back(
-            CCore::getMap()->getEvent()->eTOP);
-        CCore::getMap()->getEvent()->vNEWLength.push_back(
-            CCore::getMap()->getPlayer()->getHitBoxY());
+        event->vNEWDir.push_back(Mario::Animations::eTOP);
+        event->vNEWLength.push_back(player->getHitBoxY());
     }
 
-    CCore::getMap()->setInEvent(true);
+    map->setInEvent(true);
 }

@@ -100,134 +100,132 @@ void Vine::collisionWithPlayer(bool TOP)
 {
     if (minionState == 0)
     {
-        CCore::getMap()->setInEvent(true);
+        auto* map = CCore::getMap();
+        map->setInEvent(true);
 
-        CCore::getMap()->getEvent()->resetData();
-        CCore::getMap()->getPlayer()->resetJump();
-        CCore::getMap()->getPlayer()->stopMove();
+        auto* event = map->getEvent();
+        event->resetData();
+        map->getPlayer()->resetJump();
+        map->getPlayer()->stopMove();
 
-        CCore::getMap()->getEvent()->eventTypeID =
-            CCore::getMap()->getEvent()->eNormal;
+        event->eventTypeID = Mario::Event::eventType::eNormal;
 
-        CCore::getMap()->getEvent()->iSpeed = 2;
+        event->iSpeed = 2;
 
-        CCore::getMap()->getEvent()->newLevelType = CCore::getMap()->getLevelType();
-        CCore::getMap()->getEvent()->newCurrentLevel =
-            CCore::getMap()->getCurrentLevelID();
-        CCore::getMap()->getEvent()->newMoveMap = true;
-        CCore::getMap()->getEvent()->iDelay = 0;
-        CCore::getMap()->getEvent()->inEvent = false;
+        event->newLevelType = map->getLevelType();
+        event->newCurrentLevel = map->getCurrentLevelID();
+        event->newMoveMap = true;
+        event->iDelay = 0;
+        event->inEvent = false;
 
-        CCore::getMap()->getEvent()->newMoveMap = true;
-        CCore::getMap()->getEvent()->newUnderWater = false;
+        event->newMoveMap = true;
+        event->newUnderWater = false;
 
         if (fXPos + iHitBoxX / 2
-            > CCore::getMap()->getPlayer()->getXPos() - CCore::getMap()->getXPos())
+            > map->getPlayer()->getXPos() - map->getXPos())
         {
-            CCore::getMap()->getEvent()->vOLDDir.push_back(
-                CCore::getMap()->getEvent()->eRIGHT);
-            CCore::getMap()->getEvent()->vOLDLength.push_back(
-                CCore::getMap()->getPlayer()->getHitBoxX() - 4);
+            event->vOLDDir.push_back(
+                Mario::Animations::eRIGHT);
+            event->vOLDLength.push_back(map->getPlayer()->getHitBoxX() - 4);
         }
         else
         {
-            CCore::getMap()->getEvent()->vOLDDir.push_back(
-                CCore::getMap()->getEvent()->eLEFT);
-            CCore::getMap()->getEvent()->vOLDLength.push_back(
-                CCore::getMap()->getPlayer()->getHitBoxX() - 4);
+            event->vOLDDir.push_back(
+                Mario::Animations::eLEFT);
+            event->vOLDLength.push_back(map->getPlayer()->getHitBoxX() - 4);
         }
 
-        for (int i = 0; i < CCore::getMap()->getPlayer()->getYPos()
-                                + CCore::getMap()->getPlayer()->getHitBoxY();
+        for (int i = 0; i < map->getPlayer()->getYPos()
+                                + map->getPlayer()->getHitBoxY();
              i += 32)
         {
-            CCore::getMap()->getEvent()->vOLDDir.push_back(
-                CCore::getMap()->getEvent()->eVINE1);
-            CCore::getMap()->getEvent()->vOLDLength.push_back(16);
-            CCore::getMap()->getEvent()->vOLDDir.push_back(
-                CCore::getMap()->getEvent()->eVINE2);
-            CCore::getMap()->getEvent()->vOLDLength.push_back(16);
+            event->vOLDDir.push_back(
+                Mario::Animations::eVINE1);
+            event->vOLDLength.push_back(16);
+            event->vOLDDir.push_back(
+                Mario::Animations::eVINE2);
+            event->vOLDLength.push_back(16);
         }
 
-        switch (CCore::getMap()->getCurrentLevelID())
+        switch (map->getCurrentLevelID())
         {
             case 4:
             {
-                CCore::getMap()->getEvent()->newMapXPos = -270 * 32;
-                CCore::getMap()->getEvent()->newPlayerXPos = 128;
-                CCore::getMap()->getEvent()->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - CCore::getMap()->getPlayer()->getHitBoxY();
-                CCore::getMap()->getEvent()->vOLDDir.push_back(
-                    CCore::getMap()->getEvent()->eVINESPAWN);
-                CCore::getMap()->getEvent()->vOLDLength.push_back(274);
+                event->newMapXPos = -270 * 32;
+                event->newPlayerXPos = 128;
+                event->newPlayerYPos =
+                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                event->vOLDDir.push_back(
+                    Mario::Animations::eVINESPAWN);
+                event->vOLDLength.push_back(274);
 
                 break;
             }
             case 8:
             {
-                CCore::getMap()->getEvent()->newMapXPos = -270 * 32;
-                CCore::getMap()->getEvent()->newPlayerXPos = 128;
-                CCore::getMap()->getEvent()->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - CCore::getMap()->getPlayer()->getHitBoxY();
-                CCore::getMap()->getEvent()->vOLDDir.push_back(
-                    CCore::getMap()->getEvent()->eVINESPAWN);
-                CCore::getMap()->getEvent()->vOLDLength.push_back(274);
+                event->newMapXPos = -270 * 32;
+                event->newPlayerXPos = 128;
+                event->newPlayerYPos =
+                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                event->vOLDDir.push_back(
+                    Mario::Animations::eVINESPAWN);
+                event->vOLDLength.push_back(274);
 
                 break;
             }
             case 13:
             {
-                CCore::getMap()->getEvent()->newMapXPos = -310 * 32;
-                CCore::getMap()->getEvent()->newPlayerXPos = 128;
-                CCore::getMap()->getEvent()->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - CCore::getMap()->getPlayer()->getHitBoxY();
-                CCore::getMap()->getEvent()->newLevelType = 0;
+                event->newMapXPos = -310 * 32;
+                event->newPlayerXPos = 128;
+                event->newPlayerYPos =
+                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                event->newLevelType = 0;
 
-                CCore::getMap()->getEvent()->vOLDDir.push_back(
-                    CCore::getMap()->getEvent()->eVINESPAWN);
-                CCore::getMap()->getEvent()->vOLDLength.push_back(314);
+                event->vOLDDir.push_back(
+                    Mario::Animations::eVINESPAWN);
+                event->vOLDLength.push_back(314);
                 break;
             }
             case 17:
             {
-                CCore::getMap()->getEvent()->newMapXPos = -325 * 32;
-                CCore::getMap()->getEvent()->newPlayerXPos = 128;
-                CCore::getMap()->getEvent()->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - CCore::getMap()->getPlayer()->getHitBoxY();
-                CCore::getMap()->getEvent()->newLevelType = 0;
+                event->newMapXPos = -325 * 32;
+                event->newPlayerXPos = 128;
+                event->newPlayerYPos =
+                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                event->newLevelType = 0;
 
-                CCore::getMap()->getEvent()->vOLDDir.push_back(
-                    CCore::getMap()->getEvent()->eVINESPAWN);
-                CCore::getMap()->getEvent()->vOLDLength.push_back(329);
+                event->vOLDDir.push_back(
+                    Mario::Animations::eVINESPAWN);
+                event->vOLDLength.push_back(329);
                 break;
             }
             case 21:
             {
-                CCore::getMap()->getEvent()->newMapXPos = -390 * 32;
-                CCore::getMap()->getEvent()->newPlayerXPos = 128;
-                CCore::getMap()->getEvent()->newPlayerYPos =
-                    CCFG::GAME_HEIGHT - CCore::getMap()->getPlayer()->getHitBoxY();
-                CCore::getMap()->getEvent()->newLevelType = 4;
+                event->newMapXPos = -390 * 32;
+                event->newPlayerXPos = 128;
+                event->newPlayerYPos =
+                    CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
+                event->newLevelType = 4;
 
-                CCore::getMap()->getEvent()->vOLDDir.push_back(
-                    CCore::getMap()->getEvent()->eVINESPAWN);
-                CCore::getMap()->getEvent()->vOLDLength.push_back(394);
+                event->vOLDDir.push_back(
+                    Mario::Animations::eVINESPAWN);
+                event->vOLDLength.push_back(394);
                 break;
             }
         }
 
-        CCore::getMap()->getEvent()->vOLDDir.push_back(
-            CCore::getMap()->getEvent()->eNOTHING);
-        CCore::getMap()->getEvent()->vOLDLength.push_back(60);
+        event->vOLDDir.push_back(
+            Mario::Animations::eNOTHING);
+        event->vOLDLength.push_back(60);
 
         for (int i = 0; i < 64; i += 32)
         {
-            CCore::getMap()->getEvent()->vNEWDir.push_back(
-                CCore::getMap()->getEvent()->eVINE1);
-            CCore::getMap()->getEvent()->vNEWLength.push_back(16);
-            CCore::getMap()->getEvent()->vNEWDir.push_back(
-                CCore::getMap()->getEvent()->eVINE2);
-            CCore::getMap()->getEvent()->vNEWLength.push_back(16);
+            event->vNEWDir.push_back(
+                Mario::Animations::eVINE1);
+            event->vNEWLength.push_back(16);
+            event->vNEWDir.push_back(
+                Mario::Animations::eVINE2);
+            event->vNEWLength.push_back(16);
         }
     }
     else {}

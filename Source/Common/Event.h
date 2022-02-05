@@ -1,60 +1,54 @@
 #pragma once
 
 #include "CommonHeader.h"
-#include <vector>
+
+namespace Mario
+{
+enum class Animations
+{
+    eTOP,
+    eRIGHT,
+    eRIGHTEND,
+    eBOT,
+    eLEFT,
+    eBOTRIGHTEND,
+    eENDBOT1,
+    eENDBOT2,
+    eENDPOINTS,
+    eDEATHNOTHING,
+    eDEATHTOP,
+    eDEATHBOT,
+    eNOTHING,
+    ePLAYPIPERIGHT,
+    ePLAYPIPETOP,
+    eLOADINGMENU,
+    eGAMEOVER,
+    eBOSSEND1,
+    eBOSSEND2,
+    eBOSSEND3,
+    eBOSSEND4,
+    eBOTRIGHTBOSS,
+    eBOSSTEXT1,
+    eBOSSTEXT2,
+    eENDGAMEBOSSTEXT1,
+    eENDGAMEBOSSTEXT2,
+    eMARIOSPRITE1,
+    eVINE1,
+    eVINE2,
+    eVINESPAWN,
+};
 
 class Event
 {
-private:
-    bool bState; // true = OLD, false = NEW
-    unsigned int stepID;
-
 public:
-    Event(void);
-    ~Event(void);
+    Vector<Animations> vOLDDir;
+    Vector<int> vOLDLength;
 
-    enum animationType
-    {
-        eTOP,
-        eRIGHT,
-        eRIGHTEND,
-        eBOT,
-        eLEFT,
-        eBOTRIGHTEND,
-        eENDBOT1,
-        eENDBOT2,
-        eENDPOINTS,
-        eDEATHNOTHING,
-        eDEATHTOP,
-        eDEATHBOT,
-        eNOTHING,
-        ePLAYPIPERIGHT,
-        ePLAYPIPETOP,
-        eLOADINGMENU,
-        eGAMEOVER,
-        eBOSSEND1,
-        eBOSSEND2,
-        eBOSSEND3,
-        eBOSSEND4,
-        eBOTRIGHTBOSS,
-        eBOSSTEXT1,
-        eBOSSTEXT2,
-        eENDGAMEBOSSTEXT1,
-        eENDGAMEBOSSTEXT2,
-        eMARIOSPRITE1,
-        eVINE1,
-        eVINE2,
-        eVINESPAWN,
-    };
+    Vector<Animations> vNEWDir;
+    Vector<int> vNEWLength;
 
-    std::vector<animationType> vOLDDir;
-    std::vector<int> vOLDLength;
-
-    std::vector<animationType> vNEWDir;
-    std::vector<int> vNEWLength;
-
-    std::vector<int> reDrawX;
-    std::vector<int> reDrawY;
+    Vector<int> reDrawX;
+    Vector<int> reDrawY;
 
     enum eventType
     {
@@ -63,29 +57,29 @@ public:
         eBossEnd,
     };
 
-    eventType eventTypeID;
+    eventType eventTypeID = eventType::eNormal;
 
-    void Normal();
+    void normal();
     void end();
 
-    int iSpeed;
+    int iSpeed = 0;
 
     void resetData();
 
-    int newLevelType;
-    int newMapXPos;
-    int newPlayerXPos;
-    int newPlayerYPos;
-    bool newMoveMap;
+    int newLevelType = false;
+    int newMapXPos = false;
+    int newPlayerXPos = false;
+    int newPlayerYPos = false;
+    bool newMoveMap = false;
 
-    unsigned int iTime;
-    int iDelay;
+    unsigned int iTime = 0;
+    int iDelay = 0;
 
-    int newCurrentLevel;
-    bool inEvent;
-    bool newUnderWater;
+    int newCurrentLevel = 0;
+    bool inEvent = false;
+    bool newUnderWater = false;
 
-    bool endGame;
+    bool endGame = false;
 
     // ----- Methods
 
@@ -95,4 +89,10 @@ public:
     void newLevel();
 
     void resetRedraw();
+
+private:
+    bool state = true; // true = OLD, false = NEW
+    unsigned int stepID = 0;
 };
+
+} // namespace Mario

@@ -50,7 +50,7 @@ private:
     int iMapTime;
 
     bool inEvent;
-    Event* oEvent;
+    Mario::Event* oEvent;
 
     // ----- PLAYER -----
     Player* oPlayer;
@@ -376,7 +376,7 @@ public:
     bool getMoveMap();
     void setMoveMap(bool bMoveMap);
 
-    Event* getEvent();
+    Mario::Event* getEvent();
     bool getInEvent();
     void setInEvent(bool inEvent);
 };
