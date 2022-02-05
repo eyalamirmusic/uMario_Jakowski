@@ -19,12 +19,9 @@ public:
     static Map* getMap();
 
     static bool quitGame;
-    static bool mouseLeftPressed, mouseRightPressed;
-    static int mouseX, mouseY;
 
 private:
     void Input();
-    void MouseInput();
     void InputPlayer();
     void InputMenu();
 

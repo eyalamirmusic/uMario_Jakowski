@@ -4,10 +4,6 @@
 #include "SDL_mixer.h"
 
 Map* CCore::oMap = new Map();
-bool CCore::mouseLeftPressed = false;
-bool CCore::mouseRightPressed = false;
-int CCore::mouseX = 0;
-int CCore::mouseY = 0;
 bool CCore::quitGame = false;
 
 bool CCore::movePressed = false;
@@ -68,8 +64,6 @@ CCore::CCore()
 
     this->keyAPressed = this->keyDPressed = this->firstDir = false;
 
-    this->mouseX = this->mouseY = 0;
-
     CCFG::keyIDA = SDLK_a;
     CCFG::keyIDS = SDLK_s;
     CCFG::keyIDD = SDLK_d;
@@ -99,7 +93,6 @@ void CCore::mainLoop()
         SDL_RenderFillRect(rR, nullptr);
 
         Input();
-        MouseInput();
         Update();
         Draw();
 
@@ -386,52 +379,6 @@ void CCore::InputPlayer()
     if (player->getMove() && !keyAPressed && !keyDPressed)
     {
         player->resetMove();
-    }
-}
-
-void CCore::MouseInput()
-{
-    switch (mainEvent->type)
-    {
-        case SDL_MOUSEBUTTONDOWN:
-        {
-            switch (mainEvent->button.button)
-            {
-                case SDL_BUTTON_LEFT:
-                    mouseLeftPressed = true;
-                    break;
-                case SDL_BUTTON_RIGHT:
-                    mouseRightPressed = true;
-                    break;
-            }
-            break;
-        }
-        case SDL_MOUSEMOTION:
-        {
-            SDL_GetMouseState(&mouseX, &mouseY);
-            //CCFG::getMM()->getConsole()->print("x:" + std::to_string(mouseX));
-            //CCFG::getMM()->getConsole()->print("y:" + std::to_string(mouseY));
-            break;
-        }
-        case SDL_MOUSEBUTTONUP:
-        {
-            switch (mainEvent->button.button)
-            {
-                case SDL_BUTTON_LEFT:
-                    mouseLeftPressed = false;
-                    break;
-                case SDL_BUTTON_RIGHT:
-                    mouseRightPressed = false;
-                    break;
-            }
-            break;
-        }
-        case SDL_MOUSEWHEEL:
-            if (mainEvent->wheel.timestamp > SDL_GetTicks() - 2)
-            {
-                //CCFG::getMM()->getLE()->mouseWheel(mainEvent->wheel.y);
-            }
-            break;
     }
 }
 
