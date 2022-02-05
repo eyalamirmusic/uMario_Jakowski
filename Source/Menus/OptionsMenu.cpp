@@ -208,7 +208,7 @@ void OptionsMenu::enter()
     switch (activeMenuOption)
     {
         case 0:
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
             break;
         case 1:
         case 2:
@@ -346,7 +346,7 @@ void OptionsMenu::updateActiveButton(int iDir)
                 break;
         }
         updateVolumeRect();
-        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+        CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
     }
     if (!inSetKey)
     {

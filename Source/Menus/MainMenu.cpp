@@ -30,7 +30,7 @@ MainMenu::~MainMenu(void)
 
 void MainMenu::Update()
 {
-    CCFG::getMusic()->StopMusic();
+    CCFG::getMusic()->stopTrack();
 
     Menu::Update();
 }
@@ -147,7 +147,7 @@ void MainMenu::enter()
         case 2:
             CCFG::getMM()->getAboutMenu()->updateTime();
             CCFG::getMM()->setViewID(CCFG::getMM()->eAbout);
-            CCFG::getMusic()->PlayMusic(Mario::Music::Tracks::mOVERWORLD);
+            CCFG::getMusic()->playTrack(Mario::Music::Tracks::Overworld);
             break;
     }
 }

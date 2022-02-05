@@ -72,7 +72,7 @@ void Beetle::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->setYPos(
                 (float) CCore::getMap()->getPlayer()->getYPos() - 4);
             points(100);
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSTOMP);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Stomp);
             moveSpeed = 0;
             killOtherUnits = true;
         }
@@ -105,7 +105,7 @@ void Beetle::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->resetJump();
             CCore::getMap()->getPlayer()->startJump(1);
             points(100);
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSTOMP);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
     }
     else
@@ -125,7 +125,7 @@ void Beetle::collisionWithPlayer(bool TOP)
                 else
                     fXPos += CCore::getMap()->getPlayer()->getMoveSpeed() + 1;
                 moveSpeed = 6;
-                CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSTOMP);
+                CCFG::getMusic()->playEffect(Mario::Music::Effects::Stomp);
             }
             else
             {

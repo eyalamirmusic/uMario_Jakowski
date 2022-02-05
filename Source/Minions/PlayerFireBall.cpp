@@ -134,7 +134,7 @@ void PlayerFireBall::updateXPos()
         {
             bDestroy = true;
             collisionOnlyWithPlayer = true;
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKHIT);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {
@@ -151,7 +151,7 @@ void PlayerFireBall::updateXPos()
         {
             bDestroy = true;
             collisionOnlyWithPlayer = true;
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKHIT);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::BlockHit);
         }
         else
         {

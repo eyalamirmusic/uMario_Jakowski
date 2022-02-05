@@ -72,7 +72,7 @@ void PauseMenu::enter()
     {
         case 0:
             CCFG::getMM()->setViewID(CCFG::getMM()->eGame);
-            CCFG::getMusic()->PlayMusic();
+            CCFG::getMusic()->playTrack();
             break;
         case 1:
             CCFG::getMM()->getOptions()->setEscapeToMainMenu(false);
@@ -93,7 +93,7 @@ void PauseMenu::enter()
 void PauseMenu::escape()
 {
     CCFG::getMM()->setViewID(CCFG::getMM()->eGame);
-    CCFG::getMusic()->PauseMusic();
+    CCFG::getMusic()->pauseTrack();
 }
 
 void PauseMenu::updateActiveButton(int iDir)

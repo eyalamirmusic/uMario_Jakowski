@@ -4,55 +4,77 @@
 
 namespace Mario::Music
 {
+Mix_Music* loadMusic(std::string fileName)
+{
+    fileName = "files/sounds/" + fileName + ".wav";
+    return Mix_LoadMUS(fileName.c_str());
+}
+
+Mix_Chunk* loadChunk(std::string fileName)
+{
+    fileName = "files/sounds/" + fileName + ".wav";
+    return Mix_LoadWAV(fileName.c_str());
+}
+
 Manager::Manager()
 {
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-    tracks.push_back(loadMusic("overworld"));
-    tracks.push_back(loadMusic("overworld-fast"));
-    tracks.push_back(loadMusic("underground"));
-    tracks.push_back(loadMusic("underground-fast"));
-    tracks.push_back(loadMusic("underwater"));
-    tracks.push_back(loadMusic("underwater-fast"));
-    tracks.push_back(loadMusic("castle"));
-    tracks.push_back(loadMusic("castle-fast"));
-    tracks.push_back(loadMusic("lowtime"));
-    tracks.push_back(loadMusic("starmusic"));
-    tracks.push_back(loadMusic("starmusic-fast"));
-    tracks.push_back(loadMusic("scorering"));
+    addTrack("overworld");
+    addTrack("overworld-fast");
+    addTrack("underground");
+    addTrack("underground-fast");
+    addTrack("underwater");
+    addTrack("underwater-fast");
+    addTrack("castle");
+    addTrack("castle-fast");
+    addTrack("lowtime");
+    addTrack("starmusic");
+    addTrack("starmusic-fast");
+    addTrack("scorering");
 
-    effects.push_back(loadChunk("coin"));
-    effects.push_back(loadChunk("blockbreak"));
-    effects.push_back(loadChunk("blockhit"));
-    effects.push_back(loadChunk("boom"));
-    effects.push_back(loadChunk("bowserfall"));
-    effects.push_back(loadChunk("bridgebreak"));
-    effects.push_back(loadChunk("bulletbill"));
-    effects.push_back(loadChunk("death"));
-    effects.push_back(loadChunk("fire"));
-    effects.push_back(loadChunk("fireball"));
-    effects.push_back(loadChunk("gameover"));
-    effects.push_back(loadChunk("intermission"));
-    effects.push_back(loadChunk("jump"));
-    effects.push_back(loadChunk("jumpbig"));
-    effects.push_back(loadChunk("levelend"));
-    effects.push_back(loadChunk("lowtime"));
-    effects.push_back(loadChunk("mushroomappear"));
-    effects.push_back(loadChunk("mushroomeat"));
-    effects.push_back(loadChunk("oneup"));
-    effects.push_back(loadChunk("pause"));
-    effects.push_back(loadChunk("shrink"));
-    effects.push_back(loadChunk("rainboom"));
-    effects.push_back(loadChunk("shot"));
-    effects.push_back(loadChunk("shrink"));
-    effects.push_back(loadChunk("stomp"));
-    effects.push_back(loadChunk("swim"));
-    effects.push_back(loadChunk("vine"));
-    effects.push_back(loadChunk("castleend"));
-    effects.push_back(loadChunk("princessmusic"));
+    addEffect("coin");
+    addEffect("blockbreak");
+    addEffect("blockhit");
+    addEffect("boom");
+    addEffect("bowserfall");
+    addEffect("bridgebreak");
+    addEffect("bulletbill");
+    addEffect("death");
+    addEffect("fire");
+    addEffect("fireball");
+    addEffect("gameover");
+    addEffect("intermission");
+    addEffect("jump");
+    addEffect("jumpbig");
+    addEffect("levelend");
+    addEffect("lowtime");
+    addEffect("mushroomappear");
+    addEffect("mushroomeat");
+    addEffect("oneup");
+    addEffect("pause");
+    addEffect("shrink");
+    addEffect("rainboom");
+    addEffect("shot");
+    addEffect("shrink");
+    addEffect("stomp");
+    addEffect("swim");
+    addEffect("vine");
+    addEffect("castleend");
+    addEffect("princessmusic");
 
     setVolume(100);
-    currentMusic = Tracks::mNOTHING;
+    currentTrack = Tracks::Nothing;
+}
+
+void Manager::addTrack(const std::string& name)
+{
+    tracks.create(loadMusic(name));
+}
+
+void Manager::addEffect(const std::string& name)
+{
+    effects.create(loadChunk(name));
 }
 
 Manager::~Manager()
@@ -60,98 +82,93 @@ Manager::~Manager()
     for (auto& i: tracks)
         Mix_FreeMusic(i);
 
-    tracks.clear();
-
     for (auto& i: effects)
         Mix_FreeChunk(i);
+}
 
-    effects.clear();
+Tracks getTrack()
+{
+    auto* map = CCore::getMap();
+    auto time = map->getMapTime();
+
+    switch (map->getLevelType())
+    {
+        case 0:
+        case 4:
+            return time > 90 ? Tracks::Overworld : Tracks::OverworldFast;
+        case 1:
+            return time > 90 ? Tracks::Underworld : Tracks::UnderworldFast;
+        case 2:
+            return time > 90 ? Tracks::Underwater : Tracks::UnderwaterFast;
+        case 3:
+            return time > 90 ? Tracks::Castle : Tracks::CastleFast;
+        default:
+            return Tracks::Nothing;
+    }
 }
 
 void Manager::changeMusic(bool musicByLevel, bool forceChange)
 {
-    Tracks eNew = currentMusic;
+    auto newTrack = currentTrack;
 
     if (musicByLevel)
     {
-        if (CCore::getMap()->getInEvent() && CCore::getMap()->getEvent()->inEvent)
+        auto* map = CCore::getMap();
+
+        if (map->getInEvent() && map->getEvent()->inEvent)
         {
-            eNew = Tracks::mNOTHING;
-            PlayChunk(Effects::cINTERMISSION);
+            newTrack = Tracks::Nothing;
+            playEffect(Effects::Intermission);
         }
         else
         {
-            switch (CCore::getMap()->getLevelType())
+            newTrack = getTrack();
+
+            if (map->getLevelType() == 100)
             {
-                case 0:
-                case 4:
-                    eNew = CCore::getMap()->getMapTime() > 90
-                               ? Tracks::mOVERWORLD
-                               : Tracks::mOVERWORLDFAST;
-                    break;
-                case 1:
-                    eNew = CCore::getMap()->getMapTime() > 90
-                               ? Tracks::mUNDERWORLD
-                               : Tracks::mUNDERWORLDFAST;
-                    break;
-                case 2:
-                    eNew = CCore::getMap()->getMapTime() > 90
-                               ? Tracks::mUNDERWATER
-                               : Tracks::mUNDERWATERFAST;
-                    break;
-                case 3:
-                    eNew = CCore::getMap()->getMapTime() > 90 ? Tracks::mCASTLE
-                                                              : Tracks::mCASTLEFAST;
-                    break;
-                case 100:
-                    eNew = Tracks::mNOTHING;
-                    PlayChunk(Effects::cINTERMISSION);
-                    CCore::getMap()->setLevelType(0);
-                    break;
-                default:
-                    eNew = Tracks::mNOTHING;
-                    break;
+                playEffect(Effects::Intermission);
+                map->setLevelType(0);
             }
         }
     }
 
-    if (currentMusic != eNew || forceChange)
+    if (currentTrack != newTrack || forceChange)
     {
-        StopMusic();
-        currentMusic = eNew;
-        PlayMusic();
+        stopTrack();
+        currentTrack = newTrack;
+        playTrack();
     }
 }
 
-void Manager::PlayMusic()
+void Manager::playTrack()
 {
-    if (currentMusic != Tracks::mNOTHING)
+    if (currentTrack != Tracks::Nothing)
     {
-        Mix_PlayMusic(tracks[(int) currentMusic - 1], -1);
+        Mix_PlayMusic(tracks[(int) currentTrack - 1], -1);
         musicStopped = false;
     }
     else
     {
-        StopMusic();
+        stopTrack();
     }
 }
 
-void Manager::PlayMusic(Tracks musicID)
+void Manager::playTrack(Tracks musicID)
 {
-    if (musicID != Tracks::mNOTHING)
+    if (musicID != Tracks::Nothing)
     {
         Mix_PlayMusic(tracks[(int) musicID - 1], -1);
         musicStopped = false;
-        currentMusic = musicID;
+        currentTrack = musicID;
     }
     else
     {
-        StopMusic();
-        currentMusic = Tracks::mNOTHING;
+        stopTrack();
+        currentTrack = Tracks::Nothing;
     }
 }
 
-void Manager::StopMusic()
+void Manager::stopTrack()
 {
     if (!musicStopped)
     {
@@ -160,7 +177,7 @@ void Manager::StopMusic()
     }
 }
 
-void Manager::PauseMusic()
+void Manager::pauseTrack()
 {
     if (Mix_PausedMusic() == 1)
     {
@@ -174,23 +191,11 @@ void Manager::PauseMusic()
     }
 }
 
-void Manager::PlayChunk(Effects chunkID)
+void Manager::playEffect(Effects chunkID)
 {
     auto id = (int) chunkID;
     Mix_VolumeChunk(effects[id], volume);
     Mix_PlayChannel(-1, effects[id], 0);
-}
-
-Mix_Music* Manager::loadMusic(std::string fileName)
-{
-    fileName = "files/sounds/" + fileName + ".wav";
-    return Mix_LoadMUS(fileName.c_str());
-}
-
-Mix_Chunk* Manager::loadChunk(std::string fileName)
-{
-    fileName = "files/sounds/" + fileName + ".wav";
-    return Mix_LoadWAV(fileName.c_str());
 }
 
 int Manager::getVolume() const

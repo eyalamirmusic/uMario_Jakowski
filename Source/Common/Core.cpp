@@ -62,7 +62,7 @@ CCore::CCore(void)
     CCFG::getMM()->setActiveOption(rR);
     CCFG::getSMBLOGO()->setIMG("super_mario_bros", rR);
 
-    CCFG::getMusic()->PlayMusic();
+    CCFG::getMusic()->playTrack();
 
     this->keyMenuPressed = this->movePressed = this->keyS = this->keyW = this->keyA =
         this->keyD = this->keyShift = false;
@@ -236,8 +236,8 @@ void CCore::InputPlayer()
             case SDL_WINDOWEVENT_FOCUS_LOST:
                 CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
                 CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
-                CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPASUE);
-                CCFG::getMusic()->PauseMusic();
+                CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
+                CCFG::getMusic()->pauseTrack();
                 break;
         }
     }
@@ -357,8 +357,8 @@ void CCore::InputPlayer()
                 {
                     CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
                     CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPASUE);
-                    CCFG::getMusic()->PauseMusic();
+                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
+                    CCFG::getMusic()->pauseTrack();
                     keyMenuPressed = true;
                 }
                 break;

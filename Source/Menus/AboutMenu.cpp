@@ -153,7 +153,7 @@ void AboutMenu::enter()
     CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->eMainMenu);
     CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
     reset();
-    CCFG::getMusic()->StopMusic();
+    CCFG::getMusic()->stopTrack();
 }
 
 /* ******************************************** */

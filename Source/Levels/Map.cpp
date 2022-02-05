@@ -109,8 +109,9 @@ void Map::Update()
                     --iMapTime;
                     if (iMapTime == 90)
                     {
-                        CCFG::getMusic()->StopMusic();
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cLOWTIME);
+                        CCFG::getMusic()->stopTrack();
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::LowTime);
                     }
                     else if (iMapTime == 86)
                     {
@@ -978,7 +979,7 @@ void Map::checkCollisionOnTopOfTheBlock(int nX, int nY)
         case 73: // COIN
             lMap[nX][nY + 1]->setBlockID(0);
             lCoin.push_back(new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
             oPlayer->setCoins(oPlayer->getCoins() + 1);
             return;
             break;
@@ -1154,7 +1155,7 @@ void Map::addVine(int X, int Y, int minionState, int iBlockID)
     lMinion[getListID(X)].push_back(new Vine(X, Y, minionState, iBlockID));
     if (minionState == 0)
     {
-        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cVINE);
+        CCFG::getMusic()->playEffect(Mario::Music::Effects::Vine);
     }
 }
 
@@ -10469,14 +10470,15 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                          nX,
                                          nY));
                     }
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cMUSHROOMAPPER);
+                    CCFG::getMusic()->playEffect(
+                        Mario::Music::Effects::MushroomMapper);
                 }
                 else
                 {
                     lCoin.push_back(
                         new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
                     oPlayer->setScore(oPlayer->getScore() + 200);
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
                     oPlayer->setCoins(oPlayer->getCoins() + 1);
                 }
 
@@ -10506,7 +10508,8 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                     lMinion[getListID(32 * nX)].push_back(
                         new Star(32 * nX, CCFG::GAME_HEIGHT - 16 - 32 * nY, nX, nY));
                     lMap[nX][nY]->startBlockAnimation();
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cMUSHROOMAPPER);
+                    CCFG::getMusic()->playEffect(
+                        Mario::Music::Effects::MushroomMapper);
                 }
                 else if (lMap[nX][nY]->getSpawnMushroom())
                 {
@@ -10540,7 +10543,8 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                          nY));
                     }
                     lMap[nX][nY]->startBlockAnimation();
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cMUSHROOMAPPER);
+                    CCFG::getMusic()->playEffect(
+                        Mario::Music::Effects::MushroomMapper);
                 }
                 else if (lMap[nX][nY]->getNumOfUse() > 0)
                 {
@@ -10558,7 +10562,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                                                    : 80);
                     }
 
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
 
                     lMap[nX][nY]->startBlockAnimation();
                 }
@@ -10569,12 +10573,14 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         lMap[nX][nY]->setBlockID(0);
                         lBlockDebris.push_back(new BlockDebris(
                             nX * 32, CCFG::GAME_HEIGHT - 48 - nY * 32));
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKBREAK);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BlockBreak);
                     }
                     else
                     {
                         lMap[nX][nY]->startBlockAnimation();
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKHIT);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BlockHit);
                     }
                 }
 
@@ -10609,7 +10615,8 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                                          nX,
                                          nY));
                     }
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cMUSHROOMAPPER);
+                    CCFG::getMusic()->playEffect(
+                        Mario::Music::Effects::MushroomMapper);
                 }
                 else
                 {
@@ -10617,7 +10624,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
                         new Coin(nX * 32 + 7, CCFG::GAME_HEIGHT - nY * 32 - 48));
                     oPlayer->setCoins(oPlayer->getCoins() + 1);
                     oPlayer->setScore(oPlayer->getScore() + 200);
-                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+                    CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
 
                     lMap[nX][nY]->startBlockAnimation();
                 }
@@ -10678,7 +10685,7 @@ bool Map::blockUse(int nX, int nY, int iBlockID, int POS)
         case 73: // COIN
             lMap[nX][nY]->setBlockID(iLevelType == 2 ? 94 : 0);
             oPlayer->addCoin();
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCOIN);
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Coin);
             return false;
             break;
         case 36:
@@ -10728,8 +10735,8 @@ void Map::EndUse()
 
     oEvent->newUnderWater = false;
 
-    CCFG::getMusic()->StopMusic();
-    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cLEVELEND);
+    CCFG::getMusic()->stopTrack();
+    CCFG::getMusic()->playEffect(Mario::Music::Effects::LevelEnd);
 
     oEvent->eventTypeID = oEvent->eEnd;
 
@@ -11450,8 +11457,8 @@ void Map::EndBoss()
             oEvent->endGame = true;
             break;
         default:
-            CCFG::getMusic()->StopMusic();
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cCASTLEEND);
+            CCFG::getMusic()->stopTrack();
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::CastleEnd);
             break;
     }
 
@@ -11537,8 +11544,8 @@ void Map::EndBoss()
 
     if (currentLevelID == 31)
     {
-        CCFG::getMusic()->StopMusic();
-        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPRINCESSMUSIC);
+        CCFG::getMusic()->stopTrack();
+        CCFG::getMusic()->playEffect(Mario::Music::Effects::PrincessMusic);
     }
 
     oEvent->vOLDDir.push_back(oEvent->eBOTRIGHTBOSS);
@@ -11717,8 +11724,8 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
 
-            CCFG::getMusic()->StopMusic();
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cDEATH);
+            CCFG::getMusic()->stopTrack();
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Death);
         }
         else
         {
@@ -11727,8 +11734,8 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
 
-            CCFG::getMusic()->StopMusic();
-            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cDEATH);
+            CCFG::getMusic()->stopTrack();
+            CCFG::getMusic()->playEffect(Mario::Music::Effects::Death);
         }
     }
     else if (!oPlayer->getUnkillAble())

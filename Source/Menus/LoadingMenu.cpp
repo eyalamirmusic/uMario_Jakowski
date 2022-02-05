@@ -38,7 +38,7 @@ void LoadingMenu::Update()
     }
     else
     {
-        CCFG::getMusic()->StopMusic();
+        CCFG::getMusic()->stopTrack();
     }
     CCore::getMap()->UpdateBlocks();
 }

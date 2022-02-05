@@ -136,14 +136,14 @@ void Event::Normal()
                                 CCore::getMap()->getPlayer()->getScore() + 50);
                             if (!CCFG::getMusic()->isMusicPlaying())
                             {
-                                CCFG::getMusic()->PlayMusic(
-                                    Mario::Music::Tracks::mSCORERING);
+                                CCFG::getMusic()->playTrack(
+                                    Mario::Music::Tracks::Scorering);
                             }
                         }
                         else
                         {
                             vOLDLength[stepID] = 0;
-                            CCFG::getMusic()->StopMusic();
+                            CCFG::getMusic()->stopTrack();
                         }
                         CCore::getMap()->getFlag()->UpdateCastleFlag();
                         break;
@@ -173,7 +173,7 @@ void Event::Normal()
                             (float) CCore::getMap()->getPlayer()->getXPos()
                             + iSpeed);
                         vOLDLength[stepID] -= 1;
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPIPE);
+                        CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
                     case eLOADINGMENU:
                         vOLDLength[stepID] -= 1;
@@ -202,7 +202,8 @@ void Event::Normal()
                             CCFG::getMM()->getLoadingMenu()->updateTime();
                             CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
 
-                            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cGAMEOVER);
+                            CCFG::getMusic()->playEffect(
+                                Mario::Music::Effects::GameOver);
                         }
                         break;
                     case eBOSSEND1:
@@ -217,7 +218,8 @@ void Event::Normal()
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos()) + vOLDLength[stepID] - 1), 6)->setBlockID(0);
                         CCore::getMap()->clearPlatforms();
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBRIDGEBREAK);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BridgeBreak);
                         vOLDLength[stepID] = 0;
                         CCore::getMap()->getPlayer()->setMoveDirection(false);
                         break;
@@ -242,7 +244,8 @@ void Event::Normal()
                                 break;
                             }
                         }
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBRIDGEBREAK);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BridgeBreak);
                         vOLDLength[stepID] = 0;
                         break;
                     case eBOSSEND3:
@@ -256,12 +259,14 @@ void Event::Normal()
                             }
                         }
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - vOLDLength[stepID], 4)->setBlockID(0);
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBRIDGEBREAK);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BridgeBreak);
                         CCore::getMap()->getPlayer()->setMoveDirection(true);
                         vOLDLength[stepID] = 0;
                         break;
                     case eBOSSEND4:
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBOWSERFALL);
+                        CCFG::getMusic()->playEffect(
+                            Mario::Music::Effects::BowserFall);
                         vOLDLength[stepID] = 0;
                         break;
                     case eBOTRIGHTBOSS: // BOT & RIGHT
@@ -404,7 +409,7 @@ void Event::Normal()
                         break;
                     case ePLAYPIPETOP:
                         vNEWLength[stepID] -= 1;
-                        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPIPE);
+                        CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
                     case eNOTHING: // NOTHING YAY
                         vNEWLength[stepID] -= 1;

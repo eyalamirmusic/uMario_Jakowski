@@ -7,52 +7,52 @@ namespace Mario::Music
 {
 enum class Tracks
 {
-    mNOTHING,
-    mOVERWORLD,
-    mOVERWORLDFAST,
-    mUNDERWORLD,
-    mUNDERWORLDFAST,
-    mUNDERWATER,
-    mUNDERWATERFAST,
-    mCASTLE,
-    mCASTLEFAST,
-    mLOWTIME,
-    mSTAR,
-    mSTARFAST,
-    mSCORERING,
+    Nothing,
+    Overworld,
+    OverworldFast,
+    Underworld,
+    UnderworldFast,
+    Underwater,
+    UnderwaterFast,
+    Castle,
+    CastleFast,
+    LowTime,
+    Star,
+    StarFast,
+    Scorering,
 };
 
 enum class Effects
 {
-    cCOIN,
-    cBLOCKBREAK,
-    cBLOCKHIT,
-    cBOOM,
-    cBOWSERFALL,
-    cBRIDGEBREAK,
-    cBULLETBILL,
-    cDEATH,
-    cFIRE,
-    cFIREBALL,
-    cGAMEOVER,
-    cINTERMISSION,
-    cJUMP,
-    cJUMPBIG,
-    cLEVELEND,
-    cLOWTIME,
-    cMUSHROOMAPPER,
-    cMUSHROOMMEAT,
-    cONEUP,
-    cPASUE,
-    cPIPE,
-    cRAINBOOM,
-    cSHOT,
-    cSHRINK,
-    cSTOMP,
-    cSWIM,
-    cVINE,
-    cCASTLEEND,
-    cPRINCESSMUSIC,
+    Coin,
+    BlockBreak,
+    BlockHit,
+    Boom,
+    BowserFall,
+    BridgeBreak,
+    BulletBill,
+    Death,
+    Fire,
+    Fireball,
+    GameOver,
+    Intermission,
+    Jump,
+    JumpBig,
+    LevelEnd,
+    LowTime,
+    MushroomMapper,
+    MushroomMeat,
+    OneUp,
+    Pause,
+    Pipe,
+    RainBoom,
+    Shot,
+    Shrink,
+    Stomp,
+    Swim,
+    Vine,
+    CastleEnd,
+    PrincessMusic,
 };
 
 class Manager
@@ -63,15 +63,12 @@ public:
 
     void changeMusic(bool musicByLevel, bool forceChange);
 
-    void PlayMusic();
-    void PlayMusic(Tracks musicID);
-    void StopMusic();
-    void PauseMusic();
+    void playTrack();
+    void playTrack(Tracks musicID);
+    void stopTrack();
+    void pauseTrack();
 
-    void PlayChunk(Effects chunkID);
-
-    Mix_Music* loadMusic(std::string fileName);
-    Mix_Chunk* loadChunk(std::string fileName);
+    void playEffect(Effects chunkID);
 
     int getVolume() const;
     void setVolume(int volumeToUse);
@@ -79,11 +76,14 @@ public:
     bool isMusicPlaying() const { return !musicStopped; }
 
 private:
-    std::vector<Mix_Music*> tracks;
-    std::vector<Mix_Chunk*> effects;
+    void addTrack(const std::string& name);
+    void addEffect(const std::string& name);
+
+    Vector<Mix_Music*> tracks;
+    Vector<Mix_Chunk*> effects;
 
     int volume = 0;
-    Tracks currentMusic = Tracks::mNOTHING;
+    Tracks currentTrack = Tracks::Nothing;
     bool musicStopped = false;
 };
 } // namespace Mario::Music
