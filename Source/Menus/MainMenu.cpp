@@ -132,7 +132,7 @@ void MainMenu::enter()
                 CCore::getMap()->resetGameData();
                 CCore::getMap()->setCurrentLevelID(activeWorldID * 4
                                                    + activeSecondWorldID);
-                CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
+                CCFG::getMM()->setViewID(Mario::GameStates::eGameLoading);
                 CCFG::getMM()->getLoadingMenu()->loadingType = true;
                 CCore::getMap()->setSpawnPointID(0);
                 selectWorld = false;
@@ -140,13 +140,13 @@ void MainMenu::enter()
             break;
         case 1:
             CCFG::getMM()->getOptions()->setEscapeToMainMenu(true);
-            CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->eOptions);
+            CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
             CCFG::getMM()->getOptions()->updateVolumeRect();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eOptions);
+            CCFG::getMM()->setViewID(Mario::GameStates::eOptions);
             break;
         case 2:
             CCFG::getMM()->getAboutMenu()->updateTime();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eAbout);
+            CCFG::getMM()->setViewID(Mario::GameStates::eAbout);
             CCFG::getMusic()->playTrack(Mario::Music::Tracks::Overworld);
             break;
     }

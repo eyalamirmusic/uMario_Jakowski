@@ -15,7 +15,7 @@ int CCFG::GAME_HEIGHT = 448;
 Text* CCFG::oText = new Text();
 CIMG* CCFG::tSMBLOGO = new CIMG();
 
-MenuManager* CCFG::oMM = new MenuManager();
+Mario::MenuManager* CCFG::oMM = new Mario::MenuManager();
 Mario::Music::Manager* CCFG::oMusic = new Mario::Music::Manager();
 
 bool CCFG::keySpace = false;
@@ -35,7 +35,7 @@ Text* CCFG::getText()
     return oText;
 }
 
-MenuManager* CCFG::getMM()
+Mario::MenuManager* CCFG::getMM()
 {
     return oMM;
 }

@@ -19,13 +19,13 @@ public:
 
     static Text* getText();
 
-    static MenuManager* getMM();
+    static Mario::MenuManager* getMM();
     static Mario::Music::Manager* getMusic();
 
     static bool canMoveBackward;
 
 private:
-    static MenuManager* oMM;
+    static Mario::MenuManager* oMM;
     static Text* oText;
     static CIMG* tSMBLOGO;
     static Mario::Music::Manager* oMusic;

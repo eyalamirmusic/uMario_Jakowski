@@ -71,18 +71,18 @@ void PauseMenu::enter()
     switch (activeMenuOption)
     {
         case 0:
-            CCFG::getMM()->setViewID(CCFG::getMM()->eGame);
+            CCFG::getMM()->setViewID(Mario::GameStates::eGame);
             CCFG::getMusic()->playTrack();
             break;
         case 1:
             CCFG::getMM()->getOptions()->setEscapeToMainMenu(false);
-            CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->eOptions);
+            CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
             CCFG::getMM()->getOptions()->updateVolumeRect();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eOptions);
+            CCFG::getMM()->setViewID(Mario::GameStates::eOptions);
             break;
         case 2:
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
             break;
         case 3:
             Mario::getGameState().quitGame = true;
@@ -92,7 +92,7 @@ void PauseMenu::enter()
 
 void PauseMenu::escape()
 {
-    CCFG::getMM()->setViewID(CCFG::getMM()->eGame);
+    CCFG::getMM()->setViewID(Mario::GameStates::eGame);
     CCFG::getMusic()->pauseTrack();
 }
 

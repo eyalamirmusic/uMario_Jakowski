@@ -9,7 +9,7 @@ namespace Consts
 {
 constexpr int MIN_FRAME_TIME = 16;
 }
-}
+} // namespace Mario
 
 CCore::CCore()
 {
@@ -87,23 +87,15 @@ void CCore::mainLoop()
 
 void CCore::Input()
 {
-    switch (CCFG::getMM()->getViewID())
+    if (CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
     {
-        case 2:
-        case 7:
-            if (!getMap()->getInEvent())
-            {
-                InputPlayer();
-            }
-            else
-            {
-                resetMove();
-            }
-            break;
-        default:
-            InputMenu();
-            break;
+        if (!getMap()->getInEvent())
+            InputPlayer();
+        else
+            resetMove();
     }
+    else
+        InputMenu();
 }
 
 void CCore::InputMenu()
@@ -194,8 +186,8 @@ void CCore::InputPlayer()
         switch (mainEvent->window.event)
         {
             case SDL_WINDOWEVENT_FOCUS_LOST:
-                CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
-                CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
+                CCFG::getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
+                CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
                 CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
                 CCFG::getMusic()->pauseTrack();
                 break;
@@ -314,10 +306,10 @@ void CCore::InputPlayer()
                 }
             case SDLK_ESCAPE:
                 if (!keyMenuPressed
-                    && CCFG::getMM()->getViewID() == CCFG::getMM()->eGame)
+                    && CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
                 {
-                    CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
-                    CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
+                    CCFG::getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
+                    CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
                     CCFG::getMusic()->playEffect(Mario::Music::Effects::Pause);
                     CCFG::getMusic()->pauseTrack();
                     keyMenuPressed = true;

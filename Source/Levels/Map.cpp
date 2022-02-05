@@ -787,7 +787,8 @@ void Map::DrawGameLayout(SDL_Renderer* rR)
                           32);
 
     CCFG::getText()->Draw(rR, "TIME", 672, 16);
-    if (CCFG::getMM()->getViewID() == CCFG::getMM()->eGame)
+
+    if (CCFG::getMM()->getViewID() == Mario::GameStates::eGame)
     {
         if (iMapTime > 100)
         {

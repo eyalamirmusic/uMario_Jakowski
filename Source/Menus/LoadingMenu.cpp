@@ -27,13 +27,13 @@ void LoadingMenu::Update()
                 CCore::getMap()->setSpawnPoint();
                 CCore::getMap()->loadLVL();
             }
-            CCFG::getMM()->setViewID(CCFG::getMM()->eGame);
+            CCFG::getMM()->setViewID(Mario::GameStates::eGame);
             CCFG::getMusic()->changeMusic(true, true);
         }
         else
         {
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
         }
     }
     else

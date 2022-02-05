@@ -9,23 +9,26 @@
 #include "PauseMenu.h"
 
 
+namespace Mario
+{
+enum class GameStates
+{
+    eMainMenu,
+    eGameLoading,
+    eGame,
+    eAbout,
+    eOptions,
+    ePasue,
+    //eLevelEditor,
+};
 
 class MenuManager
 {
 public:
 
-    enum gameState
-    {
-        eMainMenu,
-        eGameLoading,
-        eGame,
-        eAbout,
-        eOptions,
-        ePasue,
-        //eLevelEditor,
-    };
 
-    gameState currentGameState = eMainMenu;
+
+    GameStates currentGameState = GameStates::eMainMenu;
 
     void Update();
     void Draw(SDL_Renderer* rR);
@@ -37,10 +40,10 @@ public:
     void setKey(int keyID);
     void keyPressed(int iDir);
 
-    void resetActiveOptionID(gameState ID);
+    void resetActiveOptionID(GameStates ID);
 
-    int getViewID() const;
-    void setViewID(gameState viewID);
+    GameStates getViewID() const;
+    void setViewID(GameStates viewID);
 
     CIMG* getActiveOption();
     void setActiveOption(SDL_Renderer* rR);
@@ -63,3 +66,5 @@ private:
     //Console* oConsole;
     //LevelEditor* oLE;
 };
+}
+

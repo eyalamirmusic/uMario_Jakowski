@@ -150,8 +150,8 @@ void AboutMenu::Draw(SDL_Renderer* rR)
 
 void AboutMenu::enter()
 {
-    CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->eMainMenu);
-    CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+    CCFG::getMM()->resetActiveOptionID(Mario::GameStates::eMainMenu);
+    CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
     reset();
     CCFG::getMusic()->stopTrack();
 }

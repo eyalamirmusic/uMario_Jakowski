@@ -158,7 +158,7 @@ void Event::normal()
 
                             CCFG::getMM()->getLoadingMenu()->loadingType = true;
                             CCFG::getMM()->getLoadingMenu()->updateTime();
-                            CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
+                            CCFG::getMM()->setViewID(GameStates::eGameLoading);
                         }
                         break;
                     case Animations::GameOver:
@@ -172,7 +172,7 @@ void Event::normal()
 
                             CCFG::getMM()->getLoadingMenu()->loadingType = false;
                             CCFG::getMM()->getLoadingMenu()->updateTime();
-                            CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
+                            CCFG::getMM()->setViewID(GameStates::eGameLoading);
 
                             CCFG::getMusic()->playEffect(
                                 Mario::Music::Effects::GameOver);
@@ -316,7 +316,7 @@ void Event::normal()
                     {
                         CCFG::getMM()->getLoadingMenu()->updateTime();
                         CCFG::getMM()->getLoadingMenu()->loadingType = true;
-                        CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
+                        CCFG::getMM()->setViewID(GameStates::eGameLoading);
                         map->startLevelAnimation();
                     }
 
@@ -326,7 +326,7 @@ void Event::normal()
             else
             {
                 map->resetGameData();
-                CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+                CCFG::getMM()->setViewID(GameStates::eMainMenu);
                 map->setInEvent(false);
                 player->stopMove();
                 inEvent = false;
@@ -461,7 +461,7 @@ void Event::newLevel() const
 
         mm->getLoadingMenu()->updateTime();
         mm->getLoadingMenu()->loadingType = true;
-        mm->setViewID(mm->eGameLoading);
+        mm->setViewID(GameStates::eGameLoading);
 
         player->setCoins(0);
     }

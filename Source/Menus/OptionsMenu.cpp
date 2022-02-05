@@ -222,7 +222,7 @@ void OptionsMenu::enter()
             break;
         case 7:
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
             break;
     }
 }
@@ -238,11 +238,11 @@ void OptionsMenu::escape()
         if (escapeToMainMenu)
         {
             CCore::getMap()->resetGameData();
-            CCFG::getMM()->setViewID(CCFG::getMM()->eMainMenu);
+            CCFG::getMM()->setViewID(Mario::GameStates::eMainMenu);
         }
         else
         {
-            CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
+            CCFG::getMM()->setViewID(Mario::GameStates::ePasue);
         }
     }
 }
