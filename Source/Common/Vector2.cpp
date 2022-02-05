@@ -1,39 +1,27 @@
 #include "Vector2.h"
 
-/* ******************************************** */
-
-Vector2::Vector2(void)
+Vector2::Vector2(int xToUse, int yToUse)
 {
+    x = xToUse;
+    y = yToUse;
 }
 
-Vector2::Vector2(int X, int Y)
+int Vector2::getX() const
 {
-    this->X = X;
-    this->Y = Y;
+    return x;
 }
 
-Vector2::~Vector2(void)
+void Vector2::setX(int xToUse)
 {
+    x = xToUse;
 }
 
-/* ******************************************** */
-
-int Vector2::getX()
+int Vector2::getY() const
 {
-    return X;
+    return y;
 }
 
-void Vector2::setX(int X)
+void Vector2::setY(int yToUse)
 {
-    this->X = X;
-}
-
-int Vector2::getY()
-{
-    return Y;
-}
-
-void Vector2::setY(int Y)
-{
-    this->Y = Y;
+    y = yToUse;
 }

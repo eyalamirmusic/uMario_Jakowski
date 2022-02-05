@@ -882,7 +882,7 @@ void Player::createFireBall()
                 (int) (fYPos + getHitBoxY() / 2),
                 !moveDirection);
             nextFireBallFrameID = 16;
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cFIREBALL);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cFIREBALL);
         }
     }
 }
@@ -920,18 +920,18 @@ void Player::startJump(int iH)
             setMarioSpriteID(8);
             swimingAnimation();
         }
-        CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cSWIM);
+        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSWIM);
     }
 
     if (iH > 1)
     {
         if (powerLVL == 0)
         {
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cJUMP);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cJUMP);
         }
         else
         {
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cJUMPBIG);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cJUMPBIG);
         }
     }
 
@@ -1660,7 +1660,7 @@ void Player::setPowerLVL(int powerLVL)
     {
         if (this->powerLVL < powerLVL)
         {
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cMUSHROOMMEAT);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cMUSHROOMMEAT);
             setScore(getScore() + 1000);
             CCore::getMap()->addPoints(
                 (int) (fXPos - CCore::getMap()->getXPos() + getHitBoxX() / 2),
@@ -1676,7 +1676,7 @@ void Player::setPowerLVL(int powerLVL)
         }
         else if (this->powerLVL > 0)
         {
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cSHRINK);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSHRINK);
             inLevelDownAnimation = true;
             inLevelDownAnimationFrameID = 180;
             inLevelAnimation = true;
@@ -1694,7 +1694,7 @@ void Player::setPowerLVL(int powerLVL)
             "1UP",
             10,
             14);
-        CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cONEUP);
+        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cONEUP);
     }
 }
 
@@ -1718,7 +1718,7 @@ void Player::setStarEffect(bool starEffect)
 {
     if (starEffect && this->starEffect != starEffect)
     {
-        CCFG::getMusic()->PlayMusic(CCFG::getMusic()->mSTAR);
+        CCFG::getMusic()->PlayMusic(Mario::Music::Tracks::mSTAR);
     }
     this->starEffect = starEffect;
     this->unKillAble = starEffect;

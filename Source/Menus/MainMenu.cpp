@@ -147,7 +147,7 @@ void MainMenu::enter()
         case 2:
             CCFG::getMM()->getAboutMenu()->updateTime();
             CCFG::getMM()->setViewID(CCFG::getMM()->eAbout);
-            CCFG::getMusic()->PlayMusic(CCFG::getMusic()->mOVERWORLD);
+            CCFG::getMusic()->PlayMusic(Mario::Music::Tracks::mOVERWORLD);
             break;
     }
 }

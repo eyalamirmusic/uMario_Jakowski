@@ -85,7 +85,7 @@ void Pipe::setEvent()
     CCore::getMap()->getPlayer()->stopMove();
     CCore::getMap()->getPlayer()->resetJump();
 
-    CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cPIPE);
+    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPIPE);
 
     CCore::getMap()->getEvent()->eventTypeID = CCore::getMap()->getEvent()->eNormal;
 

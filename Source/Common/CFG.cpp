@@ -1,12 +1,6 @@
 #include "CFG.h"
 
-/* ******************************************** */
-
-CCFG::CCFG(void)
-{
-}
-
-CCFG::~CCFG(void)
+CCFG::~CCFG()
 {
     delete oText;
     delete oMM;
@@ -22,7 +16,7 @@ Text* CCFG::oText = new Text();
 CIMG* CCFG::tSMBLOGO = new CIMG();
 
 MenuManager* CCFG::oMM = new MenuManager();
-Music* CCFG::oMusic = new Music();
+Mario::Music::Manager* CCFG::oMusic = new Mario::Music::Manager();
 
 bool CCFG::keySpace = false;
 
@@ -46,7 +40,7 @@ MenuManager* CCFG::getMM()
     return oMM;
 }
 
-Music* CCFG::getMusic()
+Mario::Music::Manager* CCFG::getMusic()
 {
     return oMusic;
 }
@@ -90,6 +84,8 @@ std::string CCFG::getKeyString(int keyID)
             return "LCTRL";
         case SDLK_RCTRL:
             return "RCTRL";
+        default:
+            return "NONE";
     }
 
     return "NONE";

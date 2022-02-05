@@ -236,7 +236,7 @@ void CCore::InputPlayer()
             case SDL_WINDOWEVENT_FOCUS_LOST:
                 CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
                 CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
-                CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cPASUE);
+                CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPASUE);
                 CCFG::getMusic()->PauseMusic();
                 break;
         }
@@ -357,7 +357,7 @@ void CCore::InputPlayer()
                 {
                     CCFG::getMM()->resetActiveOptionID(CCFG::getMM()->ePasue);
                     CCFG::getMM()->setViewID(CCFG::getMM()->ePasue);
-                    CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cPASUE);
+                    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cPASUE);
                     CCFG::getMusic()->PauseMusic();
                     keyMenuPressed = true;
                 }

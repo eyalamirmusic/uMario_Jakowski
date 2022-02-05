@@ -109,7 +109,7 @@ void Mushroom::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->setNumOfLives(
                 CCore::getMap()->getPlayer()->getNumOfLives() + 1);
             CCore::getMap()->addPoints((int) fXPos, (int) fYPos, "1UP", 10, 14);
-            CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cONEUP);
+            CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cONEUP);
         }
         minionState = -1;
     }

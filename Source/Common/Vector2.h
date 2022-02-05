@@ -2,16 +2,17 @@
 
 class Vector2
 {
-private:
-    int X, Y;
-
 public:
-    Vector2(void);
-    Vector2(int X, int Y);
-    ~Vector2(void);
+    Vector2() = default;
+    Vector2(int xToUse, int yToUse);
 
-    int getX();
-    void setX(int X);
-    int getY();
-    void setY(int Y);
+    int getX() const;
+    void setX(int xToUse);
+
+    int getY() const;
+    void setY(int yToUse);
+
+private:
+    int x = 0;
+    int y = 0;
 };

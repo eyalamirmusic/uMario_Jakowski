@@ -6,20 +6,11 @@
 
 class CCFG
 {
-private:
-    static MenuManager* oMM;
-    static Text* oText;
-    static CIMG* tSMBLOGO;
-    static Music* oMusic;
-
 public:
-    CCFG(void);
-    ~CCFG(void);
+    ~CCFG();
 
     static int GAME_WIDTH, GAME_HEIGHT;
-
     static bool keySpace;
-
     static int keyIDA, keyIDS, keyIDD, keyIDSpace, keyIDShift;
 
     static std::string getKeyString(int keyID);
@@ -29,7 +20,14 @@ public:
     static Text* getText();
 
     static MenuManager* getMM();
-    static Music* getMusic();
+    static Mario::Music::Manager* getMusic();
 
     static bool canMoveBackward;
+
+private:
+    static MenuManager* oMM;
+    static Text* oText;
+    static CIMG* tSMBLOGO;
+    static Mario::Music::Manager* oMusic;
+
 };

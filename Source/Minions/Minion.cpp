@@ -131,7 +131,7 @@ void Minion::updateXPos()
             if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
                 && fXPos < -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 64
                                + iHitBoxX)
-                CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cBLOCKHIT);
+                CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKHIT);
         }
         else
         {
@@ -150,7 +150,7 @@ void Minion::updateXPos()
             if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
                 && fXPos < -CCore::getMap()->getXPos() + CCFG::GAME_WIDTH + 64
                                + iHitBoxX)
-                CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cBLOCKHIT);
+                CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBLOCKHIT);
         }
         else
         {
@@ -323,7 +323,7 @@ void Minion::setMinionState(int minionState)
         fYPos -= iHitBoxY / 4;
         points(200);
         collisionOnlyWithPlayer = true;
-        CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cSHOT);
+        CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cSHOT);
     }
 }
 

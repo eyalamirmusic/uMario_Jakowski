@@ -35,7 +35,7 @@ BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState
                           ? 303 * 32
                           : CCore::getMap()->getMapWidth() * 32; // -- MAX X
 
-    CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cBULLETBILL);
+    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cBULLETBILL);
 }
 
 BulletBill::~BulletBill(void)

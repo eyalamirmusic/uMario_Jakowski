@@ -209,7 +209,7 @@ void Bowser::createFire()
 {
     CCore::getMap()->addFire(
         fXPos - 40, fYPos + 16, iYFireStart + 16 * (rand() % 4 + 1) + 6);
-    CCFG::getMusic()->PlayChunk(CCFG::getMusic()->cFIRE);
+    CCFG::getMusic()->PlayChunk(Mario::Music::Effects::cFIRE);
     ++iFireID;
 
     if (iFireID > 2)
