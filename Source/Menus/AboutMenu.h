@@ -4,23 +4,11 @@
 
 class AboutMenu : public Menu
 {
-private:
-    unsigned int iTime;
-
-    int cR, cG, cB, nR, nG, nB;
-    int colorStepID, iColorID;
-
-    // ----- true = RIGHT, false = LEFT
-    bool moveDirection;
-
-    int iNumOfUnits;
-
 public:
-    AboutMenu(void);
-    ~AboutMenu(void);
+    AboutMenu();
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void Update() override;
+    void Draw(SDL_Renderer* rR) override;
 
     void enter();
 
@@ -32,4 +20,22 @@ public:
 
     void setBackgroundColor(SDL_Renderer* rR);
     void updateTime();
+
+private:
+    unsigned int iTime = 0;
+
+    int cR = 93;
+    int cG = 148;
+    int cB = 252;
+    int nR = 0;
+    int nG = 0;
+    int nB = 0;
+    int colorStepID = 1;
+    int iColorID = 0;
+
+    // ----- true = RIGHT, false = LEFT
+    bool moveDirection = true;
+
+    int iNumOfUnits = 0;
+
 };

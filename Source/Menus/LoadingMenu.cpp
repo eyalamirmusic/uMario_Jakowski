@@ -2,20 +2,6 @@
 #include "Common/CFG.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
-LoadingMenu::LoadingMenu(void)
-{
-    this->iTime = 0;
-    this->loadingType = true;
-}
-
-LoadingMenu::~LoadingMenu(void)
-{
-}
-
-/* ******************************************** */
-
 void LoadingMenu::Update()
 {
     if (SDL_GetTicks() >= iTime + 2500 + (loadingType ? 0 : 2750))

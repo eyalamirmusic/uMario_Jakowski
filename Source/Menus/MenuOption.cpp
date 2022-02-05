@@ -1,19 +1,10 @@
 #include "MenuOption.h"
 
-/* ******************************************** */
-
-MenuOption::MenuOption(std::string sText, int iXPos, int iYPos)
+MenuOption::MenuOption(std::string textToUSe, int iXPos, int iYPos)
 {
-    this->sText = sText;
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
+    sText = textToUSe;
+    pos = {iXPos, iYPos};
 }
-
-MenuOption::~MenuOption(void)
-{
-}
-
-/* ******************************************** */
 
 std::string MenuOption::getText()
 {
@@ -25,12 +16,12 @@ void MenuOption::setText(std::string sText)
     this->sText = sText;
 }
 
-int MenuOption::getXPos()
+int MenuOption::getXPos() const
 {
-    return iXPos;
+    return pos.x;
 }
 
-int MenuOption::getYPos()
+int MenuOption::getYPos() const
 {
-    return iYPos;
+    return pos.y;
 }

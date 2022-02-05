@@ -4,7 +4,6 @@
 #include "MainMenu.h"
 #include "LoadingMenu.h"
 #include "AboutMenu.h"
-#include "Console.h"
 #include "OptionsMenu.h"
 #include "PauseMenu.h"
 
@@ -50,7 +49,7 @@ public:
 
 private:
     GameStates currentGameState = GameStates::eMainMenu;
-    CIMG* activeOption;
+    CIMG* activeOption = nullptr;
 
     MainMenu oMainMenu;
     LoadingMenu oLoadingMenu;

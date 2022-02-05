@@ -4,30 +4,17 @@
 
 /* ******************************************** */
 
-PauseMenu::PauseMenu(void)
+PauseMenu::PauseMenu()
 {
     rPause.x = 220;
     rPause.y = 140;
     rPause.w = 360;
     rPause.h = 142;
 
-    this->lMO.push_back(new MenuOption("RESUME", 0, 156));
-    this->lMO.push_back(new MenuOption("OPTIONS", 0, 180));
-
-    this->lMO.push_back(new MenuOption("QUIT TO MENU", 0, 228));
-    this->lMO.push_back(new MenuOption("QUIT TO DESKTOP", 0, 252));
-
-    this->numOfMenuOptions = lMO.size();
-}
-
-PauseMenu::~PauseMenu(void)
-{
-}
-
-/* ******************************************** */
-
-void PauseMenu::Update()
-{
+    lMO.createNew("RESUME", 0, 156);
+    lMO.createNew("OPTIONS", 0, 180);
+    lMO.createNew("QUIT TO MENU", 0, 228);
+    lMO.createNew("QUIT TO DESKTOP", 0, 252);
 }
 
 void PauseMenu::Draw(SDL_Renderer* rR)
@@ -46,7 +33,7 @@ void PauseMenu::Draw(SDL_Renderer* rR)
     rPause.h += 2;
     rPause.w += 2;
 
-    for (unsigned int i = 0; i < lMO.size(); i++)
+    for (int i = 0; i < lMO.size(); i++)
     {
         if (i == activeMenuOption)
         {

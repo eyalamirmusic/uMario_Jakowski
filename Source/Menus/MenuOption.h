@@ -1,20 +1,22 @@
 #pragma once
 
 #include <string>
+#include "CommonHeader.h"
 
 class MenuOption
 {
-private:
-    std::string sText;
-    int iXPos, iYPos;
-
 public:
-    MenuOption(std::string sText, int iXPos, int iYPos);
-    ~MenuOption(void);
+    MenuOption(std::string textToUse, int iXPos, int iYPos);
 
     std::string getText();
     void setText(std::string sText);
 
-    int getXPos();
-    int getYPos();
+    int getXPos() const;
+    int getYPos() const;
+
+    juce::Point<int> getPos() const { return pos; }
+
+private:
+    std::string sText;
+    juce::Point<int> pos;
 };

@@ -4,21 +4,21 @@
 
 class MainMenu : public Menu
 {
-private:
-    bool selectWorld;
-    int activeWorldID, activeSecondWorldID;
-
-    SDL_Rect rSelectWorld;
-
 public:
-    MainMenu(void);
-    ~MainMenu(void);
+    MainMenu();
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void Update() override;
+    void Draw(SDL_Renderer* rR) override;
+    void updateActiveButton(int iDir) override;
 
     void enter();
     void escape();
 
-    void updateActiveButton(int iDir);
+private:
+    bool selectWorld = false;
+    int activeWorldID = 0;
+    int activeSecondWorldID = 0;
+
+    SDL_Rect rSelectWorld;
+
 };

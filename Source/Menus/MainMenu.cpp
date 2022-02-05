@@ -2,31 +2,17 @@
 #include "Common/CFG.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
-MainMenu::MainMenu(void)
+MainMenu::MainMenu()
 {
-    this->lMO.push_back(new MenuOption("1 PLAYER GAME", 178, 276));
-    this->lMO.push_back(new MenuOption("OPTIONS", 222, 308));
-    this->lMO.push_back(new MenuOption("ABOUT", 237, 340));
-
-    this->numOfMenuOptions = lMO.size();
-
-    this->selectWorld = false;
+    lMO.createNew("1 Player GAME", 178, 276);
+    lMO.createNew("OPTIONS", 222, 308);
+    lMO.createNew("ABOUT", 237, 340);
 
     rSelectWorld.x = 122;
     rSelectWorld.y = 280;
     rSelectWorld.w = 306;
     rSelectWorld.h = 72;
-
-    this->activeWorldID = this->activeSecondWorldID = 0;
 }
-
-MainMenu::~MainMenu(void)
-{
-}
-
-/* ******************************************** */
 
 void MainMenu::Update()
 {

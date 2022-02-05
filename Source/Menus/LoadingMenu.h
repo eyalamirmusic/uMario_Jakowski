@@ -4,17 +4,15 @@
 
 class LoadingMenu : public Menu
 {
-private:
-    unsigned int iTime;
-
 public:
-    LoadingMenu(void);
-    ~LoadingMenu(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void Update() override;
+    void Draw(SDL_Renderer* rR) override;
 
     void updateTime();
 
-    bool loadingType; // -- true = LOADING, false = GAME OVER
+    bool loadingType = true; // -- true = LOADING, false = GAME OVER
+
+private:
+    unsigned int iTime = 0;
+
 };

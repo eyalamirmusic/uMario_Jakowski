@@ -2,27 +2,22 @@
 #include "Common/CFG.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
 
-OptionsMenu::OptionsMenu(void)
+OptionsMenu::OptionsMenu()
 {
     rRect.x = 58;
     rRect.y = 48;
     rRect.w = 403;
     rRect.h = 324;
 
-    this->lMO.push_back(new MenuOption("VOLUME", 73, 65));
-    this->lMO.push_back(new MenuOption("LEFT", 73, 89));
-    this->lMO.push_back(new MenuOption("DOWN", 73, 113));
-    this->lMO.push_back(new MenuOption("RIGHT", 73, 137));
-    this->lMO.push_back(new MenuOption("JUMP", 73, 161));
-    this->lMO.push_back(new MenuOption("RUN", 73, 185));
-    this->lMO.push_back(new MenuOption("CAN MOVE BACKWARD", 73, 209));
-    this->lMO.push_back(new MenuOption("MAIN MENU", 73, 257));
-
-    this->numOfMenuOptions = lMO.size();
-
-    this->inSetKey = this->resetSetKey = false;
+    lMO.createNew("VOLUME", 73, 65);
+    lMO.createNew("LEFT", 73, 89);
+    lMO.createNew("DOWN", 73, 113);
+    lMO.createNew("RIGHT", 73, 137);
+    lMO.createNew("JUMP", 73, 161);
+    lMO.createNew("RUN", 73, 185);
+    lMO.createNew("CAN MOVE BACKWARD", 73, 209);
+    lMO.createNew("MAIN MENU", 73, 257);
 
     rSetKeyRect.x = 75;
     rSetKeyRect.y = 284;
@@ -38,15 +33,7 @@ OptionsMenu::OptionsMenu(void)
     rVolume.y = 65;
     rVolume.h = 16;
     rVolume.w = 100;
-
-    this->escapeToMainMenu = true;
 }
-
-OptionsMenu::~OptionsMenu(void)
-{
-}
-
-/* ******************************************** */
 
 void OptionsMenu::Update()
 {

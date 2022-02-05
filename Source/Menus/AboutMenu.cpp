@@ -4,33 +4,11 @@
 #include <cstdlib>
 #include <ctime>
 
-AboutMenu::AboutMenu(void)
+AboutMenu::AboutMenu()
 {
-    lMO.push_back(new MenuOption("MAIN MENU", 150, 340));
-
-    this->numOfMenuOptions = lMO.size();
-
-    this->cR = 93;
-    this->cG = 148;
-    this->cB = 252;
-    this->nR = 0;
-    this->nG = 0;
-    this->nB = 0;
-    this->colorStepID = 1;
-    this->iColorID = 0;
-
-    this->moveDirection = true;
-
-    this->iNumOfUnits = 0;
-
-    srand((unsigned) time(NULL));
+    lMO.createNew("MAIN MENU", 150, 340);
+    srand((unsigned) time(nullptr));
 }
-
-AboutMenu::~AboutMenu(void)
-{
-}
-
-/* ******************************************** */
 
 void AboutMenu::Update()
 {
@@ -78,8 +56,8 @@ void AboutMenu::Update()
         }
         else if (rand() % 6 < 4)
         {
-            CCore::getMap()->addFire(-CCore::getMap()->getXPos() + getCFG().GAME_WIDTH
-                                         + 128,
+            CCore::getMap()->addFire(-CCore::getMap()->getXPos()
+                                         + getCFG().GAME_WIDTH + 128,
                                      getCFG().GAME_HEIGHT - 16.0f - rand() % 16 * 32,
                                      getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32);
         }
@@ -93,12 +71,13 @@ void AboutMenu::Update()
         }
         else
         {
-            CCore::getMap()->addFireBall(-(int) CCore::getMap()->getXPos()
-                                             + rand() % (getCFG().GAME_WIDTH + 128) + 8,
-                                         getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32,
-                                         rand() % 8 + 4 + 8,
-                                         rand() % 360,
-                                         rand() % 2 == 0);
+            CCore::getMap()->addFireBall(
+                -(int) CCore::getMap()->getXPos()
+                    + rand() % (getCFG().GAME_WIDTH + 128) + 8,
+                getCFG().GAME_HEIGHT - 16 - rand() % 16 * 32,
+                rand() % 8 + 4 + 8,
+                rand() % 360,
+                rand() % 2 == 0);
         }
 
         //iNumOfUnits += 2;

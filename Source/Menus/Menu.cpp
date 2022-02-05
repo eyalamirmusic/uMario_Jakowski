@@ -1,34 +1,16 @@
 #include "Menu.h"
 #include "Common/CFG.h"
 
-Menu::Menu(void)
-{
-    this->activeMenuOption = 0;
-}
-
-Menu::~Menu(void)
-{
-}
-
-/* ******************************************** */
-
-void Menu::Update()
-{
-}
-
 void Menu::Draw(SDL_Renderer* rR)
 {
-    for (unsigned int i = 0; i < lMO.size(); i++)
+    for (auto& i: lMO)
     {
-        getCFG().getText()->Draw(
-            rR, lMO[i]->getText(), lMO[i]->getXPos(), lMO[i]->getYPos());
+        getCFG().getText()->Draw(rR, i->getText(), i->getXPos(), i->getYPos());
     }
 
     getCFG().getMM()->getActiveOption()->Draw(
         rR, lMO[activeMenuOption]->getXPos() - 32, lMO[activeMenuOption]->getYPos());
 }
-
-/* ******************************************** */
 
 void Menu::updateActiveButton(int iDir)
 {
@@ -36,24 +18,19 @@ void Menu::updateActiveButton(int iDir)
     {
         case 0:
             if (activeMenuOption - 1 < 0)
-            {
-                activeMenuOption = numOfMenuOptions - 1;
-            }
+                activeMenuOption = lMO.getLastElementIndex();
             else
-            {
                 --activeMenuOption;
-            }
+
             break;
+
         case 2:
-            if (activeMenuOption + 1 >= numOfMenuOptions)
-            {
+            if (activeMenuOption >= lMO.getLastElementIndex())
                 activeMenuOption = 0;
-            }
             else
-            {
                 ++activeMenuOption;
-            }
             break;
+
         default:
             break;
     }
