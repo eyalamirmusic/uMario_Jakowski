@@ -29,4 +29,6 @@ target_link_libraries(uMario
         ${SDL2_MIXER_LIBRARY}
         ea_recommended_config_flags)
 
+target_include_directories(uMario PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Source)
+
 install(TARGETS uMario RUNTIME DESTINATION ${BIN_DIR})

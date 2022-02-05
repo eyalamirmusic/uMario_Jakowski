@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Text.h"
-#include "MenuManager.h"
+#include "Menus/MenuManager.h"
 #include "Music.h"
 
 class CCFG
