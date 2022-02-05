@@ -2,32 +2,12 @@
 
 class MapLevel
 {
-private:
-    int iBlockID;
-
-    bool spawnMushroom;
-    bool powerUP; // -- true = powerUP, false = 1UP
-    bool spawnStar;
-    int iNumOfUse;
-
-    // ----- Animation -----
-
-    bool blockAnimation;
-    int iYPos;
-    bool bYDirection; // ----- true TOP, false BOTTOM
-
-    // ----- Animation -----
-
 public:
-    MapLevel(void);
-    MapLevel(int iBlockID);
-    ~MapLevel(void);
+    explicit MapLevel(int iBlockID);
 
     void startBlockAnimation();
 
     int updateYPos();
-
-    /* ----- get & set ----- */
 
     int getBlockID();
     void setBlockID(int iBlockID);
@@ -43,4 +23,20 @@ public:
     void setPowerUP(bool powerUP);
     bool getSpawnStar();
     void setSpawnStar(bool spawnStar);
+
+private:
+    int iBlockID = 0;
+
+    bool spawnMushroom = false;
+    bool powerUP = false; // -- true = powerUP, false = 1UP
+    bool spawnStar = false;
+    int iNumOfUse = false;
+
+    // ----- Animation -----
+
+    bool blockAnimation = false;
+    int iYPos = 0;
+    bool bYDirection = false; // ----- true TOP, false BOTTOM
+
+    // ----- Animation -----
 };

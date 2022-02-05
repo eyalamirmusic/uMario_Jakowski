@@ -26,10 +26,6 @@ class MenuManager
 {
 public:
 
-
-
-    GameStates currentGameState = GameStates::eMainMenu;
-
     void Update();
     void Draw(SDL_Renderer* rR);
 
@@ -50,12 +46,10 @@ public:
 
     LoadingMenu* getLoadingMenu();
     AboutMenu* getAboutMenu();
-
-    //Console* getConsole();
-    //LevelEditor* getLE();
     OptionsMenu* getOptions();
 
 private:
+    GameStates currentGameState = GameStates::eMainMenu;
     CIMG* activeOption;
 
     MainMenu oMainMenu;

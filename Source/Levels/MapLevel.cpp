@@ -1,10 +1,5 @@
 #include "MapLevel.h"
 
-/* ******************************************** */
-
-MapLevel::MapLevel(void)
-{
-}
 
 MapLevel::MapLevel(int iBlockID)
 {
@@ -22,11 +17,6 @@ MapLevel::MapLevel(int iBlockID)
     this->powerUP = true;
 }
 
-MapLevel::~MapLevel(void)
-{
-}
-
-/* ******************************************** */
 
 void MapLevel::startBlockAnimation()
 {
