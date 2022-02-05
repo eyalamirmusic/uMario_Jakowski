@@ -4,20 +4,20 @@
 
 class Cheep : public Minion
 {
-private:
-    bool moveY, moveYDIR;
-
 public:
     Cheep(int iXPos,
           int iYPos,
           int minionType,
           int moveSpeed,
           bool moveDiretion = false);
-    ~Cheep(void);
+private:
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void minionPhysics() override;
+    void collisionWithPlayer(bool TOP) override;
 
-    void minionPhysics();
-    void collisionWithPlayer(bool TOP);
+
+    bool moveY, moveYDIR;
+
 };

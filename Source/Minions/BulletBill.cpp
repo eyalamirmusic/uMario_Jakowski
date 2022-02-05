@@ -1,7 +1,6 @@
 #include "BulletBill.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
 
 BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState)
 {
@@ -38,11 +37,6 @@ BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState
     getCFG().getMusic()->playEffect(Mario::Music::Effects::BulletBill);
 }
 
-BulletBill::~BulletBill(void)
-{
-}
-
-/* ******************************************** */
 
 void BulletBill::Update()
 {
@@ -83,11 +77,6 @@ void BulletBill::Draw(SDL_Renderer* rR, CIMG* iIMG)
             (int) (getCFG().GAME_HEIGHT - 16 - currentFallingSpeed * 32) + 32);
 }
 
-void BulletBill::minionPhysics()
-{
-}
-
-/* ******************************************** */
 
 void BulletBill::collisionWithPlayer(bool TOP)
 {

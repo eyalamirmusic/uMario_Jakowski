@@ -1,9 +1,7 @@
 #include "BulletBillSpawner.h"
 #include "Common/Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include <cstdlib>
+#include <ctime>
 
 BulletBillSpawner::BulletBillSpawner(int iXPos, int iYPos, int minionState)
 {
@@ -20,36 +18,27 @@ BulletBillSpawner::BulletBillSpawner(int iXPos, int iYPos, int minionState)
     this->minionSpawned = minionState != 0;
 
     srand((unsigned) time(NULL));
-
-    this->nextBulletBillFrameID = 12;
 }
-
-BulletBillSpawner::~BulletBillSpawner(void)
-{
-}
-
-/* ******************************************** */
 
 void BulletBillSpawner::Update()
 {
+    auto map = CCore::getMap();
+    auto player = map->getPlayer();
+
     if (nextBulletBillFrameID <= 0)
     {
         if (minionState == 0)
         {
-            if (fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
-                               + iHitBoxX)
+            if (fXPos > -map->getXPos() - 64
+                && fXPos < -map->getXPos() + getCFG().GAME_WIDTH + 64 + iHitBoxX)
             {
-                if (!(CCore::getMap()->getPlayer()->getXPos()
-                              - CCore::getMap()->getXPos()
-                              + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+                if (!(player->getXPos() - map->getXPos() + player->getHitBoxX() / 2
                           > fXPos - 96
-                      && CCore::getMap()->getPlayer()->getXPos()
-                                 - CCore::getMap()->getXPos()
-                                 + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+                      && player->getXPos() - map->getXPos()
+                                 + player->getHitBoxX() / 2
                              < fXPos + 96))
                 {
-                    CCore::getMap()->addBulletBill(
+                    map->addBulletBill(
                         (int) fXPos, (int) fYPos - 14, true, minionState);
                     nextBulletBillFrameID = 145 + rand() % 145;
                 }
@@ -57,30 +46,22 @@ void BulletBillSpawner::Update()
         }
         else
         {
-            CCore::getMap()->addBulletBill((int) (-CCore::getMap()->getXPos()
-                                                  + getCFG().GAME_WIDTH + iHitBoxX * 2),
-                                           (int) fYPos - rand() % 9 * 32 - 16,
-                                           true,
-                                           minionState);
+            map->addBulletBill(
+                (int) (-map->getXPos() + getCFG().GAME_WIDTH + iHitBoxX * 2),
+                (int) fYPos - rand() % 9 * 32 - 16,
+                true,
+                minionState);
             nextBulletBillFrameID = 80 + rand() % 96;
         }
     }
     else
     {
-        if (!(CCore::getMap()->getPlayer()->getXPos() - CCore::getMap()->getXPos()
-                      + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+        if (!(player->getXPos() - map->getXPos() + player->getHitBoxX() / 2
                   > fXPos - 96
-              && CCore::getMap()->getPlayer()->getXPos() - CCore::getMap()->getXPos()
-                         + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+              && player->getXPos() - map->getXPos() + player->getHitBoxX() / 2
                      < fXPos + 96))
         {
             --nextBulletBillFrameID;
         }
     }
 }
-
-void BulletBillSpawner::minionPhysics()
-{
-}
-
-/* ******************************************** */

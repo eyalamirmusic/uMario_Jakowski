@@ -1,8 +1,6 @@
 #include "Fire.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Fire::Fire(float fXPos, float fYPos, int toYPos)
 {
     this->fXPos = fXPos;
@@ -19,12 +17,6 @@ Fire::Fire(float fXPos, float fYPos, int toYPos)
 
     this->minionSpawned = true;
 }
-
-Fire::~Fire(void)
-{
-}
-
-/* ******************************************** */
 
 void Fire::Update()
 {

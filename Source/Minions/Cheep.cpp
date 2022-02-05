@@ -47,12 +47,6 @@ Cheep::Cheep(int iXPos, int iYPos, int minionType, int moveSpeed, bool moveDirec
     this->collisionOnlyWithPlayer = true;
 }
 
-Cheep::~Cheep(void)
-{
-}
-
-/* ******************************************** */
-
 void Cheep::Update()
 {
     if (minionState == 0 || minionState == 1)

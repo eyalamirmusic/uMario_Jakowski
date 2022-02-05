@@ -4,18 +4,20 @@
 
 class CheepSpawner : public Minion
 {
+public:
+    CheepSpawner(int iXPos, int iXEnd);
+
 private:
+
+    void Update() override;
+    void minionPhysics() override;
+
+    void spawnCheep();
+    void nextCheep();
+
+
     int iXEnd;
 
     unsigned int iSpawnTime;
 
-public:
-    CheepSpawner(int iXPos, int iXEnd);
-    ~CheepSpawner(void);
-
-    void Update();
-    void minionPhysics();
-
-    void spawnCheep();
-    void nextCheep();
 };

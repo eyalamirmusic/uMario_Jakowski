@@ -6,38 +6,10 @@
 class Minion
 {
 public:
-    Minion(void);
-    ~Minion(void);
+    virtual ~Minion() = default;
 
-    int minionState;
-
-    bool killOtherUnits;
-
-    int iBlockID;
-    float fXPos, fYPos;
-    int iHitBoxX, iHitBoxY;
-    bool minionSpawned;
-    bool collisionOnlyWithPlayer;
-
-    int deadTime;
-
-    bool onAnotherMinion;
-
-    // ----- true = LEFT, false = RIGHT
-    bool moveDirection;
-    int moveSpeed;
-
-    int jumpState;
-
-    float startJumpSpeed;
-    float currentJumpSpeed;
-    float jumpDistance;
-    float currentJumpDistance;
-    float currentFallingSpeed;
-
-    // ---------- Methods
-    virtual void Update();
-    virtual void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    virtual void Update() {};
+    virtual void Draw(SDL_Renderer* rR, CIMG* iIMG) {}
 
     virtual void updateYPos(int iN);
     virtual void updateXPos();
@@ -61,14 +33,14 @@ public:
     virtual void collisionWithPlayer(bool TOP);
     virtual void points(int iPoints);
 
-    virtual void collisionWithAnotherUnit(); // -- PLAYERFIREBALL
+    virtual void collisionWithAnotherUnit() {}
 
-    virtual void lockMinion();
+    virtual void lockMinion() {};
 
     // ----- get & set -----
-    int getBloockID();
+    int getBloockID() const;
     void setBlockID(int iBlockID);
-    int getMinionState();
+    int getMinionState() const;
 
     virtual void setMinionState(int minionState);
     virtual bool getPowerUP();
@@ -76,4 +48,31 @@ public:
     int getXPos();
     int getYPos();
     void setYPos(int iYPos);
+
+    int minionState = 0;
+
+    bool killOtherUnits = false;
+
+    int iBlockID = 0;
+    float fXPos, fYPos;
+    int iHitBoxX = 32;
+    int iHitBoxY = 32;
+    bool minionSpawned = false;
+    bool collisionOnlyWithPlayer = false;
+
+    int deadTime = -1;
+
+    bool onAnotherMinion = false;
+
+    // ----- true = LEFT, false = RIGHT
+    bool moveDirection = true;
+    int moveSpeed = 1;
+
+    int jumpState = 0;
+
+    float startJumpSpeed = 6.65f;
+    float currentJumpSpeed = 0;
+    float jumpDistance = 0;
+    float currentJumpDistance = 0;
+    float currentFallingSpeed = 2.2f;
 };

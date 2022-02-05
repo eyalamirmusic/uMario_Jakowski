@@ -36,6 +36,6 @@ private:
     Music::Manager oMusic;
 };
 
-}
+} // namespace Mario
 
 Mario::CCFG& getCFG();

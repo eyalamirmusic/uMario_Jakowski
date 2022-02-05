@@ -21,5 +21,5 @@ public:
 
 private:
     SDL_Texture* tIMG = nullptr;
-    SDL_Rect rRect;
+    SDL_Rect rRect {};
 };

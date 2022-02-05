@@ -1,56 +1,12 @@
 #include "Minion.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
-Minion::Minion(void)
-{
-    this->minionState = 0;
-    this->iHitBoxX = this->iHitBoxY = 32;
-
-    this->killOtherUnits = false;
-    this->minionSpawned = false;
-    this->collisionOnlyWithPlayer = false;
-
-    this->moveDirection = true;
-    this->moveSpeed = 1;
-
-    this->jumpState = 0;
-    this->startJumpSpeed = 6.65f;
-    this->currentFallingSpeed = 2.2f;
-
-    this->currentJumpSpeed = 0;
-    this->jumpDistance = 0;
-    this->currentJumpDistance = 0;
-
-    this->deadTime = -1;
-
-    this->onAnotherMinion = false;
-}
-
-Minion::~Minion(void)
-{
-}
-
-/* ******************************************** */
-
-void Minion::Update()
-{
-}
-void Minion::Draw(SDL_Renderer* rR, CIMG* iIMG)
-{
-}
-
 bool Minion::updateMinion()
 {
     if (!minionSpawned)
-    {
         Spawn();
-    }
     else
-    {
         minionPhysics();
-    }
 
     return minionSpawned;
 }
@@ -58,14 +14,13 @@ bool Minion::updateMinion()
 void Minion::minionPhysics()
 {
     if (jumpState == 1)
-    {
         physicsState1();
-    }
     else
     {
-        if (!CCore::getMap()->checkCollisionLB(
-                (int) fXPos + 2, (int) fYPos + 2, iHitBoxY, true)
-            && !CCore::getMap()->checkCollisionRB(
+        auto map = CCore::getMap();
+
+        if (!map->checkCollisionLB((int) fXPos + 2, (int) fYPos + 2, iHitBoxY, true)
+            && !map->checkCollisionRB(
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true)
             && !onAnotherMinion)
         {
@@ -120,45 +75,52 @@ void Minion::physicsState2()
 void Minion::updateXPos()
 {
     // ----- LEFT
+    auto* map = CCore::getMap();
     if (moveDirection)
     {
-        if (CCore::getMap()->checkCollisionLB(
+        if (map->checkCollisionLB(
                 (int) fXPos - moveSpeed, (int) fYPos - 2, iHitBoxY, true)
-            || CCore::getMap()->checkCollisionLT(
-                (int) fXPos - moveSpeed, (int) fYPos + 2, true))
+            || map->checkCollisionLT((int) fXPos - moveSpeed, (int) fYPos + 2, true))
         {
             moveDirection = !moveDirection;
-            if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
-                               + iHitBoxX)
+
+            if (killOtherUnits && fXPos > -map->getXPos() - 64
+                && fXPos < -map->getXPos() + getCFG().GAME_WIDTH + 64 + iHitBoxX)
+            {
                 getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+            }
         }
         else
         {
-            fXPos -= (jumpState == 0 ? moveSpeed : moveSpeed / 2.0f);
+            if (jumpState == 0)
+                fXPos -= (float) moveSpeed;
+            else
+                fXPos -= (float) moveSpeed / 2.0f;
         }
     }
     // ----- RIGHT
     else
     {
-        if (CCore::getMap()->checkCollisionRB(
+        if (map->checkCollisionRB(
                 (int) fXPos + moveSpeed, (int) fYPos - 2, iHitBoxX, iHitBoxY, true)
-            || CCore::getMap()->checkCollisionRT(
+            || map->checkCollisionRT(
                 (int) fXPos + moveSpeed, (int) fYPos + 2, iHitBoxX, true))
         {
             moveDirection = !moveDirection;
-            if (killOtherUnits && fXPos > -CCore::getMap()->getXPos() - 64
-                && fXPos < -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH + 64
-                               + iHitBoxX)
+            if (killOtherUnits && fXPos > -map->getXPos() - 64
+                && fXPos < -map->getXPos()
+                               + float(getCFG().GAME_WIDTH + 64 + iHitBoxX))
+            {
                 getCFG().getMusic()->playEffect(Mario::Music::Effects::BlockHit);
+            }
         }
         else
         {
-            fXPos += (jumpState == 0 ? moveSpeed : moveSpeed / 2.0f);
+            fXPos += (jumpState == 0 ? (float) moveSpeed : (float) moveSpeed / 2.0f);
         }
     }
 
-    if (fXPos < -iHitBoxX)
+    if (fXPos < (float) -iHitBoxX)
     {
         minionState = -1;
     }
@@ -166,11 +128,11 @@ void Minion::updateXPos()
 
 void Minion::updateYPos(int iN)
 {
+    auto map = CCore::getMap();
     if (iN > 0)
     {
-        if (!CCore::getMap()->checkCollisionLB(
-                (int) fXPos + 2, (int) fYPos + iN, iHitBoxY, true)
-            && !CCore::getMap()->checkCollisionRB(
+        if (!map->checkCollisionLB((int) fXPos + 2, (int) fYPos + iN, iHitBoxY, true)
+            && !map->checkCollisionRB(
                 (int) fXPos - 2, (int) fYPos + iN, iHitBoxX, iHitBoxY, true))
         {
             fYPos += iN;
@@ -178,17 +140,15 @@ void Minion::updateYPos(int iN)
         else
         {
             if (jumpState == 1)
-            {
                 jumpState = 2;
-            }
+
             updateYPos(iN - 1);
         }
     }
     else if (iN < 0)
     {
-        if (!CCore::getMap()->checkCollisionLT(
-                (int) fXPos + 2, (int) fYPos + iN, true)
-            && !CCore::getMap()->checkCollisionRT(
+        if (!map->checkCollisionLT((int) fXPos + 2, (int) fYPos + iN, true)
+            && !map->checkCollisionRT(
                 (int) fXPos - 2, (int) fYPos + iN, iHitBoxX, true))
         {
             fYPos += iN;
@@ -219,20 +179,13 @@ void Minion::collisionWithPlayer(bool TOP)
 {
 }
 
-void Minion::collisionWithAnotherUnit() {};
-
-void Minion::lockMinion()
-{
-}
-
-/* ******************************************** */
-
 void Minion::Spawn()
 {
-    if ((fXPos >= -CCore::getMap()->getXPos()
-         && fXPos <= -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH)
-        || (fXPos + iHitBoxX >= -CCore::getMap()->getXPos()
-            && fXPos + iHitBoxX <= -CCore::getMap()->getXPos() + getCFG().GAME_WIDTH))
+    Map* map = CCore::getMap();
+    auto x = map->getXPos();
+
+    if ((fXPos >= -x && fXPos <= -x + getCFG().GAME_WIDTH)
+        || (fXPos + iHitBoxX >= -x && fXPos + iHitBoxX <= -x + getCFG().GAME_WIDTH))
     {
         minionSpawned = true;
     }
@@ -254,16 +207,13 @@ void Minion::resetJump()
 
 void Minion::points(int iPoints)
 {
-    CCore::getMap()->addPoints(
-        (int) fXPos + 7,
-        (int) fYPos,
-        std::to_string(iPoints * CCore::getMap()->getPlayer()->getComboPoints()),
-        8,
-        16);
-    CCore::getMap()->getPlayer()->setScore(
-        CCore::getMap()->getPlayer()->getScore()
-        + iPoints * CCore::getMap()->getPlayer()->getComboPoints());
-    CCore::getMap()->getPlayer()->addComboPoints();
+    auto map = CCore::getMap();
+    auto player = map->getPlayer();
+    int points = iPoints * player->getComboPoints();
+
+    map->addPoints((int) fXPos + 7, (int) fYPos, std::to_string(points), 8, 16);
+    player->setScore(player->getScore() + points);
+    player->addComboPoints();
 }
 
 void Minion::minionDeathAnimation()
@@ -282,9 +232,7 @@ void Minion::minionDeathAnimation()
     }
 }
 
-/* ******************************************** */
-
-int Minion::getBloockID()
+int Minion::getBloockID() const
 {
     return iBlockID;
 }
@@ -309,7 +257,7 @@ void Minion::setYPos(int iYPos)
     this->fYPos = (float) iYPos;
 }
 
-int Minion::getMinionState()
+int Minion::getMinionState() const
 {
     return minionState;
 }
@@ -317,6 +265,7 @@ int Minion::getMinionState()
 void Minion::setMinionState(int minionState)
 {
     this->minionState = minionState;
+
     if (minionState == -2)
     {
         deadTime = 16;

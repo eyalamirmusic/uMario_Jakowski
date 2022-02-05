@@ -4,19 +4,18 @@
 
 class Fire : public Minion
 {
-private:
-    // -- minionState, 0 = Alive, -1 = Dead
-
-    int toYPos;
-
 public:
     Fire(float fXPos, float fYPos, int toYPos);
-    ~Fire(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP) override;
 
-    void minionPhysics();
+    void minionPhysics() override;
+
+    // -- minionState, 0 = Alive, -1 = Dead
+    int toYPos;
+
 };
