@@ -3129,7 +3129,7 @@ void Map::clearMap()
         oFlag = NULL;
     }
 
-    oEvent->eventTypeID = Mario::Event::eventType::eNormal;
+    oEvent->eventTypeID = Mario::EventType::Normal;
 
     clearLevelText();
 }
@@ -10736,7 +10736,7 @@ void Map::EndUse()
     CCFG::getMusic()->stopTrack();
     CCFG::getMusic()->playEffect(Mario::Music::Effects::LevelEnd);
 
-    oEvent->eventTypeID = Mario::Event::eventType::eEnd;
+    oEvent->eventTypeID = Mario::EventType::End;
 
     if (oPlayer->getYPos() < CCFG::GAME_HEIGHT - 16 - 10 * 32)
     {
@@ -11369,7 +11369,7 @@ void Map::EndBoss()
             break;
     }
 
-    oEvent->eventTypeID = Mario::Event::eventType::eBossEnd;
+    oEvent->eventTypeID = Mario::EventType::BossEnd;
 
     oEvent->iSpeed = 3;
 
@@ -11527,7 +11527,7 @@ void Map::EndBonus()
     oPlayer->resetJump();
     oPlayer->stopMove();
 
-    oEvent->eventTypeID = Mario::Event::eventType::eNormal;
+    oEvent->eventTypeID = Mario::EventType::Normal;
 
     oEvent->iSpeed = 3;
 
@@ -11591,7 +11591,7 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
         oEvent->newMoveMap = bMoveMap;
 
-        oEvent->eventTypeID = Mario::Event::eNormal;
+        oEvent->eventTypeID = Mario::EventType::Normal;
 
         oPlayer->resetPowerLVL();
 

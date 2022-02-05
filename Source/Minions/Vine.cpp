@@ -108,7 +108,7 @@ void Vine::collisionWithPlayer(bool TOP)
         map->getPlayer()->resetJump();
         map->getPlayer()->stopMove();
 
-        event->eventTypeID = Mario::Event::eventType::eNormal;
+        event->eventTypeID = Mario::EventType::Normal;
 
         event->iSpeed = 2;
 

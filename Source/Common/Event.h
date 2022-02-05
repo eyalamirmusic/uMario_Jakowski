@@ -38,6 +38,13 @@ enum class Animations
     VineSpawn,
 };
 
+enum class EventType
+{
+    Normal,
+    End,
+    BossEnd,
+};
+
 class Event
 {
 public:
@@ -56,15 +63,7 @@ public:
 
     Vector<Point<int>> redraw;
 
-    enum eventType
-    {
-        eNormal,
-        eEnd,
-        eBossEnd,
-    };
-
-    eventType eventTypeID = eventType::eNormal;
-
+    EventType eventTypeID = EventType::Normal;
 
     int iSpeed = 0;
 
@@ -82,7 +81,6 @@ public:
     bool newUnderWater = false;
 
     bool endGame = false;
-
 
 private:
     void normal();

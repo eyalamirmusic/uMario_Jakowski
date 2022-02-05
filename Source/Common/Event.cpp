@@ -27,18 +27,18 @@ void Event::animation()
 {
     switch (eventTypeID)
     {
-        case eNormal:
+        case EventType::Normal:
         {
             normal();
             break;
         }
-        case eEnd:
+        case EventType::End:
         {
             normal();
             end();
             break;
         }
-        case eBossEnd:
+        case EventType::BossEnd:
         {
             normal();
             break;
@@ -486,7 +486,7 @@ void Event::resetData()
     vOLDLength.clear();
     resetRedraw();
 
-    this->eventTypeID = eNormal;
+    eventTypeID = EventType::Normal;
 
     state = true;
     stepID = 0;

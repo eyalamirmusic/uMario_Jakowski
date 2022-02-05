@@ -75,7 +75,7 @@ void Pipe::setEvent()
 
     CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
 
-    event->eventTypeID = Mario::Event::eventType::eNormal;
+    event->eventTypeID = Mario::EventType::Normal;
 
     event->newCurrentLevel = newCurrentLevel;
     event->newLevelType = newLevelType;
