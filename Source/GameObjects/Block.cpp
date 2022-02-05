@@ -30,7 +30,7 @@ Block::~Block(void)
 
 void Block::Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY)
 {
-    sSprite->getTexture()->Draw(rR, iOffsetX, iOffsetY);
+    sSprite->getTexture()->draw(rR, iOffsetX, iOffsetY);
 }
 
 /* ******************************************** */

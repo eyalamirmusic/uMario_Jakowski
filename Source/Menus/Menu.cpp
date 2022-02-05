@@ -8,7 +8,7 @@ void Menu::draw(SDL_Renderer* rR)
         getCFG().getText()->Draw(rR, i->getText(), i->getXPos(), i->getYPos());
     }
 
-    getCFG().getMM()->getActiveOption()->Draw(
+    getCFG().getMM()->getActiveOption()->draw(
         rR, lMO[activeMenuOption]->getXPos() - 32, lMO[activeMenuOption]->getYPos());
 }
 

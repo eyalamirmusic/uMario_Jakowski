@@ -33,7 +33,7 @@ void Toad::minionPhysics()
 
 void Toad::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(
+    iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos, !moveDirection);
 }
 

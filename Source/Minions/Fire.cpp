@@ -47,7 +47,7 @@ void Fire::Update()
 
 void Fire::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos - 4);
+    iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos - 4);
 }
 
 void Fire::minionPhysics()

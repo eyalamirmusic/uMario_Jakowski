@@ -65,19 +65,19 @@ void BulletBill::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos(),
                    (int) fYPos + 2,
                    moveDirection);
     }
     else
     {
-        iIMG->DrawVert(
+        iIMG->drawVert(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos);
     }
 
     if (minionState == 0)
-        CCore::getMap()->getBlock(145)->getSprite()->getTexture()->Draw(
+        CCore::getMap()->getBlock(145)->getSprite()->getTexture()->draw(
             rR,
             (int) (currentJumpSpeed * 32 + CCore::getMap()->getXPos()),
             (int) (getCFG().GAME_HEIGHT - 16 - currentFallingSpeed * 32) + 32);

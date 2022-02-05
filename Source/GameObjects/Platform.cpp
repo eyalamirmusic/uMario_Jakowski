@@ -157,7 +157,7 @@ void Platform::Draw(SDL_Renderer* rR)
                 ->getBlock(CCore::getMap()->getCurrentLevelID() == 22 ? 165 : 135)
                 ->getSprite()
                 ->getTexture()
-                ->Draw(rR,
+                ->draw(rR,
                        (int) (iXEnd + (int) CCore::getMap()->getXPos()
                               + (iSize * 8) / 2 + 16 - (iSize / 2 % 2 == 0 ? 8 : 0)),
                        (int) (iXStart - 16 * i));

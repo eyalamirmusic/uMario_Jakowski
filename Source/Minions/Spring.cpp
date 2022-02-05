@@ -90,7 +90,7 @@ void Spring::Update()
 
 void Spring::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(
+    iIMG->draw(
         rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos, false);
 }
 

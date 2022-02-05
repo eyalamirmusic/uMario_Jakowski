@@ -103,12 +103,12 @@ void UpFire::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (moveDirection)
     {
-        iIMG->Draw(
+        iIMG->draw(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos, false);
     }
     else
     {
-        iIMG->DrawVert(
+        iIMG->drawVert(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos);
     }
 }

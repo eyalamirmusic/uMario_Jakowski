@@ -34,7 +34,7 @@ void Bubble::Update()
 
 void Bubble::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
+    iIMG->draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
 }
 
 /* ******************************************** */

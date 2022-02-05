@@ -79,7 +79,7 @@ void BlockDebris::Draw(SDL_Renderer* rR)
                                                           : 66)
         ->getSprite()
         ->getTexture()
-        ->Draw(rR,
+        ->draw(rR,
                vPositionL->getX() + (int) CCore::getMap()->getXPos(),
                vPositionL->getY(),
                bRotate);
@@ -91,7 +91,7 @@ void BlockDebris::Draw(SDL_Renderer* rR)
                                                           : 66)
         ->getSprite()
         ->getTexture()
-        ->Draw(rR,
+        ->draw(rR,
                vPositionR->getX() + (int) CCore::getMap()->getXPos(),
                vPositionR->getY(),
                bRotate);
@@ -103,7 +103,7 @@ void BlockDebris::Draw(SDL_Renderer* rR)
                                                           : 66)
         ->getSprite()
         ->getTexture()
-        ->Draw(rR,
+        ->draw(rR,
                vPositionL2->getX() + (int) CCore::getMap()->getXPos(),
                vPositionL2->getY(),
                bRotate);
@@ -115,7 +115,7 @@ void BlockDebris::Draw(SDL_Renderer* rR)
                                                           : 66)
         ->getSprite()
         ->getTexture()
-        ->Draw(rR,
+        ->draw(rR,
                vPositionR2->getX() + (int) CCore::getMap()->getXPos(),
                vPositionR2->getY(),
                bRotate);

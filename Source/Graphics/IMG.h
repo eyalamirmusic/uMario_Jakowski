@@ -4,22 +4,22 @@
 
 class CIMG
 {
-private:
-    SDL_Texture* tIMG;
-    SDL_Rect rRect;
-
 public:
-    CIMG(void);
-    CIMG(std::string fileName, SDL_Renderer* rR);
-    ~CIMG(void);
+    CIMG() = default;
+    CIMG(const std::string& fileName, SDL_Renderer* rR);
 
-    void Draw(SDL_Renderer* rR, int iXOffset, int iYOffset);
-    void Draw(SDL_Renderer* rR, int iXOffset, int iYOffset, bool bRoate);
-    void DrawVert(SDL_Renderer* rR, int iXOffset, int iYOffset);
-    void Draw(SDL_Renderer* rR, SDL_Rect rCrop, SDL_Rect rRect);
+    ~CIMG();
+
+    void draw(SDL_Renderer* rR, int iXOffset, int iYOffset);
+    void draw(SDL_Renderer* rR, int iXOffset, int iYOffset, bool bRoate);
+    void drawVert(SDL_Renderer* rR, int iXOffset, int iYOffset);
+    void draw(SDL_Renderer* rR, SDL_Rect rCrop, SDL_Rect rRect);
 
     /* ----- get & set ----- */
     SDL_Texture* getIMG();
     void setIMG(std::string fileName, SDL_Renderer* rR);
-    SDL_Rect getRect();
+
+private:
+    SDL_Texture* tIMG = nullptr;
+    SDL_Rect rRect;
 };

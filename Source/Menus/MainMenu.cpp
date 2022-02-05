@@ -23,7 +23,7 @@ void MainMenu::update()
 
 void MainMenu::draw(SDL_Renderer* rR)
 {
-    getCFG().getSMBLOGO()->Draw(rR, 80, 48);
+    getCFG().getSMBLOGO()->draw(rR, 80, 48);
     Menu::draw(rR);
     getCFG().getText()->Draw(
         rR, "WWW.LUKASZJAKOWSKI.PL", 4, getCFG().GAME_HEIGHT - 4 - 8, 8, 0, 0, 0);

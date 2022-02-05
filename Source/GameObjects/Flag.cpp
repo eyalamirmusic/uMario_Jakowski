@@ -39,7 +39,7 @@ void Flag::UpdateCastleFlag()
 
 void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
+    iIMG->draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
 
     if (iPoints > 0)
     {
@@ -54,7 +54,7 @@ void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
 
 void Flag::DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR,
+    iIMG->draw(rR,
                (int) (iXPos + CCore::getMap()->getXPos() + castleFlagExtraXPos
                       + 7 * 32 - 14),
                getCFG().GAME_HEIGHT + 14 - 6 * 32 - castleFlagY);

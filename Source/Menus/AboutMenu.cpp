@@ -121,7 +121,7 @@ void AboutMenu::draw(SDL_Renderer* rR)
             rR, lMO[i]->getText(), lMO[i]->getXPos(), lMO[i]->getYPos(), 0, 0, 0);
     }
 
-    getCFG().getMM()->getActiveOption()->Draw(
+    getCFG().getMM()->getActiveOption()->draw(
         rR, lMO[activeMenuOption]->getXPos() - 32, lMO[activeMenuOption]->getYPos());
 }
 

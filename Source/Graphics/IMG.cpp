@@ -1,63 +1,57 @@
 #include "IMG.h"
 
-/* ******************************************** */
 
-CIMG::CIMG(void)
-{
-}
-
-CIMG::CIMG(std::string fileName, SDL_Renderer* rR)
+CIMG::CIMG(const std::string& fileName, SDL_Renderer* rR)
 {
     setIMG(fileName, rR);
 }
 
-CIMG::~CIMG(void)
+CIMG::~CIMG()
 {
     SDL_DestroyTexture(tIMG);
 }
 
 /* ******************************************** */
 
-void CIMG::Draw(SDL_Renderer* rR, int iXOffset, int iYOffset)
+void CIMG::draw(SDL_Renderer* rR, int iXOffset, int iYOffset)
 {
     rRect.x = iXOffset;
     rRect.y = iYOffset;
 
-    SDL_RenderCopy(rR, tIMG, NULL, &rRect);
+    SDL_RenderCopy(rR, tIMG, nullptr, &rRect);
 }
 
-void CIMG::Draw(SDL_Renderer* rR, int iXOffset, int iYOffset, bool bRotate)
+void CIMG::draw(SDL_Renderer* rR, int iXOffset, int iYOffset, bool bRoate)
 {
     rRect.x = iXOffset;
     rRect.y = iYOffset;
 
-    if (!bRotate)
+    if (!bRoate)
     {
-        SDL_RenderCopy(rR, tIMG, NULL, &rRect);
+        SDL_RenderCopy(rR, tIMG, nullptr, &rRect);
     }
     else
     {
-        SDL_RenderCopyEx(rR, tIMG, NULL, &rRect, 180.0, NULL, SDL_FLIP_VERTICAL);
+        SDL_RenderCopyEx(rR, tIMG, nullptr, &rRect, 180.0, nullptr, SDL_FLIP_VERTICAL);
     }
 }
 
-void CIMG::DrawVert(SDL_Renderer* rR, int iXOffset, int iYOffset)
+void CIMG::drawVert(SDL_Renderer* rR, int iXOffset, int iYOffset)
 {
     rRect.x = iXOffset;
     rRect.y = iYOffset;
 
-    SDL_RenderCopyEx(rR, tIMG, NULL, &rRect, 180.0, NULL, SDL_FLIP_HORIZONTAL);
+    SDL_RenderCopyEx(rR, tIMG, nullptr, &rRect, 180.0, nullptr, SDL_FLIP_HORIZONTAL);
 }
 
-void CIMG::Draw(SDL_Renderer* rR, SDL_Rect rCrop, SDL_Rect rRect)
+void CIMG::draw(SDL_Renderer* rR, SDL_Rect rCrop, SDL_Rect rRect)
 {
     SDL_RenderCopy(rR, tIMG, &rCrop, &rRect);
 }
 
-/* ******************************************** */
-
 void CIMG::setIMG(std::string fileName, SDL_Renderer* rR)
 {
+
     fileName = "files/images/" + fileName + ".bmp";
     SDL_Surface* loadedSurface = SDL_LoadBMP(fileName.c_str());
     SDL_SetColorKey(
@@ -66,7 +60,7 @@ void CIMG::setIMG(std::string fileName, SDL_Renderer* rR)
     tIMG = SDL_CreateTextureFromSurface(rR, loadedSurface);
     int iWidth, iHeight;
 
-    SDL_QueryTexture(tIMG, NULL, NULL, &iWidth, &iHeight);
+    SDL_QueryTexture(tIMG, nullptr, nullptr, &iWidth, &iHeight);
 
     rRect.x = 0;
     rRect.y = 0;
@@ -78,9 +72,4 @@ void CIMG::setIMG(std::string fileName, SDL_Renderer* rR)
 SDL_Texture* CIMG::getIMG()
 {
     return tIMG;
-}
-
-SDL_Rect CIMG::getRect()
-{
-    return rRect;
 }

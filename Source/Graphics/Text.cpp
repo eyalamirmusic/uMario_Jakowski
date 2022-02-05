@@ -39,7 +39,7 @@ void Text::Draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize)
         rRect.y = Y;
         rRect.w = fontSize;
         rRect.h = fontSize;
-        FONT->Draw(rR, rCrop, rRect);
+        FONT->draw(rR, rCrop, rRect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
     }
@@ -67,7 +67,7 @@ void Text::Draw(SDL_Renderer* rR,
         rRect.y = Y;
         rRect.w = fontSize;
         rRect.h = fontSize;
-        FONT->Draw(rR, rCrop, rRect);
+        FONT->draw(rR, rCrop, rRect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
         SDL_SetTextureColorMod(FONT->getIMG(), 255, 255, 255);
@@ -93,7 +93,7 @@ void Text::Draw(
         rRect.y = Y;
         rRect.w = iWidth;
         rRect.h = iHeight;
-        FONT->Draw(rR, rCrop, rRect);
+        FONT->draw(rR, rCrop, rRect);
     }
 }
 
@@ -119,11 +119,11 @@ void Text::DrawWS(SDL_Renderer* rR,
         rRect.y = Y + 1;
         rRect.w = fontSize;
         rRect.h = fontSize;
-        FONT->Draw(rR, rCrop, rRect);
+        FONT->draw(rR, rCrop, rRect);
         SDL_SetTextureColorMod(FONT->getIMG(), 255, 255, 255);
         rRect.x = X + fontSize * i - extraLeft + 1;
         rRect.y = Y - 1;
-        FONT->Draw(rR, rCrop, rRect);
+        FONT->draw(rR, rCrop, rRect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
     }

@@ -74,7 +74,7 @@ void FireBall::Update()
 
 void FireBall::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
+    iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
 }
 
 void FireBall::minionPhysics()

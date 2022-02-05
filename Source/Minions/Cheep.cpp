@@ -223,12 +223,12 @@ void Cheep::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState == -2)
     {
-        iIMG->DrawVert(
+        iIMG->drawVert(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos + 2);
     }
     else
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) (fXPos + CCore::getMap()->getXPos()),
                    (int) fYPos,
                    moveDirection);

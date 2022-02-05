@@ -107,14 +107,14 @@ void PlayerFireBall::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (!bDestroy)
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos(),
                    (int) fYPos,
                    !moveDirection);
     }
     else
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos()
                        - (moveDirection ? 16 : 0),
                    (int) fYPos - 8,

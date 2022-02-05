@@ -144,14 +144,14 @@ void Bowser::Update()
 
 void Bowser::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(
+    iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos, !moveDirection);
 
     if (spawnHammer)
     {
         if (nextHammerFrameID <= 24 && moveDirection)
         {
-            CCore::getMap()->getMinionBlock(61)->getSprite()->getTexture()->Draw(
+            CCore::getMap()->getMinionBlock(61)->getSprite()->getTexture()->draw(
                 rR,
                 (int) (fXPos + CCore::getMap()->getXPos() + 4),
                 (int) (fYPos - 20),

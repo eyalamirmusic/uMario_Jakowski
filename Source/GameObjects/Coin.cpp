@@ -59,7 +59,7 @@ void Coin::Update()
 
 void Coin::Draw(SDL_Renderer* rR)
 {
-    CCore::getMap()->getBlock(50)->getSprite()->getTexture(iSpriteID)->Draw(
+    CCore::getMap()->getBlock(50)->getSprite()->getTexture(iSpriteID)->draw(
         rR, iXPos + (int) CCore::getMap()->getXPos(), iYPos);
 }
 

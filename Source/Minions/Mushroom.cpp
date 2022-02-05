@@ -71,7 +71,7 @@ void Mushroom::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState >= 0)
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos(),
                    (int) fYPos + 2,
                    false);
@@ -84,7 +84,7 @@ void Mushroom::Draw(SDL_Renderer* rR, CIMG* iIMG)
                                : 56)
                 ->getSprite()
                 ->getTexture()
-                ->Draw(rR,
+                ->draw(rR,
                        (int) fXPos + (int) CCore::getMap()->getXPos(),
                        (int) fYPos + (32 - inSpawnY)
                            - CCore::getMap()->getMapBlock(iX, iY)->getYPos() + 2,

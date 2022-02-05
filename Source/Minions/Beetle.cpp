@@ -40,14 +40,14 @@ void Beetle::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos(),
                    (int) fYPos,
                    !moveDirection);
     }
     else
     {
-        iIMG->DrawVert(
+        iIMG->drawVert(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos);
     }
 }

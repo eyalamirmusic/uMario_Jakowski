@@ -62,14 +62,14 @@ void Hammer::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {
-        iIMG->Draw(rR,
+        iIMG->draw(rR,
                    (int) fXPos + (int) CCore::getMap()->getXPos() - 4,
                    (int) fYPos - 4,
                    false);
     }
     else
     {
-        iIMG->DrawVert(
+        iIMG->drawVert(
             rR, (int) fXPos + (int) CCore::getMap()->getXPos() - 4, (int) fYPos - 4);
     }
 }

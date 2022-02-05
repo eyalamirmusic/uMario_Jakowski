@@ -1493,7 +1493,7 @@ void Player::Draw(SDL_Renderer* rR)
 {
     if (!inLevelDownAnimation || CCore::getMap()->getInEvent())
     {
-        sMario[getMarioSpriteID()]->getTexture()->Draw(
+        sMario[getMarioSpriteID()]->getTexture()->draw(
             rR,
             (int) fXPos,
             (int) fYPos + (CCore::getMap()->getInEvent() ? 0 : 2),
@@ -1508,7 +1508,7 @@ void Player::Draw(SDL_Renderer* rR)
                : inLevelDownAnimationFrameID > 30 ? 13
                                                   : 14))
         {
-            sMario[getMarioSpriteID()]->getTexture()->Draw(
+            sMario[getMarioSpriteID()]->getTexture()->draw(
                 rR,
                 (int) fXPos,
                 (int) fYPos + (CCore::getMap()->getInEvent() ? 0 : 2),

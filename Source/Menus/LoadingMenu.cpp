@@ -37,14 +37,14 @@ void LoadingMenu::draw(SDL_Renderer* rR)
         getCFG().getText()->Draw(rR, "WORLD", 320, 144);
         getCFG().getText()->Draw(rR, CCore::getMap()->getLevelName(), 416, 144);
 
-        CCore::getMap()->getPlayer()->getMarioSprite()->getTexture()->Draw(
+        CCore::getMap()->getPlayer()->getMarioSprite()->getTexture()->draw(
             rR, 342, 210 - CCore::getMap()->getPlayer()->getHitBoxY() / 2);
 
         getCFG().getText()->Draw(rR, "y", 384, 208);
 
         if (CCore::getMap()->getPlayer()->getNumOfLives() > 9)
         {
-            CCore::getMap()->getBlock(180)->getSprite()->getTexture()->Draw(
+            CCore::getMap()->getBlock(180)->getSprite()->getTexture()->draw(
                 rR, 410, 210);
         }
         getCFG().getText()->Draw(

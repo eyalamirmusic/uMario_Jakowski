@@ -87,7 +87,7 @@ void Squid::Update()
 
 void Squid::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->Draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
+    iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
 }
 
 void Squid::minionPhysics()

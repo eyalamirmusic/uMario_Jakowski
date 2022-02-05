@@ -72,7 +72,7 @@ void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
                    (int) (getCFG().GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
         for (int i = 0; i < jumpDistance / 32 - 1; i++)
         {
-            iIMG->Draw(
+            iIMG->draw(
                 rR,
                 (int) (iX * 32 + CCore::getMap()->getXPos()),
                 (int) (getCFG().GAME_HEIGHT + 16 - iY * 32 + i * 32 - jumpDistance),
@@ -83,7 +83,7 @@ void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
         ->getBlock(CCore::getMap()->getMapBlock((int) iX, (int) iY)->getBlockID())
         ->getSprite()
         ->getTexture()
-        ->Draw(
+        ->draw(
             rR,
             (int) (iX * 32 + CCore::getMap()->getXPos()),
             (int) (getCFG().GAME_HEIGHT - iY * 32 - 16
