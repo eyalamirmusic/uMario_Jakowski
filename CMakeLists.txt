@@ -20,7 +20,7 @@ file(COPY Resources DESTINATION .)
 
 include_directories(uNext)
 
-file(GLOB_RECURSE uMario_SOURCES "uNext/*.cpp")
+file(GLOB_RECURSE uMario_SOURCES "Source/*.cpp")
 add_executable (uMario ${uMario_SOURCES})
 
 target_link_libraries(uMario
