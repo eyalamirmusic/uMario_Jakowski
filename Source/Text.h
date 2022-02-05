@@ -1,6 +1,6 @@
 #pragma once
 
-#include "header.h"
+#include "CommonHeader.h"
 #include "IMG.h"
 
 class Text
