@@ -3,24 +3,26 @@
 
 namespace Mario
 {
-void Event::Draw(SDL_Renderer* rR)
+void Event::draw(SDL_Renderer* rR)
 {
-    for (unsigned int i = 0; i < reDrawX.size(); i++)
+    auto* map = CCore::getMap();
+
+    for (int i = 0; i < reDrawX.size(); i++)
     {
-        if (reDrawX[i] < CCore::getMap()->getMapWidth())
-            CCore::getMap()
-                ->getBlock(CCore::getMap()
-                               ->getMapBlock(reDrawX[i], reDrawY[i])
-                               ->getBlockID())
-                ->Draw(rR,
-                       32 * reDrawX[i] + (int) CCore::getMap()->getXPos(),
-                       CCFG::GAME_HEIGHT - 32 * reDrawY[i] - 16);
+        auto x = reDrawX[i];
+        auto y = reDrawY[i];
+
+        if (x < map->getMapWidth())
+        {
+            auto* block = map->getBlock(map->getMapBlock(x, y)->getBlockID());
+            auto mapX = (int) map->getXPos();
+
+            block->Draw(rR, 32 * x + mapX, CCFG::GAME_HEIGHT - 32 * y - 16);
+        }
     }
 }
 
-/* ******************************************** */
-
-void Event::Animation()
+void Event::animation()
 {
     switch (eventTypeID)
     {

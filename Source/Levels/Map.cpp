@@ -125,7 +125,7 @@ void Map::Update()
         }
         else
         {
-            oEvent->Animation();
+            oEvent->animation();
         }
 
         for (unsigned int i = 0; i < vPlatform.size(); i++)
@@ -693,7 +693,7 @@ void Map::Draw(SDL_Renderer* rR)
 
     if (inEvent)
     {
-        oEvent->Draw(rR);
+        oEvent->draw(rR);
     }
 
     DrawGameLayout(rR);

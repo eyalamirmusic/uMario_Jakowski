@@ -83,9 +83,9 @@ public:
 
     // ----- Methods
 
-    void Draw(SDL_Renderer* rR);
+    void draw(SDL_Renderer* rR);
 
-    void Animation();
+    void animation();
     void newLevel();
 
     void resetRedraw();
