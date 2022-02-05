@@ -35,15 +35,16 @@ Pipe::Pipe(int iType,
 
 void Pipe::checkUse()
 {
+    auto* map = CCore::getMap();
+    auto* player = map->getPlayer();
+
+    int xPos = (int) map->getXPos();
+    int playerX = player->getXPos();
+
     if (iType == 0 || iType == 2)
     {
-        if (CCore::getMap()->getPlayer()->getSquat()
-            && -(int) CCore::getMap()->getXPos()
-                       + CCore::getMap()->getPlayer()->getXPos()
-                   >= leftBlockPos.x * 32 + 4
-            && -(int) CCore::getMap()->getXPos()
-                       + CCore::getMap()->getPlayer()->getXPos()
-                       + CCore::getMap()->getPlayer()->getHitBoxX()
+        if (player->getSquat() && -xPos + playerX >= leftBlockPos.x * 32 + 4
+            && -xPos + playerX + player->getHitBoxX()
                    < (rightBlockPos.x + 1) * 32 - 4)
         {
             setEvent();
@@ -51,15 +52,10 @@ void Pipe::checkUse()
     }
     else
     {
-        if (!CCore::getMap()->getPlayer()->getSquat()
-            && CCore::getMap()->getBlockIDX(
-                   -(int) CCore::getMap()->getXPos()
-                   + CCore::getMap()->getPlayer()->getXPos()
-                   + CCore::getMap()->getPlayer()->getHitBoxX() / 2 + 2)
+        if (!player->getSquat()
+            && map->getBlockIDX(-xPos + playerX + player->getHitBoxX() / 2 + 2)
                    == rightBlockPos.x - 1
-            && CCore::getMap()->getBlockIDY(
-                   CCore::getMap()->getPlayer()->getYPos()
-                   + CCore::getMap()->getPlayer()->getHitBoxY() + 2)
+            && map->getBlockIDY(player->getYPos() + player->getHitBoxY() + 2)
                    == rightBlockPos.y - 1)
         {
             setEvent();
@@ -67,13 +63,12 @@ void Pipe::checkUse()
     }
 }
 
-/* ******************************************** */
 
 void Pipe::setEvent()
 {
     auto* map = CCore::getMap();
     auto* event = map->getEvent();
-    
+
     event->resetData();
     auto* player = map->getPlayer();
     player->stopMove();
@@ -142,24 +137,17 @@ void Pipe::setEvent()
             event->reDrawY.push_back(rightBlockPos.y);
 
             event->reDrawX.push_back(
-                map->getBlockIDX(
-                event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
-                                     - i);
+                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos));
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
             event->reDrawX.push_back(
-                map->getBlockIDX(
-                                         event->newPlayerXPos - event->newMapXPos)
-                                     + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
-                                     - i);
+                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos) + 1);
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
         }
     }
     else
     { // -- VERT -> VERT
         event->newPlayerXPos -=
-            player->getPowerLVL() > 0
-                ? 32
-                : 0 - player->getHitBoxX() / 2;
+            player->getPowerLVL() > 0 ? 32 : 0 - player->getHitBoxX() / 2;
         event->vOLDDir.push_back(Mario::Animations::eBOT);
         event->vOLDLength.push_back(player->getHitBoxY());
 
@@ -174,16 +162,11 @@ void Pipe::setEvent()
             event->reDrawY.push_back(rightBlockPos.y - i);
 
             event->reDrawX.push_back(
-                map->getBlockIDX(
-                event->newPlayerXPos - event->newMapXPos));
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
-                                     - i);
+                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos));
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
             event->reDrawX.push_back(
-                map->getBlockIDX(
-                                         event->newPlayerXPos - event->newMapXPos)
-                                     + 1);
-            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1
-                                     - i);
+                map->getBlockIDX(event->newPlayerXPos - event->newMapXPos) + 1);
+            event->reDrawY.push_back(map->getBlockIDY(newPlayerPos.y) - 1 - i);
         }
 
         event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);
