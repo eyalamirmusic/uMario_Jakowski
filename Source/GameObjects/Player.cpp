@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "Core.h"
+#include "Common/Core.h"
 #include <cstdlib>
 #include <ctime>
 

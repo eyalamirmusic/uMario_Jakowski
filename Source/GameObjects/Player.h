@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphics/Sprite.h"
-#include "Vector2.h"
+#include "Common/Vector2.h"
 #include <vector>
 #include <string>
 

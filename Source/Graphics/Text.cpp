@@ -1,7 +1,5 @@
 #include "Text.h"
-#include "CFG.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
 
 Text::Text(void)
 {

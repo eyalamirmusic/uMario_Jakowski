@@ -1,7 +1,6 @@
 #pragma once
 
-#include "CommonHeader.h"
-#include "CFG.h"
+#include "Common/CFG.h"
 #include "Graphics/IMG.h"
 
 class Minion

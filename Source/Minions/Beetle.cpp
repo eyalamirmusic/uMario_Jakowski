@@ -1,5 +1,5 @@
 #include "Beetle.h"
-#include "Core.h"
+#include "Common/Core.h"
 
 /* ******************************************** */
 

@@ -1,8 +1,6 @@
 #include "BlockDebris.h"
-#include "CFG.h"
-#include "Core.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
+#include "Common/Core.h"
 
 BlockDebris::BlockDebris(int iXPos, int iYPos)
 {

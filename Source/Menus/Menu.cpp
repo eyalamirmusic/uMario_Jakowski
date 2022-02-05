@@ -1,7 +1,5 @@
 #include "Menu.h"
-#include "CFG.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
 
 Menu::Menu(void)
 {

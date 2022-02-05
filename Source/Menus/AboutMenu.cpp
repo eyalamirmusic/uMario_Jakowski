@@ -1,10 +1,8 @@
 #include "AboutMenu.h"
-#include "CFG.h"
-#include "Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
+#include "Common/Core.h"
+#include <cstdlib>
+#include <ctime>
 
 AboutMenu::AboutMenu(void)
 {

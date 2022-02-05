@@ -1,7 +1,5 @@
 #include "Console.h"
-#include "CFG.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
 
 Console::Console(void)
 {

@@ -1,6 +1,6 @@
 #include "PauseMenu.h"
-#include "CFG.h"
-#include "Core.h"
+#include "Common/CFG.h"
+#include "Common/Core.h"
 
 /* ******************************************** */
 

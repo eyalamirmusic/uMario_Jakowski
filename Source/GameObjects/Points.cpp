@@ -1,14 +1,6 @@
-/************************
- * @author �ukasz Jakowski
- * @since  20.04.2014 14:32
- * 
- ************************/
-
 #include "Points.h"
-#include "CFG.h"
-#include "Core.h"
-
-/* ******************************************** */
+#include "Common/CFG.h"
+#include "Common/Core.h"
 
 Points::Points(int iXPos, int iYPos, std::string sText)
 {

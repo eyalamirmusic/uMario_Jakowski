@@ -1,9 +1,10 @@
 #pragma once
 
 #include "MapLevel.h"
-#include "Player.h"
 #include "LevelText.h"
 
+#include "Common/Event.h"
+#include "GameObjects/Player.h"
 #include "Minions/Minion.h"
 
 #include "GameObjects/Points.h"
@@ -14,8 +15,6 @@
 #include "GameObjects/Bubble.h"
 #include "GameObjects/Flag.h"
 #include "GameObjects/Block.h"
-
-#include "Event.h"
 
 class Map
 {

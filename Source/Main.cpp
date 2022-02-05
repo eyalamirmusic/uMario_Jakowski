@@ -1,5 +1,5 @@
 #include "CommonHeader.h"
-#include "Core.h"
+#include "Common/Core.h"
 
 int main(int argc, char* argv[])
 {

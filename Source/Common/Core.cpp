@@ -1,5 +1,5 @@
 #include "CommonHeader.h"
-#include "Core.h"
+#include "Common/Core.h"
 #include "CFG.h"
 #include "SDL_mixer.h"
 

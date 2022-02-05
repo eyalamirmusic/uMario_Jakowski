@@ -1,6 +1,6 @@
 #include "Bubble.h"
-#include "Core.h"
-#include "CFG.h"
+#include "Common/Core.h"
+#include "Common/CFG.h"
 
 /* ******************************************** */
 

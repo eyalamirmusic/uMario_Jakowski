@@ -1,5 +1,5 @@
 #include "Music.h"
-#include "Core.h"
+#include "Common/Core.h"
 #include "SDL_mixer.h"
 
 /* ******************************************** */
