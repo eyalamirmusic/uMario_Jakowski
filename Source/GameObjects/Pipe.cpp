@@ -37,12 +37,6 @@ Pipe::Pipe(int iType,
     this->iSpeed = iSpeed;
 }
 
-Pipe::~Pipe(void)
-{
-}
-
-/* ******************************************** */
-
 void Pipe::checkUse()
 {
     if (iType == 0 || iType == 2)
