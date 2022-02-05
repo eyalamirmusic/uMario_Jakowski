@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MENUMANAGER_H
-#define MENUMANAGER_H
-
 #include "IMG.h"
 #include "MainMenu.h"
 #include "LoadingMenu.h"
@@ -67,5 +64,3 @@ public:
     //LevelEditor* getLE();
     OptionsMenu* getOptions();
 };
-
-#endif

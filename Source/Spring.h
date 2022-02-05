@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SPRING_H
-#define SPRING_H
-
 #include "Minion.h"
 
 class Spring : public Minion
@@ -26,5 +23,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

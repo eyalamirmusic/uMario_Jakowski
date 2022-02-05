@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef GOOMBAS_H
-#define GOOMBAS_H
-
 #include "Minion.h"
 
 class Goombas : public Minion
@@ -20,5 +17,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

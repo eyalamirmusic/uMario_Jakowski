@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MUSICMANAGER_H
-#define MUSICMANAGER_H
-
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include <string>
@@ -23,5 +20,3 @@ public:
 
     void PlayMusic();
 };
-
-#endif

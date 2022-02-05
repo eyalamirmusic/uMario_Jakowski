@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CHEEP_H
-#define CHEEP_H
-
 #include "Minion.h"
 
 class Cheep : public Minion
@@ -24,5 +21,3 @@ public:
     void minionPhysics();
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

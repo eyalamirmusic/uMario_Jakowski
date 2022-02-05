@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MENU_H
-#define MENU_h
-
 #include "header.h"
 #include "MenuOption.h"
 #include <vector>
@@ -25,5 +22,3 @@ public:
     // ----- 0 = TOP, 1 = RIGHT, 2 = BOTTOM, 3 = LEFT
     virtual void updateActiveButton(int iDir);
 };
-
-#endif

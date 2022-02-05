@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PIPE_H
-#define PIPE_H
-
 class Pipe
 {
 private:
@@ -45,5 +42,3 @@ public:
     void checkUse();
     void setEvent();
 };
-
-#endif

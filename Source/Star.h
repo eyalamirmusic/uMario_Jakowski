@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef STAR_H
-#define STAR_H
-
 #include "Minion.h"
 
 class Star : public Minion
@@ -26,5 +23,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

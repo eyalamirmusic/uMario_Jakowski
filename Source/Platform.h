@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PLATFORM_H
-#define PLATFORM_H
-
 #include "header.h"
 
 class Platform
@@ -54,5 +51,3 @@ public:
     void setTypeID(int iType);
     void turnON();
 };
-
-#endif

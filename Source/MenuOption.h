@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MENUOPTION_H
-#define MENUOPTION_H
-
 #include <string>
 
 class MenuOption
@@ -21,5 +18,3 @@ public:
     int getXPos();
     int getYPos();
 };
-
-#endif

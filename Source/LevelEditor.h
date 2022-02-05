@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef LEVELEDITOR_H
-#define LEVELEDITOR_H
-
 #include "header.h"
 
 class LevelEditor
@@ -27,5 +24,3 @@ public:
 
     void drawStruct(SDL_Renderer* rR);
 };
-
-#endif

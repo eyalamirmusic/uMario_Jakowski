@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef TOAD_H
-#define TOAD_H
-
 #include "Minion.h"
 
 class Toad : public Minion
@@ -20,5 +17,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

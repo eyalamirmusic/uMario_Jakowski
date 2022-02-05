@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef VINE_H
-#define VINE_H
-
 #include "Minion.h"
 
 class Vine : public Minion
@@ -23,5 +20,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

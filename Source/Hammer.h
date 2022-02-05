@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef HAMMER_H
-#define HAMMER_H
-
 #include "Minion.h"
 
 class Hammer : public Minion
@@ -19,5 +16,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

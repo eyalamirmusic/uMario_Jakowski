@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BULLETBILL_H
-#define BULLETBILL_H
-
 #include "Minion.h"
 
 class BulletBill : public Minion
@@ -19,5 +16,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

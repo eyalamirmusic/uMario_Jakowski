@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CONSOLE_H
-#define CONOSLE_H
-
 #include "header.h"
 #include <vector>
 
@@ -24,5 +21,3 @@ public:
     void print(int);
     void print(std::string sPrint);
 };
-
-#endif

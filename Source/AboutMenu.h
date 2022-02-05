@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef ABOUTMENU_H
-#define ABOUTMENU_H
-
 #include "Menu.h"
 
 class AboutMenu : public Menu
@@ -36,5 +33,3 @@ public:
     void setBackgroundColor(SDL_Renderer* rR);
     void updateTime();
 };
-
-#endif

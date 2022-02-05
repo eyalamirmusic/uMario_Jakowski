@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SPIKEY_H
-#define SPIKEY_H
-
 #include "Minion.h"
 
 class Spikey : public Minion
@@ -19,5 +16,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

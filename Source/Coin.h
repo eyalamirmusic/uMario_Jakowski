@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef COIN_H
-#define COIN_H
-
 #include "header.h"
 
 class Coin
@@ -29,5 +26,3 @@ public:
     int getYPos();
     bool getDelete();
 };
-
-#endif

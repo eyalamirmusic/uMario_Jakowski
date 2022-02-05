@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MUSHROOM_H
-#define MUSHROOM_H
-
 #include "Minion.h"
 
 class Mushroom : public Minion
@@ -26,5 +23,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

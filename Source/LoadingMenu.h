@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef LOADINGMENU_H
-#define LOADINGMENU_H
-
 #include "Menu.h"
 
 class LoadingMenu : public Menu
@@ -21,5 +18,3 @@ public:
 
     bool loadingType; // -- true = LOADING, false = GAME OVER
 };
-
-#endif

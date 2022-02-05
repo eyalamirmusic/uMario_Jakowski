@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PLAYERFIREBALL_H
-#define PLAYERFIREBALL_H
-
 #include "Minion.h"
 
 class PlayerFireBall : public Minion
@@ -30,5 +27,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

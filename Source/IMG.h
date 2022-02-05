@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef IMG_H
-#define IMG_H
-
 #include "header.h"
 
 class CIMG
@@ -26,5 +23,3 @@ public:
     void setIMG(std::string fileName, SDL_Renderer* rR);
     SDL_Rect getRect();
 };
-
-#endif

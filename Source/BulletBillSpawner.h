@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BULLETBILLSPAWNER_H
-#define BULLETBULLSPAWNER_H
-
 #include "Minion.h"
 
 class BulletBillSpawner : public Minion
@@ -18,5 +15,3 @@ public:
 
     void minionPhysics();
 };
-
-#endif

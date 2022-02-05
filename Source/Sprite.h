@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SPRITE_H
-#define SPRITE_H
-
 #include "IMG.h"
 #include <string>
 #include <vector>
@@ -35,5 +32,3 @@ public:
     CIMG* getTexture();
     CIMG* getTexture(int iID);
 };
-
-#endif

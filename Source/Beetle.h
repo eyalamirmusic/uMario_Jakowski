@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BEETLE_H
-#define BEETLE_H
-
 #include "Minion.h"
 
 class Beetle : public Minion
@@ -21,5 +18,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

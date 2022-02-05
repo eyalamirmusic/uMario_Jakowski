@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BLOCKDEBRIS_H
-#define BLOCKDEBRIS_H
-
 #include "header.h"
 #include "Vector2.h"
 
@@ -32,5 +29,3 @@ public:
 
     int getDebrisState();
 };
-
-#endif

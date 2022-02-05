@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BUBBLE_H
-#define BUBBlE_H
-
 #include "header.h"
 #include "IMG.h"
 
@@ -24,5 +21,3 @@ public:
     int getBlockID();
     bool getDestroy();
 };
-
-#endif

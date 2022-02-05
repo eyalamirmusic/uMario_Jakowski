@@ -1,12 +1,7 @@
 #pragma once
 
-#ifndef BLOCK_H
-#define BLOCK_H
-
 #include "IMG.h"
 #include "Sprite.h"
-
-/* ******************************************** */
 
 class Block
 {
@@ -42,5 +37,3 @@ public:
     bool getUse();
     bool getVisible();
 };
-
-#endif

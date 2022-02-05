@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CHEEPSPAWNER_H
-#define CHEEPSPAWNER_H
-
 #include "Minion.h"
 
 class CheepSpawner : public Minion
@@ -22,5 +19,3 @@ public:
     void spawnCheep();
     void nextCheep();
 };
-
-#endif

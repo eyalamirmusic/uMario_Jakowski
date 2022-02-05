@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef UPFIRE_H
-#define UPFIRE_H
-
 #include "Minion.h"
 
 class UpFire : public Minion
@@ -23,5 +20,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

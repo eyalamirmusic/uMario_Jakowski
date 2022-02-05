@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PLAYER_H
-#define PLAYER_H
-
 #include "Sprite.h"
 #include "Vector2.h"
 #include <vector>
@@ -190,5 +187,3 @@ public:
 
     void setSpringJump(bool springJump);
 };
-
-#endif

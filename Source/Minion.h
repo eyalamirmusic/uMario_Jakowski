@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MINION_H
-#define MINION_H
-
 #include "header.h"
 #include "CFG.h"
 #include "IMG.h"
@@ -81,5 +78,3 @@ public:
     int getYPos();
     void setYPos(int iYPos);
 };
-
-#endif

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef FIRE_H
-#define FIRE_H
-
 #include "Minion.h"
 
 class Fire : public Minion
@@ -23,5 +20,3 @@ public:
 
     void minionPhysics();
 };
-
-#endif

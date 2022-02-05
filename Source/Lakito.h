@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef LAKITO_H
-#define LAKITO_H
-
 #include "Minion.h"
 
 class Lakito : public Minion
@@ -26,5 +23,3 @@ public:
 
     void collisionWithPlayer(bool TOP);
 };
-
-#endif

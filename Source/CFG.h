@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CFG_H
-#define CFG_H
-
 #include "Text.h"
 #include "MenuManager.h"
 #include "Music.h"
@@ -36,5 +33,3 @@ public:
 
     static bool canMoveBackward;
 };
-
-#endif

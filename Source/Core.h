@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CORE_H
-#define CORE_H
-
 #include "Map.h"
 
 class CCore
@@ -61,4 +58,3 @@ public:
     static Map* getMap();
 };
 
-#endif

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PAUSEMENU_H
-#define PAUSEMENU_H
-
 #include "Menu.h"
 
 class PauseMenu : public Menu
@@ -22,5 +19,3 @@ public:
 
     void updateActiveButton(int iDir);
 };
-
-#endif

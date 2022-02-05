@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef LEVELTEXT_H
-#define LEVELTEXT_H
-
 #include <string>
 
 class LevelText
@@ -21,5 +18,3 @@ public:
     std::string getText();
     void setText(std::string sText);
 };
-
-#endif

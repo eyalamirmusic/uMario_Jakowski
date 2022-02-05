@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef BOWSER_H
-#define BOWSER_H
-
 #include "Minion.h"
 
 class Bowser : public Minion
@@ -36,5 +33,3 @@ public:
 
     void createFire();
 };
-
-#endif

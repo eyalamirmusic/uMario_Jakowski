@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef Event_H
-#define Event_H
-
 #include "header.h"
 #include <vector>
 
@@ -99,5 +96,3 @@ public:
 
     void resetRedraw();
 };
-
-#endif

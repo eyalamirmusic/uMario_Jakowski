@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef POINTS_H
-#define POINTS_H
-
 #include "header.h"
 
 class Points
@@ -26,5 +23,3 @@ public:
 
     bool getDelete();
 };
-
-#endif

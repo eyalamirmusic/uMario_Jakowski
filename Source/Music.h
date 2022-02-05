@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MUSIC_H
-#define MUSIC_H
-
 #include "SDL_mixer.h"
 #include <string>
 #include <vector>
@@ -90,5 +87,3 @@ public:
     int getVolume();
     void setVolume(int iVolume);
 };
-
-#endif

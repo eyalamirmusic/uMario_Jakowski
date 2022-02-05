@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef FLAG_H
-#define FLAG_H
-
 #include "header.h"
 #include "IMG.h"
 
@@ -27,5 +24,3 @@ public:
     void Draw(SDL_Renderer* rR, CIMG* iIMG);
     void DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG);
 };
-
-#endif

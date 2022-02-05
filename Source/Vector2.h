@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef VECTORR_H
-#define VECTORR_H
-
 class Vector2
 {
 private:
@@ -18,5 +15,3 @@ public:
     int getY();
     void setY(int Y);
 };
-
-#endif

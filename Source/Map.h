@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef MAP_H
-#define MAP_H
-
 #include "header.h"
 #include "IMG.h"
 #include "Block.h"
@@ -410,5 +407,3 @@ public:
     bool getInEvent();
     void setInEvent(bool inEvent);
 };
-
-#endif

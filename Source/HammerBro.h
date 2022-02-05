@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef HAMMERBRO_H
-#define HAMMERBRO_H
-
 #include "Minion.h"
 
 class HammerBro : public Minion
@@ -30,5 +27,3 @@ public:
 
     void collisionEffect();
 };
-
-#endif

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PLANT_H
-#define PLANT_H
-
 #include "Minion.h"
 
 class Plant : public Minion
@@ -34,5 +31,3 @@ public:
 
     void setMinionState(int minionState);
 };
-
-#endif

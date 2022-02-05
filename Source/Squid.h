@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SQUID_H
-#define SQUID_H
-
 #include "Minion.h"
 
 class Squid : public Minion
@@ -22,5 +19,3 @@ public:
 
     void changeBlockID();
 };
-
-#endif

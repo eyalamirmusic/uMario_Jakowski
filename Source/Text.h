@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef TEXT_H
-#define TEXT_H
-
 #include "header.h"
 #include "IMG.h"
 
@@ -57,5 +54,3 @@ public:
     // ----- SET FONT IMG
     void setFont(SDL_Renderer* rR, std::string fileName);
 };
-
-#endif
