@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Text.h"
+#include "Graphics/Text.h"
 #include "Menus/MenuManager.h"
 #include "Music/Music.h"
 

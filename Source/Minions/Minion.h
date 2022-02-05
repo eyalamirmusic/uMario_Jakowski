@@ -2,7 +2,7 @@
 
 #include "CommonHeader.h"
 #include "CFG.h"
-#include "IMG.h"
+#include "Graphics/IMG.h"
 
 class Minion
 {

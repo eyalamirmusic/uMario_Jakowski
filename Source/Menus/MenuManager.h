@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IMG.h"
+#include "Graphics/IMG.h"
 #include "MainMenu.h"
 #include "LoadingMenu.h"
 #include "AboutMenu.h"

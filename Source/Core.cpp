@@ -1,11 +1,8 @@
 #include "CommonHeader.h"
 #include "Core.h"
-#include "IMG.h"
 #include "CFG.h"
-#include "Text.h"
 #include "SDL_mixer.h"
 
-/* ******************************************** */
 
 Map* CCore::oMap = new Map();
 bool CCore::mouseLeftPressed = false;

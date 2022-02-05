@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CommonHeader.h"
-#include "IMG.h"
+#include "Graphics/IMG.h"
 
 class Bubble
 {

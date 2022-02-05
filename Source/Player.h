@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sprite.h"
+#include "Graphics/Sprite.h"
 #include "Vector2.h"
 #include <vector>
 #include <string>

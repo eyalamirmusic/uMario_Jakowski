@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IMG.h"
-#include "Sprite.h"
+#include "Graphics/IMG.h"
+#include "Graphics/Sprite.h"
 
 class Block
 {
