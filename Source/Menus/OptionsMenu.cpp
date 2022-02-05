@@ -64,25 +64,25 @@ void OptionsMenu::draw(SDL_Renderer* rR)
     {
         if (i == activeMenuOption)
         {
-            getCFG().getText()->Draw(rR,
-                                  lMO[i]->getText(),
-                                  lMO[i]->getXPos(),
-                                  lMO[i]->getYPos(),
-                                  16,
-                                  255,
-                                  255,
-                                  255);
+            getCFG().getText()->draw(rR,
+                                     lMO[i]->getText(),
+                                     lMO[i]->getXPos(),
+                                     lMO[i]->getYPos(),
+                                     16,
+                                     255,
+                                     255,
+                                     255);
         }
         else
         {
-            getCFG().getText()->Draw(rR,
-                                  lMO[i]->getText(),
-                                  lMO[i]->getXPos(),
-                                  lMO[i]->getYPos(),
-                                  16,
-                                  90,
-                                  90,
-                                  90);
+            getCFG().getText()->draw(rR,
+                                     lMO[i]->getText(),
+                                     lMO[i]->getXPos(),
+                                     lMO[i]->getYPos(),
+                                     16,
+                                     90,
+                                     90,
+                                     90);
         }
     }
 
@@ -107,55 +107,55 @@ void OptionsMenu::draw(SDL_Renderer* rR)
         SDL_RenderDrawRect(rR, &rVolumeBG);
     }
 
-    getCFG().getText()->Draw(rR,
-                          getCFG().getKeyString(getCFG().keyIDA),
-                          185,
-                          89,
-                          16,
-                          activeMenuOption == 1 ? 255 : 90,
-                          activeMenuOption == 1 ? 255 : 90,
-                          activeMenuOption == 1 ? 255 : 90);
-    getCFG().getText()->Draw(rR,
-                          getCFG().getKeyString(getCFG().keyIDS),
-                          185,
-                          113,
-                          16,
-                          activeMenuOption == 2 ? 255 : 90,
-                          activeMenuOption == 2 ? 255 : 90,
-                          activeMenuOption == 2 ? 255 : 90);
-    getCFG().getText()->Draw(rR,
-                          getCFG().getKeyString(getCFG().keyIDD),
-                          185,
-                          137,
-                          16,
-                          activeMenuOption == 3 ? 255 : 90,
-                          activeMenuOption == 3 ? 255 : 90,
-                          activeMenuOption == 3 ? 255 : 90);
-    getCFG().getText()->Draw(rR,
-                          getCFG().getKeyString(getCFG().keyIDSpace),
-                          185,
-                          161,
-                          16,
-                          activeMenuOption == 4 ? 255 : 90,
-                          activeMenuOption == 4 ? 255 : 90,
-                          activeMenuOption == 4 ? 255 : 90);
-    getCFG().getText()->Draw(rR,
-                          getCFG().getKeyString(getCFG().keyIDShift),
-                          185,
-                          185,
-                          16,
-                          activeMenuOption == 5 ? 255 : 90,
-                          activeMenuOption == 5 ? 255 : 90,
-                          activeMenuOption == 5 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().getKeyString(getCFG().keyIDA),
+                             185,
+                             89,
+                             16,
+                             activeMenuOption == 1 ? 255 : 90,
+                             activeMenuOption == 1 ? 255 : 90,
+                             activeMenuOption == 1 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().getKeyString(getCFG().keyIDS),
+                             185,
+                             113,
+                             16,
+                             activeMenuOption == 2 ? 255 : 90,
+                             activeMenuOption == 2 ? 255 : 90,
+                             activeMenuOption == 2 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().getKeyString(getCFG().keyIDD),
+                             185,
+                             137,
+                             16,
+                             activeMenuOption == 3 ? 255 : 90,
+                             activeMenuOption == 3 ? 255 : 90,
+                             activeMenuOption == 3 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().getKeyString(getCFG().keyIDSpace),
+                             185,
+                             161,
+                             16,
+                             activeMenuOption == 4 ? 255 : 90,
+                             activeMenuOption == 4 ? 255 : 90,
+                             activeMenuOption == 4 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().getKeyString(getCFG().keyIDShift),
+                             185,
+                             185,
+                             16,
+                             activeMenuOption == 5 ? 255 : 90,
+                             activeMenuOption == 5 ? 255 : 90,
+                             activeMenuOption == 5 ? 255 : 90);
 
-    getCFG().getText()->Draw(rR,
-                          getCFG().canMoveBackward ? "TRUE" : "FALSE",
-                          357,
-                          209,
-                          16,
-                          activeMenuOption == 6 ? 255 : 90,
-                          activeMenuOption == 6 ? 255 : 90,
-                          activeMenuOption == 6 ? 255 : 90);
+    getCFG().getText()->draw(rR,
+                             getCFG().canMoveBackward ? "TRUE" : "FALSE",
+                             357,
+                             209,
+                             16,
+                             activeMenuOption == 6 ? 255 : 90,
+                             activeMenuOption == 6 ? 255 : 90,
+                             activeMenuOption == 6 ? 255 : 90);
 
     if (inSetKey)
     {
@@ -172,15 +172,15 @@ void OptionsMenu::draw(SDL_Renderer* rR)
         rSetKeyRect.h += 2;
         rSetKeyRect.w += 2;
 
-        getCFG().getText()->Draw(rR,
-                              "PRESS KEY FOR " + lMO[activeMenuOption]->getText(),
-                              92,
-                              rSetKeyRect.y + 16,
-                              16,
-                              255,
-                              255,
-                              255);
-        getCFG().getText()->Draw(
+        getCFG().getText()->draw(rR,
+                                 "PRESS KEY FOR " + lMO[activeMenuOption]->getText(),
+                                 92,
+                                 rSetKeyRect.y + 16,
+                                 16,
+                                 255,
+                                 255,
+                                 255);
+        getCFG().getText()->draw(
             rR, "PRESS ESC TO CANCEL", 92, rSetKeyRect.y + 40, 16, 255, 255, 255);
     }
 

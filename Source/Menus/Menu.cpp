@@ -5,7 +5,7 @@ void Menu::draw(SDL_Renderer* rR)
 {
     for (auto& i: lMO)
     {
-        getCFG().getText()->Draw(rR, i->getText(), i->getXPos(), i->getYPos());
+        getCFG().getText()->draw(rR, i->getText(), i->getXPos(), i->getYPos());
     }
 
     getCFG().getMM()->getActiveOption()->draw(

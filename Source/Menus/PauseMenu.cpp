@@ -37,12 +37,12 @@ void PauseMenu::draw(SDL_Renderer* rR)
     {
         if (i == activeMenuOption)
         {
-            getCFG().getText()->DrawCenterX(
+            getCFG().getText()->drawCenterX(
                 rR, lMO[i]->getText(), lMO[i]->getYPos(), 16, 255, 255, 255);
         }
         else
         {
-            getCFG().getText()->DrawCenterX(
+            getCFG().getText()->drawCenterX(
                 rR, lMO[i]->getText(), lMO[i]->getYPos(), 16, 90, 90, 90);
         }
     }

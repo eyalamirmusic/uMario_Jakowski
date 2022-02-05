@@ -1,31 +1,20 @@
 #include "Text.h"
 #include "Common/CFG.h"
 
-Text::Text(void)
+Text::Text()
 {
-    rCrop.x = 0;
-    rCrop.y = 0;
-    rCrop.w = 8;
-    rCrop.h = 8;
+    cropRect.x = 0;
+    cropRect.y = 0;
+    cropRect.w = 8;
+    cropRect.h = 8;
 
-    rRect.x = 0;
-    rRect.y = 0;
-    rRect.w = 16;
-    rRect.h = 16;
-
-    this->fontSize = 16;
-    this->extraLeft = 0;
-    this->nextExtraLeft = 0;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 16;
+    rect.h = 16;
 }
 
-Text::~Text(void)
-{
-    delete FONT;
-}
-
-/* ******************************************** */
-
-void Text::Draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize)
+void Text::draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize)
 {
     this->fontSize = fontSize;
     this->extraLeft = 0;
@@ -33,19 +22,19 @@ void Text::Draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize)
 
     for (unsigned int i = 0; i < sText.size(); i++)
     {
-        rCrop.x = getPos(sText.at(i));
+        cropRect.x = getPos(sText.at(i));
 
-        rRect.x = X + fontSize * i - extraLeft;
-        rRect.y = Y;
-        rRect.w = fontSize;
-        rRect.h = fontSize;
-        FONT->draw(rR, rCrop, rRect);
+        rect.x = X + fontSize * i - extraLeft;
+        rect.y = Y;
+        rect.w = fontSize;
+        rect.h = fontSize;
+        font->draw(rR, cropRect, rect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
     }
 }
 
-void Text::Draw(SDL_Renderer* rR,
+void Text::draw(SDL_Renderer* rR,
                 std::string sText,
                 int X,
                 int Y,
@@ -60,44 +49,44 @@ void Text::Draw(SDL_Renderer* rR,
 
     for (unsigned int i = 0; i < sText.size(); i++)
     {
-        SDL_SetTextureColorMod(FONT->getIMG(), iR, iG, iB);
-        rCrop.x = getPos(sText.at(i));
+        SDL_SetTextureColorMod(font->getIMG(), iR, iG, iB);
+        cropRect.x = getPos(sText.at(i));
 
-        rRect.x = X + fontSize * i - extraLeft;
-        rRect.y = Y;
-        rRect.w = fontSize;
-        rRect.h = fontSize;
-        FONT->draw(rR, rCrop, rRect);
+        rect.x = X + fontSize * i - extraLeft;
+        rect.y = Y;
+        rect.w = fontSize;
+        rect.h = fontSize;
+        font->draw(rR, cropRect, rect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
-        SDL_SetTextureColorMod(FONT->getIMG(), 255, 255, 255);
+        SDL_SetTextureColorMod(font->getIMG(), 255, 255, 255);
     }
 }
 
-void Text::DrawCenterX(
+void Text::drawCenterX(
     SDL_Renderer* rR, std::string sText, int Y, int fontSize, int iR, int iG, int iB)
 {
     int X = getCFG().GAME_WIDTH / 2 - getTextWidth(sText, fontSize) / 2;
 
-    Draw(rR, sText, X, Y, fontSize, iR, iG, iB);
+    draw(rR, sText, X, Y, fontSize, iR, iG, iB);
 }
 
-void Text::Draw(
+void Text::draw(
     SDL_Renderer* rR, std::string sText, int X, int Y, int iWidth, int iHeight)
 {
     for (unsigned int i = 0; i < sText.size(); i++)
     {
-        rCrop.x = getPos(sText.at(i));
+        cropRect.x = getPos(sText.at(i));
 
-        rRect.x = X + iWidth * i - extraLeft;
-        rRect.y = Y;
-        rRect.w = iWidth;
-        rRect.h = iHeight;
-        FONT->draw(rR, rCrop, rRect);
+        rect.x = X + iWidth * i - extraLeft;
+        rect.y = Y;
+        rect.w = iWidth;
+        rect.h = iHeight;
+        font->draw(rR, cropRect, rect);
     }
 }
 
-void Text::DrawWS(SDL_Renderer* rR,
+void Text::drawWS(SDL_Renderer* rR,
                   std::string sText,
                   int X,
                   int Y,
@@ -112,34 +101,30 @@ void Text::DrawWS(SDL_Renderer* rR,
 
     for (unsigned int i = 0; i < sText.size(); i++)
     {
-        SDL_SetTextureColorMod(FONT->getIMG(), 0, 0, 0);
-        rCrop.x = getPos(sText.at(i));
+        SDL_SetTextureColorMod(font->getIMG(), 0, 0, 0);
+        cropRect.x = getPos(sText.at(i));
 
-        rRect.x = X + fontSize * i - extraLeft - 1;
-        rRect.y = Y + 1;
-        rRect.w = fontSize;
-        rRect.h = fontSize;
-        FONT->draw(rR, rCrop, rRect);
-        SDL_SetTextureColorMod(FONT->getIMG(), 255, 255, 255);
-        rRect.x = X + fontSize * i - extraLeft + 1;
-        rRect.y = Y - 1;
-        FONT->draw(rR, rCrop, rRect);
+        rect.x = X + fontSize * i - extraLeft - 1;
+        rect.y = Y + 1;
+        rect.w = fontSize;
+        rect.h = fontSize;
+        font->draw(rR, cropRect, rect);
+        SDL_SetTextureColorMod(font->getIMG(), 255, 255, 255);
+        rect.x = X + fontSize * i - extraLeft + 1;
+        rect.y = Y - 1;
+        font->draw(rR, cropRect, rect);
         extraLeft += nextExtraLeft;
         nextExtraLeft = 0;
     }
 }
 
-/* ******************************************** */
-
 int Text::getTextWidth(std::string sText, int fontSize)
 {
-    int iOutput = sText.size() * fontSize;
+    int iOutput = (int)sText.size() * fontSize;
     nextExtraLeft = 0;
 
-    for (unsigned int i = 0; i < sText.size(); i++)
-    {
-        checkExtra(sText.at(i));
-    }
+    for (char i: sText)
+        checkExtra(i);
 
     iOutput -= nextExtraLeft;
 
@@ -151,18 +136,16 @@ int Text::getPos(int iChar)
     if (iChar >= 43 && iChar < 91)
     {
         checkExtra(iChar);
-        return (iChar - 43) * rCrop.w + rCrop.w;
+        return (iChar - 43) * cropRect.w + cropRect.w;
     }
 
     if (iChar >= 118 && iChar < 123)
     { // v w x y z
-        return (iChar - 70) * rCrop.w + rCrop.w;
+        return (iChar - 70) * cropRect.w + cropRect.w;
     }
 
     return 0;
 }
-
-/* ******************************************** */
 
 void Text::checkExtra(int iChar)
 {
@@ -172,14 +155,16 @@ void Text::checkExtra(int iChar)
         case 46:
         case 58:
         case 59:
-            nextExtraLeft += 4 * fontSize / rRect.w;
+            nextExtraLeft += 4 * fontSize / rect.w;
+            break;
+        default:
             break;
     }
 }
 
 /* ******************************************** */
 
-void Text::setFont(SDL_Renderer* rR, std::string fileName)
+void Text::setFont(SDL_Renderer* rR, const std::string& fileName)
 {
-    FONT = new CIMG(fileName, rR);
+    font.create(fileName, rR);
 }

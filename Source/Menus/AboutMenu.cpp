@@ -103,21 +103,21 @@ void AboutMenu::update()
 
 void AboutMenu::draw(SDL_Renderer* rR)
 {
-    getCFG().getText()->DrawWS(rR, "MARIO V 1.03 - C++ AND SDL2", 150, 128, 0, 0, 0);
-    getCFG().getText()->DrawWS(rR, "AUTOR: LUKASZ JAKOWSKI", 150, 146, 0, 0, 0);
+    getCFG().getText()->drawWS(rR, "MARIO V 1.03 - C++ AND SDL2", 150, 128, 0, 0, 0);
+    getCFG().getText()->drawWS(rR, "AUTOR: LUKASZ JAKOWSKI", 150, 146, 0, 0, 0);
 
-    getCFG().getText()->DrawWS(rR, "INFORMATYKA INZ 2012-2016", 150, 188, 0, 0, 0);
-    getCFG().getText()->DrawWS(
+    getCFG().getText()->drawWS(rR, "INFORMATYKA INZ 2012-2016", 150, 188, 0, 0, 0);
+    getCFG().getText()->drawWS(
         rR, "UNIWERSYTET SLASKI W KATOWICACH", 150, 206, 0, 0, 0);
-    getCFG().getText()->DrawWS(rR, "MAJ 2014", 150, 224, 0, 0, 0);
+    getCFG().getText()->drawWS(rR, "MAJ 2014", 150, 224, 0, 0, 0);
 
-    getCFG().getText()->DrawWS(rR, "WWW.LUKASZJAKOWSKI.PL", 150, 264, 0, 0, 0);
+    getCFG().getText()->drawWS(rR, "WWW.LUKASZJAKOWSKI.PL", 150, 264, 0, 0, 0);
 
     //getCFG().getText()->DrawWS(rR, std::to_string(iNumOfUnits), 5, getCFG().GAME_HEIGHT - 21, 0, 0, 0);
 
     for (unsigned int i = 0; i < lMO.size(); i++)
     {
-        getCFG().getText()->DrawWS(
+        getCFG().getText()->drawWS(
             rR, lMO[i]->getText(), lMO[i]->getXPos(), lMO[i]->getYPos(), 0, 0, 0);
     }
 

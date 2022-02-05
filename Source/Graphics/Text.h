@@ -5,25 +5,11 @@
 
 class Text
 {
-private:
-    CIMG* FONT;
-
-    SDL_Rect rCrop;
-    SDL_Rect rRect;
-
-    int fontSize;
-    int extraLeft, nextExtraLeft;
-
-    // ----- METHODS
-    int getPos(int iChar);
-    void checkExtra(int iChar);
-
 public:
-    Text(void);
-    ~Text(void);
+    Text();
 
-    void Draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize = 16);
-    void Draw(SDL_Renderer* rR,
+    void draw(SDL_Renderer* rR, std::string sText, int X, int Y, int fontSize = 16);
+    void draw(SDL_Renderer* rR,
               std::string sText,
               int X,
               int Y,
@@ -31,16 +17,16 @@ public:
               int iR,
               int iG,
               int iB);
-    void DrawCenterX(SDL_Renderer* rR,
+    void drawCenterX(SDL_Renderer* rR,
                      std::string sText,
                      int Y,
                      int fontSize = 16,
                      int iR = 255,
                      int iG = 255,
                      int iB = 255);
-    void Draw(
+    void draw(
         SDL_Renderer* rR, std::string sText, int X, int Y, int iWidth, int iHeight);
-    void DrawWS(SDL_Renderer* rR,
+    void drawWS(SDL_Renderer* rR,
                 std::string sText,
                 int X,
                 int Y,
@@ -51,6 +37,18 @@ public:
 
     int getTextWidth(std::string sText, int fontSize = 16);
 
-    // ----- SET FONT IMG
-    void setFont(SDL_Renderer* rR, std::string fileName);
+    void setFont(SDL_Renderer* rR, const std::string& fileName);
+
+private:
+    int getPos(int iChar);
+    void checkExtra(int iChar);
+
+    EA::OwningPointer<CIMG> font;
+
+    SDL_Rect cropRect;
+    SDL_Rect rect;
+
+    int fontSize = 16;
+    int extraLeft = 0;
+    int nextExtraLeft = 0;
 };

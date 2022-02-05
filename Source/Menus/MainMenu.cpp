@@ -25,10 +25,16 @@ void MainMenu::draw(SDL_Renderer* rR)
 {
     getCFG().getSMBLOGO()->draw(rR, 80, 48);
     Menu::draw(rR);
-    getCFG().getText()->Draw(
+    getCFG().getText()->draw(
         rR, "WWW.LUKASZJAKOWSKI.PL", 4, getCFG().GAME_HEIGHT - 4 - 8, 8, 0, 0, 0);
-    getCFG().getText()->Draw(
-        rR, "WWW.LUKASZJAKOWSKI.PL", 5, getCFG().GAME_HEIGHT - 5 - 8, 8, 255, 255, 255);
+    getCFG().getText()->draw(rR,
+                             "WWW.LUKASZJAKOWSKI.PL",
+                             5,
+                             getCFG().GAME_HEIGHT - 5 - 8,
+                             8,
+                             255,
+                             255,
+                             255);
 
     if (selectWorld)
     {
@@ -46,31 +52,31 @@ void MainMenu::draw(SDL_Renderer* rR)
         rSelectWorld.h += 2;
         rSelectWorld.w += 2;
 
-        getCFG().getText()->Draw(rR,
-                              "SELECT WORLD",
-                              rSelectWorld.x + rSelectWorld.w / 2
-                                  - getCFG().getText()->getTextWidth("SELECT WORLD")
-                                        / 2,
-                              rSelectWorld.y + 16,
-                              16,
-                              255,
-                              255,
-                              255);
+        getCFG().getText()->draw(
+            rR,
+            "SELECT WORLD",
+            rSelectWorld.x + rSelectWorld.w / 2
+                - getCFG().getText()->getTextWidth("SELECT WORLD") / 2,
+            rSelectWorld.y + 16,
+            16,
+            255,
+            255,
+            255);
 
         for (int i = 0, extraX = 0; i < 8; i++)
         {
             if (i == activeWorldID)
             {
-                getCFG().getText()->Draw(rR,
-                                      std::to_string(i + 1) + "-"
-                                          + std::to_string(activeSecondWorldID + 1),
-                                      rSelectWorld.x + 16 * (i + 1) + 16 * i
-                                          + extraX,
-                                      rSelectWorld.y + 16 + 24,
-                                      16,
-                                      255,
-                                      255,
-                                      255);
+                getCFG().getText()->draw(
+                    rR,
+                    std::to_string(i + 1) + "-"
+                        + std::to_string(activeSecondWorldID + 1),
+                    rSelectWorld.x + 16 * (i + 1) + 16 * i + extraX,
+                    rSelectWorld.y + 16 + 24,
+                    16,
+                    255,
+                    255,
+                    255);
 
                 extraX = 32;
 
@@ -84,15 +90,15 @@ void MainMenu::draw(SDL_Renderer* rR)
             }
             else
             {
-                getCFG().getText()->Draw(rR,
-                                      std::to_string(i + 1),
-                                      rSelectWorld.x + 16 * (i + 1) + 16 * i
-                                          + extraX,
-                                      rSelectWorld.y + 16 + 24,
-                                      16,
-                                      90,
-                                      90,
-                                      90);
+                getCFG().getText()->draw(rR,
+                                         std::to_string(i + 1),
+                                         rSelectWorld.x + 16 * (i + 1) + 16 * i
+                                             + extraX,
+                                         rSelectWorld.y + 16 + 24,
+                                         16,
+                                         90,
+                                         90,
+                                         90);
             }
         }
 

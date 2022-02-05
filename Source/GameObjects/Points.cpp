@@ -49,7 +49,7 @@ void Points::Update()
 
 void Points::Draw(SDL_Renderer* rR)
 {
-    getCFG().getText()->Draw(
+    getCFG().getText()->draw(
         rR, sText, iXPos + (int) CCore::getMap()->getXPos(), iYPos, iW, iH);
 }
 

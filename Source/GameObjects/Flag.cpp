@@ -43,12 +43,12 @@ void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
 
     if (iPoints > 0)
     {
-        getCFG().getText()->Draw(rR,
-                              std::to_string(iPoints),
-                              (int) (iXPos + CCore::getMap()->getXPos() + 42),
-                              iYTextPos - 22,
-                              8,
-                              16);
+        getCFG().getText()->draw(rR,
+                                 std::to_string(iPoints),
+                                 (int) (iXPos + CCore::getMap()->getXPos() + 42),
+                                 iYTextPos - 22,
+                                 8,
+                                 16);
     }
 }
 

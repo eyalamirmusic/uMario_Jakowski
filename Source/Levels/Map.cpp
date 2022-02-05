@@ -671,10 +671,10 @@ void Map::Draw(SDL_Renderer* rR)
 
     for (unsigned int i = 0; i < vLevelText.size(); i++)
     {
-        getCFG().getText()->Draw(rR,
-                              vLevelText[i]->getText(),
-                              vLevelText[i]->getXPos() + (int) fXPos,
-                              vLevelText[i]->getYPos());
+        getCFG().getText()->draw(rR,
+                                 vLevelText[i]->getText(),
+                                 vLevelText[i]->getXPos() + (int) fXPos,
+                                 vLevelText[i]->getYPos());
     }
     /*
 	if(drawLines) {
@@ -742,34 +742,35 @@ void Map::DrawMinions(SDL_Renderer* rR)
 
 void Map::DrawGameLayout(SDL_Renderer* rR)
 {
-    getCFG().getText()->Draw(rR, "MARIO", 54, 16);
+    getCFG().getText()->draw(rR, "MARIO", 54, 16);
 
     if (oPlayer->getScore() < 100)
     {
-        getCFG().getText()->Draw(
+        getCFG().getText()->draw(
             rR, "00000" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 1000)
     {
-        getCFG().getText()->Draw(
+        getCFG().getText()->draw(
             rR, "000" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 10000)
     {
-        getCFG().getText()->Draw(
+        getCFG().getText()->draw(
             rR, "00" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else if (oPlayer->getScore() < 100000)
     {
-        getCFG().getText()->Draw(rR, "0" + std::to_string(oPlayer->getScore()), 54, 32);
+        getCFG().getText()->draw(
+            rR, "0" + std::to_string(oPlayer->getScore()), 54, 32);
     }
     else
     {
-        getCFG().getText()->Draw(rR, std::to_string(oPlayer->getScore()), 54, 32);
+        getCFG().getText()->draw(rR, std::to_string(oPlayer->getScore()), 54, 32);
     }
 
-    getCFG().getText()->Draw(rR, "WORLD", 462, 16);
-    getCFG().getText()->Draw(rR, getLevelName(), 480, 32);
+    getCFG().getText()->draw(rR, "WORLD", 462, 16);
+    getCFG().getText()->draw(rR, getLevelName(), 480, 32);
 
     if (iLevelType != 1)
     {
@@ -779,28 +780,28 @@ void Map::DrawGameLayout(SDL_Renderer* rR)
     {
         vBlock[57]->Draw(rR, 268, 32);
     }
-    getCFG().getText()->Draw(rR, "y", 286, 32);
-    getCFG().getText()->Draw(rR,
-                          (oPlayer->getCoins() < 10 ? "0" : "")
-                              + std::to_string(oPlayer->getCoins()),
-                          302,
-                          32);
+    getCFG().getText()->draw(rR, "y", 286, 32);
+    getCFG().getText()->draw(rR,
+                             (oPlayer->getCoins() < 10 ? "0" : "")
+                                 + std::to_string(oPlayer->getCoins()),
+                             302,
+                             32);
 
-    getCFG().getText()->Draw(rR, "TIME", 672, 16);
+    getCFG().getText()->draw(rR, "TIME", 672, 16);
 
     if (getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
     {
         if (iMapTime > 100)
         {
-            getCFG().getText()->Draw(rR, std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->draw(rR, std::to_string(iMapTime), 680, 32);
         }
         else if (iMapTime > 10)
         {
-            getCFG().getText()->Draw(rR, "0" + std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->draw(rR, "0" + std::to_string(iMapTime), 680, 32);
         }
         else
         {
-            getCFG().getText()->Draw(rR, "00" + std::to_string(iMapTime), 680, 32);
+            getCFG().getText()->draw(rR, "00" + std::to_string(iMapTime), 680, 32);
         }
     }
 }
@@ -832,7 +833,7 @@ void Map::DrawLines(SDL_Renderer* rR)
     {
         for (int j = 0; j < getCFG().GAME_HEIGHT / 32; j++)
         {
-            getCFG().getText()->Draw(
+            getCFG().getText()->draw(
                 rR,
                 std::to_string(i + (-((int) fXPos + (-(int) fXPos) % 32)) / 32),
                 32 * i + 16 - (-(int) fXPos) % 32
@@ -843,7 +844,7 @@ void Map::DrawLines(SDL_Renderer* rR)
                           / 2,
                 getCFG().GAME_HEIGHT - 9 - 32 * j,
                 8);
-            getCFG().getText()->Draw(
+            getCFG().getText()->draw(
                 rR,
                 std::to_string(j),
                 32 * i + 16 - (-(int) fXPos) % 32

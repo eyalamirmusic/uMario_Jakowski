@@ -34,34 +34,35 @@ void LoadingMenu::draw(SDL_Renderer* rR)
     if (loadingType)
     {
         CCore::getMap()->DrawGameLayout(rR);
-        getCFG().getText()->Draw(rR, "WORLD", 320, 144);
-        getCFG().getText()->Draw(rR, CCore::getMap()->getLevelName(), 416, 144);
+        getCFG().getText()->draw(rR, "WORLD", 320, 144);
+        getCFG().getText()->draw(rR, CCore::getMap()->getLevelName(), 416, 144);
 
         CCore::getMap()->getPlayer()->getMarioSprite()->getTexture()->draw(
             rR, 342, 210 - CCore::getMap()->getPlayer()->getHitBoxY() / 2);
 
-        getCFG().getText()->Draw(rR, "y", 384, 208);
+        getCFG().getText()->draw(rR, "y", 384, 208);
 
         if (CCore::getMap()->getPlayer()->getNumOfLives() > 9)
         {
             CCore::getMap()->getBlock(180)->getSprite()->getTexture()->draw(
                 rR, 410, 210);
         }
-        getCFG().getText()->Draw(
+        getCFG().getText()->draw(
             rR,
             std::to_string(CCore::getMap()->getPlayer()->getNumOfLives()),
             432,
             208);
-        getCFG().getText()->DrawCenterX(rR,
-                                     "REMEMBER THAT YOU CAN RUN WITH "
-                                         + getCFG().getKeyString(getCFG().keyIDShift),
-                                     400,
-                                     16);
+        getCFG().getText()->drawCenterX(
+            rR,
+            "REMEMBER THAT YOU CAN RUN WITH "
+                + getCFG().getKeyString(getCFG().keyIDShift),
+            400,
+            16);
     }
     else
     {
         CCore::getMap()->DrawGameLayout(rR);
-        getCFG().getText()->DrawCenterX(rR, "GAME OVER", 240, 16);
+        getCFG().getText()->drawCenterX(rR, "GAME OVER", 240, 16);
     }
 }
 
