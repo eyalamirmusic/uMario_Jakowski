@@ -95,10 +95,10 @@ void Pipe::setEvent()
     if (iType == 0)
     { // VERTICAL -> NONE
         event->newPlayerYPos -= player->getPowerLVL() > 0 ? 32 : 0;
-        event->vOLDDir.push_back(Mario::Animations::eBOT);
+        event->vOLDDir.push_back(Mario::Animations::Bot);
         event->vOLDLength.push_back(player->getHitBoxY());
 
-        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDDir.push_back(Mario::Animations::Nothing);
         event->vOLDLength.push_back(35);
 
         for (int i = 0; i < 3; i++)
@@ -111,19 +111,19 @@ void Pipe::setEvent()
     {
         event->newPlayerXPos += 32 - player->getHitBoxX() / 2;
 
-        event->vOLDDir.push_back(Mario::Animations::eRIGHT);
+        event->vOLDDir.push_back(Mario::Animations::Right);
         event->vOLDLength.push_back(player->getHitBoxX());
 
-        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDDir.push_back(Mario::Animations::Nothing);
         event->vOLDLength.push_back(35);
 
-        event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);
+        event->vNEWDir.push_back(Mario::Animations::PlayPipeTop);
         event->vNEWLength.push_back(1);
 
-        event->vNEWDir.push_back(Mario::Animations::eNOTHING);
+        event->vNEWDir.push_back(Mario::Animations::Nothing);
         event->vNEWLength.push_back(35);
 
-        event->vNEWDir.push_back(Mario::Animations::eTOP);
+        event->vNEWDir.push_back(Mario::Animations::Top);
         event->vNEWLength.push_back(player->getHitBoxY());
 
         for (int i = 0; i < 3; i++)
@@ -144,10 +144,10 @@ void Pipe::setEvent()
     { // -- VERT -> VERT
         event->newPlayerXPos -=
             player->getPowerLVL() > 0 ? 32 : 0 - player->getHitBoxX() / 2;
-        event->vOLDDir.push_back(Mario::Animations::eBOT);
+        event->vOLDDir.push_back(Mario::Animations::Bot);
         event->vOLDLength.push_back(player->getHitBoxY());
 
-        event->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        event->vOLDDir.push_back(Mario::Animations::Nothing);
         event->vOLDLength.push_back(55);
 
         for (int i = 0; i < 3; i++)
@@ -164,13 +164,13 @@ void Pipe::setEvent()
             event->redraw.add({nextX, y});
         }
 
-        event->vNEWDir.push_back(Mario::Animations::ePLAYPIPETOP);
+        event->vNEWDir.push_back(Mario::Animations::PlayPipeTop);
         event->vNEWLength.push_back(1);
 
-        event->vNEWDir.push_back(Mario::Animations::eNOTHING);
+        event->vNEWDir.push_back(Mario::Animations::Nothing);
         event->vNEWLength.push_back(35);
 
-        event->vNEWDir.push_back(Mario::Animations::eTOP);
+        event->vNEWDir.push_back(Mario::Animations::Top);
         event->vNEWLength.push_back(player->getHitBoxY());
     }
 

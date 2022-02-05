@@ -125,13 +125,13 @@ void Vine::collisionWithPlayer(bool TOP)
             > map->getPlayer()->getXPos() - map->getXPos())
         {
             event->vOLDDir.push_back(
-                Mario::Animations::eRIGHT);
+                Mario::Animations::Right);
             event->vOLDLength.push_back(map->getPlayer()->getHitBoxX() - 4);
         }
         else
         {
             event->vOLDDir.push_back(
-                Mario::Animations::eLEFT);
+                Mario::Animations::Left);
             event->vOLDLength.push_back(map->getPlayer()->getHitBoxX() - 4);
         }
 
@@ -140,10 +140,10 @@ void Vine::collisionWithPlayer(bool TOP)
              i += 32)
         {
             event->vOLDDir.push_back(
-                Mario::Animations::eVINE1);
+                Mario::Animations::Vine1);
             event->vOLDLength.push_back(16);
             event->vOLDDir.push_back(
-                Mario::Animations::eVINE2);
+                Mario::Animations::Vine2);
             event->vOLDLength.push_back(16);
         }
 
@@ -156,7 +156,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newPlayerYPos =
                     CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->vOLDDir.push_back(
-                    Mario::Animations::eVINESPAWN);
+                    Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(274);
 
                 break;
@@ -168,7 +168,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newPlayerYPos =
                     CCFG::GAME_HEIGHT - map->getPlayer()->getHitBoxY();
                 event->vOLDDir.push_back(
-                    Mario::Animations::eVINESPAWN);
+                    Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(274);
 
                 break;
@@ -182,7 +182,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newLevelType = 0;
 
                 event->vOLDDir.push_back(
-                    Mario::Animations::eVINESPAWN);
+                    Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(314);
                 break;
             }
@@ -195,7 +195,7 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newLevelType = 0;
 
                 event->vOLDDir.push_back(
-                    Mario::Animations::eVINESPAWN);
+                    Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(329);
                 break;
             }
@@ -208,23 +208,23 @@ void Vine::collisionWithPlayer(bool TOP)
                 event->newLevelType = 4;
 
                 event->vOLDDir.push_back(
-                    Mario::Animations::eVINESPAWN);
+                    Mario::Animations::VineSpawn);
                 event->vOLDLength.push_back(394);
                 break;
             }
         }
 
         event->vOLDDir.push_back(
-            Mario::Animations::eNOTHING);
+            Mario::Animations::Nothing);
         event->vOLDLength.push_back(60);
 
         for (int i = 0; i < 64; i += 32)
         {
             event->vNEWDir.push_back(
-                Mario::Animations::eVINE1);
+                Mario::Animations::Vine1);
             event->vNEWLength.push_back(16);
             event->vNEWDir.push_back(
-                Mario::Animations::eVINE2);
+                Mario::Animations::Vine2);
             event->vNEWLength.push_back(16);
         }
     }

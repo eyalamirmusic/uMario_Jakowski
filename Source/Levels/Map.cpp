@@ -10759,24 +10759,24 @@ void Map::EndUse()
         oFlag->iPoints = 100;
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eRIGHTEND);
+    oEvent->vOLDDir.push_back(Mario::Animations::RightEnd);
     oEvent->vOLDLength.push_back(oPlayer->getHitBoxX());
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eENDBOT1);
+    oEvent->vOLDDir.push_back(Mario::Animations::EndBot1);
     oEvent->vOLDLength.push_back((CCFG::GAME_HEIGHT - 16 - 32 * 2)
                                  - oPlayer->getYPos() - oPlayer->getHitBoxY() - 2);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eENDBOT2);
+    oEvent->vOLDDir.push_back(Mario::Animations::EndBot2);
     oEvent->vOLDLength.push_back((CCFG::GAME_HEIGHT - 16 - 32 * 2)
                                  - oPlayer->getYPos() - oPlayer->getHitBoxY() - 2);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eRIGHTEND);
+    oEvent->vOLDDir.push_back(Mario::Animations::RightEnd);
     oEvent->vOLDLength.push_back(oPlayer->getHitBoxX());
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eBOTRIGHTEND);
+    oEvent->vOLDDir.push_back(Mario::Animations::BotRightEnd);
     oEvent->vOLDLength.push_back(32);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eRIGHTEND);
+    oEvent->vOLDDir.push_back(Mario::Animations::RightEnd);
     oEvent->vOLDLength.push_back(132);
 
     oEvent->iSpeed = 3;
@@ -10840,7 +10840,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -10887,7 +10887,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -10912,7 +10912,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -10972,7 +10972,7 @@ void Map::EndUse()
             oEvent->newPlayerYPos = 150;
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11037,7 +11037,7 @@ void Map::EndUse()
                 oEvent->newPlayerYPos = 150;
                 oEvent->newMoveMap = true;
 
-                oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+                oEvent->vOLDDir.push_back(Mario::Animations::Right);
                 oEvent->vOLDLength.push_back(32);
 
                 oFlag->castleFlagExtraXPos = 32;
@@ -11106,7 +11106,7 @@ void Map::EndUse()
             oEvent->newPlayerYPos = 150;
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11133,7 +11133,7 @@ void Map::EndUse()
             oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(96);
 
             oFlag->castleFlagExtraXPos = 96;
@@ -11159,7 +11159,7 @@ void Map::EndUse()
             oEvent->newPlayerYPos = CCFG::GAME_HEIGHT - 48 - oPlayer->getHitBoxY();
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11185,7 +11185,7 @@ void Map::EndUse()
             oEvent->newPlayerYPos = 150;
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11234,7 +11234,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11259,7 +11259,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(32);
 
             oFlag->castleFlagExtraXPos = 32;
@@ -11328,7 +11328,7 @@ void Map::EndUse()
 
             oPlayer->setMoveDirection(true);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(128);
 
             oFlag->castleFlagExtraXPos = 128;
@@ -11341,10 +11341,10 @@ void Map::EndUse()
         }
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eENDPOINTS);
+    oEvent->vOLDDir.push_back(Mario::Animations::EndPoints);
     oEvent->vOLDLength.push_back(iMapTime);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(128);
 }
 
@@ -11401,52 +11401,52 @@ void Map::EndBoss()
             ->getBlockID()
         == 82)
     {
-        oEvent->vOLDDir.push_back(Mario::Animations::eBOT);
+        oEvent->vOLDDir.push_back(Mario::Animations::Bot);
         oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
     }
     else
     {
-        oEvent->vOLDDir.push_back(Mario::Animations::eBOTRIGHTEND);
+        oEvent->vOLDDir.push_back(Mario::Animations::BotRightEnd);
         oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
 
-        oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+        oEvent->vOLDDir.push_back(Mario::Animations::Right);
         oEvent->vOLDLength.push_back(32 - CCFG::GAME_HEIGHT - 16 - 5 * 32
                                      - (oPlayer->getYPos() + oPlayer->getHitBoxY()));
         addOne = true;
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eBOSSEND1);
+    oEvent->vOLDDir.push_back(Mario::Animations::BossEnd1);
     oEvent->vOLDLength.push_back(1);
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(10);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eBOSSEND2);
+    oEvent->vOLDDir.push_back(Mario::Animations::BossEnd2);
     oEvent->vOLDLength.push_back(1);
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(3);
 
     for (int i = 0; i < 6; i++)
     {
-        oEvent->vOLDDir.push_back(Mario::Animations::eBOSSEND3);
+        oEvent->vOLDDir.push_back(Mario::Animations::BossEnd3);
         oEvent->vOLDLength.push_back(2 + i);
-        oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
         oEvent->vOLDLength.push_back(3);
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eBOSSEND4);
+    oEvent->vOLDDir.push_back(Mario::Animations::BossEnd4);
     oEvent->vOLDLength.push_back(1);
 
     for (int i = 6; i < 12; i++)
     {
-        oEvent->vOLDDir.push_back(Mario::Animations::eBOSSEND3);
+        oEvent->vOLDDir.push_back(Mario::Animations::BossEnd3);
         oEvent->vOLDLength.push_back(2 + i);
-        oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
         oEvent->vOLDLength.push_back(3);
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(90);
 
     if (currentLevelID == 31)
@@ -11455,13 +11455,13 @@ void Map::EndBoss()
         CCFG::getMusic()->playEffect(Mario::Music::Effects::PrincessMusic);
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eBOTRIGHTBOSS);
+    oEvent->vOLDDir.push_back(Mario::Animations::BotRightBoss);
     oEvent->vOLDLength.push_back(8 * 32);
 
     switch (currentLevelID)
     {
         case 31:
-            oEvent->vOLDDir.push_back(Mario::Animations::eENDGAMEBOSSTEXT1);
+            oEvent->vOLDDir.push_back(Mario::Animations::EndGameBossText1);
             oEvent->vOLDLength.push_back(
                 getBlockIDX(
                     (int) (oPlayer->getXPos() + oPlayer->getHitBoxX() / 2 - fXPos))
@@ -11469,7 +11469,7 @@ void Map::EndBoss()
                 + 7 * 32 + (addOne ? 32 : 0));
             break;
         default:
-            oEvent->vOLDDir.push_back(Mario::Animations::eBOSSTEXT1);
+            oEvent->vOLDDir.push_back(Mario::Animations::BossText1);
             oEvent->vOLDLength.push_back(
                 getBlockIDX(
                     (int) (oPlayer->getXPos() + oPlayer->getHitBoxX() / 2 - fXPos))
@@ -11478,19 +11478,19 @@ void Map::EndBoss()
             break;
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+    oEvent->vOLDDir.push_back(Mario::Animations::Right);
     oEvent->vOLDLength.push_back(2 * 32 + 16);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eMARIOSPRITE1);
+    oEvent->vOLDDir.push_back(Mario::Animations::MarioSprite1);
     oEvent->vOLDLength.push_back(1);
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(90);
 
     switch (currentLevelID)
     {
         case 31:
-            oEvent->vOLDDir.push_back(Mario::Animations::eENDGAMEBOSSTEXT2);
+            oEvent->vOLDDir.push_back(Mario::Animations::EndGameBossText2);
             oEvent->vOLDLength.push_back(
                 getBlockIDX(
                     (int) (oPlayer->getXPos() + oPlayer->getHitBoxX() / 2 - fXPos))
@@ -11498,7 +11498,7 @@ void Map::EndBoss()
                 + 5 * 32 + (addOne ? 32 : 0) + 28);
             break;
         default:
-            oEvent->vOLDDir.push_back(Mario::Animations::eBOSSTEXT2);
+            oEvent->vOLDDir.push_back(Mario::Animations::BossText2);
             oEvent->vOLDLength.push_back(
                 getBlockIDX(
                     (int) (oPlayer->getXPos() + oPlayer->getHitBoxX() / 2 - fXPos))
@@ -11507,13 +11507,13 @@ void Map::EndBoss()
             break;
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(300 + (currentLevelID == 31 ? 100 : 0));
 
     switch (currentLevelID)
     {
         case 31:
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(90);
             break;
     }
@@ -11572,7 +11572,7 @@ void Map::EndBonus()
         }
     }
 
-    oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+    oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
     oEvent->vOLDLength.push_back(1);
 }
 
@@ -11602,13 +11602,13 @@ void Map::playerDeath(bool animation, bool instantDeath)
 
             oPlayer->setYPos(oPlayer->getYPos() + 4.0f);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eDEATHNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::DeathNothing);
             oEvent->vOLDLength.push_back(30);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eDEATHTOP);
+            oEvent->vOLDDir.push_back(Mario::Animations::DeathTop);
             oEvent->vOLDLength.push_back(64);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eDEATHBOT);
+            oEvent->vOLDDir.push_back(Mario::Animations::DeathBot);
             oEvent->vOLDLength.push_back(CCFG::GAME_HEIGHT - oPlayer->getYPos()
                                          + 128);
         }
@@ -11617,16 +11617,16 @@ void Map::playerDeath(bool animation, bool instantDeath)
             oEvent->iSpeed = 4;
             oEvent->newLevelType = iLevelType;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eDEATHTOP);
+            oEvent->vOLDDir.push_back(Mario::Animations::DeathTop);
             oEvent->vOLDLength.push_back(1);
         }
 
-        oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+        oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
         oEvent->vOLDLength.push_back(64);
 
         if (oPlayer->getNumOfLives() > 1)
         {
-            oEvent->vOLDDir.push_back(Mario::Animations::eLOADINGMENU);
+            oEvent->vOLDDir.push_back(Mario::Animations::LoadingMenu);
             oEvent->vOLDLength.push_back(90);
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
@@ -11636,7 +11636,7 @@ void Map::playerDeath(bool animation, bool instantDeath)
         }
         else
         {
-            oEvent->vOLDDir.push_back(Mario::Animations::eGAMEOVER);
+            oEvent->vOLDDir.push_back(Mario::Animations::GameOver);
             oEvent->vOLDLength.push_back(90);
 
             oPlayer->setNumOfLives(oPlayer->getNumOfLives() - 1);
@@ -11676,16 +11676,16 @@ void Map::startLevelAnimation()
             oEvent->newPlayerYPos = 64;
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(7 * 32 + 4);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::ePLAYPIPERIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::PlayPipeRight);
             oEvent->vOLDLength.push_back(1);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(1 * 32 - 2);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(75);
 
             oEvent->redraw.add({220, 2});
@@ -11708,16 +11708,16 @@ void Map::startLevelAnimation()
             oEvent->newMoveMap = true;
             oEvent->newUnderWater = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(7 * 32 + 4);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::ePLAYPIPERIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::PlayPipeRight);
             oEvent->vOLDLength.push_back(1);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(1 * 32 - 2);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(75);
 
             oEvent->redraw.add({230, 2});
@@ -11739,16 +11739,16 @@ void Map::startLevelAnimation()
             oEvent->newPlayerYPos = 64;
             oEvent->newMoveMap = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(7 * 32 + 4);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::ePLAYPIPERIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::PlayPipeRight);
             oEvent->vOLDLength.push_back(1);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(1 * 32 - 2);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(75);
 
             oEvent->redraw.add({250, 2});
@@ -11771,16 +11771,16 @@ void Map::startLevelAnimation()
             oEvent->newMoveMap = true;
             oEvent->newUnderWater = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(7 * 32 + 4);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::ePLAYPIPERIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::PlayPipeRight);
             oEvent->vOLDLength.push_back(1);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(1 * 32 - 2);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(75);
 
             oEvent->redraw.add({230, 2});
@@ -11803,16 +11803,16 @@ void Map::startLevelAnimation()
             oEvent->newMoveMap = true;
             oEvent->newUnderWater = true;
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(7 * 32 + 4);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::ePLAYPIPERIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::PlayPipeRight);
             oEvent->vOLDLength.push_back(1);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eRIGHT);
+            oEvent->vOLDDir.push_back(Mario::Animations::Right);
             oEvent->vOLDLength.push_back(1 * 32 - 2);
 
-            oEvent->vOLDDir.push_back(Mario::Animations::eNOTHING);
+            oEvent->vOLDDir.push_back(Mario::Animations::Nothing);
             oEvent->vOLDLength.push_back(75);
 
             oEvent->redraw.add({230, 2});

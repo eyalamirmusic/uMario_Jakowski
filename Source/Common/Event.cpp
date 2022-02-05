@@ -66,48 +66,48 @@ void Event::normal()
 
                 switch (vOLDDir[(int) stepID])
                 {
-                    case Animations::eTOP: // TOP
+                    case Animations::Top: // TOP
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         break;
-                    case Animations::eBOT:
+                    case Animations::Bot:
                         player->setYPos((float) player->getYPos() + speed);
                         length -= speed;
                         break;
-                    case Animations::eRIGHT:
+                    case Animations::Right:
                         player->setXPos((float) player->getXPos() + speed);
                         length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(true);
                         break;
-                    case Animations::eRIGHTEND:
+                    case Animations::RightEnd:
                         map->setXPos((float) map->getXPos() - speed);
                         length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(true);
                         break;
-                    case Animations::eLEFT:
+                    case Animations::Left:
                         player->setXPos((float) player->getXPos() - speed);
                         length -= speed;
                         player->moveAnimation();
                         player->setMoveDirection(false);
                         break;
-                    case Animations::eBOTRIGHTEND: // BOT & RIGHT
+                    case Animations::BotRightEnd: // BOT & RIGHT
                         player->setYPos((float) player->getYPos() + speed);
                         map->setXPos((float) map->getXPos() - speed);
                         length -= speed;
                         player->moveAnimation();
                         break;
-                    case Animations::eENDBOT1:
+                    case Animations::EndBot1:
                         player->setYPos((float) player->getYPos() + speed);
                         length -= speed;
                         player->setMarioSpriteID(10);
                         break;
-                    case Animations::eENDBOT2:
+                    case Animations::EndBot2:
                         length -= speed;
                         player->setMoveDirection(false);
                         break;
-                    case Animations::eENDPOINTS:
+                    case Animations::EndPoints:
                         if (map->getMapTime() > 0)
                         {
                             map->setMapTime(map->getMapTime() - 1);
@@ -125,29 +125,29 @@ void Event::normal()
                         }
                         map->getFlag()->UpdateCastleFlag();
                         break;
-                    case Animations::eDEATHNOTHING:
+                    case Animations::DeathNothing:
                         length -= speed;
                         player->setMarioSpriteID(0);
                         break;
-                    case Animations::eDEATHTOP: // DEATH TOP
+                    case Animations::DeathTop: // DEATH TOP
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(0);
                         break;
-                    case Animations::eDEATHBOT: // DEATH BOT
+                    case Animations::DeathBot: // DEATH BOT
                         player->setYPos((float) player->getYPos() + speed);
                         length -= speed;
                         player->setMarioSpriteID(0);
                         break;
-                    case Animations::eNOTHING: // NOTHING YAY
+                    case Animations::Nothing: // NOTHING YAY
                         length -= 1;
                         break;
-                    case Animations::ePLAYPIPERIGHT:
+                    case Animations::PlayPipeRight:
                         player->setXPos((float) player->getXPos() + speed);
                         length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
-                    case Animations::eLOADINGMENU:
+                    case Animations::LoadingMenu:
                         length -= 1;
 
                         if (length < 2)
@@ -161,7 +161,7 @@ void Event::normal()
                             CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
                         }
                         break;
-                    case Animations::eGAMEOVER:
+                    case Animations::GameOver:
                         length -= 1;
 
                         if (length < 2)
@@ -178,7 +178,7 @@ void Event::normal()
                                 Mario::Music::Effects::GameOver);
                         }
                         break;
-                    case Animations::eBOSSEND1:
+                    case Animations::BossEnd1:
                         for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
                             if (map->getMapBlock(i, 6)->getBlockID() == 82)
@@ -194,7 +194,7 @@ void Event::normal()
                         length = 0;
                         player->setMoveDirection(false);
                         break;
-                    case Animations::eBOSSEND2:
+                    case Animations::BossEnd2:
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - 1, 5)->setBlockID(0);
                         //CCore::getMap()->getMapBlock(CCore::getMap()->getBlockIDX((int)(CCore::getMap()->getPlayer()->getXPos() + CCore::getMap()->getPlayer()->getHitBoxX()/2 - CCore::getMap()->getXPos())) - 1, 4)->setBlockID(0);
                         for (int i = map->getMapWidth() - 1; i > 0; i--)
@@ -217,7 +217,7 @@ void Event::normal()
                             Mario::Music::Effects::BridgeBreak);
                         length = 0;
                         break;
-                    case Animations::eBOSSEND3:
+                    case Animations::BossEnd3:
                         for (int i = map->getMapWidth() - 1; i > 0; i--)
                         {
                             if (map->getMapBlock(i, 4)->getBlockID() == 76)
@@ -232,24 +232,24 @@ void Event::normal()
                         player->setMoveDirection(true);
                         length = 0;
                         break;
-                    case Animations::eBOSSEND4:
+                    case Animations::BossEnd4:
                         CCFG::getMusic()->playEffect(
                             Mario::Music::Effects::BowserFall);
                         length = 0;
                         break;
-                    case Animations::eBOTRIGHTBOSS: // BOT & RIGHT
+                    case Animations::BotRightBoss: // BOT & RIGHT
                         player->moveAnimation();
                         player->playerPhysics();
                         map->setXPos((float) map->getXPos() - speed);
                         length -= speed;
                         break;
-                    case Animations::eBOSSTEXT1:
+                    case Animations::BossText1:
                         map->addText(length,
                                      CCFG::GAME_HEIGHT - 16 - 9 * 32,
                                      "THANK YOU MARIOz");
                         length = 0;
                         break;
-                    case Animations::eBOSSTEXT2:
+                    case Animations::BossText2:
                         map->addText(length + 16,
                                      CCFG::GAME_HEIGHT - 16 - 7 * 32,
                                      "BUT OUR PRINCESS IS IN");
@@ -258,33 +258,33 @@ void Event::normal()
                                      "ANOTHER CASTLEz");
                         length = 0;
                         break;
-                    case Animations::eENDGAMEBOSSTEXT1:
+                    case Animations::EndGameBossText1:
                         map->addText(length,
                                      CCFG::GAME_HEIGHT - 16 - 9 * 32,
                                      "THANK YOU MARIOz");
                         length = 0;
                         break;
-                    case Animations::eENDGAMEBOSSTEXT2:
+                    case Animations::EndGameBossText2:
                         map->addText(length + 16,
                                      CCFG::GAME_HEIGHT - 16 - 7 * 32,
                                      "YOUR QUEST IS OVER.");
                         length = 0;
                         break;
-                    case Animations::eMARIOSPRITE1:
+                    case Animations::MarioSprite1:
                         player->setMarioSpriteID(1);
                         length = 0;
                         break;
-                    case Animations::eVINE1:
+                    case Animations::Vine1:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(10);
                         break;
-                    case Animations::eVINE2:
+                    case Animations::Vine2:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(11);
                         break;
-                    case Animations::eVINESPAWN:
+                    case Animations::VineSpawn:
                         map->addVine(length,
                                      0,
                                      1,
@@ -292,7 +292,7 @@ void Event::normal()
                                                                             : 36);
                         length = 0;
                         break;
-                    case Animations::ePLAYPIPETOP:
+                    case Animations::PlayPipeTop:
                         break;
                 }
             }
@@ -347,71 +347,71 @@ void Event::normal()
 
                 switch (vNEWDir[(int) stepID])
                 {
-                    case Animations::eTOP: // TOP
+                    case Animations::Top: // TOP
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         break;
 
-                    case Animations::eBOT:
+                    case Animations::Bot:
                         player->setYPos((float) player->getYPos() + speed);
                         length -= speed;
                         break;
 
-                    case Animations::eRIGHT:
+                    case Animations::Right:
                         player->setXPos((float) player->getXPos() + speed);
                         length -= speed;
                         player->moveAnimation();
                         break;
 
-                    case Animations::eLEFT:
+                    case Animations::Left:
                         player->setXPos((float) player->getXPos() - speed);
                         length -= speed;
                         player->moveAnimation();
                         break;
 
-                    case Animations::ePLAYPIPETOP:
+                    case Animations::PlayPipeTop:
                         length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
 
-                    case Animations::eNOTHING: // NOTHING YAY
+                    case Animations::Nothing: // NOTHING YAY
                         length -= 1;
                         break;
 
-                    case Animations::eVINE1:
+                    case Animations::Vine1:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(10);
                         break;
 
-                    case Animations::eVINE2:
+                    case Animations::Vine2:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(11);
                         break;
 
-                    case Animations::eRIGHTEND:
-                    case Animations::eBOTRIGHTEND:
-                    case Animations::eENDBOT1:
-                    case Animations::eENDBOT2:
-                    case Animations::eENDPOINTS:
-                    case Animations::eDEATHNOTHING:
-                    case Animations::eDEATHTOP:
-                    case Animations::eDEATHBOT:
-                    case Animations::ePLAYPIPERIGHT:
-                    case Animations::eLOADINGMENU:
-                    case Animations::eGAMEOVER:
-                    case Animations::eBOSSEND1:
-                    case Animations::eBOSSEND2:
-                    case Animations::eBOSSEND3:
-                    case Animations::eBOSSEND4:
-                    case Animations::eBOTRIGHTBOSS:
-                    case Animations::eBOSSTEXT1:
-                    case Animations::eBOSSTEXT2:
-                    case Animations::eENDGAMEBOSSTEXT1:
-                    case Animations::eENDGAMEBOSSTEXT2:
-                    case Animations::eMARIOSPRITE1:
-                    case Animations::eVINESPAWN:
+                    case Animations::RightEnd:
+                    case Animations::BotRightEnd:
+                    case Animations::EndBot1:
+                    case Animations::EndBot2:
+                    case Animations::EndPoints:
+                    case Animations::DeathNothing:
+                    case Animations::DeathTop:
+                    case Animations::DeathBot:
+                    case Animations::PlayPipeRight:
+                    case Animations::LoadingMenu:
+                    case Animations::GameOver:
+                    case Animations::BossEnd1:
+                    case Animations::BossEnd2:
+                    case Animations::BossEnd3:
+                    case Animations::BossEnd4:
+                    case Animations::BotRightBoss:
+                    case Animations::BossText1:
+                    case Animations::BossText2:
+                    case Animations::EndGameBossText1:
+                    case Animations::EndGameBossText2:
+                    case Animations::MarioSprite1:
+                    case Animations::VineSpawn:
                         break;
                 }
 
