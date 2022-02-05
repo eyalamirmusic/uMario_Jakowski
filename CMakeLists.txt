@@ -7,10 +7,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${uMario_SOURCE_DIR}/CMake")
 set(BIN_DIR ${uMario_SOURCE_DIR}/bin)
 include(ConfigFlags)
 include(WarningSettings)
+include(CPM)
+include(Config)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
+
+CPMAddPackage("gh:eyalamirmusic/cpp_data_structures#main")
 
 include_directories(${SDL2_INCLUDE_DIR}
         ${SDL2_IMAGE_INCLUDE_DIR}
@@ -27,7 +31,8 @@ target_link_libraries(uMario
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
         ${SDL2_MIXER_LIBRARY}
-        ea_recommended_config_flags)
+        ea_recommended_config_flags
+        ea_data_structures)
 
 target_include_directories(uMario PRIVATE ${CMAKE_CURRENT_LIST_DIR}/Source)
 
