@@ -594,51 +594,51 @@ void Map::UpdateMinionsCollisions()
 
 void Map::UpdateBlocks()
 {
-    vBlock[2]->getSprite()->Update();
-    vBlock[8]->getSprite()->Update();
-    vBlock[29]->getSprite()->Update();
-    vBlock[55]->getSprite()->Update();
-    vBlock[57]->getSprite()->Update();
-    vBlock[70]->getSprite()->Update();
-    vBlock[71]->getSprite()->Update();
-    vBlock[72]->getSprite()->Update();
-    vBlock[73]->getSprite()->Update();
-    vBlock[82]->getSprite()->Update();
+    vBlock[2]->getSprite()->update();
+    vBlock[8]->getSprite()->update();
+    vBlock[29]->getSprite()->update();
+    vBlock[55]->getSprite()->update();
+    vBlock[57]->getSprite()->update();
+    vBlock[70]->getSprite()->update();
+    vBlock[71]->getSprite()->update();
+    vBlock[72]->getSprite()->update();
+    vBlock[73]->getSprite()->update();
+    vBlock[82]->getSprite()->update();
 }
 
 void Map::UpdateMinionBlokcs()
 {
-    vMinion[0]->getSprite()->Update();
-    vMinion[4]->getSprite()->Update();
-    vMinion[6]->getSprite()->Update();
-    vMinion[7]->getSprite()->Update();
-    vMinion[8]->getSprite()->Update();
-    vMinion[10]->getSprite()->Update();
-    vMinion[12]->getSprite()->Update();
-    vMinion[14]->getSprite()->Update();
-    vMinion[15]->getSprite()->Update();
-    vMinion[17]->getSprite()->Update();
-    vMinion[18]->getSprite()->Update();
-    vMinion[19]->getSprite()->Update();
-    vMinion[20]->getSprite()->Update();
-    vMinion[21]->getSprite()->Update();
-    vMinion[22]->getSprite()->Update();
-    vMinion[23]->getSprite()->Update();
-    vMinion[24]->getSprite()->Update();
-    vMinion[30]->getSprite()->Update();
-    vMinion[31]->getSprite()->Update();
-    vMinion[43]->getSprite()->Update();
-    vMinion[44]->getSprite()->Update();
-    vMinion[45]->getSprite()->Update();
-    vMinion[46]->getSprite()->Update();
-    vMinion[47]->getSprite()->Update();
-    vMinion[48]->getSprite()->Update();
-    vMinion[51]->getSprite()->Update();
-    vMinion[52]->getSprite()->Update();
-    vMinion[53]->getSprite()->Update();
-    vMinion[55]->getSprite()->Update();
-    vMinion[57]->getSprite()->Update();
-    vMinion[62]->getSprite()->Update();
+    vMinion[0]->getSprite()->update();
+    vMinion[4]->getSprite()->update();
+    vMinion[6]->getSprite()->update();
+    vMinion[7]->getSprite()->update();
+    vMinion[8]->getSprite()->update();
+    vMinion[10]->getSprite()->update();
+    vMinion[12]->getSprite()->update();
+    vMinion[14]->getSprite()->update();
+    vMinion[15]->getSprite()->update();
+    vMinion[17]->getSprite()->update();
+    vMinion[18]->getSprite()->update();
+    vMinion[19]->getSprite()->update();
+    vMinion[20]->getSprite()->update();
+    vMinion[21]->getSprite()->update();
+    vMinion[22]->getSprite()->update();
+    vMinion[23]->getSprite()->update();
+    vMinion[24]->getSprite()->update();
+    vMinion[30]->getSprite()->update();
+    vMinion[31]->getSprite()->update();
+    vMinion[43]->getSprite()->update();
+    vMinion[44]->getSprite()->update();
+    vMinion[45]->getSprite()->update();
+    vMinion[46]->getSprite()->update();
+    vMinion[47]->getSprite()->update();
+    vMinion[48]->getSprite()->update();
+    vMinion[51]->getSprite()->update();
+    vMinion[52]->getSprite()->update();
+    vMinion[53]->getSprite()->update();
+    vMinion[55]->getSprite()->update();
+    vMinion[57]->getSprite()->update();
+    vMinion[62]->getSprite()->update();
 }
 
 /* ******************************************** */
@@ -1216,14 +1216,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        0, new Sprite(rR, tSprite, iDelay, false), false, true, false, false));
+        0, new Sprite(rR, tSprite, iDelay), false, true, false, false));
     tSprite.clear();
     iDelay.clear();
     // ----- 1 -----
     tSprite.push_back("gnd_red_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        1, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        1, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 2 -----
@@ -1236,42 +1236,42 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_2");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        2, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        2, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 3 -----
     tSprite.push_back("bush_center_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        3, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        3, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 4 -----
     tSprite.push_back("bush_center_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        4, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        4, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 5 -----
     tSprite.push_back("bush_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        5, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        5, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 6 -----
     tSprite.push_back("bush_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        6, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        6, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 7 -----
     tSprite.push_back("bush_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        7, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        7, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 8 -----
@@ -1284,147 +1284,147 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("blockq_2");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        8, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        8, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 9 -----
     tSprite.push_back("blockq_used");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        9, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        9, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 10 -----
     tSprite.push_back("grass_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        10, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        10, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 11 -----
     tSprite.push_back("grass_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        11, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        11, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 12 -----
     tSprite.push_back("grass_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        12, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        12, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 13 -----
     tSprite.push_back("brickred");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        13, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        13, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 14 -----
     tSprite.push_back("cloud_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        14, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        14, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 15 -----
     tSprite.push_back("cloud_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        15, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        15, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 16 -----
     tSprite.push_back("cloud_center_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        16, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        16, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 17 -----
     tSprite.push_back("cloud_center_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        17, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        17, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 18 -----
     tSprite.push_back("cloud_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        18, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        18, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 19 -----
     tSprite.push_back("cloud_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        19, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        19, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 20 -----
     tSprite.push_back("pipe_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        20, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        20, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 21 -----
     tSprite.push_back("pipe_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        21, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        21, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 22 -----
     tSprite.push_back("pipe_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        22, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        22, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 23 -----
     tSprite.push_back("pipe_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        23, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        23, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 24 BlockQ2 -----
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        24, new Sprite(rR, tSprite, iDelay, false), true, false, true, false));
+        24, new Sprite(rR, tSprite, iDelay), true, false, true, false));
     tSprite.clear();
     iDelay.clear();
     // ----- 25 -----
     tSprite.push_back("gnd_red2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        25, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        25, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 26 -----
     tSprite.push_back("gnd1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        26, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        26, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 27 -----
     tSprite.push_back("gnd1_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        27, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        27, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 28 -----
     tSprite.push_back("brick1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        28, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        28, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 29 -----
@@ -1437,147 +1437,147 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_use2");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        29, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        29, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 30 -----
     tSprite.push_back("pipe1_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        30, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        30, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 31 -----
     tSprite.push_back("pipe1_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        31, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        31, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 32 -----
     tSprite.push_back("pipe1_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        32, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        32, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 33 -----
     tSprite.push_back("pipe1_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        33, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        33, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 34 -----
     tSprite.push_back("pipe1_hor_bot_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        34, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        34, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 35 -----
     tSprite.push_back("pipe1_hor_top_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        35, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        35, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 36 -----
     tSprite.push_back("pipe1_hor_top_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        36, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        36, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 37 -----
     tSprite.push_back("pipe1_hor_bot_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        37, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        37, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 38 -----
     tSprite.push_back("pipe1_hor_bot_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        38, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        38, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 39 -----
     tSprite.push_back("pipe1_hor_top_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        39, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        39, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 40 -----
     tSprite.push_back("end0_l");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        40, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        40, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 41 -----
     tSprite.push_back("end0_dot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        41, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        41, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 42 -----
     tSprite.push_back("end0_flag");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        42, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        42, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 43 -----
     tSprite.push_back("castle0_brick");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        43, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        43, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 44 -----
     tSprite.push_back("castle0_top0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        44, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        44, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 45 -----
     tSprite.push_back("castle0_top1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        45, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        45, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 46 -----
     tSprite.push_back("castle0_center_center_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        46, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        46, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 47 -----
     tSprite.push_back("castle0_center_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        47, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        47, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 48 -----
     tSprite.push_back("castle0_center_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        48, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        48, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 49 -----
     tSprite.push_back("castle0_center_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        49, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        49, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 50 -----
@@ -1590,35 +1590,35 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_an3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        50, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        50, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 51 -----
     tSprite.push_back("castle_flag");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        51, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        51, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 52 -----
     tSprite.push_back("firework0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        52, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        52, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 53 -----
     tSprite.push_back("firework1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        53, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        53, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 54 -----
     tSprite.push_back("firework2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        54, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        54, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 55 -----
@@ -1631,14 +1631,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("blockq1_2");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        55, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        55, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 56 -----
     tSprite.push_back("blockq1_used");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        56, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        56, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 57 -----
@@ -1651,98 +1651,98 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin1_2");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        57, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        57, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 58 -----
     tSprite.push_back("pipe_hor_bot_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        58, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        58, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 59 -----
     tSprite.push_back("pipe_hor_top_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        59, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        59, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 60 -----
     tSprite.push_back("pipe_hor_top_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        60, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        60, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 61 -----
     tSprite.push_back("pipe_hor_bot_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        61, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        61, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 62 -----
     tSprite.push_back("pipe_hor_bot_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        62, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        62, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 63 -----
     tSprite.push_back("pipe_hor_top_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        63, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        63, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 64 -----
     tSprite.push_back("block_debris0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        64, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        64, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 65 -----
     tSprite.push_back("block_debris1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        65, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        65, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 66 -----
     tSprite.push_back("block_debris2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        66, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        66, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 67 -----
     tSprite.push_back("t_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        67, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        67, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 68 -----
     tSprite.push_back("t_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        68, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        68, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 69 -----
     tSprite.push_back("t_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        69, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        69, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 70 -----
     tSprite.push_back("t_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        70, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        70, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 71 -----
@@ -1755,7 +1755,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_use02");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        71, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        71, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 72 -----
@@ -1768,7 +1768,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_use22");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        72, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        72, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 73 -----
@@ -1781,63 +1781,63 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("coin_use32");
     iDelay.push_back(140);
     vBlock.push_back(new Block(
-        73, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        73, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 74 -----
     tSprite.push_back("platform");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        74, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        74, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 75 -----
     tSprite.push_back("gnd_4");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        75, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        75, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 76 -----
     tSprite.push_back("bridge_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        76, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        76, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 77 -----
     tSprite.push_back("lava_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        77, new Sprite(rR, tSprite, iDelay, false), false, true, false, true));
+        77, new Sprite(rR, tSprite, iDelay), false, true, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 78 -----
     tSprite.push_back("lava_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        78, new Sprite(rR, tSprite, iDelay, false), false, true, false, true));
+        78, new Sprite(rR, tSprite, iDelay), false, true, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 79 -----
     tSprite.push_back("bridge_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        78, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        78, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 80 -----
     tSprite.push_back("blockq2_used");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        80, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        80, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 81 -----
     tSprite.push_back("brick2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        81, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        81, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 82 -----
@@ -1848,707 +1848,707 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("axe_2");
     iDelay.push_back(200);
     vBlock.push_back(new Block(
-        82, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        82, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 83 ----- END BRIDGE
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        83, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        83, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 84 -----
     tSprite.push_back("tree_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        84, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        84, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 85 -----
     tSprite.push_back("tree_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        85, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        85, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 86 -----
     tSprite.push_back("tree_3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        86, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        86, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 87 -----
     tSprite.push_back("tree1_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        87, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        87, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 88 -----
     tSprite.push_back("tree1_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        88, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        88, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 89 -----
     tSprite.push_back("tree1_3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        89, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        89, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 90 -----
     tSprite.push_back("fence");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        90, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        90, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 91 -----
     tSprite.push_back("tree_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        91, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        91, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 92 -----
     tSprite.push_back("uw_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        92, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        92, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 93 -----
     tSprite.push_back("uw_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        93, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        93, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 94 -----
     tSprite.push_back("water_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        94, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        94, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 95 -----
     tSprite.push_back("water_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        95, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        95, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 96 -----
     tSprite.push_back("bubble");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        96, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        96, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 97 -----
     tSprite.push_back("pipe2_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        97, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        97, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 98 -----
     tSprite.push_back("pipe2_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        98, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        98, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 99 -----
     tSprite.push_back("pipe2_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        99, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        99, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 100 -----
     tSprite.push_back("pipe2_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        100, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        100, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 101 -----
     tSprite.push_back("pipe2_hor_bot_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        101, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        101, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 102 -----
     tSprite.push_back("pipe2_hor_top_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        102, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        102, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 103 -----
     tSprite.push_back("pipe2_hor_top_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        103, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        103, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 104 -----
     tSprite.push_back("pipe2_hor_bot_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        104, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        104, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 105 -----
     tSprite.push_back("pipe2_hor_bot_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        105, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        105, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 106 -----
     tSprite.push_back("pipe2_hor_top_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        106, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        106, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 107 -----
     tSprite.push_back("bridge2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        107, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        107, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 108 -----
     tSprite.push_back("bridge3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        108, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        108, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 109 -----
     tSprite.push_back("platform1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        109, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        109, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 110 -----
     tSprite.push_back("water_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        110, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        110, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 111 -----
     tSprite.push_back("water_3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        111, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        111, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 112 -----
     tSprite.push_back("pipe3_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        112, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        112, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 113 -----
     tSprite.push_back("pipe3_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        113, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        113, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 114 -----
     tSprite.push_back("pipe3_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        114, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        114, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 115 -----
     tSprite.push_back("pipe3_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        115, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        115, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 116 -----
     tSprite.push_back("pipe3_hor_bot_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        116, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        116, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 117 -----
     tSprite.push_back("pipe3_hor_top_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        117, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        117, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 118 -----
     tSprite.push_back("pipe3_hor_top_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        118, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        118, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 119 -----
     tSprite.push_back("pipe3_hor_bot_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        119, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        119, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 120 -----
     tSprite.push_back("pipe3_hor_bot_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        120, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        120, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 121 -----
     tSprite.push_back("pipe3_hor_top_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        121, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        121, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 122 -----
     tSprite.push_back("bridge4");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        122, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        122, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 123 -----
     tSprite.push_back("end1_l");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        123, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        123, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 124 -----
     tSprite.push_back("end1_dot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        124, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        124, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 125 -----
     tSprite.push_back("bonus");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        125, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        125, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 126 -----
     tSprite.push_back("platformbonus");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        126, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        126, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 127 ----- // -- BONUS END
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        127, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        127, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 128 ----- // -- SPAWN VINE
     tSprite.push_back("brickred");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        128, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        128, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 129 ----- // -- SPAWN VINE
     tSprite.push_back("brick1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        129, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        129, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 130 -----
     tSprite.push_back("vine");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        130, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        130, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 131 -----
     tSprite.push_back("vine1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        131, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        131, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 132 -----
     tSprite.push_back("seesaw_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        132, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        132, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 133 -----
     tSprite.push_back("seesaw_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        133, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        133, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 134 -----
     tSprite.push_back("seesaw_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        134, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        134, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 135 -----
     tSprite.push_back("seesaw_3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        135, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        135, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 136 -----
     tSprite.push_back("pipe4_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        136, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        136, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 137 -----
     tSprite.push_back("pipe4_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        137, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        137, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 138 -----
     tSprite.push_back("pipe4_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        138, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        138, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 139 -----
     tSprite.push_back("pipe4_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        139, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        139, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 140 -----
     tSprite.push_back("t_left1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        140, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        140, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 141 -----
     tSprite.push_back("t_center1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        141, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        141, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 142 -----
     tSprite.push_back("t_right1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        142, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        142, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 143 -----
     tSprite.push_back("t_bot0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        143, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        143, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 144 -----
     tSprite.push_back("t_bot1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        144, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        144, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 145 -----
     tSprite.push_back("b_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        145, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        145, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 146 -----
     tSprite.push_back("b_top1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        146, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        146, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 147 -----
     tSprite.push_back("b_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        147, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        147, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 148 -----
     tSprite.push_back("cloud_left_bot1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        148, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        148, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 149 -----
     tSprite.push_back("cloud_center_bot1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        149, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        149, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 150 -----
     tSprite.push_back("cloud_center_top1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        150, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        150, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 151 -----
     tSprite.push_back("t_left2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        151, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        151, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 152 -----
     tSprite.push_back("t_center2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        152, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        152, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 153 -----
     tSprite.push_back("t_right2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        153, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        153, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 154 -----
     tSprite.push_back("t_bot2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        154, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        154, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 155 -----
     tSprite.push_back("castle1_brick");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        155, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        155, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 156 -----
     tSprite.push_back("castle1_top0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        156, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        156, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 157 -----
     tSprite.push_back("castle1_top1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        157, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        157, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 158 -----
     tSprite.push_back("castle1_center_center_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        158, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        158, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 159 -----
     tSprite.push_back("castle1_center_center");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        159, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        159, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 160 -----
     tSprite.push_back("castle1_center_left");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        160, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        160, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 161 -----
     tSprite.push_back("castle1_center_right");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        161, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        161, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 162 -----
     tSprite.push_back("seesaw1_0");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        162, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        162, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 163 -----
     tSprite.push_back("seesaw1_1");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        163, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        163, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 164 -----
     tSprite.push_back("seesaw1_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        164, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        164, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 165 -----
     tSprite.push_back("seesaw1_3");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        165, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        165, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 166 -----
     tSprite.push_back("gnd2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        166, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        166, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 167 -----
     tSprite.push_back("gnd2_2");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        167, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        167, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 168 -----
     tSprite.push_back("end1_flag");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        168, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        168, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 169 ----- TP
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        169, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        169, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 170 ----- TP2
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        170, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        170, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 171 ----- TP3 - bTP
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        171, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        171, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 172 -----
     tSprite.push_back("pipe5_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        172, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        172, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 173 -----
     tSprite.push_back("pipe5_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        173, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        173, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 174 -----
     tSprite.push_back("pipe5_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        174, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        174, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 175 -----
     tSprite.push_back("pipe5_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        175, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        175, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 176 -----
     tSprite.push_back("pipe6_left_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        176, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        176, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 177 -----
     tSprite.push_back("pipe6_left_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        177, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        177, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 178 -----
     tSprite.push_back("pipe6_right_bot");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        178, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        178, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 179 -----
     tSprite.push_back("pipe6_right_top");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        179, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        179, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 180 -----
     tSprite.push_back("crown");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        180, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        180, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 181 -----
     tSprite.push_back("gnd_5");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        166, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        166, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 182 ----- ENDUSE
     tSprite.push_back("transp");
     iDelay.push_back(0);
     vBlock.push_back(new Block(
-        182, new Sprite(rR, tSprite, iDelay, false), false, false, true, true));
+        182, new Sprite(rR, tSprite, iDelay), false, false, true, true));
     tSprite.clear();
     iDelay.clear();
 
@@ -2560,28 +2560,28 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("goombas_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        0, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        0, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 1 -----
     tSprite.push_back("goombas_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        1, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        1, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 2 -----
     tSprite.push_back("mushroom");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        2, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        2, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 3 -----
     tSprite.push_back("mushroom_1up");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        3, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        3, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 4 -----
@@ -2590,14 +2590,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        4, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        4, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 5 -----
     tSprite.push_back("koopa_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        5, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        5, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 6 -----
@@ -2610,7 +2610,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("flower3");
     iDelay.push_back(50);
     vMinion.push_back(new Block(
-        6, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        6, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 7 -----
@@ -2619,7 +2619,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa_3");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        7, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        7, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 8 -----
@@ -2628,14 +2628,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("goombas1_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        8, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        8, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 9 -----
     tSprite.push_back("goombas1_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        9, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        9, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 10 -----
@@ -2644,14 +2644,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("goombas2_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        10, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        10, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 11 -----
     tSprite.push_back("goombas2_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        11, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        11, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 12 -----
@@ -2660,14 +2660,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa1_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        12, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        12, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 13 -----
     tSprite.push_back("koopa1_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        13, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        13, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 14 -----
@@ -2676,7 +2676,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa1_3");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        14, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        14, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 15 -----
@@ -2685,14 +2685,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa2_1");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        15, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        15, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 16 -----
     tSprite.push_back("koopa2_ded");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        16, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        16, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 17 -----
@@ -2701,7 +2701,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("koopa2_3");
     iDelay.push_back(200);
     vMinion.push_back(new Block(
-        17, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        17, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 18 -----
@@ -2710,7 +2710,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("plant_1");
     iDelay.push_back(125);
     vMinion.push_back(new Block(
-        18, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        18, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 19 -----
@@ -2719,7 +2719,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("plant1_1");
     iDelay.push_back(125);
     vMinion.push_back(new Block(
-        19, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        19, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 20 -----
@@ -2728,7 +2728,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("bowser1");
     iDelay.push_back(285);
     vMinion.push_back(new Block(
-        20, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        20, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 21 -----
@@ -2737,7 +2737,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("bowser3");
     iDelay.push_back(285);
     vMinion.push_back(new Block(
-        21, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        21, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 22 -----
@@ -2746,7 +2746,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("fire_1");
     iDelay.push_back(35);
     vMinion.push_back(new Block(
-        22, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        22, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 23 -----
@@ -2759,7 +2759,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("fireball_3");
     iDelay.push_back(75);
     vMinion.push_back(new Block(
-        23, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        23, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 24 -----
@@ -2772,42 +2772,42 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("star_3");
     iDelay.push_back(75);
     vMinion.push_back(new Block(
-        24, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        24, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 25 -----
     tSprite.push_back("mushroom1_1up");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        25, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        25, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 26 -----
     tSprite.push_back("toad");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        26, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        26, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 27 -----
     tSprite.push_back("peach");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        27, new Sprite(rR, tSprite, iDelay, false), false, false, false, true));
+        27, new Sprite(rR, tSprite, iDelay), false, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 28 -----
     tSprite.push_back("squid0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        28, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        28, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 29 -----
     tSprite.push_back("squid1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        29, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        29, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 30 -----
@@ -2816,7 +2816,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("cheep1");
     iDelay.push_back(120);
     vMinion.push_back(new Block(
-        30, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        30, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 31 -----
@@ -2825,84 +2825,84 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("cheep3");
     iDelay.push_back(110);
     vMinion.push_back(new Block(
-        31, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        31, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 32 -----
     tSprite.push_back("upfire");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        32, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        32, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 33 -----
     tSprite.push_back("vine_top");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        33, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        33, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 34 -----
     tSprite.push_back("vine");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        34, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        34, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 35 -----
     tSprite.push_back("vine1_top");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        35, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        35, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 36 -----
     tSprite.push_back("vine1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        36, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        36, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 37 -----
     tSprite.push_back("spring_0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        37, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        37, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 38 -----
     tSprite.push_back("spring_1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        38, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        38, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 39 -----
     tSprite.push_back("spring_2");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        39, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        39, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 40 -----
     tSprite.push_back("spring1_0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        40, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        40, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 41 -----
     tSprite.push_back("spring1_1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        41, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        41, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 42 -----
     tSprite.push_back("spring1_2");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        42, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        42, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 43 -----
@@ -2911,7 +2911,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammerbro_1");
     iDelay.push_back(175);
     vMinion.push_back(new Block(
-        43, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        43, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 44 -----
@@ -2920,7 +2920,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammerbro_3");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        44, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        44, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 45 -----
@@ -2929,7 +2929,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammerbro1_1");
     iDelay.push_back(175);
     vMinion.push_back(new Block(
-        45, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        45, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 46 -----
@@ -2938,7 +2938,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammerbro1_3");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        46, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        46, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 47 -----
@@ -2951,7 +2951,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammer_3");
     iDelay.push_back(95);
     vMinion.push_back(new Block(
-        47, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        47, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 48 -----
@@ -2964,21 +2964,21 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("hammer1_3");
     iDelay.push_back(95);
     vMinion.push_back(new Block(
-        48, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        48, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 49 -----
     tSprite.push_back("lakito_0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        49, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        49, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 50 -----
     tSprite.push_back("lakito_1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        50, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        50, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 51 -----
@@ -2987,7 +2987,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("spikey0_1");
     iDelay.push_back(135);
     vMinion.push_back(new Block(
-        51, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        51, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 52 -----
@@ -2996,7 +2996,7 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("spikey1_1");
     iDelay.push_back(75);
     vMinion.push_back(new Block(
-        52, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        52, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 53 -----
@@ -3005,14 +3005,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("beetle_1");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        53, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        53, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 54 -----
     tSprite.push_back("beetle_2");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        54, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        54, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 55 -----
@@ -3021,14 +3021,14 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("beetle1_1");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        55, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        55, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 56 -----
     tSprite.push_back("beetle1_2");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        56, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        56, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 57 -----
@@ -3037,35 +3037,35 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("beetle2_1");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        57, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        57, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 58 -----
     tSprite.push_back("beetle2_2");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        58, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        58, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 59 -----
     tSprite.push_back("bulletbill");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        59, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        59, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 60 -----
     tSprite.push_back("bulletbill1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        60, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        60, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 61 -----
     tSprite.push_back("hammer1_0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        61, new Sprite(rR, tSprite, iDelay, false), true, false, true, true));
+        61, new Sprite(rR, tSprite, iDelay), true, false, true, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 62 -----
@@ -3078,28 +3078,28 @@ void Map::loadGameData(SDL_Renderer* rR)
     tSprite.push_back("fireball_3");
     iDelay.push_back(155);
     vMinion.push_back(new Block(
-        62, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        62, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 63 -----
     tSprite.push_back("firework0");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        63, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        63, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 64 -----
     tSprite.push_back("firework1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        64, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        64, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
     // ----- 65 -----
     tSprite.push_back("firework1");
     iDelay.push_back(0);
     vMinion.push_back(new Block(
-        65, new Sprite(rR, tSprite, iDelay, false), true, false, false, true));
+        65, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
 

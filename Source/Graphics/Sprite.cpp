@@ -1,66 +1,33 @@
 #include "Sprite.h"
 
-/* ******************************************** */
-
-Sprite::Sprite(void)
-{
-}
-
 Sprite::Sprite(SDL_Renderer* rR,
-               std::vector<std::string> sSprite,
-               std::vector<unsigned int> iDelay,
-               bool bRotate)
+               const std::vector<std::string>& spritesToUse,
+               const std::vector<unsigned int>& delaysToUse)
+    : delays(delaysToUse)
 {
-    this->iDelay = iDelay;
-    this->bRotate = bRotate;
-
-    this->iCurrentFrame = 0;
-    this->iStartFrame = 0;
-    this->iEndFrame = sSprite.size() - 1;
-
-    for (int i = 0; i < this->iEndFrame + 1; i++)
-    {
-        this->tSprite.push_back(new CIMG(sSprite[i], rR));
-    }
-
-    this->lTimePassed = 0;
+    for (auto& sprite: spritesToUse)
+        sprites.createNew(sprite, rR);
 }
 
-Sprite::~Sprite(void)
+void Sprite::update()
 {
-    for (std::vector<CIMG*>::iterator i = tSprite.begin(); i != tSprite.end(); i++)
+    if (SDL_GetTicks() - delays[currentFrame] > timePassed)
     {
-        delete (*i);
-    }
-}
+        timePassed = SDL_GetTicks();
 
-/* ******************************************** */
-
-void Sprite::Update()
-{
-    if (SDL_GetTicks() - iDelay[iCurrentFrame] > lTimePassed)
-    {
-        lTimePassed = SDL_GetTicks();
-
-        if (iCurrentFrame == iEndFrame)
-        {
-            iCurrentFrame = 0;
-        }
+        if (currentFrame == sprites.getLastElementIndex())
+            currentFrame = 0;
         else
-        {
-            ++iCurrentFrame;
-        }
+            ++currentFrame;
     }
 }
-
-/* ******************************************** */
 
 CIMG* Sprite::getTexture()
 {
-    return tSprite[iCurrentFrame];
+    return sprites[currentFrame];
 }
 
 CIMG* Sprite::getTexture(int iID)
 {
-    return tSprite[iID];
+    return sprites[iID];
 }
