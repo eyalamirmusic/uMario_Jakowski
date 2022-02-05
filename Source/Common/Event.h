@@ -41,6 +41,13 @@ enum class Animations
 class Event
 {
 public:
+    void resetData();
+
+    void draw(SDL_Renderer* rR);
+    void animation();
+    void newLevel() const;
+    void resetRedraw();
+
     Vector<Animations> vOLDDir;
     Vector<int> vOLDLength;
 
@@ -58,12 +65,8 @@ public:
 
     eventType eventTypeID = eventType::eNormal;
 
-    void normal();
-    void end();
 
     int iSpeed = 0;
-
-    void resetData();
 
     int newLevelType = false;
     int newMapXPos = false;
@@ -80,16 +83,11 @@ public:
 
     bool endGame = false;
 
-    // ----- Methods
-
-    void draw(SDL_Renderer* rR);
-
-    void animation();
-    void newLevel();
-
-    void resetRedraw();
 
 private:
+    void normal();
+    void end();
+
     bool state = true; // true = OLD, false = NEW
     unsigned int stepID = 0;
 };

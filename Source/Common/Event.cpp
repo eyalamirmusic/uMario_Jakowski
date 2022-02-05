@@ -54,7 +54,8 @@ void Event::normal()
     auto map = CCore::getMap();
     auto player = map->getPlayer();
 
-    auto speed = (float)iSpeed;
+    auto speed = (float) iSpeed;
+
     if (state)
     {
         if (vOLDDir.size() > stepID)
@@ -342,7 +343,7 @@ void Event::normal()
             if (vNEWLength[(int) stepID] > 0)
             {
                 auto& originalLength = vNEWLength[(int) stepID];
-                auto length = (float)originalLength;
+                auto length = (float) originalLength;
 
                 switch (vNEWDir[(int) stepID])
                 {
@@ -350,37 +351,45 @@ void Event::normal()
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         break;
+
                     case Animations::eBOT:
                         player->setYPos((float) player->getYPos() + speed);
                         length -= speed;
                         break;
+
                     case Animations::eRIGHT:
                         player->setXPos((float) player->getXPos() + speed);
                         length -= speed;
                         player->moveAnimation();
                         break;
+
                     case Animations::eLEFT:
                         player->setXPos((float) player->getXPos() - speed);
                         length -= speed;
                         player->moveAnimation();
                         break;
+
                     case Animations::ePLAYPIPETOP:
                         length -= 1;
                         CCFG::getMusic()->playEffect(Mario::Music::Effects::Pipe);
                         break;
+
                     case Animations::eNOTHING: // NOTHING YAY
                         length -= 1;
                         break;
+
                     case Animations::eVINE1:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(10);
                         break;
+
                     case Animations::eVINE2:
                         player->setYPos((float) player->getYPos() - speed);
                         length -= speed;
                         player->setMarioSpriteID(11);
                         break;
+
                     case Animations::eRIGHTEND:
                     case Animations::eBOTRIGHTEND:
                     case Animations::eENDBOT1:
@@ -406,7 +415,7 @@ void Event::normal()
                         break;
                 }
 
-                originalLength = (int)length;
+                originalLength = (int) length;
             }
             else
             {
@@ -427,38 +436,47 @@ void Event::normal()
 
 void Event::end()
 {
-    if (CCore::getMap()->getFlag() != NULL
-        && CCore::getMap()->getFlag()->iYPos < CCFG::GAME_HEIGHT - 16 - 3 * 32 - 4)
+    auto* flag = CCore::getMap()->getFlag();
+
+    if (flag != nullptr && flag->iYPos < CCFG::GAME_HEIGHT - 16 - 3 * 32 - 4)
     {
-        CCore::getMap()->getFlag()->Update();
+        flag->Update();
     }
 }
 
-void Event::newLevel()
+void Event::newLevel() const
 {
-    CCore::getMap()->setXPos((float) newMapXPos);
-    CCore::getMap()->getPlayer()->setXPos((float) newPlayerXPos);
-    CCore::getMap()->getPlayer()->setYPos((float) newPlayerYPos);
-    CCore::getMap()->setMoveMap(newMoveMap);
-    if (CCore::getMap()->getCurrentLevelID() != newCurrentLevel)
-    {
-        CCFG::getMM()->getLoadingMenu()->updateTime();
-        CCFG::getMM()->getLoadingMenu()->loadingType = true;
-        CCFG::getMM()->setViewID(CCFG::getMM()->eGameLoading);
-        CCore::getMap()->getPlayer()->setCoins(0);
-    }
-    CCore::getMap()->setCurrentLevelID(newCurrentLevel);
-    CCore::getMap()->setLevelType(newLevelType);
-    if (newUnderWater)
-    {
-        CCore::getMap()->getPlayer()->resetRun();
-    }
-    CCore::getMap()->setUnderWater(newUnderWater);
+    auto map = CCore::getMap();
+    auto* player = map->getPlayer();
 
-    CCore::getMap()->lockMinions();
+    map->setXPos((float) newMapXPos);
+
+    player->setXPos((float) newPlayerXPos);
+    player->setYPos((float) newPlayerYPos);
+    map->setMoveMap(newMoveMap);
+    
+    if (map->getCurrentLevelID() != newCurrentLevel)
+    {
+        auto* mm = CCFG::getMM();
+
+        mm->getLoadingMenu()->updateTime();
+        mm->getLoadingMenu()->loadingType = true;
+        mm->setViewID(mm->eGameLoading);
+
+        player->setCoins(0);
+    }
+
+    map->setCurrentLevelID(newCurrentLevel);
+    map->setLevelType(newLevelType);
+
+    if (newUnderWater)
+        player->resetRun();
+
+    map->setUnderWater(newUnderWater);
+
+    map->lockMinions();
 }
 
-/* ******************************************** */
 
 void Event::resetData()
 {
@@ -470,11 +488,11 @@ void Event::resetData()
 
     this->eventTypeID = eNormal;
 
-    this->state = true;
-    this->stepID = 0;
-    this->inEvent = false;
-    this->endGame = false;
-    this->newUnderWater = false;
+    state = true;
+    stepID = 0;
+    inEvent = false;
+    endGame = false;
+    newUnderWater = false;
 }
 
 void Event::resetRedraw()
