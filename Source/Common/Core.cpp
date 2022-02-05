@@ -384,16 +384,3 @@ Map* CCore::getMap()
 {
     return Mario::getGameState().map;
 }
-
-Mario::GameState& Mario::getGameState(SDL_Renderer* renderer)
-{
-    static EA::OwningPointer<GameState> state;
-
-    if (state == nullptr)
-    {
-        state.create(renderer);
-        state->map->loadLVL();
-    }
-
-    return *state;
-}

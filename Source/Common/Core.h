@@ -1,29 +1,6 @@
 #pragma once
 
-#include "Levels/Map.h"
-#include "CommonHeader.h"
-
-
-
-namespace Mario
-{
-struct GameState
-{
-    explicit GameState(SDL_Renderer* renderer)
-    {
-        if (renderer == nullptr)
-            quitGame = true;
-        else
-            map.create(renderer);
-    }
-
-    bool quitGame = false;
-    EA::OwningPointer<Map> map;
-};
-
-extern GameState& getGameState(SDL_Renderer* renderer = nullptr);
-
-} // namespace Mario
+#include "GameState.h"
 
 class CCore
 {
