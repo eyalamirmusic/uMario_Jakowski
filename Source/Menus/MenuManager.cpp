@@ -3,84 +3,84 @@
 
 namespace Mario
 {
-void MenuManager::Update()
+void MenuManager::update()
 {
     auto* map = CCore::getMap();
 
     switch (currentGameState)
     {
-        case GameStates::eMainMenu:
-            oMainMenu.Update();
+        case MenuStates::MainMenu:
+            oMainMenu.update();
             map->UpdateBlocks();
             break;
 
-        case GameStates::eGameLoading:
-            oLoadingMenu.Update();
+        case MenuStates::GameLoading:
+            oLoadingMenu.update();
             break;
 
-        case GameStates::eGame:
+        case MenuStates::Game:
             map->Update();
             map->UpdateMinionsCollisions();
             break;
 
-        case GameStates::eAbout:
+        case MenuStates::About:
             map->UpdateMinions();
             map->UpdateMinionBlokcs();
             map->UpdateBlocks();
-            oAboutMenu.Update();
+            oAboutMenu.update();
             break;
 
-        case GameStates::eOptions:
-            oOptionsMenu.Update();
+        case MenuStates::Options:
+            oOptionsMenu.update();
             break;
 
-        case GameStates::ePasue:
-            oPauseMenu.Update();
+        case MenuStates::Pause:
+            oPauseMenu.update();
             break;
     }
 }
 
-void MenuManager::Draw(SDL_Renderer* rR)
+void MenuManager::draw(SDL_Renderer* rR)
 {
     auto* map = CCore::getMap();
 
     switch (currentGameState)
     {
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             map->DrawMap(rR);
             map->getPlayer()->Draw(rR);
             map->DrawGameLayout(rR);
-            oMainMenu.Draw(rR);
+            oMainMenu.draw(rR);
             break;
 
-        case GameStates::eGameLoading:
-            oLoadingMenu.Draw(rR);
+        case MenuStates::GameLoading:
+            oLoadingMenu.draw(rR);
             break;
 
-        case GameStates::eGame:
+        case MenuStates::Game:
             map->Draw(rR);
             break;
 
-        case GameStates::eAbout:
+        case MenuStates::About:
             map->DrawMap(rR);
             map->DrawMinions(rR);
-            oAboutMenu.Draw(rR);
+            oAboutMenu.draw(rR);
             break;
 
-        case GameStates::eOptions:
+        case MenuStates::Options:
             map->DrawMap(rR);
             map->DrawMinions(rR);
             map->getPlayer()->Draw(rR);
             map->DrawGameLayout(rR);
-            oOptionsMenu.Draw(rR);
+            oOptionsMenu.draw(rR);
             break;
 
-        case GameStates::ePasue:
+        case MenuStates::Pause:
             map->DrawMap(rR);
             map->DrawMinions(rR);
             map->getPlayer()->Draw(rR);
             map->DrawGameLayout(rR);
-            oPauseMenu.Draw(rR);
+            oPauseMenu.draw(rR);
             break;
     }
 }
@@ -89,24 +89,24 @@ void MenuManager::setBackgroundColor(SDL_Renderer* rR)
 {
     switch (currentGameState)
     {
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             CCore::getMap()->setBackgroundColor(rR);
             break;
 
-        case GameStates::eGameLoading:
+        case MenuStates::GameLoading:
             SDL_SetRenderDrawColor(rR, 0, 0, 0, 255);
             break;
 
-        case GameStates::eGame:
+        case MenuStates::Game:
             CCore::getMap()->setBackgroundColor(rR);
             break;
 
-        case GameStates::eAbout:
+        case MenuStates::About:
             oAboutMenu.setBackgroundColor(rR);
             break;
 
-        case GameStates::eOptions:
-        case GameStates::ePasue:
+        case MenuStates::Options:
+        case MenuStates::Pause:
             break;
     }
 }
@@ -115,27 +115,27 @@ void MenuManager::enter()
 {
     switch (currentGameState)
     {
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             oMainMenu.enter();
             break;
 
-        case GameStates::eGame:
+        case MenuStates::Game:
             CCore::getMap()->setDrawLines(!CCore::getMap()->getDrawLines());
             break;
 
-        case GameStates::eAbout:
+        case MenuStates::About:
             oAboutMenu.enter();
             break;
 
-        case GameStates::eOptions:
+        case MenuStates::Options:
             oOptionsMenu.enter();
             break;
 
-        case GameStates::ePasue:
+        case MenuStates::Pause:
             oPauseMenu.enter();
             break;
 
-        case GameStates::eGameLoading:
+        case MenuStates::GameLoading:
             break;
     }
 }
@@ -144,24 +144,24 @@ void MenuManager::escape()
 {
     switch (currentGameState)
     {
-        case GameStates::eAbout:
+        case MenuStates::About:
             oAboutMenu.enter();
             break;
 
-        case GameStates::eOptions:
+        case MenuStates::Options:
             oOptionsMenu.escape();
             break;
 
-        case GameStates::ePasue:
+        case MenuStates::Pause:
             oPauseMenu.escape();
             break;
 
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             oMainMenu.escape();
             break;
 
-        case GameStates::eGame:
-        case GameStates::eGameLoading:
+        case MenuStates::Game:
+        case MenuStates::GameLoading:
             break;
     }
 }
@@ -170,15 +170,15 @@ void MenuManager::setKey(int keyID)
 {
     switch (currentGameState)
     {
-        case GameStates::eOptions:
+        case MenuStates::Options:
             oOptionsMenu.setKey(keyID);
             break;
 
-        case GameStates::eMainMenu:
-        case GameStates::eGameLoading:
-        case GameStates::eGame:
-        case GameStates::eAbout:
-        case GameStates::ePasue:
+        case MenuStates::MainMenu:
+        case MenuStates::GameLoading:
+        case MenuStates::Game:
+        case MenuStates::About:
+        case MenuStates::Pause:
             break;
     }
 }
@@ -187,54 +187,54 @@ void MenuManager::keyPressed(int iDir)
 {
     switch (currentGameState)
     {
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             oMainMenu.updateActiveButton(iDir);
             break;
 
-        case GameStates::eOptions:
+        case MenuStates::Options:
             oOptionsMenu.updateActiveButton(iDir);
             break;
 
-        case GameStates::ePasue:
+        case MenuStates::Pause:
             oPauseMenu.updateActiveButton(iDir);
             break;
 
-        case GameStates::eGameLoading:
-        case GameStates::eGame:
-        case GameStates::eAbout:
+        case MenuStates::GameLoading:
+        case MenuStates::Game:
+        case MenuStates::About:
             break;
     }
 }
 
-void MenuManager::resetActiveOptionID(GameStates ID)
+void MenuManager::resetActiveOptionID(MenuStates ID)
 {
     switch (ID)
     {
-        case GameStates::eMainMenu:
+        case MenuStates::MainMenu:
             oMainMenu.activeMenuOption = 0;
             break;
 
-        case GameStates::eOptions:
+        case MenuStates::Options:
             oOptionsMenu.activeMenuOption = 0;
             break;
 
-        case GameStates::ePasue:
+        case MenuStates::Pause:
             oPauseMenu.activeMenuOption = 0;
             break;
 
-        case GameStates::eGameLoading:
-        case GameStates::eGame:
-        case GameStates::eAbout:
+        case MenuStates::GameLoading:
+        case MenuStates::Game:
+        case MenuStates::About:
             break;
     }
 }
 
-GameStates MenuManager::getViewID() const
+MenuStates MenuManager::getViewID() const
 {
     return currentGameState;
 }
 
-void MenuManager::setViewID(GameStates viewID)
+void MenuManager::setViewID(MenuStates viewID)
 {
     currentGameState = viewID;
 }

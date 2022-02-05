@@ -72,7 +72,7 @@ void CCore::mainLoop()
         getCFG().getMM()->setBackgroundColor(rR);
         SDL_RenderFillRect(rR, nullptr);
 
-        Input();
+        input();
         update();
         draw();
 
@@ -85,9 +85,9 @@ void CCore::mainLoop()
     }
 }
 
-void CCore::Input()
+void CCore::input()
 {
-    if (getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
+    if (getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
     {
         if (!getMap()->getInEvent())
             InputPlayer();
@@ -186,8 +186,8 @@ void CCore::InputPlayer()
         switch (mainEvent->window.event)
         {
             case SDL_WINDOWEVENT_FOCUS_LOST:
-                getCFG().getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
-                getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
+                getCFG().getMM()->resetActiveOptionID(Mario::MenuStates::Pause);
+                getCFG().getMM()->setViewID(Mario::MenuStates::Pause);
                 getCFG().getMusic()->playEffect(Mario::Music::Effects::Pause);
                 getCFG().getMusic()->pauseTrack();
                 break;
@@ -306,10 +306,10 @@ void CCore::InputPlayer()
                 }
             case SDLK_ESCAPE:
                 if (!keyMenuPressed
-                    && getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
+                    && getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
                 {
-                    getCFG().getMM()->resetActiveOptionID(Mario::GameStates::ePasue);
-                    getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
+                    getCFG().getMM()->resetActiveOptionID(Mario::MenuStates::Pause);
+                    getCFG().getMM()->setViewID(Mario::MenuStates::Pause);
                     getCFG().getMusic()->playEffect(Mario::Music::Effects::Pause);
                     getCFG().getMusic()->pauseTrack();
                     keyMenuPressed = true;
@@ -367,12 +367,12 @@ void CCore::resetKeys()
 
 void CCore::update()
 {
-    getCFG().getMM()->Update();
+    getCFG().getMM()->update();
 }
 
 void CCore::draw()
 {
-    getCFG().getMM()->Draw(rR);
+    getCFG().getMM()->draw(rR);
 }
 
 void CCore::resetMove()

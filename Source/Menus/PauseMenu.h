@@ -7,7 +7,7 @@ class PauseMenu : public Menu
 public:
     PauseMenu();
 
-    void Draw(SDL_Renderer* rR) override;
+    void draw(SDL_Renderer* rR) override;
 
     void enter();
     void escape();

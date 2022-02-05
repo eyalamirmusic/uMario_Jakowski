@@ -7,8 +7,8 @@ class OptionsMenu : public Menu
 public:
     OptionsMenu();
 
-    void Update() override;
-    void Draw(SDL_Renderer* rR) override;
+    void update() override;
+    void draw(SDL_Renderer* rR) override;
     void updateActiveButton(int iDir) override;
 
     void enter();

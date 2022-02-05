@@ -10,23 +10,22 @@
 
 namespace Mario
 {
-enum class GameStates
+enum class MenuStates
 {
-    eMainMenu,
-    eGameLoading,
-    eGame,
-    eAbout,
-    eOptions,
-    ePasue,
-    //eLevelEditor,
+    MainMenu,
+    GameLoading,
+    Game,
+    About,
+    Options,
+    Pause
 };
 
 class MenuManager
 {
 public:
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void update();
+    void draw(SDL_Renderer* rR);
 
     void setBackgroundColor(SDL_Renderer* rR);
 
@@ -35,10 +34,10 @@ public:
     void setKey(int keyID);
     void keyPressed(int iDir);
 
-    void resetActiveOptionID(GameStates ID);
+    void resetActiveOptionID(MenuStates ID);
 
-    GameStates getViewID() const;
-    void setViewID(GameStates viewID);
+    MenuStates getViewID() const;
+    void setViewID(MenuStates viewID);
 
     CIMG* getActiveOption();
     void setActiveOption(SDL_Renderer* rR);
@@ -48,7 +47,7 @@ public:
     OptionsMenu* getOptions();
 
 private:
-    GameStates currentGameState = GameStates::eMainMenu;
+    MenuStates currentGameState = MenuStates::MainMenu;
     CIMG* activeOption = nullptr;
 
     MainMenu oMainMenu;

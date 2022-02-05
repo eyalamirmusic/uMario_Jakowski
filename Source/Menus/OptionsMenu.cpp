@@ -35,7 +35,7 @@ OptionsMenu::OptionsMenu()
     rVolume.w = 100;
 }
 
-void OptionsMenu::Update()
+void OptionsMenu::update()
 {
     if (resetSetKey)
     {
@@ -44,7 +44,7 @@ void OptionsMenu::Update()
     }
 }
 
-void OptionsMenu::Draw(SDL_Renderer* rR)
+void OptionsMenu::draw(SDL_Renderer* rR)
 {
     SDL_SetRenderDrawBlendMode(rR, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(rR, 4, 4, 4, 235);
@@ -209,7 +209,7 @@ void OptionsMenu::enter()
             break;
         case 7:
             CCore::getMap()->resetGameData();
-            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::MenuStates::MainMenu);
             break;
     }
 }
@@ -225,11 +225,11 @@ void OptionsMenu::escape()
         if (escapeToMainMenu)
         {
             CCore::getMap()->resetGameData();
-            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::MenuStates::MainMenu);
         }
         else
         {
-            getCFG().getMM()->setViewID(Mario::GameStates::ePasue);
+            getCFG().getMM()->setViewID(Mario::MenuStates::Pause);
         }
     }
 }

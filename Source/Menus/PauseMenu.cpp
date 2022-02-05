@@ -17,7 +17,7 @@ PauseMenu::PauseMenu()
     lMO.createNew("QUIT TO DESKTOP", 0, 252);
 }
 
-void PauseMenu::Draw(SDL_Renderer* rR)
+void PauseMenu::draw(SDL_Renderer* rR)
 {
     SDL_SetRenderDrawBlendMode(rR, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(rR, 4, 4, 4, 235);
@@ -58,18 +58,18 @@ void PauseMenu::enter()
     switch (activeMenuOption)
     {
         case 0:
-            getCFG().getMM()->setViewID(Mario::GameStates::eGame);
+            getCFG().getMM()->setViewID(Mario::MenuStates::Game);
             getCFG().getMusic()->playTrack();
             break;
         case 1:
             getCFG().getMM()->getOptions()->setEscapeToMainMenu(false);
-            getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
+            getCFG().getMM()->resetActiveOptionID(Mario::MenuStates::Options);
             getCFG().getMM()->getOptions()->updateVolumeRect();
-            getCFG().getMM()->setViewID(Mario::GameStates::eOptions);
+            getCFG().getMM()->setViewID(Mario::MenuStates::Options);
             break;
         case 2:
             CCore::getMap()->resetGameData();
-            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::MenuStates::MainMenu);
             break;
         case 3:
             Mario::getGameState().quitGame = true;
@@ -79,7 +79,7 @@ void PauseMenu::enter()
 
 void PauseMenu::escape()
 {
-    getCFG().getMM()->setViewID(Mario::GameStates::eGame);
+    getCFG().getMM()->setViewID(Mario::MenuStates::Game);
     getCFG().getMusic()->pauseTrack();
 }
 

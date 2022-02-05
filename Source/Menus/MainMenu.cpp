@@ -14,17 +14,17 @@ MainMenu::MainMenu()
     rSelectWorld.h = 72;
 }
 
-void MainMenu::Update()
+void MainMenu::update()
 {
     getCFG().getMusic()->stopTrack();
 
-    Menu::Update();
+    Menu::update();
 }
 
-void MainMenu::Draw(SDL_Renderer* rR)
+void MainMenu::draw(SDL_Renderer* rR)
 {
     getCFG().getSMBLOGO()->Draw(rR, 80, 48);
-    Menu::Draw(rR);
+    Menu::draw(rR);
     getCFG().getText()->Draw(
         rR, "WWW.LUKASZJAKOWSKI.PL", 4, getCFG().GAME_HEIGHT - 4 - 8, 8, 0, 0, 0);
     getCFG().getText()->Draw(
@@ -118,7 +118,7 @@ void MainMenu::enter()
                 CCore::getMap()->resetGameData();
                 CCore::getMap()->setCurrentLevelID(activeWorldID * 4
                                                    + activeSecondWorldID);
-                getCFG().getMM()->setViewID(Mario::GameStates::eGameLoading);
+                getCFG().getMM()->setViewID(Mario::MenuStates::GameLoading);
                 getCFG().getMM()->getLoadingMenu()->loadingType = true;
                 CCore::getMap()->setSpawnPointID(0);
                 selectWorld = false;
@@ -126,13 +126,13 @@ void MainMenu::enter()
             break;
         case 1:
             getCFG().getMM()->getOptions()->setEscapeToMainMenu(true);
-            getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eOptions);
+            getCFG().getMM()->resetActiveOptionID(Mario::MenuStates::Options);
             getCFG().getMM()->getOptions()->updateVolumeRect();
-            getCFG().getMM()->setViewID(Mario::GameStates::eOptions);
+            getCFG().getMM()->setViewID(Mario::MenuStates::Options);
             break;
         case 2:
             getCFG().getMM()->getAboutMenu()->updateTime();
-            getCFG().getMM()->setViewID(Mario::GameStates::eAbout);
+            getCFG().getMM()->setViewID(Mario::MenuStates::About);
             getCFG().getMusic()->playTrack(Mario::Music::Tracks::Overworld);
             break;
     }

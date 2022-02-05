@@ -5,8 +5,8 @@
 class LoadingMenu : public Menu
 {
 public:
-    void Update() override;
-    void Draw(SDL_Renderer* rR) override;
+    void update() override;
+    void draw(SDL_Renderer* rR) override;
 
     void updateTime();
 

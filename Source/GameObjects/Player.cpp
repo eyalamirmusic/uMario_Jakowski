@@ -1522,7 +1522,7 @@ void Player::Draw(SDL_Renderer* rR)
 int Player::getMarioSpriteID()
 {
     if (starEffect && !inLevelAnimation
-        && getCFG().getMM()->getViewID() == Mario::GameStates::eGame)
+        && getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
     {
         if (unKillAbleTimeFrameID <= 0)
         {

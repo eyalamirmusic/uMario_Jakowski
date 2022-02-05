@@ -10,7 +10,7 @@ AboutMenu::AboutMenu()
     srand((unsigned) time(nullptr));
 }
 
-void AboutMenu::Update()
+void AboutMenu::update()
 {
     if (SDL_GetTicks() >= iTime + 35)
     {
@@ -101,7 +101,7 @@ void AboutMenu::Update()
     //CCore::getMap()->getPlayer()->setXPos((float)CCore::getMap()->getPlayer()->getXPos() + 4 * (moveDirection ? -1 : 1));
 }
 
-void AboutMenu::Draw(SDL_Renderer* rR)
+void AboutMenu::draw(SDL_Renderer* rR)
 {
     getCFG().getText()->DrawWS(rR, "MARIO V 1.03 - C++ AND SDL2", 150, 128, 0, 0, 0);
     getCFG().getText()->DrawWS(rR, "AUTOR: LUKASZ JAKOWSKI", 150, 146, 0, 0, 0);
@@ -129,8 +129,8 @@ void AboutMenu::Draw(SDL_Renderer* rR)
 
 void AboutMenu::enter()
 {
-    getCFG().getMM()->resetActiveOptionID(Mario::GameStates::eMainMenu);
-    getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
+    getCFG().getMM()->resetActiveOptionID(Mario::MenuStates::MainMenu);
+    getCFG().getMM()->setViewID(Mario::MenuStates::MainMenu);
     reset();
     getCFG().getMusic()->stopTrack();
 }

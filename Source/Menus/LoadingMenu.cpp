@@ -2,7 +2,7 @@
 #include "Common/CFG.h"
 #include "Common/Core.h"
 
-void LoadingMenu::Update()
+void LoadingMenu::update()
 {
     if (SDL_GetTicks() >= iTime + 2500 + (loadingType ? 0 : 2750))
     {
@@ -13,13 +13,13 @@ void LoadingMenu::Update()
                 CCore::getMap()->setSpawnPoint();
                 CCore::getMap()->loadLVL();
             }
-            getCFG().getMM()->setViewID(Mario::GameStates::eGame);
+            getCFG().getMM()->setViewID(Mario::MenuStates::Game);
             getCFG().getMusic()->changeMusic(true, true);
         }
         else
         {
             CCore::getMap()->resetGameData();
-            getCFG().getMM()->setViewID(Mario::GameStates::eMainMenu);
+            getCFG().getMM()->setViewID(Mario::MenuStates::MainMenu);
         }
     }
     else
@@ -29,7 +29,7 @@ void LoadingMenu::Update()
     CCore::getMap()->UpdateBlocks();
 }
 
-void LoadingMenu::Draw(SDL_Renderer* rR)
+void LoadingMenu::draw(SDL_Renderer* rR)
 {
     if (loadingType)
     {

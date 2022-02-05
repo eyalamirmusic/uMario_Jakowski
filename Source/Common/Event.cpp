@@ -158,7 +158,7 @@ void Event::normal()
 
                             getCFG().getMM()->getLoadingMenu()->loadingType = true;
                             getCFG().getMM()->getLoadingMenu()->updateTime();
-                            getCFG().getMM()->setViewID(GameStates::eGameLoading);
+                            getCFG().getMM()->setViewID(MenuStates::GameLoading);
                         }
                         break;
                     case Animations::GameOver:
@@ -172,7 +172,7 @@ void Event::normal()
 
                             getCFG().getMM()->getLoadingMenu()->loadingType = false;
                             getCFG().getMM()->getLoadingMenu()->updateTime();
-                            getCFG().getMM()->setViewID(GameStates::eGameLoading);
+                            getCFG().getMM()->setViewID(MenuStates::GameLoading);
 
                             getCFG().getMusic()->playEffect(
                                 Mario::Music::Effects::GameOver);
@@ -316,7 +316,7 @@ void Event::normal()
                     {
                         getCFG().getMM()->getLoadingMenu()->updateTime();
                         getCFG().getMM()->getLoadingMenu()->loadingType = true;
-                        getCFG().getMM()->setViewID(GameStates::eGameLoading);
+                        getCFG().getMM()->setViewID(MenuStates::GameLoading);
                         map->startLevelAnimation();
                     }
 
@@ -326,7 +326,7 @@ void Event::normal()
             else
             {
                 map->resetGameData();
-                getCFG().getMM()->setViewID(GameStates::eMainMenu);
+                getCFG().getMM()->setViewID(MenuStates::MainMenu);
                 map->setInEvent(false);
                 player->stopMove();
                 inEvent = false;
@@ -461,7 +461,7 @@ void Event::newLevel() const
 
         mm->getLoadingMenu()->updateTime();
         mm->getLoadingMenu()->loadingType = true;
-        mm->setViewID(GameStates::eGameLoading);
+        mm->setViewID(MenuStates::GameLoading);
 
         player->setCoins(0);
     }

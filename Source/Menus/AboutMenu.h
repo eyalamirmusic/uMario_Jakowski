@@ -7,8 +7,8 @@ class AboutMenu : public Menu
 public:
     AboutMenu();
 
-    void Update() override;
-    void Draw(SDL_Renderer* rR) override;
+    void update() override;
+    void draw(SDL_Renderer* rR) override;
 
     void enter();
 

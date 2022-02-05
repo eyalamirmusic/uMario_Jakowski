@@ -1,7 +1,7 @@
 #include "Menu.h"
 #include "Common/CFG.h"
 
-void Menu::Draw(SDL_Renderer* rR)
+void Menu::draw(SDL_Renderer* rR)
 {
     for (auto& i: lMO)
     {

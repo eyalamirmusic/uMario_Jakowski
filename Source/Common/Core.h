@@ -41,7 +41,7 @@ public:
     static Map* getMap();
 
 private:
-    void Input();
+    void input();
     void InputPlayer();
     void InputMenu();
 
