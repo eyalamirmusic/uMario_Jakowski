@@ -1,10 +1,33 @@
 #include "Map.h"
-#include "CFG.h"
 #include "math.h"
 #include "stdlib.h"
 #include "time.h"
 
-/* ******************************************** */
+
+#include "Minions/PlayerFireBall.h"
+#include "Minions/Toad.h"
+#include "Minions/Bowser.h"
+#include "Minions/Plant.h"
+#include "Minions/Hammer.h"
+#include "Minions/HammerBro.h"
+#include "Minions/Cheep.h"
+#include "Minions/CheepSpawner.h"
+#include "Minions/Squid.h"
+#include "Minions/Flower.h"
+#include "Minions/Lakito.h"
+#include "Minions/Spikey.h"
+#include "Minions/FireBall.h"
+#include "Minions/Fire.h"
+#include "Minions/BulletBill.h"
+#include "Minions/BulletBillSpawner.h"
+#include "Minions/Vine.h"
+#include "Minions/UpFire.h"
+#include "Minions/Goombas.h"
+#include "Minions/Koppa.h"
+#include "Minions/Beetle.h"
+#include "Minions/Mushroom.h"
+#include "Minions/Star.h"
+#include "Minions/Spring.h"
 
 Map::Map(void)
 {
