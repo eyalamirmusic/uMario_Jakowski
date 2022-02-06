@@ -141,7 +141,7 @@ void Map::Update()
     {
         if (lBlockDebris[i]->getDebrisState() != -1)
         {
-            lBlockDebris[i]->Update();
+            lBlockDebris[i]->update();
         }
         else
         {
@@ -666,7 +666,7 @@ void Map::Draw(SDL_Renderer* rR)
 
     for (unsigned int i = 0; i < lBlockDebris.size(); i++)
     {
-        lBlockDebris[i]->Draw(rR);
+        lBlockDebris[i]->draw(rR);
     }
 
     for (unsigned int i = 0; i < vLevelText.size(); i++)

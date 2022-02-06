@@ -1,11 +1,5 @@
 #include "Block.h"
 
-/* ******************************************** */
-
-Block::Block(void)
-{
-}
-
 Block::Block(int iBlockID,
              Sprite* sSprite,
              bool bCollision,
@@ -21,19 +15,10 @@ Block::Block(int iBlockID,
     this->bVisible = bVisible;
 }
 
-Block::~Block(void)
-{
-    delete sSprite;
-}
-
-/* ******************************************** */
-
 void Block::Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY)
 {
     sSprite->getTexture()->draw(rR, iOffsetX, iOffsetY);
 }
-
-/* ******************************************** */
 
 int Block::getBlockID()
 {
