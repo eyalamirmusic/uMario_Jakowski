@@ -27,18 +27,8 @@ Platform::Platform(int iSize,
     this->seesawPlatformID = seesawPlatformID;
 
     if (iType == 6)
-    {
         this->iXStart = (int) fYPos;
-    }
-
-    this->ON = false;
 }
-
-Platform::~Platform(void)
-{
-}
-
-/* ******************************************** */
 
 void Platform::Update()
 {
@@ -174,8 +164,6 @@ void Platform::Draw(SDL_Renderer* rR)
     }
 }
 
-/* ******************************************** */
-
 float Platform::getMoveX()
 {
     switch (iType)
@@ -288,8 +276,6 @@ void Platform::moveYReverse()
             break;
     }
 }
-
-/* ******************************************** */
 
 int Platform::getXPos()
 {

@@ -7,6 +7,96 @@
 
 class Player
 {
+public:
+    Player(SDL_Renderer* rR, float fXPos, float fYPos);
+    ~Player();
+
+    void Draw(SDL_Renderer* rR);
+    void Update();
+
+    void playerPhysics();
+
+    void updateXPos(int iN);
+    void updateYPos(int iN);
+
+    void powerUPAnimation();
+
+    // ----- MOVE
+    void moveAnimation();
+    void swimingAnimation();
+
+    void startMove();
+    void resetMove();
+    void stopMove();
+    void setMoveDirection(bool moveDirection);
+    bool getChangeMoveDirection();
+    void setChangeMoveDirection();
+
+    void startRun();
+    void resetRun();
+
+    void createFireBall();
+    // ----- MOVE
+    // ----- JUMP
+    void jump();
+    void startJump(int iH);
+    void resetJump();
+    // ----- JUMP
+
+    void setMarioSpriteID(int iID);
+    int getMarioSpriteID();
+
+    int getHitBoxX();
+    int getHitBoxY();
+
+    // ----- get & set -----
+
+    bool getInLevelAnimation();
+    void setInLevelAnimation(bool inLevelAnimation);
+
+    int getXPos();
+    void setXPos(float fXPos);
+    int getYPos();
+    void setYPos(float fYPos);
+
+    int getPowerLVL();
+    void setPowerLVL(int powerLVL);
+    void resetPowerLVL();
+
+    bool getUnkillAble();
+
+    int getNumOfLives();
+    void setNumOfLives(int iNumOfLives);
+
+    bool getStarEffect();
+    void setStarEffect(bool starEffect);
+
+    int getMoveSpeed();
+    bool getMove();
+    bool getMoveDirection();
+    void setNextFallFrameID(int nextFallFrameID);
+    void setCurrentJumpSpeed(float currentJumpSpeed);
+    void setMoveSpeed(int moveSpeed);
+
+    int getJumpState();
+
+    bool getSquat();
+    void setSquat(bool bSquat);
+
+    CIMG* getMarioLVLUP();
+    Sprite* getMarioSprite();
+
+    void addCoin();
+
+    unsigned int getScore();
+    void setScore(unsigned int iScore);
+    void addComboPoints();
+    int getComboPoints();
+    unsigned int getCoins();
+    void setCoins(unsigned int iCoins);
+
+    void setSpringJump(bool springJump);
+
 private:
     std::vector<Sprite*> sMario;
     int iSpriteID;
@@ -96,94 +186,4 @@ private:
 
     Vector2* getBlockLT(float nX, float nY);
     Vector2* getBlockRT(float nX, float nY);
-
-public:
-    Player(SDL_Renderer* rR, float fXPos, float fYPos);
-    ~Player(void);
-
-    void Draw(SDL_Renderer* rR);
-    void Update();
-
-    void playerPhysics();
-
-    void updateXPos(int iN);
-    void updateYPos(int iN);
-
-    void powerUPAnimation();
-
-    // ----- MOVE
-    void moveAnimation();
-    void swimingAnimation();
-
-    void startMove();
-    void resetMove();
-    void stopMove();
-    void setMoveDirection(bool moveDirection);
-    bool getChangeMoveDirection();
-    void setChangeMoveDirection();
-
-    void startRun();
-    void resetRun();
-
-    void createFireBall();
-    // ----- MOVE
-    // ----- JUMP
-    void jump();
-    void startJump(int iH);
-    void resetJump();
-    // ----- JUMP
-
-    void setMarioSpriteID(int iID);
-    int getMarioSpriteID();
-
-    int getHitBoxX();
-    int getHitBoxY();
-
-    // ----- get & set -----
-
-    bool getInLevelAnimation();
-    void setInLevelAnimation(bool inLevelAnimation);
-
-    int getXPos();
-    void setXPos(float fXPos);
-    int getYPos();
-    void setYPos(float fYPos);
-
-    int getPowerLVL();
-    void setPowerLVL(int powerLVL);
-    void resetPowerLVL();
-
-    bool getUnkillAble();
-
-    int getNumOfLives();
-    void setNumOfLives(int iNumOfLives);
-
-    bool getStarEffect();
-    void setStarEffect(bool starEffect);
-
-    int getMoveSpeed();
-    bool getMove();
-    bool getMoveDirection();
-    void setNextFallFrameID(int nextFallFrameID);
-    void setCurrentJumpSpeed(float currentJumpSpeed);
-    void setMoveSpeed(int moveSpeed);
-
-    int getJumpState();
-
-    bool getSquat();
-    void setSquat(bool bSquat);
-
-    CIMG* getMarioLVLUP();
-    Sprite* getMarioSprite();
-
-    void addCoin();
-
-    unsigned int getScore();
-    void setScore(unsigned int iScore);
-    void addComboPoints();
-    int getComboPoints();
-    unsigned int getCoins();
-    void setCoins(unsigned int iCoins);
-
-    void setSpringJump(bool springJump);
 };
