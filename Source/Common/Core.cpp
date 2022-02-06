@@ -360,7 +360,7 @@ void CCore::resetKeys()
     //It's probably wrong to have it statically available like that so I'm keeping
     //it here until I know why it was created
 
-    jassertfalse;
+    assert(false);
     //    movePressed = keyMenuPressed = keyS = keyW = keyA = keyD = getCFG().keySpace =
     //        keyShift = keyAPressed = keyDPressed = false;
 }

@@ -13,7 +13,7 @@ void Points::Update()
 {
     if (left > 0)
     {
-        rect.setY(rect.getY() - 2);
+        rect.y -= 2;
         left -= 2;
     }
     else
@@ -24,10 +24,10 @@ void Points::Update()
 
 void Points::Draw(SDL_Renderer* rR)
 {
-    auto x = rect.getX() + (int) CCore::getMap()->getXPos();
+    auto x = rect.x + (int) CCore::getMap()->getXPos();
 
     getCFG().getText()->draw(
-        rR, sText, x, rect.getY(), rect.getWidth(), rect.getHeight());
+        rR, sText, x, rect.y, rect.w, rect.h);
 }
 
 

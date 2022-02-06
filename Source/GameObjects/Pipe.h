@@ -1,6 +1,6 @@
 #pragma once
 
-#include <juce_graphics/juce_graphics.h>
+#include "CommonHeader.h"
 
 class Pipe
 {
@@ -26,7 +26,7 @@ private:
     // ----- 0 = VERTICAL, 1 = HORIZONTAL -> VERTICAL, 2 = VERTICAL -> VERTICAL
     int iType = 0;
 
-    juce::Point<int> leftBlockPos, rightBlockPos, newPlayerPos;
+    EA::Point<int> leftBlockPos, rightBlockPos, newPlayerPos;
 
     // ----- MAP LVL ID
     int newCurrentLevel = 0;

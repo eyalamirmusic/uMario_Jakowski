@@ -13,7 +13,7 @@ public:
     bool getDelete() const;
 
 private:
-    juce::Rectangle<int> rect;
+    EA::Rect<int> rect;
     int left = 96;
 
     std::string sText;

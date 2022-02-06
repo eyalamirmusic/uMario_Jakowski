@@ -367,7 +367,7 @@ public:
 
     Block* getBlock(int iID);
     Block* getMinionBlock(int iID);
-    MapLevel* getMapBlock(const juce::Point<int>& pos)
+    MapLevel* getMapBlock(const EA::Point<int>& pos)
     {
         return getMapBlock(pos.x, pos.y);
     }

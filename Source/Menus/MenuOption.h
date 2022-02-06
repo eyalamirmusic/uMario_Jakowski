@@ -14,9 +14,9 @@ public:
     int getXPos() const;
     int getYPos() const;
 
-    juce::Point<int> getPos() const { return pos; }
+    EA::Point<int> getPos() const { return pos; }
 
 private:
     std::string sText;
-    juce::Point<int> pos;
+    EA::Point<int> pos;
 };
