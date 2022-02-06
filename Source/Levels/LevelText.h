@@ -1,20 +1,18 @@
 #pragma once
 
-#include <string>
+#include "CommonHeader.h"
 
 class LevelText
 {
-private:
-    int iXPos, iYPos;
-
-    std::string sText;
-
 public:
-    LevelText(int iXPos, int iYPos, std::string sText);
-    ~LevelText(void);
+    LevelText(int x, int y, const std::string& textToUse);
 
-    int getXPos();
-    int getYPos();
-    std::string getText();
-    void setText(std::string sText);
+    int getXPos() const;
+    int getYPos() const;
+
+    const std::string& getText();
+
+private:
+    EA::Point<int> pos;
+    std::string sText;
 };

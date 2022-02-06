@@ -1,36 +1,22 @@
 #include "LevelText.h"
 
-/* ******************************************** */
-
-LevelText::LevelText(int iXPos, int iYPos, std::string sText)
-{
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-    this->sText = sText;
-}
-
-LevelText::~LevelText(void)
+LevelText::LevelText(int x, int y, const std::string& textToUse)
+    : pos(x, y)
+    , sText(textToUse)
 {
 }
 
-/* ******************************************** */
-
-int LevelText::getXPos()
+int LevelText::getXPos() const
 {
-    return iXPos;
+    return pos.x;
 }
 
-int LevelText::getYPos()
+int LevelText::getYPos() const
 {
-    return iYPos;
+    return pos.y;
 }
 
-void LevelText::setText(std::string sText)
-{
-    this->sText = sText;
-}
-
-std::string LevelText::getText()
+const std::string& LevelText::getText()
 {
     return sText;
 }
