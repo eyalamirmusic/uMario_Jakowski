@@ -9,12 +9,11 @@ public:
 
 private:
 
-    void Update() override;
+    void update() override;
     void minionPhysics() override;
 
     void spawnCheep();
     void nextCheep();
-
 
     int iXEnd;
 

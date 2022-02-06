@@ -1,9 +1,7 @@
 #include "Bowser.h"
 #include "Common/Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include <cstdlib>
+#include <ctime>
 
 Bowser::Bowser(float fXPos, float fYPos, bool spawnHammer)
 {
@@ -37,19 +35,12 @@ Bowser::Bowser(float fXPos, float fYPos, bool spawnHammer)
     this->spawnHammer = spawnHammer;
 }
 
-Bowser::~Bowser(void)
+void Bowser::update()
 {
-}
+    auto map = CCore::getMap();
+    moveDirection = map->getPlayer()->getXPos() - map->getXPos() < fXPos + iHitBoxX;
 
-/* ******************************************** */
-
-void Bowser::Update()
-{
-    moveDirection =
-        CCore::getMap()->getPlayer()->getXPos() - CCore::getMap()->getXPos()
-        < fXPos + iHitBoxX;
-
-    if (!CCore::getMap()->getInEvent())
+    if (!map->getInEvent())
     {
         if (nextJumpFrameID < 1 && jumpState == 0)
         {
@@ -62,10 +53,8 @@ void Bowser::Update()
         }
 
         if (moveDirection
-            && CCore::getMap()->getBlockIDX(
-                   (int) (CCore::getMap()->getPlayer()->getXPos()
-                          - CCore::getMap()->getXPos()))
-                   > CCore::getMap()->getMapWidth() / 2)
+            && map->getBlockIDX((int) (map->getPlayer()->getXPos() - map->getXPos()))
+                   > map->getMapWidth() / 2)
         {
             if (nextFireFrameID < 1)
             {
@@ -95,7 +84,7 @@ void Bowser::Update()
 
         if (moveDir)
         {
-            if (CCore::getMap()->getBlockIDX((int) fXPos) <= iMinBlockID)
+            if (map->getBlockIDX((int) fXPos) <= iMinBlockID)
             {
                 moveDir = false;
             }
@@ -106,7 +95,7 @@ void Bowser::Update()
         }
         else
         {
-            if (CCore::getMap()->getBlockIDX((int) fXPos) >= iMaxBlockID)
+            if (map->getBlockIDX((int) fXPos) >= iMaxBlockID)
             {
                 moveDir = true;
             }
@@ -124,9 +113,9 @@ void Bowser::Update()
                 {
                     nextHammerFrameID = 8;
                     --numOfHammers;
-                    CCore::getMap()->addHammer((int) (fXPos + iHitBoxX / 4),
-                                               (int) (fYPos - 18),
-                                               !moveDirection);
+                    map->addHammer((int) (fXPos + iHitBoxX / 4),
+                                   (int) (fYPos - 18),
+                                   !moveDirection);
                 }
                 else
                 {
@@ -142,7 +131,7 @@ void Bowser::Update()
     }
 }
 
-void Bowser::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Bowser::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos, !moveDirection);
@@ -214,12 +203,10 @@ void Bowser::createFire()
 
     if (iFireID > 2)
     {
-        nextFireFrameID += 88 + rand() % 110;
+        nextFireFrameID += (88 + rand() % 110);
         iFireID = 0;
     }
 }
-
-/* ******************************************** */
 
 void Bowser::collisionWithPlayer(bool TOP)
 {

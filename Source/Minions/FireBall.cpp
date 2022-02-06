@@ -28,7 +28,7 @@ FireBall::FireBall(
     this->iBlockID = 23;
 }
 
-void FireBall::Update()
+void FireBall::update()
 {
     if (moveDirection)
     {
@@ -64,7 +64,7 @@ void FireBall::Update()
     }
 }
 
-void FireBall::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void FireBall::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
 }

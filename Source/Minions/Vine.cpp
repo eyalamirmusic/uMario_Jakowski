@@ -23,7 +23,7 @@ Vine::Vine(int iXPos, int iYPos, int minionState, int iBlockID)
     this->iHitBoxY = -32;
 }
 
-void Vine::Update()
+void Vine::update()
 {
     if (minionState == 0)
     {
@@ -45,7 +45,7 @@ void Vine::Update()
     }
 }
 
-void Vine::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Vine::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     auto map = CCore::getMap();
 

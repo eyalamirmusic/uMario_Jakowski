@@ -17,7 +17,7 @@ Toad::Toad(int iXPos, int iYPos, bool peach)
     this->iHitBoxY = 48;
 }
 
-void Toad::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Toad::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos, !moveDirection);

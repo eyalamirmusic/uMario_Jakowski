@@ -120,7 +120,7 @@ void Koppa::minionPhysics()
     }
 }
 
-void Koppa::Update()
+void Koppa::update()
 {
     if (minionState == 0)
     {
@@ -148,7 +148,7 @@ void Koppa::Update()
     }
 }
 
-void Koppa::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Koppa::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

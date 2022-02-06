@@ -19,7 +19,7 @@ Spring::Spring(int iXPos, int iYPos)
     this->inAnimation = false;
 }
 
-void Spring::Update()
+void Spring::update()
 {
     if (inAnimation)
     {
@@ -79,7 +79,7 @@ void Spring::Update()
     }
 }
 
-void Spring::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Spring::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos, false);

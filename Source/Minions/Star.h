@@ -8,12 +8,12 @@ public:
     Star(int iXPos, int iYPos, int iX, int iY);
 
 private:
-    void Update() override;
+    void update() override;
     bool updateMinion() override;
 
     void minionPhysics() override;
 
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void collisionWithPlayer(bool TOP) override;
     void setMinionState(int) override {};

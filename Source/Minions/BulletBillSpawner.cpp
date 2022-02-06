@@ -20,7 +20,7 @@ BulletBillSpawner::BulletBillSpawner(int iXPos, int iYPos, int minionState)
     srand((unsigned) time(NULL));
 }
 
-void BulletBillSpawner::Update()
+void BulletBillSpawner::update()
 {
     auto map = CCore::getMap();
     auto player = map->getPlayer();

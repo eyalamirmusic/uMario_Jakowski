@@ -18,7 +18,7 @@ Fire::Fire(float fXPos, float fYPos, int toYPos)
     this->minionSpawned = true;
 }
 
-void Fire::Update()
+void Fire::update()
 {
     fXPos -= 2;
 
@@ -37,7 +37,7 @@ void Fire::Update()
     }
 }
 
-void Fire::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Fire::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos - 4);
 }

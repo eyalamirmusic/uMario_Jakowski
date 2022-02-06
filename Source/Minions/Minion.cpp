@@ -4,7 +4,7 @@
 bool Minion::updateMinion()
 {
     if (!minionSpawned)
-        Spawn();
+        spawn();
     else
         minionPhysics();
 
@@ -181,7 +181,7 @@ void Minion::collisionWithPlayer(bool TOP)
 {
 }
 
-void Minion::Spawn()
+void Minion::spawn()
 {
     Map* map = CCore::getMap();
     auto x = map->getXPos();

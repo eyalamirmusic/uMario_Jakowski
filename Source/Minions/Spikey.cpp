@@ -16,7 +16,7 @@ Spikey::Spikey(int iXPos, int iYPos)
     this->moveSpeed = 0;
 }
 
-void Spikey::Update()
+void Spikey::update()
 {
     if (minionState == 0)
         updateXPos();
@@ -24,7 +24,7 @@ void Spikey::Update()
         Minion::minionDeathAnimation();
 }
 
-void Spikey::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Spikey::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

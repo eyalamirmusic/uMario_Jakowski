@@ -8,14 +8,13 @@ public:
     Vine(int iXPos, int iYPos, int minionState, int iBlockID);
 
 private:
-    // -- minionState = 0 VINE START, minionState = 1 VINE END
-
-    void Update() override;
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void minionPhysics() override {};
 
     void collisionWithPlayer(bool TOP) override;
 
+    // -- minionState = 0 VINE START, minionState = 1 VINE END
     int iX, iY;
 };

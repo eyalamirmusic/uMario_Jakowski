@@ -8,8 +8,8 @@ public:
     Koppa(int iX, int iY, int minionState, bool moveDirection, int iBlockID);
 
 private:
-    void Update() override;
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void minionPhysics() override;
     void updateXPos() override;

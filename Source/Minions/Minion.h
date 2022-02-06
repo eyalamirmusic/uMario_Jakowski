@@ -8,8 +8,8 @@ class Minion
 public:
     virtual ~Minion() = default;
 
-    virtual void Update() {};
-    virtual void Draw(SDL_Renderer* rR, CIMG* iIMG) {}
+    virtual void update() {};
+    virtual void draw(SDL_Renderer* rR, CIMG* iIMG) {}
 
     virtual void updateYPos(int iN);
     virtual void updateXPos();
@@ -24,7 +24,7 @@ public:
     void physicsState1();
     void physicsState2();
 
-    void Spawn();
+    void spawn();
     void startJump(int iH);
     void resetJump();
 

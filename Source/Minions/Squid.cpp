@@ -24,7 +24,7 @@ Squid::Squid(int iXPos, int iYPos)
     srand((unsigned) time(NULL));
 }
 
-void Squid::Update()
+void Squid::update()
 {
     auto map = CCore::getMap();
 
@@ -79,7 +79,7 @@ void Squid::Update()
     }
 }
 
-void Squid::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Squid::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
 }

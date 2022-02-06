@@ -4,7 +4,18 @@
 
 class Bowser : public Minion
 {
+public:
+    Bowser(float fXPos, float fYPos, bool spawnHammer = false);
+
 private:
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void minionPhysics() override;
+
+    void collisionWithPlayer(bool TOP) override;
+
+    void createFire();
     // -- minionState, 0 = Normal, 1 = Shot, -1 = Dead
 
     int nextJumpFrameID;
@@ -20,16 +31,4 @@ private:
     int iYFireStart;
     int iFireID;
 
-public:
-    Bowser(float fXPos, float fYPos, bool spawnHammer = false);
-    ~Bowser(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void minionPhysics();
-
-    void collisionWithPlayer(bool TOP);
-
-    void createFire();
 };

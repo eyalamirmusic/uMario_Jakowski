@@ -21,7 +21,7 @@ UpFire::UpFire(int iXPos, int iYJump)
     srand((unsigned) time(nullptr));
 }
 
-void UpFire::Update()
+void UpFire::update()
 {
     if (nextJumpFrameID <= 0)
     {
@@ -91,7 +91,7 @@ void UpFire::Update()
     }
 }
 
-void UpFire::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void UpFire::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     auto mapX = (int) CCore::getMap()->getXPos();
 

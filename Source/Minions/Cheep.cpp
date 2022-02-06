@@ -47,7 +47,7 @@ Cheep::Cheep(int iXPos, int iYPos, int minionType, int moveSpeed, bool moveDirec
     this->collisionOnlyWithPlayer = true;
 }
 
-void Cheep::Update()
+void Cheep::update()
 {
     if (minionState == 0 || minionState == 1)
     {
@@ -213,7 +213,7 @@ void Cheep::Update()
     }
 }
 
-void Cheep::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Cheep::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState == -2)
     {

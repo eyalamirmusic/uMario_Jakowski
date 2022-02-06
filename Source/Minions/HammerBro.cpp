@@ -35,7 +35,7 @@ HammerBro::HammerBro(int iXPos, int iYPos)
     this->nextHammerFrameID = 65;
 }
 
-void HammerBro::Update()
+void HammerBro::update()
 {
     if (minionState != -2)
     {
@@ -165,7 +165,7 @@ void HammerBro::Update()
     }
 }
 
-void HammerBro::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void HammerBro::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

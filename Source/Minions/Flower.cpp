@@ -18,7 +18,7 @@ Flower::Flower(int iXPos, int fYPos, int iX, int iY)
     this->iY = iY;
 }
 
-void Flower::Update()
+void Flower::update()
 {
     if (inSpawnState)
     {
@@ -47,7 +47,7 @@ bool Flower::updateMinion()
     return minionSpawned;
 }
 
-void Flower::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Flower::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState >= 0)
     {

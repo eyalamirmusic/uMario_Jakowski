@@ -4,17 +4,14 @@
 
 class Beetle : public Minion
 {
-private:
 public:
     Beetle(int iXPos, int iYPos, bool moveDirection);
-    ~Beetle(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void collisionWithPlayer(bool TOP);
-
-    void collisionEffect();
-
-    void setMinionState(int minionState);
+    void collisionWithPlayer(bool TOP) override;
+    void collisionEffect() override;
+    void setMinionState(int minionState) override;
 };

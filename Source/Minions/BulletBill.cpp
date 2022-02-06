@@ -38,7 +38,7 @@ BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState
 }
 
 
-void BulletBill::Update()
+void BulletBill::update()
 {
     if (minionState != -2)
     {
@@ -55,7 +55,7 @@ void BulletBill::Update()
     }
 }
 
-void BulletBill::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void BulletBill::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

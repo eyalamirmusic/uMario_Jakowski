@@ -193,7 +193,7 @@ void Map::UpdateMinions()
         {
             if (lMinion[i][j]->updateMinion())
             {
-                lMinion[i][j]->Update();
+                lMinion[i][j]->update();
             }
         }
     }
@@ -732,7 +732,7 @@ void Map::DrawMinions(SDL_Renderer* rR)
     {
         for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
         {
-            lMinion[i][j]->Draw(
+            lMinion[i][j]->draw(
                 rR,
                 vMinion[lMinion[i][j]->getBloockID()]->getSprite()->getTexture());
             //getCFG().getText()->DrawWS(rR, std::to_string(i), lMinion[i][j]->getXPos() + (int)fXPos, lMinion[i][j]->getYPos(), 0, 0, 0, 8);

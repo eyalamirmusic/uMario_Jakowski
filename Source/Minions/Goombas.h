@@ -9,8 +9,8 @@ public:
 
 private:
 
-    void Update() override;
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void collisionWithPlayer(bool TOP) override;
 

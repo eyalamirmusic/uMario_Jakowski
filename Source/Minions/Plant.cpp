@@ -25,7 +25,7 @@ Plant::Plant(int fXPos, int fYPos, int iBlockID)
     this->Y = CCore::getMap()->getBlockIDY((int) fYPos);
 }
 
-void Plant::Update()
+void Plant::update()
 {
     lockPlant =
         CCore::getMap()->getPlayer()->getXPos() - CCore::getMap()->getXPos()
@@ -77,7 +77,7 @@ void Plant::Update()
     }
 }
 
-void Plant::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Plant::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()) - 2, (int) fYPos - 6, false);

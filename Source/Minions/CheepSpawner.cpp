@@ -23,7 +23,7 @@ CheepSpawner::CheepSpawner(int iXPos, int iXEnd)
     srand((unsigned) time(NULL));
 }
 
-void CheepSpawner::Update()
+void CheepSpawner::update()
 {
     if (iSpawnTime < SDL_GetTicks())
     {

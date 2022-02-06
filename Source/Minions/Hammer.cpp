@@ -26,7 +26,7 @@ Hammer::Hammer(int iXPos, int iYPos, bool moveDirection)
     this->minionSpawned = true;
 }
 
-void Hammer::Update()
+void Hammer::update()
 {
     if (minionState != -2)
     {
@@ -50,7 +50,7 @@ void Hammer::Update()
     }
 }
 
-void Hammer::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Hammer::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

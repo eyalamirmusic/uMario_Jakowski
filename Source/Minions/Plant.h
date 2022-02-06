@@ -7,8 +7,9 @@ class Plant : public Minion
 public:
     Plant(int fXPos, int fYPos, int iBlockID);
 
-    void Update() override;
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+private:
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void minionPhysics() override;
 
@@ -18,7 +19,6 @@ public:
     void lockMinion() override;
     void setMinionState(int minionState) override;
 
-private:
     bool bWait;
     unsigned int iTime;
 

@@ -1,8 +1,6 @@
 #include "Beetle.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Beetle::Beetle(int iXPos, int iYPos, bool moveDirection)
 {
     this->fXPos = (float) iXPos;
@@ -18,25 +16,15 @@ Beetle::Beetle(int iXPos, int iYPos, bool moveDirection)
     this->moveSpeed = 1;
 }
 
-Beetle::~Beetle(void)
-{
-}
-
-/* ******************************************** */
-
-void Beetle::Update()
+void Beetle::update()
 {
     if (minionState == -2)
-    {
         Minion::minionDeathAnimation();
-    }
     else
-    {
         updateXPos();
-    }
 }
 
-void Beetle::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Beetle::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {
@@ -52,14 +40,12 @@ void Beetle::Draw(SDL_Renderer* rR, CIMG* iIMG)
     }
 }
 
-/* ******************************************** */
-
 void Beetle::collisionWithPlayer(bool TOP)
 {
-    if (CCore::getMap()->getPlayer()->getStarEffect())
-    {
+    auto player = CCore::getMap()->getPlayer();
+
+    if (player->getStarEffect())
         setMinionState(-2);
-    }
     else if (TOP)
     {
         if (minionState == 0)
@@ -67,10 +53,9 @@ void Beetle::collisionWithPlayer(bool TOP)
             minionState = 1;
 
             ++iBlockID;
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
-            CCore::getMap()->getPlayer()->setYPos(
-                (float) CCore::getMap()->getPlayer()->getYPos() - 4);
+            player->resetJump();
+            player->startJump(1);
+            player->setYPos((float) player->getYPos() - 4);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
             moveSpeed = 0;
@@ -85,9 +70,8 @@ void Beetle::collisionWithPlayer(bool TOP)
             else
             {
                 if ((fXPos + iHitBoxX) / 2
-                    < (CCore::getMap()->getPlayer()->getXPos()
-                       - CCore::getMap()->getXPos()
-                       + CCore::getMap()->getPlayer()->getHitBoxX())
+                    < (player->getXPos() - CCore::getMap()->getXPos()
+                       + player->getHitBoxX())
                           / 2)
                 {
                     moveDirection = true;
@@ -100,10 +84,9 @@ void Beetle::collisionWithPlayer(bool TOP)
                 moveSpeed = 6;
             }
 
-            CCore::getMap()->getPlayer()->setYPos(
-                (float) CCore::getMap()->getPlayer()->getYPos() - 4);
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
+            player->setYPos((float) player->getYPos() - 4);
+            player->resetJump();
+            player->startJump(1);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
@@ -115,15 +98,13 @@ void Beetle::collisionWithPlayer(bool TOP)
             if (moveSpeed == 0)
             {
                 //moveDirection = !CCore::getMap()->getPlayer()->getMoveDirection();
-                moveDirection =
-                    (fXPos + iHitBoxX / 2
-                     < CCore::getMap()->getPlayer()->getXPos()
-                           - CCore::getMap()->getXPos()
-                           + CCore::getMap()->getPlayer()->getHitBoxX() / 2);
+                moveDirection = (fXPos + iHitBoxX / 2
+                                 < player->getXPos() - CCore::getMap()->getXPos()
+                                       + player->getHitBoxX() / 2);
                 if (moveDirection)
-                    fXPos -= CCore::getMap()->getPlayer()->getMoveSpeed() + 1;
+                    fXPos -= player->getMoveSpeed() + 1;
                 else
-                    fXPos += CCore::getMap()->getPlayer()->getMoveSpeed() + 1;
+                    fXPos += player->getMoveSpeed() + 1;
                 moveSpeed = 6;
                 getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
             }
@@ -148,11 +129,7 @@ void Beetle::collisionEffect()
 void Beetle::setMinionState(int minionState)
 {
     if (minionState != -2 || CCore::getMap()->getPlayer()->getStarEffect())
-    {
         Minion::setMinionState(minionState);
-    }
     else
-    {
         moveDirection = !moveDirection;
-    }
 }

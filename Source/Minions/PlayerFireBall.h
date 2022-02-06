@@ -7,8 +7,9 @@ class PlayerFireBall : public Minion
 public:
     PlayerFireBall(int X, int Y, bool moveDirection);
 
-    void Update() override;
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+private:
+    void update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
     void updateXPos() override;
 
@@ -21,7 +22,6 @@ public:
     void collisionEffect() override {}
     void setMinionState(int) override {}
 
-private:
     bool bDestroy;
     int destroyFrameID;
 };

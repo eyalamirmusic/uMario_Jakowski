@@ -27,7 +27,7 @@ Lakito::Lakito(int iXPos, int iYPos, int iMaxXPos)
     srand((unsigned) time(NULL));
 }
 
-void Lakito::Update()
+void Lakito::update()
 {
     if (minionState == -2)
     {
@@ -135,7 +135,7 @@ void Lakito::Update()
     }
 }
 
-void Lakito::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Lakito::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

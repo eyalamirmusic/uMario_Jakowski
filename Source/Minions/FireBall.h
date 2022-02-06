@@ -9,8 +9,8 @@ public:
 
 private:
 
-    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
-    void Update() override;
+    void draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void update() override;
     void collisionWithPlayer(bool TOP) override;
     void minionPhysics() override {}
     void updateXPos() override {}

@@ -26,7 +26,7 @@ PlayerFireBall::PlayerFireBall(int iXPos, int iYPos, bool moveDirection)
     this->destroyFrameID = 15;
 }
 
-void PlayerFireBall::Update()
+void PlayerFireBall::update()
 {
     if (bDestroy)
     {
@@ -95,7 +95,7 @@ void PlayerFireBall::Update()
     }
 }
 
-void PlayerFireBall::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void PlayerFireBall::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (!bDestroy)
     {

@@ -10,7 +10,7 @@ Goombas::Goombas(int iX, int iY, int iBlockID, bool moveDirection)
     this->moveSpeed = 1;
 }
 
-void Goombas::Update()
+void Goombas::update()
 {
     if (minionState == 0)
     {
@@ -26,7 +26,7 @@ void Goombas::Update()
     }
 }
 
-void Goombas::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Goombas::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState != -2)
     {

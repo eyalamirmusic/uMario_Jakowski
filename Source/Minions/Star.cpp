@@ -25,7 +25,7 @@ Star::Star(int iXPos, int iYPos, int iX, int iY)
     this->iHitBoxY = 32;
 }
 
-void Star::Update()
+void Star::update()
 {
     if (inSpawnState)
     {
@@ -99,7 +99,7 @@ void Star::minionPhysics()
     }
 }
 
-void Star::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Star::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos + 2, false);

@@ -21,7 +21,7 @@ Mushroom::Mushroom(int iXPos, int fYPos, bool powerUP, int iX, int iY)
     this->iY = iY;
 }
 
-void Mushroom::Update()
+void Mushroom::update()
 {
     if (inSpawnState)
     {
@@ -59,7 +59,7 @@ bool Mushroom::updateMinion()
     return minionSpawned;
 }
 
-void Mushroom::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Mushroom::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState >= 0)
     {
