@@ -354,7 +354,7 @@ Player::~Player(void)
 
 /* ******************************************** */
 
-void Player::Update()
+void Player::update()
 {
     playerPhysics();
     movePlayer();
@@ -1489,7 +1489,7 @@ Vector2* Player::getBlockRT(float nX, float nY)
 
 /* ******************************************** */
 
-void Player::Draw(SDL_Renderer* rR)
+void Player::draw(SDL_Renderer* rR)
 {
     if (!inLevelDownAnimation || CCore::getMap()->getInEvent())
     {

@@ -16,8 +16,8 @@ public:
              bool direction,
              int seesawPlatformID = 0);
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void update();
+    void draw(SDL_Renderer* rR);
 
     void moveY();
     void moveYReverse();

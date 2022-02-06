@@ -130,7 +130,7 @@ void Map::Update()
 
         for (unsigned int i = 0; i < vPlatform.size(); i++)
         {
-            vPlatform[i]->Update();
+            vPlatform[i]->update();
         }
     }
     else
@@ -155,7 +155,7 @@ void Map::Update()
     {
         if (!lPoints[i]->getDelete())
         {
-            lPoints[i]->Update();
+            lPoints[i]->update();
         }
         else
         {
@@ -168,7 +168,7 @@ void Map::Update()
     {
         if (!lCoin[i]->getDelete())
         {
-            lCoin[i]->Update();
+            lCoin[i]->update();
         }
         else
         {
@@ -182,7 +182,7 @@ void Map::Update()
 
 void Map::UpdatePlayer()
 {
-    oPlayer->Update();
+    oPlayer->update();
     checkSpawnPoint();
 }
 
@@ -650,19 +650,19 @@ void Map::Draw(SDL_Renderer* rR)
 
     for (unsigned int i = 0; i < vPlatform.size(); i++)
     {
-        vPlatform[i]->Draw(rR);
+        vPlatform[i]->draw(rR);
     }
 
     DrawMinions(rR);
 
     for (unsigned int i = 0; i < lPoints.size(); i++)
     {
-        lPoints[i]->Draw(rR);
+        lPoints[i]->draw(rR);
     }
 
     for (unsigned int i = 0; i < lCoin.size(); i++)
     {
-        lCoin[i]->Draw(rR);
+        lCoin[i]->draw(rR);
     }
 
     for (unsigned int i = 0; i < lBlockDebris.size(); i++)
@@ -689,7 +689,7 @@ void Map::Draw(SDL_Renderer* rR)
             rR, vBlock[lBubble[i]->getBlockID()]->getSprite()->getTexture());
     }
 
-    oPlayer->Draw(rR);
+    oPlayer->draw(rR);
 
     if (inEvent)
     {
@@ -703,7 +703,7 @@ void Map::DrawMap(SDL_Renderer* rR)
 {
     if (oFlag != NULL)
     {
-        oFlag->DrawCastleFlag(rR, vBlock[51]->getSprite()->getTexture());
+        oFlag->drawCastleFlag(rR, vBlock[51]->getSprite()->getTexture());
     }
 
     for (int i = getStartBlock(), iEnd = getEndBlock(); i < iEnd && i < iMapWidth;
@@ -723,7 +723,7 @@ void Map::DrawMap(SDL_Renderer* rR)
 
     if (oFlag != NULL)
     {
-        oFlag->Draw(rR, vBlock[oFlag->getBlockID()]->getSprite()->getTexture());
+        oFlag->draw(rR, vBlock[oFlag->getBlockID()]->getSprite()->getTexture());
     }
 }
 

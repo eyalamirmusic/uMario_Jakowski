@@ -9,7 +9,7 @@ Points::Points(int x, int y, std::string textToUse, int width, int height)
 {
 }
 
-void Points::Update()
+void Points::update()
 {
     if (left > 0)
     {
@@ -22,7 +22,7 @@ void Points::Update()
     }
 }
 
-void Points::Draw(SDL_Renderer* rR)
+void Points::draw(SDL_Renderer* rR)
 {
     auto x = rect.x + (int) CCore::getMap()->getXPos();
 

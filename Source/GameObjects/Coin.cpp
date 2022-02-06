@@ -6,7 +6,7 @@ Coin::Coin(int x, int y)
 {
 }
 
-void Coin::Update()
+void Coin::update()
 {
     if (iLEFT > 0)
     {
@@ -37,7 +37,7 @@ void Coin::Update()
     }
 }
 
-void Coin::Draw(SDL_Renderer* rR)
+void Coin::draw(SDL_Renderer* rR)
 {
     auto texture = CCore::getMap()->getBlock(50)->getSprite()->getTexture(iSpriteID);
 

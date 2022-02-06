@@ -123,7 +123,7 @@ void Event::normal()
                             length = 0;
                             getCFG().getMusic()->stopTrack();
                         }
-                        map->getFlag()->UpdateCastleFlag();
+                        map->getFlag()->updateCastleFlag();
                         break;
                     case Animations::DeathNothing:
                         length -= speed;
@@ -440,7 +440,7 @@ void Event::end()
 
     if (flag != nullptr && flag->getPos().y < getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4)
     {
-        flag->Update();
+        flag->update();
     }
 }
 

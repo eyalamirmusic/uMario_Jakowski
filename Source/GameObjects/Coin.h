@@ -7,8 +7,8 @@ class Coin
 public:
     Coin(int x, int y);
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void update();
+    void draw(SDL_Renderer* rR);
 
     int getXPos();
     int getYPos();

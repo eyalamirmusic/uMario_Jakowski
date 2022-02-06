@@ -11,8 +11,8 @@ public:
     Player(SDL_Renderer* rR, float fXPos, float fYPos);
     ~Player();
 
-    void Draw(SDL_Renderer* rR);
-    void Update();
+    void draw(SDL_Renderer* rR);
+    void update();
 
     void playerPhysics();
 

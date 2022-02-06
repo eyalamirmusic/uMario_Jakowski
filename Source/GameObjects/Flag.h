@@ -8,10 +8,10 @@ class Flag
 public:
     Flag(int iXPos, int iYPos);
 
-    void Update();
-    void UpdateCastleFlag();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-    void DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG);
+    void update();
+    void updateCastleFlag();
+    void draw(SDL_Renderer* rR, CIMG* iIMG);
+    void drawCastleFlag(SDL_Renderer* rR, CIMG* iIMG);
 
     int getBlockID() const { return iBlockID; }
 

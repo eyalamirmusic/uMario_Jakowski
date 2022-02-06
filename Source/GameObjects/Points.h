@@ -7,8 +7,8 @@ class Points
 public:
     Points(int x, int y, std::string textToUse, int width = 8, int height = 16);
 
-    void Update();
-    void Draw(SDL_Renderer* rR);
+    void update();
+    void draw(SDL_Renderer* rR);
 
     bool getDelete() const;
 

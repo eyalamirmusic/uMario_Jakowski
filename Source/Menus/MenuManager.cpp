@@ -48,7 +48,7 @@ void MenuManager::draw(SDL_Renderer* rR)
     {
         case MenuStates::MainMenu:
             map->DrawMap(rR);
-            map->getPlayer()->Draw(rR);
+            map->getPlayer()->draw(rR);
             map->DrawGameLayout(rR);
             oMainMenu.draw(rR);
             break;
@@ -70,7 +70,7 @@ void MenuManager::draw(SDL_Renderer* rR)
         case MenuStates::Options:
             map->DrawMap(rR);
             map->DrawMinions(rR);
-            map->getPlayer()->Draw(rR);
+            map->getPlayer()->draw(rR);
             map->DrawGameLayout(rR);
             oOptionsMenu.draw(rR);
             break;
@@ -78,7 +78,7 @@ void MenuManager::draw(SDL_Renderer* rR)
         case MenuStates::Pause:
             map->DrawMap(rR);
             map->DrawMinions(rR);
-            map->getPlayer()->Draw(rR);
+            map->getPlayer()->draw(rR);
             map->DrawGameLayout(rR);
             oPauseMenu.draw(rR);
             break;

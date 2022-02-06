@@ -15,19 +15,19 @@ Flag::Flag(int iXPos, int iYPos)
     this->castleFlagExtraXPos = this->castleFlagY = 0;
 }
 
-void Flag::Update()
+void Flag::update()
 {
     pos.x += 4;
     iYTextPos -= 4;
 }
 
-void Flag::UpdateCastleFlag()
+void Flag::updateCastleFlag()
 {
     if (castleFlagY <= 56)
         castleFlagY += 2;
 }
 
-void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Flag::draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     auto x = pos.x + (int) CCore::getMap()->getXPos();
     iIMG->draw(rR, x, pos.y);
@@ -39,7 +39,7 @@ void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
     }
 }
 
-void Flag::DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG)
+void Flag::drawCastleFlag(SDL_Renderer* rR, CIMG* iIMG)
 {
     auto mapX = (int) CCore::getMap()->getXPos();
     auto x = pos.x + mapX + castleFlagExtraXPos + 7 * 32 - 14;

@@ -30,7 +30,7 @@ Platform::Platform(int iSize,
         this->iXStart = (int) fYPos;
 }
 
-void Platform::Update()
+void Platform::update()
 {
     switch (iType)
     {
@@ -137,7 +137,7 @@ void Platform::Update()
     }
 }
 
-void Platform::Draw(SDL_Renderer* rR)
+void Platform::draw(SDL_Renderer* rR)
 {
     if (iType == 6 || iType == 7)
     { // -- iXStart = YPos 2
