@@ -6,13 +6,13 @@ namespace Mario::Music
 {
 Mix_Music* loadMusic(std::string fileName)
 {
-    fileName = "files/sounds/" + fileName + ".wav";
+    fileName = "Resources/sounds/" + fileName + ".wav";
     return Mix_LoadMUS(fileName.c_str());
 }
 
 Mix_Chunk* loadChunk(std::string fileName)
 {
-    fileName = "files/sounds/" + fileName + ".wav";
+    fileName = "Resources/sounds/" + fileName + ".wav";
     return Mix_LoadWAV(fileName.c_str());
 }
 

@@ -26,7 +26,7 @@ CCore::CCore()
         rR = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     // ----- ICO
-    std::string fileName = "files/images/ico.bmp";
+    std::string fileName = "Resources/images/ico.bmp";
     SDL_Surface* loadedSurface = SDL_LoadBMP(fileName.c_str());
     SDL_SetColorKey(
         loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 255, 0, 255));
