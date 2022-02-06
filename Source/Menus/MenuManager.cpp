@@ -11,7 +11,7 @@ void MenuManager::update()
     {
         case MenuStates::MainMenu:
             oMainMenu.update();
-            map->UpdateBlocks();
+            map->updateBlocks();
             break;
 
         case MenuStates::GameLoading:
@@ -19,14 +19,14 @@ void MenuManager::update()
             break;
 
         case MenuStates::Game:
-            map->Update();
-            map->UpdateMinionsCollisions();
+            map->update();
+            map->updateMinionsCollisions();
             break;
 
         case MenuStates::About:
-            map->UpdateMinions();
-            map->UpdateMinionBlokcs();
-            map->UpdateBlocks();
+            map->updateMinions();
+            map->updateMinionBlocks();
+            map->updateBlocks();
             oAboutMenu.update();
             break;
 
@@ -47,9 +47,9 @@ void MenuManager::draw(SDL_Renderer* rR)
     switch (currentGameState)
     {
         case MenuStates::MainMenu:
-            map->DrawMap(rR);
+            map->drawMap(rR);
             map->getPlayer()->draw(rR);
-            map->DrawGameLayout(rR);
+            map->drawGameLayout(rR);
             oMainMenu.draw(rR);
             break;
 
@@ -58,28 +58,28 @@ void MenuManager::draw(SDL_Renderer* rR)
             break;
 
         case MenuStates::Game:
-            map->Draw(rR);
+            map->draw(rR);
             break;
 
         case MenuStates::About:
-            map->DrawMap(rR);
-            map->DrawMinions(rR);
+            map->drawMap(rR);
+            map->drawMinions(rR);
             oAboutMenu.draw(rR);
             break;
 
         case MenuStates::Options:
-            map->DrawMap(rR);
-            map->DrawMinions(rR);
+            map->drawMap(rR);
+            map->drawMinions(rR);
             map->getPlayer()->draw(rR);
-            map->DrawGameLayout(rR);
+            map->drawGameLayout(rR);
             oOptionsMenu.draw(rR);
             break;
 
         case MenuStates::Pause:
-            map->DrawMap(rR);
-            map->DrawMinions(rR);
+            map->drawMap(rR);
+            map->drawMinions(rR);
             map->getPlayer()->draw(rR);
-            map->DrawGameLayout(rR);
+            map->drawGameLayout(rR);
             oPauseMenu.draw(rR);
             break;
     }

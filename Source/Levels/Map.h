@@ -19,22 +19,21 @@
 class Map
 {
 public:
-    Map(SDL_Renderer* rR);
-    ~Map(void);
+    explicit Map(SDL_Renderer* rR);
+    ~Map();
 
-    void Update();
+    void update();
 
-    void UpdatePlayer();
-    void UpdateMinions();
-    void UpdateMinionsCollisions();
-    void UpdateBlocks();
-    void UpdateMinionBlokcs();
+    void updatePlayer();
+    void updateMinions();
+    void updateMinionsCollisions();
+    void updateBlocks();
+    void updateMinionBlocks();
 
-    void Draw(SDL_Renderer* rR);
-    void DrawMap(SDL_Renderer* rR);
-    void DrawMinions(SDL_Renderer* rR);
-    void DrawGameLayout(SDL_Renderer* rR);
-    void DrawLines(SDL_Renderer* rR);
+    void draw(SDL_Renderer* rR);
+    void drawMap(SDL_Renderer* rR);
+    void drawMinions(SDL_Renderer* rR);
+    void drawGameLayout(SDL_Renderer* rR);
 
     void moveMap(int iX, int iY);
     void setSpawnPoint();

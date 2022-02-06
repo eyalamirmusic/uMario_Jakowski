@@ -81,19 +81,19 @@ Map::~Map(void)
 
 /* ******************************************** */
 
-void Map::Update()
+void Map::update()
 {
-    UpdateBlocks();
+    updateBlocks();
 
     if (!oPlayer->getInLevelAnimation())
     {
-        UpdateMinionBlokcs();
+        updateMinionBlocks();
 
-        UpdateMinions();
+        updateMinions();
 
         if (!inEvent)
         {
-            UpdatePlayer();
+            updatePlayer();
 
             ++iFrameID;
             if (iFrameID > 32)
@@ -177,13 +177,13 @@ void Map::Update()
     }
 }
 
-void Map::UpdatePlayer()
+void Map::updatePlayer()
 {
     oPlayer->update();
     checkSpawnPoint();
 }
 
-void Map::UpdateMinions()
+void Map::updateMinions()
 {
     for (int i = 0; i < iMinionListSize; i++)
     {
@@ -234,7 +234,7 @@ void Map::UpdateMinions()
     }
 }
 
-void Map::UpdateMinionsCollisions()
+void Map::updateMinionsCollisions()
 {
     // ----- COLLISIONS
     for (int i = 0; i < iMinionListSize; i++)
@@ -590,7 +590,7 @@ void Map::UpdateMinionsCollisions()
     }
 }
 
-void Map::UpdateBlocks()
+void Map::updateBlocks()
 {
     vBlock[2]->getSprite()->update();
     vBlock[8]->getSprite()->update();
@@ -604,7 +604,7 @@ void Map::UpdateBlocks()
     vBlock[82]->getSprite()->update();
 }
 
-void Map::UpdateMinionBlokcs()
+void Map::updateMinionBlocks()
 {
     vMinion[0]->getSprite()->update();
     vMinion[4]->getSprite()->update();
@@ -641,16 +641,16 @@ void Map::UpdateMinionBlokcs()
 
 /* ******************************************** */
 
-void Map::Draw(SDL_Renderer* rR)
+void Map::draw(SDL_Renderer* rR)
 {
-    DrawMap(rR);
+    drawMap(rR);
 
     for (unsigned int i = 0; i < vPlatform.size(); i++)
     {
         vPlatform[i]->draw(rR);
     }
 
-    DrawMinions(rR);
+    drawMinions(rR);
 
     for (unsigned int i = 0; i < lPoints.size(); i++)
     {
@@ -693,10 +693,10 @@ void Map::Draw(SDL_Renderer* rR)
         oEvent->draw(rR);
     }
 
-    DrawGameLayout(rR);
+    drawGameLayout(rR);
 }
 
-void Map::DrawMap(SDL_Renderer* rR)
+void Map::drawMap(SDL_Renderer* rR)
 {
     if (oFlag != NULL)
     {
@@ -724,7 +724,7 @@ void Map::DrawMap(SDL_Renderer* rR)
     }
 }
 
-void Map::DrawMinions(SDL_Renderer* rR)
+void Map::drawMinions(SDL_Renderer* rR)
 {
     for (int i = 0; i < iMinionListSize; i++)
     {
@@ -738,7 +738,7 @@ void Map::DrawMinions(SDL_Renderer* rR)
     }
 }
 
-void Map::DrawGameLayout(SDL_Renderer* rR)
+void Map::drawGameLayout(SDL_Renderer* rR)
 {
     getCFG().getText()->draw(rR, "MARIO", 54, 16);
 
@@ -802,57 +802,6 @@ void Map::DrawGameLayout(SDL_Renderer* rR)
             getCFG().getText()->draw(rR, "00" + std::to_string(iMapTime), 680, 32);
         }
     }
-}
-
-void Map::DrawLines(SDL_Renderer* rR)
-{
-    SDL_SetRenderDrawBlendMode(rR, SDL_BLENDMODE_BLEND); // APLHA ON !
-    SDL_SetRenderDrawColor(rR, 255, 255, 255, 128);
-
-    for (int i = 0; i < getCFG().GAME_WIDTH / 32 + 1; i++)
-    {
-        SDL_RenderDrawLine(rR,
-                           32 * i - (-(int) fXPos) % 32,
-                           0,
-                           32 * i - (-(int) fXPos) % 32,
-                           getCFG().GAME_HEIGHT);
-    }
-
-    for (int i = 0; i < getCFG().GAME_HEIGHT / 32 + 1; i++)
-    {
-        SDL_RenderDrawLine(rR,
-                           0,
-                           32 * i - 16 + (int) fYPos,
-                           getCFG().GAME_WIDTH,
-                           32 * i - 16 + (int) fYPos);
-    }
-
-    for (int i = 0; i < getCFG().GAME_WIDTH / 32 + 1; i++)
-    {
-        for (int j = 0; j < getCFG().GAME_HEIGHT / 32; j++)
-        {
-            getCFG().getText()->draw(
-                rR,
-                std::to_string(i + (-((int) fXPos + (-(int) fXPos) % 32)) / 32),
-                32 * i + 16 - (-(int) fXPos) % 32
-                    - getCFG().getText()->getTextWidth(
-                          std::to_string(
-                              i + (-((int) fXPos + (-(int) fXPos) % 32)) / 32),
-                          8)
-                          / 2,
-                getCFG().GAME_HEIGHT - 9 - 32 * j,
-                8);
-            getCFG().getText()->draw(
-                rR,
-                std::to_string(j),
-                32 * i + 16 - (-(int) fXPos) % 32
-                    - getCFG().getText()->getTextWidth(std::to_string(j), 8) / 2 + 1,
-                getCFG().GAME_HEIGHT - 32 * j,
-                8);
-        }
-    }
-
-    SDL_SetRenderDrawBlendMode(rR, SDL_BLENDMODE_NONE); // APLHA OFF !
 }
 
 /* ******************************************** */

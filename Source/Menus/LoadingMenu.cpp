@@ -26,14 +26,14 @@ void LoadingMenu::update()
     {
         getCFG().getMusic()->stopTrack();
     }
-    CCore::getMap()->UpdateBlocks();
+    CCore::getMap()->updateBlocks();
 }
 
 void LoadingMenu::draw(SDL_Renderer* rR)
 {
     if (loadingType)
     {
-        CCore::getMap()->DrawGameLayout(rR);
+        CCore::getMap()->drawGameLayout(rR);
         getCFG().getText()->draw(rR, "WORLD", 320, 144);
         getCFG().getText()->draw(rR, CCore::getMap()->getLevelName(), 416, 144);
 
@@ -61,7 +61,7 @@ void LoadingMenu::draw(SDL_Renderer* rR)
     }
     else
     {
-        CCore::getMap()->DrawGameLayout(rR);
+        CCore::getMap()->drawGameLayout(rR);
         getCFG().getText()->drawCenterX(rR, "GAME OVER", 240, 16);
     }
 }
