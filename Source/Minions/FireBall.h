@@ -4,7 +4,17 @@
 
 class FireBall : public Minion
 {
+public:
+    FireBall(int iXPos, int iYPos, int radius, int nSliceID, bool moveDirection);
+
 private:
+
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+    void Update() override;
+    void collisionWithPlayer(bool TOP) override;
+    void minionPhysics() override {}
+    void updateXPos() override {}
+
     int radius; // -- r
     double angle;
 
@@ -14,16 +24,4 @@ private:
 
     int sliceID;
 
-public:
-    FireBall(int iXPos, int iYPos, int radius, int nSliceID, bool moveDirection);
-    ~FireBall(void);
-
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-    void Update();
-
-    void updateXPos();
-
-    void collisionWithPlayer(bool TOP);
-
-    void minionPhysics();
 };

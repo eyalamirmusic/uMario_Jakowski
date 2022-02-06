@@ -1,8 +1,6 @@
 #include "Hammer.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Hammer::Hammer(int iXPos, int iYPos, bool moveDirection)
 {
     this->fXPos = (float) iXPos + 4;
@@ -27,12 +25,6 @@ Hammer::Hammer(int iXPos, int iYPos, bool moveDirection)
 
     this->minionSpawned = true;
 }
-
-Hammer::~Hammer(void)
-{
-}
-
-/* ******************************************** */
 
 void Hammer::Update()
 {
@@ -98,16 +90,10 @@ void Hammer::minionPhysics()
     }
 }
 
-/* ******************************************** */
-
 void Hammer::collisionWithPlayer(bool TOP)
 {
     if (CCore::getMap()->getPlayer()->getStarEffect())
-    {
         setMinionState(-2);
-    }
     else
-    {
         CCore::getMap()->playerDeath(true, false);
-    }
 }

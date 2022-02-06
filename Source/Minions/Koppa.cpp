@@ -1,8 +1,6 @@
 #include "Koppa.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Koppa::Koppa(int iX, int iY, int minionState, bool moveDirection, int iBlockID)
 {
     this->fXPos = (float) iX;
@@ -41,12 +39,6 @@ Koppa::Koppa(int iX, int iY, int minionState, bool moveDirection, int iBlockID)
 
     this->iDistance = 7 * 32;
 }
-
-Koppa::~Koppa(void)
-{
-}
-
-/* ******************************************** */
 
 void Koppa::minionPhysics()
 {
@@ -241,11 +233,10 @@ void Koppa::updateXPos()
     }
 }
 
-/* ******************************************** */
-
 void Koppa::collisionWithPlayer(bool TOP)
 {
-    if (CCore::getMap()->getPlayer()->getStarEffect())
+    Player* player = CCore::getMap()->getPlayer();
+    if (player->getStarEffect())
     {
         setMinionState(-2);
     }
@@ -255,10 +246,9 @@ void Koppa::collisionWithPlayer(bool TOP)
         {
             minionState = 1;
             setMinion();
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
-            CCore::getMap()->getPlayer()->setYPos(
-                (float) CCore::getMap()->getPlayer()->getYPos() - 4);
+            player->resetJump();
+            player->startJump(1);
+            player->setYPos((float) player->getYPos() - 4);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
@@ -266,10 +256,9 @@ void Koppa::collisionWithPlayer(bool TOP)
         {
             minionState = 2;
             setMinion();
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
-            CCore::getMap()->getPlayer()->setYPos(
-                (float) CCore::getMap()->getPlayer()->getYPos() - 4);
+            player->resetJump();
+            player->startJump(1);
+            player->setYPos((float) player->getYPos() - 4);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
@@ -282,9 +271,8 @@ void Koppa::collisionWithPlayer(bool TOP)
             else
             {
                 if ((fXPos + iHitBoxX) / 2
-                    < (CCore::getMap()->getPlayer()->getXPos()
-                       - CCore::getMap()->getXPos()
-                       + CCore::getMap()->getPlayer()->getHitBoxX())
+                    < (player->getXPos() - CCore::getMap()->getXPos()
+                       + player->getHitBoxX())
                           / 2)
                 {
                     moveDirection = true;
@@ -297,10 +285,9 @@ void Koppa::collisionWithPlayer(bool TOP)
                 moveSpeed = 6;
             }
 
-            CCore::getMap()->getPlayer()->setYPos(
-                (float) CCore::getMap()->getPlayer()->getYPos() - 4);
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
+            player->setYPos((float) player->getYPos() - 4);
+            player->resetJump();
+            player->startJump(1);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
@@ -312,15 +299,13 @@ void Koppa::collisionWithPlayer(bool TOP)
             if (moveSpeed == 0)
             {
                 //moveDirection = !CCore::getMap()->getPlayer()->getMoveDirection();
-                moveDirection =
-                    (fXPos + iHitBoxX / 2
-                     < CCore::getMap()->getPlayer()->getXPos()
-                           - CCore::getMap()->getXPos()
-                           + CCore::getMap()->getPlayer()->getHitBoxX() / 2);
+                moveDirection = (fXPos + iHitBoxX / 2
+                                 < player->getXPos() - CCore::getMap()->getXPos()
+                                       + player->getHitBoxX() / 2);
                 if (moveDirection)
-                    fXPos -= CCore::getMap()->getPlayer()->getMoveSpeed() + 1;
+                    fXPos -= player->getMoveSpeed() + 1;
                 else
-                    fXPos += CCore::getMap()->getPlayer()->getMoveSpeed() + 1;
+                    fXPos += player->getMoveSpeed() + 1;
                 moveSpeed = 6;
                 getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
             }
@@ -357,8 +342,6 @@ void Koppa::setMinionState(int minionState)
 
     Minion::setMinionState(minionState);
 }
-
-/* ******************************************** */
 
 void Koppa::setMinion()
 {

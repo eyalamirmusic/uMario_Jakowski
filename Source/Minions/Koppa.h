@@ -4,25 +4,24 @@
 
 class Koppa : public Minion
 {
+public:
+    Koppa(int iX, int iY, int minionState, bool moveDirection, int iBlockID);
+
 private:
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void minionPhysics() override;
+    void updateXPos() override;
+
+    void collisionWithPlayer(bool TOP) override;
+    void collisionEffect() override;
+
+    void setMinionState(int minionState) override;
+
+    void setMinion();
     // ----- MinionState, 0 & 3 = Alive with wings, 1 = Alive, 2 = Dead, 4 = Dead animation, -1 = Destroy
 
     int iDistance;
     bool flyDirection; // -- minionState 3
-public:
-    Koppa(int iX, int iY, int minionState, bool moveDirection, int iBlockID);
-    ~Koppa(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void minionPhysics();
-    void updateXPos();
-
-    void collisionWithPlayer(bool TOP);
-    void collisionEffect();
-
-    void setMinionState(int minionState);
-
-    void setMinion();
 };

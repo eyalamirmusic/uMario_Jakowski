@@ -4,7 +4,19 @@
 
 class HammerBro : public Minion
 {
+public:
+    HammerBro(int iXPos, int iYPos);
+
 private:
+
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void minionPhysics() override;
+    void collisionWithPlayer(bool TOP) override;
+    void collisionEffect() override;
+
+
     bool moveDIR;
     float moveDistance;
 
@@ -14,16 +26,4 @@ private:
     int hammerID;
     int nextHammerFrameID;
 
-public:
-    HammerBro(int iXPos, int iYPos);
-    ~HammerBro(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void minionPhysics();
-
-    void collisionWithPlayer(bool TOP);
-
-    void collisionEffect();
 };

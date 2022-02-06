@@ -76,6 +76,7 @@ void Minion::updateXPos()
 {
     // ----- LEFT
     auto* map = CCore::getMap();
+
     if (moveDirection)
     {
         if (map->checkCollisionLB(
@@ -107,6 +108,7 @@ void Minion::updateXPos()
                 (int) fXPos + moveSpeed, (int) fYPos + 2, iHitBoxX, true))
         {
             moveDirection = !moveDirection;
+            
             if (killOtherUnits && fXPos > -map->getXPos() - 64
                 && fXPos < -map->getXPos()
                                + float(getCFG().GAME_WIDTH + 64 + iHitBoxX))

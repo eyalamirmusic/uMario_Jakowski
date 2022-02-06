@@ -1,9 +1,7 @@
 #include "HammerBro.h"
 #include "Common/Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include <cstdlib>
+#include <ctime>
 
 HammerBro::HammerBro(int iXPos, int iYPos)
 {
@@ -36,12 +34,6 @@ HammerBro::HammerBro(int iXPos, int iYPos)
     this->hammerID = 0;
     this->nextHammerFrameID = 65;
 }
-
-HammerBro::~HammerBro(void)
-{
-}
-
-/* ******************************************** */
 
 void HammerBro::Update()
 {
@@ -207,8 +199,6 @@ void HammerBro::minionPhysics()
         }
     }
 }
-
-/* ******************************************** */
 
 void HammerBro::collisionWithPlayer(bool TOP)
 {

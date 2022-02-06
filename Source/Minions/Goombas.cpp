@@ -1,8 +1,6 @@
 #include "Goombas.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Goombas::Goombas(int iX, int iY, int iBlockID, bool moveDirection)
 {
     this->fXPos = (float) iX;
@@ -11,12 +9,6 @@ Goombas::Goombas(int iX, int iY, int iBlockID, bool moveDirection)
     this->moveDirection = moveDirection;
     this->moveSpeed = 1;
 }
-
-Goombas::~Goombas(void)
-{
-}
-
-/* ******************************************** */
 
 void Goombas::Update()
 {
@@ -50,11 +42,11 @@ void Goombas::Draw(SDL_Renderer* rR, CIMG* iIMG)
     }
 }
 
-/* ******************************************** */
-
 void Goombas::collisionWithPlayer(bool TOP)
 {
-    if (CCore::getMap()->getPlayer()->getStarEffect())
+    auto player = CCore::getMap()->getPlayer();
+
+    if (player->getStarEffect())
     {
         setMinionState(-2);
     }
@@ -63,14 +55,14 @@ void Goombas::collisionWithPlayer(bool TOP)
         if (minionState == 0)
         {
             minionState = 1;
-            iBlockID = CCore::getMap()->getLevelType() == 0
-                               || CCore::getMap()->getLevelType() == 4
-                           ? 1
-                       : CCore::getMap()->getLevelType() == 1 ? 9
-                                                              : 11;
+            int levelType = CCore::getMap()->getLevelType();
+
+            iBlockID = levelType == 0 || levelType == 4 ? 1
+                       : levelType == 1                 ? 9
+                                                        : 11;
             deadTime = SDL_GetTicks();
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->startJump(1);
+            player->resetJump();
+            player->startJump(1);
             points(100);
             getCFG().getMusic()->playEffect(Mario::Music::Effects::Stomp);
         }
@@ -81,16 +73,12 @@ void Goombas::collisionWithPlayer(bool TOP)
     }
 }
 
-/* ******************************************** */
-
 void Goombas::setMinionState(int minionState)
 {
     this->minionState = minionState;
 
     if (this->minionState == 1)
-    {
-        deadTime = SDL_GetTicks();
-    }
+        deadTime = (int) SDL_GetTicks();
 
     Minion::setMinionState(minionState);
 }

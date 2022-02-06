@@ -1,8 +1,6 @@
 #include "Mushroom.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Mushroom::Mushroom(int iXPos, int fYPos, bool powerUP, int iX, int iY)
 {
     this->fXPos = (float) iXPos;
@@ -22,12 +20,6 @@ Mushroom::Mushroom(int iXPos, int fYPos, bool powerUP, int iX, int iY)
     this->iX = iX;
     this->iY = iY;
 }
-
-Mushroom::~Mushroom(void)
-{
-}
-
-/* ******************************************** */
 
 void Mushroom::Update()
 {
@@ -71,29 +63,24 @@ void Mushroom::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState >= 0)
     {
-        iIMG->draw(rR,
-                   (int) fXPos + (int) CCore::getMap()->getXPos(),
-                   (int) fYPos + 2,
-                   false);
+        auto map = CCore::getMap();
+
+        iIMG->draw(rR, (int) fXPos + (int) map->getXPos(), (int) fYPos + 2, false);
         if (inSpawnState)
         {
-            CCore::getMap()
-                ->getBlock(CCore::getMap()->getLevelType() == 0
-                                   || CCore::getMap()->getLevelType() == 4
-                               ? 9
-                               : 56)
+            int type = map->getLevelType();
+
+            map->getBlock(type == 0 || type == 4 ? 9 : 56)
                 ->getSprite()
                 ->getTexture()
                 ->draw(rR,
-                       (int) fXPos + (int) CCore::getMap()->getXPos(),
+                       (int) fXPos + (int) map->getXPos(),
                        (int) fYPos + (32 - inSpawnY)
-                           - CCore::getMap()->getMapBlock(iX, iY)->getYPos() + 2,
+                           - map->getMapBlock(iX, iY)->getYPos() + 2,
                        false);
         }
     }
 }
-
-/* ******************************************** */
 
 void Mushroom::collisionWithPlayer(bool TOP)
 {
@@ -113,8 +100,4 @@ void Mushroom::collisionWithPlayer(bool TOP)
         }
         minionState = -1;
     }
-}
-
-void Mushroom::setMinionState(int minionState)
-{
 }

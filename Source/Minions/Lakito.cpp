@@ -1,9 +1,7 @@
 #include "Lakito.h"
 #include "Common/Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include <cstdlib>
+#include <ctime>
 
 Lakito::Lakito(int iXPos, int iYPos, int iMaxXPos)
 {
@@ -28,12 +26,6 @@ Lakito::Lakito(int iXPos, int iYPos, int iMaxXPos)
 
     srand((unsigned) time(NULL));
 }
-
-Lakito::~Lakito(void)
-{
-}
-
-/* ******************************************** */
 
 void Lakito::Update()
 {
@@ -60,24 +52,25 @@ void Lakito::Update()
             return;
         }
 
-        if (fXPos < -CCore::getMap()->getXPos() - 64)
-        {
-            fXPos = -CCore::getMap()->getXPos() - 32;
-        }
+        auto map = CCore::getMap();
+        
+        if (fXPos < -map->getXPos() - 64)
+            fXPos = -map->getXPos() - 32;
 
-        if (fXPos <= CCore::getMap()->getPlayer()->getXPos()
-                         - CCore::getMap()->getXPos()
-                         + CCore::getMap()->getPlayer()->getHitBoxX() / 2
-                         + 32 * CCore::getMap()->getPlayer()->getMoveSpeed()
-            && CCore::getMap()->getPlayer()->getMove()
-            && CCore::getMap()->getPlayer()->getMoveDirection())
+        auto player = map->getPlayer();
+
+        if (fXPos <= player->getXPos()
+                         - map->getXPos()
+                         + player->getHitBoxX() / 2
+                         + 32 * player->getMoveSpeed()
+            && player->getMove()
+            && player->getMoveDirection())
         {
-            moveSpeed =
-                CCore::getMap()->getPlayer()->getMoveSpeed()
-                + (fXPos < CCore::getMap()->getPlayer()->getXPos()
-                               - CCore::getMap()->getXPos()
-                               + CCore::getMap()->getPlayer()->getHitBoxX() / 2
-                               + 32 * CCore::getMap()->getPlayer()->getMoveSpeed());
+            moveSpeed = player->getMoveSpeed()
+                + (fXPos < player->getXPos()
+                               - map->getXPos()
+                               + player->getHitBoxX() / 2
+                               + 32 * player->getMoveSpeed());
             fXPos += moveSpeed;
             followPlayer = true;
             moveDirection = true;
@@ -102,9 +95,9 @@ void Lakito::Update()
                 {
                     fXPos -= 1;
 
-                    if (fXPos < CCore::getMap()->getPlayer()->getXPos()
-                                    - CCore::getMap()->getXPos()
-                                    + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+                    if (fXPos < player->getXPos()
+                                    - map->getXPos()
+                                    + player->getHitBoxX() / 2
                                     - 128)
                     {
                         moveDirection = true;
@@ -113,9 +106,9 @@ void Lakito::Update()
                 else
                 {
                     fXPos += 1;
-                    if (fXPos > CCore::getMap()->getPlayer()->getXPos()
-                                    - CCore::getMap()->getXPos()
-                                    + CCore::getMap()->getPlayer()->getHitBoxX() / 2
+                    if (fXPos > player->getXPos()
+                                    - map->getXPos()
+                                    + player->getHitBoxX() / 2
                                     + 128)
                     {
                         moveDirection = false;
@@ -131,7 +124,7 @@ void Lakito::Update()
 
         if (nextSpikeyFrameID <= 0)
         {
-            CCore::getMap()->addSpikey((int) fXPos, (int) (fYPos - 32));
+            map->addSpikey((int) fXPos, (int) (fYPos - 32));
             nextSpikeyFrameID = 135 + rand() % 175;
             iBlockID = 50;
         }
@@ -157,12 +150,6 @@ void Lakito::Draw(SDL_Renderer* rR, CIMG* iIMG)
             rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos - 16);
     }
 }
-
-void Lakito::minionPhysics()
-{
-}
-
-/* ******************************************** */
 
 void Lakito::collisionWithPlayer(bool TOP)
 {

@@ -2,8 +2,6 @@
 #include "Common/Core.h"
 #include <math.h>
 
-/* ******************************************** */
-
 FireBall::FireBall(
     int iXPos, int iYPos, int radius, int nSliceID, bool moveDirection)
 {
@@ -29,12 +27,6 @@ FireBall::FireBall(
 
     this->iBlockID = 23;
 }
-
-FireBall::~FireBall(void)
-{
-}
-
-/* ******************************************** */
 
 void FireBall::Update()
 {
@@ -76,16 +68,6 @@ void FireBall::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos);
 }
-
-void FireBall::minionPhysics()
-{
-}
-
-void FireBall::updateXPos()
-{
-}
-
-/* ******************************************** */
 
 void FireBall::collisionWithPlayer(bool TOP)
 {

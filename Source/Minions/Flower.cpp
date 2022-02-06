@@ -1,8 +1,6 @@
 #include "Flower.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Flower::Flower(int iXPos, int fYPos, int iX, int iY)
 {
     this->fXPos = (float) iXPos;
@@ -19,12 +17,6 @@ Flower::Flower(int iXPos, int fYPos, int iX, int iY)
     this->iX = iX;
     this->iY = iY;
 }
-
-Flower::~Flower(void)
-{
-}
-
-/* ******************************************** */
 
 void Flower::Update()
 {
@@ -59,29 +51,23 @@ void Flower::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     if (minionState >= 0)
     {
-        iIMG->draw(rR,
-                   (int) fXPos + (int) CCore::getMap()->getXPos(),
-                   (int) fYPos + 2,
-                   false);
+        auto map = CCore::getMap();
+        iIMG->draw(rR, (int) fXPos + (int) map->getXPos(), (int) fYPos + 2, false);
+
         if (inSpawnState)
         {
-            CCore::getMap()
-                ->getBlock(CCore::getMap()->getLevelType() == 0
-                                   || CCore::getMap()->getLevelType() == 4
-                               ? 9
-                               : 56)
+            map->getBlock(map->getLevelType() == 0 || map->getLevelType() == 4 ? 9
+                                                                               : 56)
                 ->getSprite()
                 ->getTexture()
                 ->draw(rR,
-                       (int) fXPos + (int) CCore::getMap()->getXPos(),
+                       (int) fXPos + (int) map->getXPos(),
                        (int) fYPos + (32 - inSpawnY)
-                           - CCore::getMap()->getMapBlock(iX, iY)->getYPos() + 2,
+                           - map->getMapBlock(iX, iY)->getYPos() + 2,
                        false);
         }
     }
 }
-
-/* ******************************************** */
 
 void Flower::collisionWithPlayer(bool TOP)
 {
@@ -91,8 +77,4 @@ void Flower::collisionWithPlayer(bool TOP)
             CCore::getMap()->getPlayer()->getPowerLVL() + 1);
         minionState = -1;
     }
-}
-
-void Flower::setMinionState(int minionState)
-{
 }

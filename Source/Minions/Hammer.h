@@ -4,15 +4,13 @@
 
 class Hammer : public Minion
 {
-private:
 public:
     Hammer(int iXPos, int iYPos, bool moveDirection);
-    ~Hammer(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void minionPhysics();
-
-    void collisionWithPlayer(bool TOP);
+    void minionPhysics() override;
+    void collisionWithPlayer(bool TOP) override;
 };

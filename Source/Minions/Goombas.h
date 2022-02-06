@@ -4,16 +4,15 @@
 
 class Goombas : public Minion
 {
-private:
-    // ----- MinionState, 0 = Alive, 1 = Dead, -1 = Destroy
 public:
     Goombas(int iX, int iY, int iBlockID, bool moveDirection);
-    ~Goombas(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
 
-    void collisionWithPlayer(bool TOP);
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void setMinionState(int minionState);
+    void collisionWithPlayer(bool TOP) override;
+
+    void setMinionState(int minionState) override;
 };
