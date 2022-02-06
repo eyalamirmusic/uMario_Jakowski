@@ -1,61 +1,12 @@
 #pragma once
 
-#include "CommonHeader.h"
-#include "SDL_mixer.h"
-#include "MusicObjects.h"
+#include <ea_data_structures/ea_data_structures.h>
+#include "Track.h"
+#include "Effect.h"
+#include "MusicConsts.h"
 
 namespace Mario::Music
 {
-enum class Tracks
-{
-    Nothing,
-    Overworld,
-    OverworldFast,
-    Underworld,
-    UnderworldFast,
-    Underwater,
-    UnderwaterFast,
-    Castle,
-    CastleFast,
-    LowTime,
-    Star,
-    StarFast,
-    Scorering,
-};
-
-enum class Effects
-{
-    Coin,
-    BlockBreak,
-    BlockHit,
-    Boom,
-    BowserFall,
-    BridgeBreak,
-    BulletBill,
-    Death,
-    Fire,
-    Fireball,
-    GameOver,
-    Intermission,
-    Jump,
-    JumpBig,
-    LevelEnd,
-    LowTime,
-    MushroomMapper,
-    MushroomMeat,
-    OneUp,
-    Pause,
-    Pipe,
-    RainBoom,
-    Shot,
-    Shrink,
-    Stomp,
-    Swim,
-    Vine,
-    CastleEnd,
-    PrincessMusic,
-};
-
 class Manager
 {
 public:
@@ -79,8 +30,8 @@ private:
     void addTrack(const std::string& name);
     void addEffect(const std::string& name);
 
-    Vector<Track> tracks;
-    Vector<Effect> effects;
+    EA::Vector<Track> tracks;
+    EA::Vector<Effect> effects;
 
     int volume = 0;
     Tracks currentTrack = Tracks::Nothing;

@@ -1,5 +1,6 @@
 #include "Music.h"
 #include "Common/Core.h"
+#include "Controller.h"
 
 namespace Mario::Music
 {

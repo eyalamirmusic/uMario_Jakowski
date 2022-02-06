@@ -1,15 +1,11 @@
 #include "CommonHeader.h"
 #include "Common/Core.h"
 #include "CFG.h"
-#include "SDL_mixer.h"
 
-namespace Mario
-{
-namespace Consts
+namespace Mario::Consts
 {
 constexpr int MIN_FRAME_TIME = 16;
-}
-} // namespace Mario
+} // namespace Mario::Consts
 
 CCore::CCore()
 {
@@ -36,8 +32,6 @@ CCore::CCore()
 
     mainEvent = new SDL_Event();
     // ----- ICO
-
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
     Mario::getGameState(rR);
 
