@@ -2,6 +2,7 @@
 
 #include "CommonHeader.h"
 #include "SDL_mixer.h"
+#include "MusicObjects.h"
 
 namespace Mario::Music
 {
@@ -59,7 +60,6 @@ class Manager
 {
 public:
     Manager();
-    ~Manager();
 
     void changeMusic(bool musicByLevel, bool forceChange);
 
@@ -79,8 +79,8 @@ private:
     void addTrack(const std::string& name);
     void addEffect(const std::string& name);
 
-    Vector<Mix_Music*> tracks;
-    Vector<Mix_Chunk*> effects;
+    Vector<Track> tracks;
+    Vector<Effect> effects;
 
     int volume = 0;
     Tracks currentTrack = Tracks::Nothing;

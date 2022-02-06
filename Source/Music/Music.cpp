@@ -1,24 +1,11 @@
 #include "Music.h"
 #include "Common/Core.h"
-#include "SDL_mixer.h"
 
 namespace Mario::Music
 {
-Mix_Music* loadMusic(std::string fileName)
-{
-    fileName = "Resources/sounds/" + fileName + ".wav";
-    return Mix_LoadMUS(fileName.c_str());
-}
-
-Mix_Chunk* loadChunk(std::string fileName)
-{
-    fileName = "Resources/sounds/" + fileName + ".wav";
-    return Mix_LoadWAV(fileName.c_str());
-}
-
 Manager::Manager()
 {
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    Controller::open();
 
     addTrack("overworld");
     addTrack("overworld-fast");
@@ -69,21 +56,12 @@ Manager::Manager()
 
 void Manager::addTrack(const std::string& name)
 {
-    tracks.create(loadMusic(name));
+    tracks.create(name);
 }
 
 void Manager::addEffect(const std::string& name)
 {
-    effects.create(loadChunk(name));
-}
-
-Manager::~Manager()
-{
-    for (auto& i: tracks)
-        Mix_FreeMusic(i);
-
-    for (auto& i: effects)
-        Mix_FreeChunk(i);
+    effects.create(name);
 }
 
 Tracks getTrack()
@@ -144,7 +122,7 @@ void Manager::playTrack()
 {
     if (currentTrack != Tracks::Nothing)
     {
-        Mix_PlayMusic(tracks[(int) currentTrack - 1], -1);
+        tracks[(int) currentTrack - 1].play();
         musicStopped = false;
     }
     else
@@ -157,7 +135,7 @@ void Manager::playTrack(Tracks musicID)
 {
     if (musicID != Tracks::Nothing)
     {
-        Mix_PlayMusic(tracks[(int) musicID - 1], -1);
+        tracks[(int) musicID - 1].play();
         musicStopped = false;
         currentTrack = musicID;
     }
@@ -172,21 +150,21 @@ void Manager::stopTrack()
 {
     if (!musicStopped)
     {
-        Mix_HaltMusic();
+        Controller::stop();
         musicStopped = true;
     }
 }
 
 void Manager::pauseTrack()
 {
-    if (Mix_PausedMusic() == 1)
+    if (Controller::isPaused())
     {
-        Mix_ResumeMusic();
+        Controller::resume();
         musicStopped = false;
     }
     else
     {
-        Mix_PauseMusic();
+        Controller::pause();
         musicStopped = true;
     }
 }
@@ -194,8 +172,7 @@ void Manager::pauseTrack()
 void Manager::playEffect(Effects chunkID)
 {
     auto id = (int) chunkID;
-    Mix_VolumeChunk(effects[id], volume);
-    Mix_PlayChannel(-1, effects[id], 0);
+    effects[id].play(volume);
 }
 
 int Manager::getVolume() const
@@ -206,7 +183,7 @@ int Manager::getVolume() const
 void Manager::setVolume(int volumeToUse)
 {
     volume = volumeToUse;
-    Mix_VolumeMusic(volumeToUse);
+    Controller::setVolume(volume);
 }
 
 } // namespace Mario::Music
