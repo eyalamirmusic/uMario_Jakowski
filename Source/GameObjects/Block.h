@@ -13,7 +13,7 @@ public:
           bool bUse,
           bool bVisible);
 
-    void Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY);
+    void draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY);
 
     /* ----- get & set ----- */
     int getBlockID();

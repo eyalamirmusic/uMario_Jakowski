@@ -168,7 +168,7 @@ void Platform::Draw(SDL_Renderer* rR)
     {
         CCore::getMap()
             ->getBlock(iType != 4 ? 74 : 126)
-            ->Draw(rR,
+            ->draw(rR,
                    (int) fXPos + i * 16 + (int) CCore::getMap()->getXPos(),
                    (int) fYPos);
     }

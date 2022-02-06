@@ -4,20 +4,8 @@
 
 class Coin
 {
-private:
-    int iXPos, iYPos;
-    int iLEFT;
-
-    int iSpriteID;
-    int iStepID;
-
-    bool bTOP;
-
-    bool bDelete;
-
 public:
-    Coin(int iXPos, int iYPos);
-    ~Coin(void);
+    Coin(int x, int y);
 
     void Update();
     void Draw(SDL_Renderer* rR);
@@ -25,4 +13,15 @@ public:
     int getXPos();
     int getYPos();
     bool getDelete();
+
+private:
+    EA::Point<int> pos;
+    int iLEFT = 80;
+
+    int iSpriteID = 0;
+    int iStepID = 0;
+
+    bool bTOP = true;
+
+    bool shouldDelete = false;
 };

@@ -1,45 +1,25 @@
-/************************
- * @author �ukasz Jakowski
- * @since  20.04.2014 14:32
- * 
- ************************/
-
 #include "Coin.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
-Coin::Coin(int iXPos, int iYPos)
-{
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-
-    this->iSpriteID = 0;
-    this->iStepID = 0;
-
-    this->iLEFT = 80;
-    this->bTOP = true;
-    this->bDelete = false;
-}
-
-Coin::~Coin(void)
+Coin::Coin(int x, int y)
+    : pos(x, y)
 {
 }
-
-/* ******************************************** */
 
 void Coin::Update()
 {
     if (iLEFT > 0)
     {
         iLEFT -= 5;
-        iYPos = iYPos + (bTOP ? -5 : 5);
+        pos.y = pos.y + (bTOP ? -5 : 5);
 
         ++iStepID;
+
         if (iStepID > 2)
         {
             iStepID = 0;
             ++iSpriteID;
+
             if (iSpriteID > 3)
             {
                 iSpriteID = 0;
@@ -53,29 +33,29 @@ void Coin::Update()
     }
     else
     {
-        bDelete = true;
+        shouldDelete = true;
     }
 }
 
 void Coin::Draw(SDL_Renderer* rR)
 {
-    CCore::getMap()->getBlock(50)->getSprite()->getTexture(iSpriteID)->draw(
-        rR, iXPos + (int) CCore::getMap()->getXPos(), iYPos);
-}
+    auto texture = CCore::getMap()->getBlock(50)->getSprite()->getTexture(iSpriteID);
 
-/* ******************************************** */
+    auto x = pos.x + (int) CCore::getMap()->getXPos();
+    texture->draw(rR, x, pos.y);
+}
 
 int Coin::getXPos()
 {
-    return iXPos;
+    return pos.x;
 }
 
 int Coin::getYPos()
 {
-    return iYPos;
+    return pos.y;
 }
 
 bool Coin::getDelete()
 {
-    return bDelete;
+    return shouldDelete;
 }

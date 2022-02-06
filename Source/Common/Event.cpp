@@ -18,7 +18,7 @@ void Event::draw(SDL_Renderer* rR)
             auto x = 32 * point.x + mapX;
             auto y = getCFG().GAME_HEIGHT - 32 * point.y - 16;
 
-            block->Draw(rR, x, y);
+            block->draw(rR, x, y);
         }
     }
 }
@@ -438,7 +438,7 @@ void Event::end()
 {
     auto* flag = CCore::getMap()->getFlag();
 
-    if (flag != nullptr && flag->iYPos < getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4)
+    if (flag != nullptr && flag->getPos().y < getCFG().GAME_HEIGHT - 16 - 3 * 32 - 4)
     {
         flag->Update();
     }
@@ -454,7 +454,7 @@ void Event::newLevel() const
     player->setXPos((float) newPlayerXPos);
     player->setYPos((float) newPlayerYPos);
     map->setMoveMap(newMoveMap);
-    
+
     if (map->getCurrentLevelID() != newCurrentLevel)
     {
         auto* mm = getCFG().getMM();
@@ -476,7 +476,6 @@ void Event::newLevel() const
 
     map->lockMinions();
 }
-
 
 void Event::resetData()
 {

@@ -52,14 +52,14 @@ void Vine::draw(SDL_Renderer* rR, CIMG* iIMG)
     if (jumpDistance < 32)
     {
         map->getMinionBlock(iBlockID - 1)
-            ->Draw(rR,
+            ->draw(rR,
                    (int) (iX * 32 + map->getXPos()),
                    (int) (getCFG().GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
     }
     else
     {
         map->getMinionBlock(iBlockID - 1)
-            ->Draw(rR,
+            ->draw(rR,
                    (int) (iX * 32 + map->getXPos()),
                    (int) (getCFG().GAME_HEIGHT - 16 - iY * 32 - jumpDistance));
         for (int i = 0; i < jumpDistance / 32 - 1; i++)

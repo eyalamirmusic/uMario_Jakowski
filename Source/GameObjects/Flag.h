@@ -5,12 +5,19 @@
 
 class Flag
 {
-private:
 public:
     Flag(int iXPos, int iYPos);
-    ~Flag(void);
 
-    int iXPos, iYPos;
+    void Update();
+    void UpdateCastleFlag();
+    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG);
+
+    int getBlockID() const { return iBlockID; }
+
+    EA::Point<int> getPos() const { return pos; }
+
+    EA::Point<int> pos;
     int iBlockID;
 
     int iYTextPos;
@@ -18,9 +25,4 @@ public:
 
     int castleFlagExtraXPos;
     int castleFlagY;
-
-    void Update();
-    void UpdateCastleFlag();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-    void DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG);
 };

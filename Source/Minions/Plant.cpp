@@ -88,7 +88,7 @@ void Plant::draw(SDL_Renderer* rR, CIMG* iIMG)
         {
             CCore::getMap()
                 ->getBlock(CCore::getMap()->getMapBlock(X + j, Y - i)->getBlockID())
-                ->Draw(rR,
+                ->draw(rR,
                        (int) ((X + j) * 32 + CCore::getMap()->getXPos()),
                        getCFG().GAME_HEIGHT - 32 * (Y - i) - 16);
         }

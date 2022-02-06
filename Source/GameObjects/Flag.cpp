@@ -1,13 +1,9 @@
 #include "Flag.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Flag::Flag(int iXPos, int iYPos)
+    : pos(iXPos, iYPos)
 {
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-
     this->iYTextPos = getCFG().GAME_HEIGHT - 3 * 32;
     this->iPoints = -1;
 
@@ -19,15 +15,9 @@ Flag::Flag(int iXPos, int iYPos)
     this->castleFlagExtraXPos = this->castleFlagY = 0;
 }
 
-Flag::~Flag(void)
-{
-}
-
-/* ******************************************** */
-
 void Flag::Update()
 {
-    iYPos += 4;
+    pos.x += 4;
     iYTextPos -= 4;
 }
 
@@ -39,25 +29,20 @@ void Flag::UpdateCastleFlag()
 
 void Flag::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
+    auto x = pos.x + (int) CCore::getMap()->getXPos();
+    iIMG->draw(rR, x, pos.y);
 
     if (iPoints > 0)
     {
-        getCFG().getText()->draw(rR,
-                                 std::to_string(iPoints),
-                                 (int) (iXPos + CCore::getMap()->getXPos() + 42),
-                                 iYTextPos - 22,
-                                 8,
-                                 16);
+        getCFG().getText()->draw(
+            rR, std::to_string(iPoints), x + 42, iYTextPos - 22, 8, 16);
     }
 }
 
 void Flag::DrawCastleFlag(SDL_Renderer* rR, CIMG* iIMG)
 {
-    iIMG->draw(rR,
-               (int) (iXPos + CCore::getMap()->getXPos() + castleFlagExtraXPos
-                      + 7 * 32 - 14),
-               getCFG().GAME_HEIGHT + 14 - 6 * 32 - castleFlagY);
-}
+    auto mapX = (int) CCore::getMap()->getXPos();
+    auto x = pos.x + mapX + castleFlagExtraXPos + 7 * 32 - 14;
 
-/* ******************************************** */
+    iIMG->draw(rR, x, getCFG().GAME_HEIGHT + 14 - 6 * 32 - castleFlagY);
+}

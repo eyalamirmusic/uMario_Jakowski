@@ -15,7 +15,7 @@ Block::Block(int iBlockID,
     this->bVisible = bVisible;
 }
 
-void Block::Draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY)
+void Block::draw(SDL_Renderer* rR, int iOffsetX, int iOffsetY)
 {
     sSprite->getTexture()->draw(rR, iOffsetX, iOffsetY);
 }

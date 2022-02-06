@@ -5,19 +5,17 @@
 
 class Bubble
 {
-private:
-    int iXPos, iYPos;
-
-    bool bDestoy; // -- DELETE BUBBLE
-    int iBlockID;
-
 public:
-    Bubble(int iXPos, int iYPos);
-    ~Bubble(void);
+    Bubble(int x, int y);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+    void update();
+    void draw(SDL_Renderer* rR, CIMG* iIMG) const;
 
-    int getBlockID();
-    bool getDestroy();
+    int getBlockID() const;
+    bool getDestroy() const;
+
+private:
+    EA::Point<int> pos;
+
+    bool bDestoy = false; // -- DELETE BUBBLE
 };

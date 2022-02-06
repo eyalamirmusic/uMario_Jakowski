@@ -2,49 +2,30 @@
 #include "Common/Core.h"
 #include "Common/CFG.h"
 
-/* ******************************************** */
-
-Bubble::Bubble(int iXPos, int iYPos)
-{
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-
-    this->bDestoy = false;
-
-    this->iBlockID = 96;
-}
-
-Bubble::~Bubble(void)
+Bubble::Bubble(int x, int y)
+    : pos(x, y)
 {
 }
-
-/* ******************************************** */
-
-void Bubble::Update()
+void Bubble::update()
 {
-    if (iYPos < getCFG().GAME_HEIGHT - 12 * 32 - 8)
-    {
+    if (pos.y < getCFG().GAME_HEIGHT - 12 * 32 - 8)
         bDestoy = true;
-    }
     else
-    {
-        iYPos -= 1;
-    }
+        pos.y -= 1;
 }
 
-void Bubble::Draw(SDL_Renderer* rR, CIMG* iIMG)
+void Bubble::draw(SDL_Renderer* rR, CIMG* iIMG) const
 {
-    iIMG->draw(rR, (int) (iXPos + CCore::getMap()->getXPos()), iYPos);
+    auto x = pos.x + (int) CCore::getMap()->getXPos();
+    iIMG->draw(rR, x, pos.y);
 }
 
-/* ******************************************** */
-
-int Bubble::getBlockID()
+int Bubble::getBlockID() const
 {
-    return iBlockID;
+    return 96;
 }
 
-bool Bubble::getDestroy()
+bool Bubble::getDestroy() const
 {
     return bDestoy;
 }
