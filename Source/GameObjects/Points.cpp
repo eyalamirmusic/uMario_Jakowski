@@ -1,61 +1,38 @@
 #include "Points.h"
+
+#include <utility>
 #include "Common/CFG.h"
 #include "Common/Core.h"
 
-Points::Points(int iXPos, int iYPos, std::string sText)
-{
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-    this->sText = sText;
-    this->iYLEFT = 96;
-
-    this->iW = 8;
-    this->iH = 16;
-
-    this->bDelete = false;
-}
-
-Points::Points(int iXPos, int iYPos, std::string sText, int iW, int iH)
-{
-    this->iXPos = iXPos;
-    this->iYPos = iYPos;
-    this->sText = sText;
-    this->iYLEFT = 96;
-
-    this->iW = iW;
-    this->iH = iH;
-
-    this->bDelete = false;
-}
-
-Points::~Points(void)
+Points::Points(int x, int y, std::string textToUse, int width, int height)
+    : rect(x, y, width, height)
+    , sText(std::move(textToUse))
 {
 }
-
-/* ******************************************** */
 
 void Points::Update()
 {
-    if (iYLEFT > 0)
+    if (left > 0)
     {
-        iYPos -= 2;
-        iYLEFT -= 2;
+        rect.setY(rect.getY() - 2);
+        left -= 2;
     }
     else
     {
-        bDelete = true;
+        shouldDelete = true;
     }
 }
 
 void Points::Draw(SDL_Renderer* rR)
 {
+    auto x = rect.getX() + (int) CCore::getMap()->getXPos();
+
     getCFG().getText()->draw(
-        rR, sText, iXPos + (int) CCore::getMap()->getXPos(), iYPos, iW, iH);
+        rR, sText, x, rect.getY(), rect.getWidth(), rect.getHeight());
 }
 
-/* ******************************************** */
 
-bool Points::getDelete()
+bool Points::getDelete() const
 {
-    return bDelete;
+    return shouldDelete;
 }

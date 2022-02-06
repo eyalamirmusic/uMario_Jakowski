@@ -4,22 +4,18 @@
 
 class Points
 {
-private:
-    int iXPos, iYPos, iYLEFT;
-
-    std::string sText;
-
-    int iW, iH;
-
-    bool bDelete;
-
 public:
-    Points(int iXPos, int iYPos, std::string sText);
-    Points(int iXPos, int iYPos, std::string sText, int iW, int iH);
-    ~Points(void);
+    Points(int x, int y, std::string textToUse, int width = 8, int height = 16);
 
     void Update();
     void Draw(SDL_Renderer* rR);
 
-    bool getDelete();
+    bool getDelete() const;
+
+private:
+    juce::Rectangle<int> rect;
+    int left = 96;
+
+    std::string sText;
+    bool shouldDelete = false;
 };
