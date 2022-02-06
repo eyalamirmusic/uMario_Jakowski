@@ -28,9 +28,6 @@
 #include "Minions/Star.h"
 #include "Minions/Spring.h"
 
-Map::Map(void)
-{
-}
 
 Map::Map(SDL_Renderer* rR)
 {
@@ -3105,9 +3102,6 @@ void Map::loadGameData(SDL_Renderer* rR)
         new Block(65, new Sprite(rR, tSprite, iDelay), true, false, false, true));
     tSprite.clear();
     iDelay.clear();
-
-    iBlockSize = vBlock.size();
-    iMinionSize = vMinion.size();
 }
 
 /* ******************************************** */
