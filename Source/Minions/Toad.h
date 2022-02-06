@@ -4,16 +4,15 @@
 
 class Toad : public Minion
 {
-private:
 public:
     Toad(int iXPos, int iYPos, bool peach);
-    ~Toad(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
+    void Update() override {}
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void minionPhysics();
-    void collisionWithPlayer(bool TOP);
+    void minionPhysics() override {}
+    void collisionWithPlayer(bool) override {}
 
-    void setMinionState(int minionState);
+    void setMinionState(int) override {}
 };

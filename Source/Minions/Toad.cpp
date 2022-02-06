@@ -1,7 +1,6 @@
 #include "Toad.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
 
 Toad::Toad(int iXPos, int iYPos, bool peach)
 {
@@ -18,31 +17,8 @@ Toad::Toad(int iXPos, int iYPos, bool peach)
     this->iHitBoxY = 48;
 }
 
-Toad::~Toad(void)
-{
-}
-
-/* ******************************************** */
-
-void Toad::Update()
-{
-}
-void Toad::minionPhysics()
-{
-}
-
 void Toad::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
     iIMG->draw(
         rR, (int) (fXPos + CCore::getMap()->getXPos()), (int) fYPos, !moveDirection);
-}
-
-/* ******************************************** */
-
-void Toad::collisionWithPlayer(bool TOP)
-{
-}
-
-void Toad::setMinionState(int minionState)
-{
 }

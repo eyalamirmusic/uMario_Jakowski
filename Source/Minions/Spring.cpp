@@ -1,8 +1,6 @@
 #include "Spring.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Spring::Spring(int iXPos, int iYPos)
 {
     this->fXPos = (float) iXPos;
@@ -21,28 +19,25 @@ Spring::Spring(int iXPos, int iYPos)
     this->inAnimation = false;
 }
 
-Spring::~Spring(void)
-{
-}
-
-/* ******************************************** */
-
 void Spring::Update()
 {
     if (inAnimation)
     {
+        Player* player = CCore::getMap()->getPlayer();
+
         if (getCFG().keySpace)
         {
             extraJump = true;
-            CCore::getMap()->getPlayer()->resetJump();
-            CCore::getMap()->getPlayer()->setNextFallFrameID(16);
+            player->resetJump();
+            player->setNextFallFrameID(16);
         }
         else
         {
-            CCore::getMap()->getPlayer()->stopMove();
+            player->stopMove();
         }
 
-        CCore::getMap()->getPlayer()->setMarioSpriteID(5);
+        player->setMarioSpriteID(5);
+
         if (nextFrameID <= 0)
         {
             switch (minionState)
@@ -50,32 +45,28 @@ void Spring::Update()
                 case 0:
                     iBlockID = iBlockID == 37 ? 38 : 41;
                     minionState = 1;
-                    CCore::getMap()->getPlayer()->setYPos(
-                        CCore::getMap()->getPlayer()->getYPos() + 16.0f);
+                    player->setYPos(player->getYPos() + 16.0f);
                     break;
                 case 1:
                     iBlockID = iBlockID == 38 ? 39 : 42;
                     minionState = 2;
-                    CCore::getMap()->getPlayer()->setYPos(
-                        CCore::getMap()->getPlayer()->getYPos() + 16.0f);
+                    player->setYPos(player->getYPos() + 16.0f);
                     break;
                 case 2:
                     iBlockID = iBlockID == 39 ? 38 : 41;
                     minionState = 3;
-                    CCore::getMap()->getPlayer()->setYPos(
-                        CCore::getMap()->getPlayer()->getYPos() - 16.0f);
+                    player->setYPos(player->getYPos() - 16.0f);
                     break;
                 case 3:
                     iBlockID = iBlockID == 38 ? 37 : 40;
                     minionState = 0;
-                    CCore::getMap()->getPlayer()->setYPos(
-                        CCore::getMap()->getPlayer()->getYPos() - 16.0f);
-                    CCore::getMap()->getPlayer()->resetJump();
-                    CCore::getMap()->getPlayer()->startJump(4 + (extraJump ? 5 : 0));
-                    CCore::getMap()->getPlayer()->setSpringJump(true);
-                    CCore::getMap()->getPlayer()->startMove();
+                    player->setYPos(player->getYPos() - 16.0f);
+                    player->resetJump();
+                    player->startJump(4 + (extraJump ? 5 : 0));
+                    player->setSpringJump(true);
+                    player->startMove();
                     if (extraJump)
-                        CCore::getMap()->getPlayer()->setCurrentJumpSpeed(10.5f);
+                        player->setCurrentJumpSpeed(10.5f);
                     inAnimation = false;
                     break;
             }
@@ -93,12 +84,6 @@ void Spring::Draw(SDL_Renderer* rR, CIMG* iIMG)
     iIMG->draw(
         rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos, false);
 }
-
-void Spring::minionPhysics()
-{
-}
-
-/* ******************************************** */
 
 void Spring::collisionWithPlayer(bool TOP)
 {
@@ -129,8 +114,4 @@ void Spring::collisionWithPlayer(bool TOP)
             }
         }
     }
-}
-
-void Spring::setMinionState(int minionState)
-{
 }

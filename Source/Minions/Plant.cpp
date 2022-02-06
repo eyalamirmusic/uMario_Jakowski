@@ -1,8 +1,6 @@
 #include "Plant.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Plant::Plant(int fXPos, int fYPos, int iBlockID)
 {
     this->fXPos = (float) fXPos + 2;
@@ -26,12 +24,6 @@ Plant::Plant(int fXPos, int fYPos, int iBlockID)
     this->X = CCore::getMap()->getBlockIDX((int) fXPos);
     this->Y = CCore::getMap()->getBlockIDY((int) fYPos);
 }
-
-Plant::~Plant(void)
-{
-}
-
-/* ******************************************** */
 
 void Plant::Update()
 {
@@ -107,7 +99,6 @@ void Plant::minionPhysics()
 {
 }
 
-/* ******************************************** */
 
 void Plant::collisionWithPlayer(bool onTOP)
 {
@@ -122,9 +113,6 @@ void Plant::collisionWithPlayer(bool onTOP)
     }
 }
 
-void Plant::collisionEffect()
-{
-}
 
 void Plant::lockMinion()
 {
@@ -155,5 +143,3 @@ void Plant::setMinionState(int minionState)
         this->minionState = minionState;
     }
 }
-
-/* ******************************************** */

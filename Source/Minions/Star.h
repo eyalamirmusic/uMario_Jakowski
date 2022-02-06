@@ -4,22 +4,21 @@
 
 class Star : public Minion
 {
+public:
+    Star(int iXPos, int iYPos, int iX, int iY);
+
 private:
+    void Update() override;
+    bool updateMinion() override;
+
+    void minionPhysics() override;
+
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void collisionWithPlayer(bool TOP) override;
+    void setMinionState(int) override {};
+
     bool inSpawnState;
     int inSpawnY;
     int iX, iY; // inSpawnState draw Block
-public:
-    Star(int iXPos, int iYPos, int iX, int iY);
-    ~Star(void);
-
-    void Update();
-    bool updateMinion();
-
-    void minionPhysics();
-
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void collisionWithPlayer(bool TOP);
-
-    void setMinionState(int minionState);
 };

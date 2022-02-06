@@ -1,9 +1,7 @@
 #include "UpFire.h"
 #include "Common/Core.h"
-#include "stdlib.h"
-#include "time.h"
-
-/* ******************************************** */
+#include <cstdlib>
+#include <ctime>
 
 UpFire::UpFire(int iXPos, int iYJump)
 {
@@ -20,14 +18,8 @@ UpFire::UpFire(int iXPos, int iYJump)
 
     this->iBlockID = 32;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 }
-
-UpFire::~UpFire(void)
-{
-}
-
-/* ******************************************** */
 
 void UpFire::Update()
 {
@@ -101,23 +93,17 @@ void UpFire::Update()
 
 void UpFire::Draw(SDL_Renderer* rR, CIMG* iIMG)
 {
+    auto mapX = (int) CCore::getMap()->getXPos();
+
     if (moveDirection)
-    {
-        iIMG->draw(
-            rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos, false);
-    }
+        iIMG->draw(rR, (int) fXPos + mapX, (int) fYPos, false);
     else
-    {
-        iIMG->drawVert(
-            rR, (int) fXPos + (int) CCore::getMap()->getXPos(), (int) fYPos);
-    }
+        iIMG->drawVert(rR, (int) fXPos + mapX, (int) fYPos);
 }
 
 void UpFire::minionPhysics()
 {
 }
-
-/* ******************************************** */
 
 void UpFire::collisionWithPlayer(bool TOP)
 {

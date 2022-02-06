@@ -1,8 +1,6 @@
 #include "Star.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Star::Star(int iXPos, int iYPos, int iX, int iY)
 {
     this->fXPos = (float) iXPos + 2;
@@ -26,12 +24,6 @@ Star::Star(int iXPos, int iYPos, int iX, int iY)
     this->iHitBoxX = 28;
     this->iHitBoxY = 32;
 }
-
-Star::~Star(void)
-{
-}
-
-/* ******************************************** */
 
 void Star::Update()
 {
@@ -128,8 +120,6 @@ void Star::Draw(SDL_Renderer* rR, CIMG* iIMG)
     }
 }
 
-/* ******************************************** */
-
 void Star::collisionWithPlayer(bool TOP)
 {
     if (!inSpawnState)
@@ -137,8 +127,4 @@ void Star::collisionWithPlayer(bool TOP)
         CCore::getMap()->getPlayer()->setStarEffect(true);
         minionState = -1;
     }
-}
-
-void Star::setMinionState(int minionState)
-{
 }

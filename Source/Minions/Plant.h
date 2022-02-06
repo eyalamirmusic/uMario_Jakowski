@@ -4,6 +4,20 @@
 
 class Plant : public Minion
 {
+public:
+    Plant(int fXPos, int fYPos, int iBlockID);
+
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void minionPhysics() override;
+
+    void collisionWithPlayer(bool TOP) override;
+
+    void collisionEffect() override {}
+    void lockMinion() override;
+    void setMinionState(int minionState) override;
+
 private:
     bool bWait;
     unsigned int iTime;
@@ -13,21 +27,4 @@ private:
     int iLength;
 
     int X, Y;
-
-public:
-    Plant(int fXPos, int fYPos, int iBlockID);
-    ~Plant(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void minionPhysics();
-
-    void collisionWithPlayer(bool TOP);
-
-    void collisionEffect();
-
-    void lockMinion();
-
-    void setMinionState(int minionState);
 };

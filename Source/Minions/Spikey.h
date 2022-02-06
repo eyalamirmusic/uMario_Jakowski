@@ -4,15 +4,15 @@
 
 class Spikey : public Minion
 {
-private:
+
 public:
     Spikey(int iXPos, int iYPos);
-    ~Spikey(void);
 
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
+private:
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
 
-    void minionPhysics();
+    void minionPhysics() override;
 
-    void collisionWithPlayer(bool TOP);
+    void collisionWithPlayer(bool TOP) override;
 };

@@ -1,8 +1,6 @@
 #include "Spikey.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 Spikey::Spikey(int iXPos, int iYPos)
 {
     this->fXPos = (float) iXPos;
@@ -18,22 +16,12 @@ Spikey::Spikey(int iXPos, int iYPos)
     this->moveSpeed = 0;
 }
 
-Spikey::~Spikey(void)
-{
-}
-
-/* ******************************************** */
-
 void Spikey::Update()
 {
     if (minionState == 0)
-    {
         updateXPos();
-    }
     else if (minionState == -2)
-    {
         Minion::minionDeathAnimation();
-    }
 }
 
 void Spikey::Draw(SDL_Renderer* rR, CIMG* iIMG)
@@ -60,9 +48,10 @@ void Spikey::minionPhysics()
     }
     else
     {
-        if (!CCore::getMap()->checkCollisionLB(
-                (int) fXPos + 2, (int) fYPos + 2, iHitBoxY, true)
-            && !CCore::getMap()->checkCollisionRB(
+        auto map = CCore::getMap();
+
+        if (!map->checkCollisionLB((int) fXPos + 2, (int) fYPos + 2, iHitBoxY, true)
+            && !map->checkCollisionRB(
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true)
             && !onAnotherMinion)
         {
@@ -76,18 +65,16 @@ void Spikey::minionPhysics()
             if (iBlockID == 52)
             {
                 iBlockID = 51;
+                auto player = map->getPlayer();
+
                 moveDirection =
                     fXPos + iHitBoxX / 2
-                    > CCore::getMap()->getPlayer()->getXPos()
-                          - CCore::getMap()->getXPos()
-                          + CCore::getMap()->getPlayer()->getHitBoxX() / 2;
+                    > player->getXPos() - map->getXPos() + player->getHitBoxX() / 2;
                 moveSpeed = 1;
             }
         }
     }
 }
-
-/* ******************************************** */
 
 void Spikey::collisionWithPlayer(bool TOP)
 {

@@ -4,19 +4,17 @@
 
 class UpFire : public Minion
 {
+public:
+    UpFire(int iXPos, int iYJump);
+
+    void Update() override;
+    void Draw(SDL_Renderer* rR, CIMG* iIMG) override;
+
+    void minionPhysics() override;
+    void collisionWithPlayer(bool TOP) override;
+
 private:
     // moveDirection true = TOP, false = BOT
     int iYJump;
     int nextJumpFrameID;
-
-public:
-    UpFire(int iXPos, int iYJump);
-    ~UpFire(void);
-
-    void Update();
-    void Draw(SDL_Renderer* rR, CIMG* iIMG);
-
-    void minionPhysics();
-
-    void collisionWithPlayer(bool TOP);
 };

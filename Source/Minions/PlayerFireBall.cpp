@@ -1,8 +1,6 @@
 #include "PlayerFireBall.h"
 #include "Common/Core.h"
 
-/* ******************************************** */
-
 PlayerFireBall::PlayerFireBall(int iXPos, int iYPos, bool moveDirection)
 {
     this->fXPos = (float) iXPos;
@@ -27,12 +25,6 @@ PlayerFireBall::PlayerFireBall(int iXPos, int iYPos, bool moveDirection)
 
     this->destroyFrameID = 15;
 }
-
-PlayerFireBall::~PlayerFireBall(void)
-{
-}
-
-/* ******************************************** */
 
 void PlayerFireBall::Update()
 {
@@ -168,27 +160,11 @@ void PlayerFireBall::updateXPos()
 void PlayerFireBall::minionPhysics()
 {
     if (!bDestroy)
-    {
         Minion::minionPhysics();
-    }
-}
-
-/* ******************************************** */
-
-void PlayerFireBall::collisionWithPlayer(bool TOP)
-{
 }
 
 void PlayerFireBall::collisionWithAnotherUnit()
 {
     bDestroy = true;
     collisionOnlyWithPlayer = true;
-}
-
-void PlayerFireBall::collisionEffect()
-{
-}
-
-void PlayerFireBall::setMinionState(int minionState)
-{
 }
