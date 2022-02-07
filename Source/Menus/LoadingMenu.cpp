@@ -1,6 +1,7 @@
 #include "LoadingMenu.h"
 #include "Common/CFG.h"
 #include "Common/Core.h"
+#include "Common/MusicHelper.h"
 
 void LoadingMenu::update()
 {
@@ -14,7 +15,7 @@ void LoadingMenu::update()
                 CCore::getMap()->loadLVL();
             }
             getCFG().getMM()->setViewID(Mario::MenuStates::Game);
-            getCFG().getMusic()->changeMusic(true, true);
+            Mario::Music::Helpers::changeMusic();
         }
         else
         {

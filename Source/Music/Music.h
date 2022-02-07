@@ -7,12 +7,15 @@
 
 namespace Mario::Music
 {
+Tracks getTrack(int time, int levelType);
+
 class Manager
 {
 public:
     Manager();
 
-    void changeMusic(bool musicByLevel, bool forceChange);
+    Tracks getCurrentTrack() const { return currentTrack; }
+    void replaceTrack(Tracks track);
 
     void playTrack();
     void playTrack(Tracks musicID);

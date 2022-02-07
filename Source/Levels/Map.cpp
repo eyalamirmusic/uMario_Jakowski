@@ -1,7 +1,7 @@
 #include "Map.h"
-#include "math.h"
-#include "stdlib.h"
-#include "time.h"
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 #include "Minions/PlayerFireBall.h"
 #include "Minions/Toad.h"
@@ -27,6 +27,8 @@
 #include "Minions/Mushroom.h"
 #include "Minions/Star.h"
 #include "Minions/Spring.h"
+
+#include "Common/MusicHelper.h"
 
 
 Map::Map(SDL_Renderer* rR)
@@ -110,7 +112,7 @@ void Map::update()
                     }
                     else if (iMapTime == 86)
                     {
-                        getCFG().getMusic()->changeMusic(true, true);
+                        Mario::Music::Helpers::changeMusic();
                     }
 
                     if (iMapTime <= 0)

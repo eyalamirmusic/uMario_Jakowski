@@ -1,5 +1,6 @@
 #include "Event.h"
 #include "Common/Core.h"
+#include "Common/MusicHelper.h"
 
 namespace Mario
 {
@@ -115,7 +116,7 @@ void Event::normal()
                             if (!getCFG().getMusic()->isMusicPlaying())
                             {
                                 getCFG().getMusic()->playTrack(
-                                    Mario::Music::Tracks::Scorering);
+                                    Music::Tracks::Scorering);
                             }
                         }
                         else
@@ -426,7 +427,7 @@ void Event::normal()
         {
             map->setInEvent(false);
             player->stopMove();
-            getCFG().getMusic()->changeMusic(true, true);
+            Mario::Music::Helpers::changeMusic();
             inEvent = false;
             getCFG().keySpace = false;
             CCore::resetKeys();

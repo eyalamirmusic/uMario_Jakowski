@@ -2,6 +2,7 @@
 #include "Common/Core.h"
 #include <cstdlib>
 #include <ctime>
+#include "Common/MusicHelper.h"
 
 /* ******************************************** */
 
@@ -1531,7 +1532,7 @@ int Player::getMarioSpriteID()
 
         if (unKillAbleTimeFrameID == 35)
         {
-            getCFG().getMusic()->changeMusic(true, true);
+            Mario::Music::Helpers::changeMusic();
         }
 
         ++unKillAbleFrameID;

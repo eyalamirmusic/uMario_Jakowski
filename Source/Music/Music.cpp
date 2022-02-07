@@ -1,9 +1,26 @@
 #include "Music.h"
-#include "Common/Core.h"
 #include "Controller.h"
 
 namespace Mario::Music
 {
+Tracks getTrack(int time, int levelType)
+{
+    switch (levelType)
+    {
+        case 0:
+        case 4:
+            return time > 90 ? Tracks::Overworld : Tracks::OverworldFast;
+        case 1:
+            return time > 90 ? Tracks::Underworld : Tracks::UnderworldFast;
+        case 2:
+            return time > 90 ? Tracks::Underwater : Tracks::UnderwaterFast;
+        case 3:
+            return time > 90 ? Tracks::Castle : Tracks::CastleFast;
+        default:
+            return Tracks::Nothing;
+    }
+}
+
 Manager::Manager()
 {
     Controller::open();
@@ -63,60 +80,6 @@ void Manager::addTrack(const std::string& name)
 void Manager::addEffect(const std::string& name)
 {
     effects.create(name);
-}
-
-Tracks getTrack()
-{
-    auto* map = CCore::getMap();
-    auto time = map->getMapTime();
-
-    switch (map->getLevelType())
-    {
-        case 0:
-        case 4:
-            return time > 90 ? Tracks::Overworld : Tracks::OverworldFast;
-        case 1:
-            return time > 90 ? Tracks::Underworld : Tracks::UnderworldFast;
-        case 2:
-            return time > 90 ? Tracks::Underwater : Tracks::UnderwaterFast;
-        case 3:
-            return time > 90 ? Tracks::Castle : Tracks::CastleFast;
-        default:
-            return Tracks::Nothing;
-    }
-}
-
-void Manager::changeMusic(bool musicByLevel, bool forceChange)
-{
-    auto newTrack = currentTrack;
-
-    if (musicByLevel)
-    {
-        auto* map = CCore::getMap();
-
-        if (map->getInEvent() && map->getEvent()->inEvent)
-        {
-            newTrack = Tracks::Nothing;
-            playEffect(Effects::Intermission);
-        }
-        else
-        {
-            newTrack = getTrack();
-
-            if (map->getLevelType() == 100)
-            {
-                playEffect(Effects::Intermission);
-                map->setLevelType(0);
-            }
-        }
-    }
-
-    if (currentTrack != newTrack || forceChange)
-    {
-        stopTrack();
-        currentTrack = newTrack;
-        playTrack();
-    }
 }
 
 void Manager::playTrack()
@@ -187,4 +150,10 @@ void Manager::setVolume(int volumeToUse)
     Controller::setVolume(volume);
 }
 
+void Manager::replaceTrack(Tracks track)
+{
+    stopTrack();
+    currentTrack = track;
+    playTrack();
+}
 } // namespace Mario::Music
