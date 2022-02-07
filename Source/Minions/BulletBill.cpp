@@ -30,9 +30,11 @@ BulletBill::BulletBill(int iXPos, int iYPos, bool moveDirection, int minionState
     this->currentJumpDistance =
         (float) (CCore::getMap()->getCurrentLevelID() == 17 ? 73 * 32
                                                             : 0); // -- MIN X
-    this->jumpState = CCore::getMap()->getCurrentLevelID() == 17
+    specialState = CCore::getMap()->getCurrentLevelID() == 17
                           ? 303 * 32
                           : CCore::getMap()->getMapWidth() * 32; // -- MAX X
+
+    jumpState = MinionJump::None;
 
     getCFG().getMusic()->playEffect(Mario::Music::Effects::BulletBill);
 }
@@ -44,7 +46,7 @@ void BulletBill::update()
     {
         fXPos += moveDirection ? -moveSpeed : moveSpeed;
 
-        if (fXPos + iHitBoxX < currentJumpDistance || fXPos > jumpState)
+        if (fXPos + iHitBoxX < currentJumpDistance || fXPos > specialState)
         {
             minionState = -1;
         }

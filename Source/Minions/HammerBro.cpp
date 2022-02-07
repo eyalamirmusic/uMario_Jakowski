@@ -48,7 +48,7 @@ void HammerBro::update()
         {
             moveDistance -= 0.5f;
 
-            if (jumpState == 1)
+            if (jumpState == MinionJump::Jump)
             {
                 fXPos += moveDIR ? -0.5f : 0.5f;
             }
@@ -108,7 +108,7 @@ void HammerBro::update()
             currentJumpDistance = 4 * 32 + 16;
             jumpDistance = 16;
             nextJumpFrameID = rand() % 295 + 215;
-            jumpState = 1;
+            jumpState = MinionJump::Jump;
             if (fYPos + iHitBoxY < getCFG().GAME_HEIGHT - 16 - 4 * 32)
             {
                 newY = rand() % 3 == 0;
@@ -121,7 +121,7 @@ void HammerBro::update()
         else
         {
             --nextJumpFrameID;
-            jumpState = 2;
+            jumpState = MinionJump::Land;
         }
 
         if (nextHammerFrameID < 15)
@@ -183,7 +183,7 @@ void HammerBro::draw(SDL_Renderer* rR, CIMG* iIMG)
 
 void HammerBro::minionPhysics()
 {
-    if (jumpState == 1) {}
+    if (jumpState == MinionJump::Jump) {}
     else
     {
         if (!CCore::getMap()->checkCollisionLB(
@@ -191,11 +191,11 @@ void HammerBro::minionPhysics()
             && !CCore::getMap()->checkCollisionRB(
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true))
         {
-            Minion::physicsState2();
+            Minion::physicsLand();
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
         }
     }
 }

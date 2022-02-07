@@ -42,9 +42,9 @@ void Spikey::draw(SDL_Renderer* rR, CIMG* iIMG)
 
 void Spikey::minionPhysics()
 {
-    if (jumpState == 1)
+    if (jumpState == MinionJump::Jump)
     {
-        physicsState1();
+        jumpPhysics();
     }
     else
     {
@@ -55,11 +55,11 @@ void Spikey::minionPhysics()
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true)
             && !onAnotherMinion)
         {
-            physicsState2();
+            physicsLand();
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
             onAnotherMinion = false;
 
             if (iBlockID == 52)

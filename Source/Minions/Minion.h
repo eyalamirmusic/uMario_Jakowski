@@ -3,6 +3,14 @@
 #include "Common/CFG.h"
 #include "Graphics/IMG.h"
 
+enum class MinionJump
+{
+    None,
+    Jump,
+    Land,
+    Fly
+};
+
 class Minion
 {
 public:
@@ -21,8 +29,8 @@ public:
 
     virtual void minionDeathAnimation();
 
-    void physicsState1();
-    void physicsState2();
+    void jumpPhysics();
+    void physicsLand();
 
     void spawn();
     void startJump(int iH);
@@ -43,7 +51,6 @@ public:
     int getMinionState() const;
 
     virtual void setMinionState(int minionState);
-    virtual bool getPowerUP();
 
     int getXPos();
     int getYPos();
@@ -54,7 +61,7 @@ public:
     bool killOtherUnits = false;
 
     int iBlockID = 0;
-    float fXPos, fYPos;
+    float fXPos = 0.f, fYPos = 0.f;
     int iHitBoxX = 32;
     int iHitBoxY = 32;
     bool minionSpawned = false;
@@ -68,7 +75,7 @@ public:
     bool moveDirection = true;
     int moveSpeed = 1;
 
-    int jumpState = 0;
+    MinionJump jumpState = MinionJump::None;
 
     float startJumpSpeed = 6.65f;
     float currentJumpSpeed = 0;

@@ -42,12 +42,12 @@ void Bowser::update()
 
     if (!map->getInEvent())
     {
-        if (nextJumpFrameID < 1 && jumpState == 0)
+        if (nextJumpFrameID < 1 && jumpState == MinionJump::None)
         {
             startJump(2);
             nextJumpFrameID = 110 + rand() % 100;
         }
-        else if (jumpState == 0)
+        else if (jumpState == MinionJump::None)
         {
             --nextJumpFrameID;
         }
@@ -151,7 +151,7 @@ void Bowser::draw(SDL_Renderer* rR, CIMG* iIMG)
 
 void Bowser::minionPhysics()
 {
-    if (jumpState == 1)
+    if (jumpState == MinionJump::Jump)
     {
         if (jumpDistance <= currentJumpDistance + 16)
         {
@@ -166,7 +166,7 @@ void Bowser::minionPhysics()
 
         if (jumpDistance <= currentJumpDistance)
         {
-            jumpState = 2;
+            jumpState = MinionJump::Land;
             currentJumpDistance = 0;
         }
     }
@@ -189,7 +189,7 @@ void Bowser::minionPhysics()
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
         }
     }
 }

@@ -15,7 +15,7 @@ Hammer::Hammer(int iXPos, int iYPos, bool moveDirection)
     this->iHitBoxY = 24;
 
     this->moveDirection = moveDirection;
-    this->jumpState = 1;
+    this->jumpState = MinionJump::Jump;
     this->jumpDistance = 48;
     this->currentJumpDistance = 0;
     this->moveSpeed = 0;
@@ -68,10 +68,8 @@ void Hammer::draw(SDL_Renderer* rR, CIMG* iIMG)
 
 void Hammer::minionPhysics()
 {
-    if (jumpState == 1)
-    {
-        Minion::physicsState1();
-    }
+    if (jumpState == MinionJump::Jump)
+        Minion::jumpPhysics();
     else
     {
         currentFallingSpeed *= 1.06f;

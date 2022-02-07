@@ -3,18 +3,18 @@
 
 bool Minion::updateMinion()
 {
-    if (!minionSpawned)
-        spawn();
-    else
+    if (minionSpawned)
         minionPhysics();
+    else
+        spawn();
 
     return minionSpawned;
 }
 
 void Minion::minionPhysics()
 {
-    if (jumpState == 1)
-        physicsState1();
+    if (jumpState == MinionJump::Jump)
+        jumpPhysics();
     else
     {
         auto map = CCore::getMap();
@@ -24,20 +24,20 @@ void Minion::minionPhysics()
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true)
             && !onAnotherMinion)
         {
-            physicsState2();
+            physicsLand();
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
             onAnotherMinion = false;
         }
     }
 }
 
-void Minion::physicsState1()
+void Minion::jumpPhysics()
 {
     updateYPos(-(int) currentJumpSpeed);
-    currentJumpDistance += (int) currentJumpSpeed;
+    currentJumpDistance += currentJumpSpeed;
 
     currentJumpSpeed *=
         (currentJumpDistance / jumpDistance > 0.75f ? 0.972f : 0.986f);
@@ -49,11 +49,11 @@ void Minion::physicsState1()
 
     if (jumpDistance <= currentJumpDistance)
     {
-        jumpState = 2;
+        jumpState = MinionJump::Land;
     }
 }
 
-void Minion::physicsState2()
+void Minion::physicsLand()
 {
     currentFallingSpeed *= 1.06f;
 
@@ -64,7 +64,7 @@ void Minion::physicsState2()
 
     updateYPos((int) currentFallingSpeed);
 
-    jumpState = 2;
+    jumpState = MinionJump::Land;
 
     if (fYPos >= getCFG().GAME_HEIGHT)
     {
@@ -93,7 +93,7 @@ void Minion::updateXPos()
         }
         else
         {
-            if (jumpState == 0)
+            if (jumpState == MinionJump::None)
                 fXPos -= (float) moveSpeed;
             else
                 fXPos -= (float) moveSpeed / 2.0f;
@@ -108,7 +108,7 @@ void Minion::updateXPos()
                 (int) fXPos + moveSpeed, (int) fYPos + 2, iHitBoxX, true))
         {
             moveDirection = !moveDirection;
-            
+
             if (killOtherUnits && fXPos > -map->getXPos() - 64
                 && fXPos < -map->getXPos()
                                + float(getCFG().GAME_WIDTH + 64 + iHitBoxX))
@@ -118,7 +118,8 @@ void Minion::updateXPos()
         }
         else
         {
-            fXPos += (jumpState == 0 ? (float) moveSpeed : (float) moveSpeed / 2.0f);
+            fXPos += (jumpState == MinionJump::None ? (float) moveSpeed
+                                                    : (float) moveSpeed / 2.0f);
         }
     }
 
@@ -141,8 +142,8 @@ void Minion::updateYPos(int iN)
         }
         else
         {
-            if (jumpState == 1)
-                jumpState = 2;
+            if (jumpState == MinionJump::Jump)
+                jumpState = MinionJump::Land;
 
             updateYPos(iN - 1);
         }
@@ -157,10 +158,9 @@ void Minion::updateYPos(int iN)
         }
         else
         {
-            if (jumpState == 1)
-            {
-                jumpState = 2;
-            }
+            if (jumpState == MinionJump::Jump)
+                jumpState = MinionJump::Land;
+
             updateYPos(iN + 1);
         }
     }
@@ -195,7 +195,7 @@ void Minion::spawn()
 
 void Minion::startJump(int iH)
 {
-    jumpState = 1;
+    jumpState = MinionJump::Jump;
     currentJumpSpeed = startJumpSpeed;
     jumpDistance = 32 * iH + 16.0f;
     currentJumpDistance = 0;
@@ -203,7 +203,7 @@ void Minion::startJump(int iH)
 
 void Minion::resetJump()
 {
-    jumpState = 0;
+    jumpState = MinionJump::None;
     currentFallingSpeed = 2.7f;
 }
 
@@ -276,9 +276,4 @@ void Minion::setMinionState(int minionState)
         collisionOnlyWithPlayer = true;
         getCFG().getMusic()->playEffect(Mario::Music::Effects::Shot);
     }
-}
-
-bool Minion::getPowerUP()
-{
-    return true;
 }

@@ -11,4 +11,6 @@ private:
     void update() override;
     void draw(SDL_Renderer* rR, CIMG* iIMG) override;
     void collisionWithPlayer(bool TOP) override;
+
+    int specialState = 0;
 };

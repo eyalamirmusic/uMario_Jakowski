@@ -49,7 +49,7 @@ void Star::update()
     }
     else
     {
-        if (jumpState == 0)
+        if (jumpState == MinionJump::None)
         {
             startJump(1);
             jumpDistance = 32;
@@ -70,7 +70,7 @@ bool Star::updateMinion()
 
 void Star::minionPhysics()
 {
-    if (jumpState == 1)
+    if (jumpState == MinionJump::Jump)
     {
         if (minionState == 0)
         {
@@ -79,7 +79,7 @@ void Star::minionPhysics()
 
             if (jumpDistance <= currentJumpDistance)
             {
-                jumpState = 2;
+                jumpState = MinionJump::Land;
             }
         }
     }
@@ -90,11 +90,11 @@ void Star::minionPhysics()
             && !CCore::getMap()->checkCollisionRB(
                 (int) fXPos - 2, (int) fYPos + 2, iHitBoxX, iHitBoxY, true))
         {
-            Minion::physicsState2();
+            Minion::physicsLand();
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
         }
     }
 }

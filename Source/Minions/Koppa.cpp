@@ -71,7 +71,7 @@ void Koppa::minionPhysics()
             }
         }
     }
-    else if (jumpState == 1)
+    else if (jumpState == MinionJump::Jump)
     {
         if (minionState == 0)
         {
@@ -80,12 +80,12 @@ void Koppa::minionPhysics()
 
             if (jumpDistance <= currentJumpDistance)
             {
-                jumpState = 2;
+                jumpState = MinionJump::Land;
             }
         }
         else
         {
-            Minion::physicsState1();
+            Minion::jumpPhysics();
         }
     }
     else
@@ -100,7 +100,7 @@ void Koppa::minionPhysics()
             {
                 updateYPos(2);
 
-                jumpState = 2;
+                jumpState = MinionJump::Land;
 
                 if (fYPos >= getCFG().GAME_HEIGHT)
                 {
@@ -109,12 +109,12 @@ void Koppa::minionPhysics()
             }
             else
             {
-                Minion::physicsState2();
+                Minion::physicsLand();
             }
         }
         else
         {
-            jumpState = 0;
+            jumpState = MinionJump::None;
             onAnotherMinion = false;
         }
     }
@@ -125,7 +125,7 @@ void Koppa::update()
     if (minionState == 0)
     {
         updateXPos();
-        if (jumpState == 0)
+        if (jumpState == MinionJump::None)
         {
             startJump(1);
         }

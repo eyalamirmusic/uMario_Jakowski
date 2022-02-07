@@ -16,7 +16,7 @@ PlayerFireBall::PlayerFireBall(int iXPos, int iYPos, bool moveDirection)
 
     this->iBlockID = 62;
 
-    this->jumpState = 2;
+    this->jumpState = MinionJump::Land;
 
     this->iHitBoxX = 16;
     this->iHitBoxY = 16;
@@ -50,21 +50,21 @@ void PlayerFireBall::update()
     }
     else
     {
-        if (jumpState == 0)
+        if (jumpState == MinionJump::None)
         {
-            jumpState = 1;
+            jumpState = MinionJump::Jump;
             currentJumpSpeed = startJumpSpeed;
             jumpDistance = 34.0f;
             currentJumpDistance = 0;
         }
-        else if (jumpState == 1)
+        else if (jumpState == MinionJump::Jump)
         {
             updateYPos(-1);
             currentJumpDistance += 1;
 
             if (jumpDistance <= currentJumpDistance)
             {
-                jumpState = 2;
+                jumpState = MinionJump::Land;
             }
         }
         else
@@ -77,7 +77,7 @@ void PlayerFireBall::update()
             {
                 updateYPos(1);
 
-                jumpState = 2;
+                jumpState = MinionJump::Land;
 
                 if (fYPos >= getCFG().GAME_HEIGHT)
                 {
@@ -86,7 +86,7 @@ void PlayerFireBall::update()
             }
             else
             {
-                jumpState = 0;
+                jumpState = MinionJump::None;
                 onAnotherMinion = false;
             }
         }
@@ -130,7 +130,7 @@ void PlayerFireBall::updateXPos()
         }
         else
         {
-            fXPos -= (jumpState == 0 ? moveSpeed : moveSpeed / 2.0f);
+            fXPos -= (jumpState == MinionJump::None ? moveSpeed : moveSpeed / 2.0f);
         }
     }
     // ----- RIGHT
@@ -147,7 +147,7 @@ void PlayerFireBall::updateXPos()
         }
         else
         {
-            fXPos += (jumpState == 0 ? moveSpeed : moveSpeed / 2.0f);
+            fXPos += (jumpState == MinionJump::None ? moveSpeed : moveSpeed / 2.0f);
         }
     }
 
