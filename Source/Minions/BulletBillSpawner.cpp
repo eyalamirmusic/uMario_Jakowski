@@ -17,7 +17,7 @@ BulletBillSpawner::BulletBillSpawner(int iXPos, int iYPos, int minionState)
     this->iBlockID = 0;
     this->minionSpawned = minionState != 0;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 }
 
 void BulletBillSpawner::update()

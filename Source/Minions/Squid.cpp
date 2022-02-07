@@ -21,7 +21,7 @@ Squid::Squid(int iXPos, int iYPos)
 
     this->collisionOnlyWithPlayer = true;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 }
 
 void Squid::update()

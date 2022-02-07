@@ -56,7 +56,7 @@ Player::Player(SDL_Renderer* rR, float fXPos, float fYPos)
     std::vector<std::string> tempS;
     std::vector<unsigned int> tempI;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 
     // ----- 0
     tempS.push_back("mario/mario_death");

@@ -24,7 +24,7 @@ Lakito::Lakito(int iXPos, int iYPos, int iMaxXPos)
 
     this->minionSpawned = true;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 }
 
 void Lakito::update()

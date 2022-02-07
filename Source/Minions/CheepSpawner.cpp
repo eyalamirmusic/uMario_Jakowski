@@ -20,7 +20,7 @@ CheepSpawner::CheepSpawner(int iXPos, int iXEnd)
 
     this->iBlockID = 0;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 }
 
 void CheepSpawner::update()

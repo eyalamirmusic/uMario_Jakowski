@@ -60,7 +60,7 @@ Map::Map(SDL_Renderer* rR)
     oEvent = new Mario::Event();
     oFlag = nullptr;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 
     loadGameData(rR);
 }
@@ -700,7 +700,7 @@ void Map::draw(SDL_Renderer* rR)
 
 void Map::drawMap(SDL_Renderer* rR)
 {
-    if (oFlag != NULL)
+    if (oFlag != nullptr)
     {
         oFlag->drawCastleFlag(rR, vBlock[51]->getSprite()->getTexture());
     }
@@ -720,7 +720,7 @@ void Map::drawMap(SDL_Renderer* rR)
         }
     }
 
-    if (oFlag != NULL)
+    if (oFlag != nullptr)
     {
         oFlag->draw(rR, vBlock[oFlag->getBlockID()]->getSprite()->getTexture());
     }
@@ -3071,10 +3071,10 @@ void Map::clearMap()
 
     this->iMapWidth = this->iMapHeight = 0;
 
-    if (oFlag != NULL)
+    if (oFlag != nullptr)
     {
         delete oFlag;
-        oFlag = NULL;
+        oFlag = nullptr;
     }
 
     oEvent->eventTypeID = Mario::EventType::Normal;

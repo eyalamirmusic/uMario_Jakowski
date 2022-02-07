@@ -25,7 +25,7 @@ HammerBro::HammerBro(int iXPos, int iYPos)
 
     this->newY = true;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 
     this->nextJumpFrameID = rand() % 175 + 125;
     this->currentJumpDistance = 0;

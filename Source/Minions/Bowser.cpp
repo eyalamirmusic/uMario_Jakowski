@@ -28,7 +28,7 @@ Bowser::Bowser(float fXPos, float fYPos, bool spawnHammer)
     this->iYFireStart = (int) fYPos - 32;
     this->iFireID = 0;
 
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 
     this->nextHammerFrameID = 128;
     this->numOfHammers = 3 + rand() % 6;

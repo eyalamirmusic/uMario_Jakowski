@@ -7,7 +7,7 @@
 
 Cheep::Cheep(int iXPos, int iYPos, int minionType, int moveSpeed, bool moveDirection)
 {
-    srand((unsigned) time(NULL));
+    srand((unsigned) time(nullptr));
 
     this->fXPos = (float) iXPos;
     this->fYPos = (float) iYPos + rand() % 16;
