@@ -55,8 +55,6 @@ CCore::~CCore()
 
 void CCore::mainLoop()
 {
-    lFPSTime = SDL_GetTicks();
-
     while (!Mario::getGameState().quitGame && mainEvent->type != SDL_QUIT)
     {
         frameTime = SDL_GetTicks();
