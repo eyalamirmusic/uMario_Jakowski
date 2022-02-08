@@ -78,8 +78,8 @@ public:
     MinionJump jumpState = MinionJump::None;
 
     float startJumpSpeed = 6.65f;
-    float currentJumpSpeed = 0;
-    float jumpDistance = 0;
-    float currentJumpDistance = 0;
+    float currentJumpSpeed = 0.f;
+    float jumpDistance = 0.f;
+    float currentJumpDistance = 0.f;
     float currentFallingSpeed = 2.2f;
 };
