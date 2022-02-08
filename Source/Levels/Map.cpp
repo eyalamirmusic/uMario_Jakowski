@@ -30,7 +30,6 @@
 
 #include "Common/MusicHelper.h"
 
-
 Map::Map(SDL_Renderer* rR)
 {
     oPlayer = new Player(rR, 84, 368);
@@ -65,23 +64,18 @@ Map::Map(SDL_Renderer* rR)
     loadGameData(rR);
 }
 
-Map::~Map(void)
+Map::~Map()
 {
-    for (std::vector<Block*>::iterator i = vBlock.begin(); i != vBlock.end(); i++)
-    {
-        delete (*i);
-    }
+    for (auto& i: vBlock)
+        delete i;
 
-    for (std::vector<Block*>::iterator i = vMinion.begin(); i != vMinion.end(); i++)
-    {
-        delete (*i);
-    }
+    for (auto& i: vMinion)
+        delete i;
 
     delete oEvent;
     delete oFlag;
 }
 
-/* ******************************************** */
 
 void Map::update()
 {
@@ -187,19 +181,19 @@ void Map::updatePlayer()
 
 void Map::updateMinions()
 {
-    for (int i = 0; i < iMinionListSize; i++)
+    for (int i = 0; i < lMinion.size(); i++)
     {
-        for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
+        for (auto& minion: lMinion[i])
         {
-            if (lMinion[i][j]->updateMinion())
+            if (minion->updateMinion())
             {
-                lMinion[i][j]->update();
+                minion->update();
             }
         }
     }
 
     // ----- UPDATE MINION LIST ID
-    for (int i = 0; i < iMinionListSize; i++)
+    for (int i = 0; i < lMinion.size(); i++)
     {
         for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
         {
@@ -238,145 +232,126 @@ void Map::updateMinions()
 
 void Map::updateMinionsCollisions()
 {
-    // ----- COLLISIONS
-    for (int i = 0; i < iMinionListSize; i++)
+    for (int i = 0; i < lMinion.size(); i++)
     {
-        for (unsigned int j = 0; j < lMinion[i].size(); j++)
+        for (int j = 0; j < lMinion[i].size(); j++)
         {
-            if (!lMinion[i][j]
-                     ->collisionOnlyWithPlayer /*&& lMinion[i][j]->minionSpawned*/
-                && lMinion[i][j]->deadTime < 0)
+            auto current = lMinion[i][j];
+
+            if (!current->collisionOnlyWithPlayer /*&& lMinion[i][j]->minionSpawned*/
+                && current->deadTime < 0)
             {
                 // ----- WITH MINIONS IN SAME LIST
-                for (unsigned int k = j + 1; k < lMinion[i].size(); k++)
+                for (int k = j + 1; k < lMinion[i].size(); k++)
                 {
-                    if (!lMinion[i][k]
-                             ->collisionOnlyWithPlayer /*&& lMinion[i][k]->minionSpawned*/
-                        && lMinion[i][k]->deadTime < 0)
+                    auto next = lMinion[i][k];
+
+                    if (!next->collisionOnlyWithPlayer /*&& lMinion[i][k]->minionSpawned*/
+                        && next->deadTime < 0)
                     {
-                        if (lMinion[i][j]->getXPos() < lMinion[i][k]->getXPos())
+                        if (current->getXPos() < next->getXPos())
                         {
-                            if (lMinion[i][j]->getXPos() + lMinion[i][j]->iHitBoxX
-                                    >= lMinion[i][k]->getXPos()
-                                && lMinion[i][j]->getXPos() + lMinion[i][j]->iHitBoxX
-                                       <= lMinion[i][k]->getXPos()
-                                              + lMinion[i][k]->iHitBoxX
-                                && ((lMinion[i][j]->getYPos()
-                                         <= lMinion[i][k]->getYPos()
-                                                + lMinion[i][k]->iHitBoxY
-                                     && lMinion[i][j]->getYPos()
-                                                + lMinion[i][j]->iHitBoxY
-                                            >= lMinion[i][k]->getYPos()
-                                                   + lMinion[i][k]->iHitBoxY)
-                                    || (lMinion[i][k]->getYPos()
-                                            <= lMinion[i][j]->getYPos()
-                                                   + lMinion[i][j]->iHitBoxY
-                                        && lMinion[i][k]->getYPos()
-                                                   + lMinion[i][k]->iHitBoxY
-                                               >= lMinion[i][j]->getYPos()
-                                                      + lMinion[i][j]->iHitBoxY)))
+                            if (current->getXPos() + current->iHitBoxX
+                                    >= next->getXPos()
+                                && current->getXPos() + current->iHitBoxX
+                                       <= next->getXPos() + next->iHitBoxX
+                                && ((current->getYPos()
+                                         <= next->getYPos() + next->iHitBoxY
+                                     && current->getYPos() + current->iHitBoxY
+                                            >= next->getYPos() + next->iHitBoxY)
+                                    || (next->getYPos()
+                                            <= current->getYPos() + current->iHitBoxY
+                                        && next->getYPos() + next->iHitBoxY
+                                               >= current->getYPos()
+                                                      + current->iHitBoxY)))
                             {
-                                if (lMinion[i][j]->killOtherUnits
-                                    && lMinion[i][j]->moveSpeed > 0
-                                    && lMinion[i][k]->minionSpawned)
+                                if (current->killOtherUnits && current->moveSpeed > 0
+                                    && next->minionSpawned)
                                 {
-                                    lMinion[i][k]->setMinionState(-2);
-                                    lMinion[i][j]->collisionWithAnotherUnit();
+                                    next->setMinionState(-2);
+                                    current->collisionWithAnotherUnit();
                                 }
 
-                                if (lMinion[i][k]->killOtherUnits
-                                    && lMinion[i][k]->moveSpeed > 0
-                                    && lMinion[i][j]->minionSpawned)
+                                if (next->killOtherUnits && next->moveSpeed > 0
+                                    && current->minionSpawned)
                                 {
-                                    lMinion[i][j]->setMinionState(-2);
-                                    lMinion[i][k]->collisionWithAnotherUnit();
+                                    current->setMinionState(-2);
+                                    next->collisionWithAnotherUnit();
                                 }
 
-                                if (lMinion[i][j]->getYPos() - 4
-                                        <= lMinion[i][k]->getYPos()
-                                               + lMinion[i][k]->iHitBoxY
-                                    && lMinion[i][j]->getYPos() + 4
-                                           >= lMinion[i][k]->getYPos()
-                                                  + lMinion[i][k]->iHitBoxY)
+                                if (current->getYPos() - 4
+                                        <= next->getYPos() + next->iHitBoxY
+                                    && current->getYPos() + 4
+                                           >= next->getYPos() + next->iHitBoxY)
                                 {
-                                    lMinion[i][k]->onAnotherMinion = true;
+                                    next->onAnotherMinion = true;
                                 }
-                                else if (lMinion[i][k]->getYPos() - 4
-                                             <= lMinion[i][j]->getYPos()
-                                                    + lMinion[i][j]->iHitBoxY
-                                         && lMinion[i][k]->getYPos() + 4
-                                                >= lMinion[i][j]->getYPos()
-                                                       + lMinion[i][j]->iHitBoxY)
+                                else if (next->getYPos() - 4
+                                             <= current->getYPos()
+                                                    + current->iHitBoxY
+                                         && next->getYPos() + 4
+                                                >= current->getYPos()
+                                                       + current->iHitBoxY)
                                 {
-                                    lMinion[i][j]->onAnotherMinion = true;
+                                    current->onAnotherMinion = true;
                                 }
                                 else
                                 {
-                                    lMinion[i][j]->collisionEffect();
-                                    lMinion[i][k]->collisionEffect();
+                                    current->collisionEffect();
+                                    next->collisionEffect();
                                 }
                             }
                         }
                         else
                         {
-                            if (lMinion[i][k]->getXPos() + lMinion[i][k]->iHitBoxX
-                                    >= lMinion[i][j]->getXPos()
-                                && lMinion[i][k]->getXPos() + lMinion[i][k]->iHitBoxX
-                                       <= lMinion[i][j]->getXPos()
-                                              + lMinion[i][j]->iHitBoxX
-                                && ((lMinion[i][j]->getYPos()
-                                         <= lMinion[i][k]->getYPos()
-                                                + lMinion[i][k]->iHitBoxY
-                                     && lMinion[i][j]->getYPos()
-                                                + lMinion[i][j]->iHitBoxY
-                                            >= lMinion[i][k]->getYPos()
-                                                   + lMinion[i][k]->iHitBoxY)
-                                    || (lMinion[i][k]->getYPos()
-                                            <= lMinion[i][j]->getYPos()
-                                                   + lMinion[i][j]->iHitBoxY
-                                        && lMinion[i][k]->getYPos()
-                                                   + lMinion[i][k]->iHitBoxY
-                                               >= lMinion[i][j]->getYPos()
-                                                      + lMinion[i][j]->iHitBoxY)))
+                            if (next->getXPos() + next->iHitBoxX
+                                    >= current->getXPos()
+                                && next->getXPos() + next->iHitBoxX
+                                       <= current->getXPos() + current->iHitBoxX
+                                && ((current->getYPos()
+                                         <= next->getYPos() + next->iHitBoxY
+                                     && current->getYPos() + current->iHitBoxY
+                                            >= next->getYPos() + next->iHitBoxY)
+                                    || (next->getYPos()
+                                            <= current->getYPos() + current->iHitBoxY
+                                        && next->getYPos() + next->iHitBoxY
+                                               >= current->getYPos()
+                                                      + current->iHitBoxY)))
                             {
-                                if (lMinion[i][j]->killOtherUnits
-                                    && lMinion[i][j]->moveSpeed > 0
-                                    && lMinion[i][k]->minionSpawned)
+                                if (current->killOtherUnits && current->moveSpeed > 0
+                                    && next->minionSpawned)
                                 {
-                                    lMinion[i][k]->setMinionState(-2);
-                                    lMinion[i][j]->collisionWithAnotherUnit();
+                                    next->setMinionState(-2);
+                                    current->collisionWithAnotherUnit();
                                 }
 
-                                if (lMinion[i][k]->killOtherUnits
-                                    && lMinion[i][k]->moveSpeed > 0
-                                    && lMinion[i][j]->minionSpawned)
+                                if (next->killOtherUnits && next->moveSpeed > 0
+                                    && current->minionSpawned)
                                 {
-                                    lMinion[i][j]->setMinionState(-2);
-                                    lMinion[i][k]->collisionWithAnotherUnit();
+                                    current->setMinionState(-2);
+                                    next->collisionWithAnotherUnit();
                                 }
 
-                                if (lMinion[i][j]->getYPos() - 4
-                                        <= lMinion[i][k]->getYPos()
-                                               + lMinion[i][k]->iHitBoxY
-                                    && lMinion[i][j]->getYPos() + 4
-                                           >= lMinion[i][k]->getYPos()
-                                                  + lMinion[i][k]->iHitBoxY)
+                                if (current->getYPos() - 4
+                                        <= next->getYPos() + next->iHitBoxY
+                                    && current->getYPos() + 4
+                                           >= next->getYPos() + next->iHitBoxY)
                                 {
-                                    lMinion[i][k]->onAnotherMinion = true;
+                                    next->onAnotherMinion = true;
                                 }
-                                else if (lMinion[i][k]->getYPos() - 4
-                                             <= lMinion[i][j]->getYPos()
-                                                    + lMinion[i][j]->iHitBoxY
-                                         && lMinion[i][k]->getYPos() + 4
-                                                >= lMinion[i][j]->getYPos()
-                                                       + lMinion[i][j]->iHitBoxY)
+                                else if (next->getYPos() - 4
+                                             <= current->getYPos()
+                                                    + current->iHitBoxY
+                                         && next->getYPos() + 4
+                                                >= current->getYPos()
+                                                       + current->iHitBoxY)
                                 {
-                                    lMinion[i][j]->onAnotherMinion = true;
+                                    current->onAnotherMinion = true;
                                 }
                                 else
                                 {
-                                    lMinion[i][j]->collisionEffect();
-                                    lMinion[i][k]->collisionEffect();
+                                    current->collisionEffect();
+                                    next->collisionEffect();
                                 }
                             }
                         }
@@ -384,122 +359,95 @@ void Map::updateMinionsCollisions()
                 }
 
                 // ----- WITH MINIONS IN OTHER LIST
-                if (i + 1 < iMinionListSize)
+                if (i + 1 < lMinion.size())
                 {
-                    for (unsigned int k = 0; k < lMinion[i + 1].size(); k++)
+                    for (auto& k: lMinion[i + 1])
                     {
-                        if (!lMinion[i + 1][k]
-                                 ->collisionOnlyWithPlayer /*&& lMinion[i + 1][k]->minionSpawned*/
-                            && lMinion[i + 1][k]->deadTime < 0)
+                        if (!k->collisionOnlyWithPlayer /*&& lMinion[i + 1][k]->minionSpawned*/
+                            && k->deadTime < 0)
                         {
-                            if (lMinion[i][j]->getXPos()
-                                < lMinion[i + 1][k]->getXPos())
+                            if (current->getXPos() < k->getXPos())
                             {
-                                if (lMinion[i][j]->getXPos()
-                                            + lMinion[i][j]->iHitBoxX
-                                        >= lMinion[i + 1][k]->getXPos()
-                                    && lMinion[i][j]->getXPos()
-                                               + lMinion[i][j]->iHitBoxX
-                                           <= lMinion[i + 1][k]->getXPos()
-                                                  + lMinion[i + 1][k]->iHitBoxX
-                                    && ((lMinion[i][j]->getYPos()
-                                             <= lMinion[i + 1][k]->getYPos()
-                                                    + lMinion[i + 1][k]->iHitBoxY
-                                         && lMinion[i][j]->getYPos()
-                                                    + lMinion[i][j]->iHitBoxY
-                                                >= lMinion[i + 1][k]->getYPos()
-                                                       + lMinion[i + 1][k]->iHitBoxY)
-                                        || (lMinion[i + 1][k]->getYPos()
-                                                <= lMinion[i][j]->getYPos()
-                                                       + lMinion[i][j]->iHitBoxY
-                                            && lMinion[i + 1][k]->getYPos()
-                                                       + lMinion[i + 1][k]->iHitBoxY
-                                                   >= lMinion[i][j]->getYPos()
-                                                          + lMinion[i][j]
-                                                                ->iHitBoxY)))
+                                if (current->getXPos() + current->iHitBoxX
+                                        >= k->getXPos()
+                                    && current->getXPos() + current->iHitBoxX
+                                           <= k->getXPos() + k->iHitBoxX
+                                    && ((current->getYPos()
+                                             <= k->getYPos() + k->iHitBoxY
+                                         && current->getYPos() + current->iHitBoxY
+                                                >= k->getYPos() + k->iHitBoxY)
+                                        || (k->getYPos() <= current->getYPos()
+                                                                + current->iHitBoxY
+                                            && k->getYPos() + k->iHitBoxY
+                                                   >= current->getYPos()
+                                                          + current->iHitBoxY)))
                                 {
-                                    if (lMinion[i][j]->killOtherUnits
-                                        && lMinion[i][j]->moveSpeed > 0
-                                        && lMinion[i + 1][k]->minionSpawned)
+                                    if (current->killOtherUnits
+                                        && current->moveSpeed > 0
+                                        && k->minionSpawned)
                                     {
-                                        lMinion[i + 1][k]->setMinionState(-2);
-                                        lMinion[i][j]->collisionWithAnotherUnit();
+                                        k->setMinionState(-2);
+                                        current->collisionWithAnotherUnit();
                                     }
 
-                                    if (lMinion[i + 1][k]->killOtherUnits
-                                        && lMinion[i + 1][k]->moveSpeed > 0
-                                        && lMinion[i][j]->minionSpawned)
+                                    if (k->killOtherUnits && k->moveSpeed > 0
+                                        && current->minionSpawned)
                                     {
-                                        lMinion[i][j]->setMinionState(-2);
-                                        lMinion[i + 1][k]
-                                            ->collisionWithAnotherUnit();
+                                        current->setMinionState(-2);
+                                        k->collisionWithAnotherUnit();
                                     }
 
-                                    if (lMinion[i][j]->getYPos() - 4
-                                            <= lMinion[i + 1][k]->getYPos()
-                                                   + lMinion[i + 1][k]->iHitBoxY
-                                        && lMinion[i][j]->getYPos() + 4
-                                               >= lMinion[i + 1][k]->getYPos()
-                                                      + lMinion[i + 1][k]->iHitBoxY)
+                                    if (current->getYPos() - 4
+                                            <= k->getYPos() + k->iHitBoxY
+                                        && current->getYPos() + 4
+                                               >= k->getYPos() + k->iHitBoxY)
                                     {
-                                        lMinion[i + 1][k]->onAnotherMinion = true;
+                                        k->onAnotherMinion = true;
                                     }
-                                    else if (lMinion[i + 1][k]->getYPos() - 4
-                                                 <= lMinion[i][j]->getYPos()
-                                                        + lMinion[i][j]->iHitBoxY
-                                             && lMinion[i + 1][k]->getYPos() + 4
-                                                    >= lMinion[i][j]->getYPos()
-                                                           + lMinion[i][j]->iHitBoxY)
+                                    else if (k->getYPos() - 4
+                                                 <= current->getYPos()
+                                                        + current->iHitBoxY
+                                             && k->getYPos() + 4
+                                                    >= current->getYPos()
+                                                           + current->iHitBoxY)
                                     {
-                                        lMinion[i][j]->onAnotherMinion = true;
+                                        current->onAnotherMinion = true;
                                     }
                                     else
                                     {
-                                        lMinion[i][j]->collisionEffect();
-                                        lMinion[i + 1][k]->collisionEffect();
+                                        current->collisionEffect();
+                                        k->collisionEffect();
                                     }
                                 }
                             }
                             else
                             {
-                                if (lMinion[i + 1][k]->getXPos()
-                                            + lMinion[i + 1][k]->iHitBoxX
-                                        >= lMinion[i][j]->getXPos()
-                                    && lMinion[i + 1][k]->getXPos()
-                                               + lMinion[i + 1][k]->iHitBoxX
-                                           < lMinion[i][j]->getXPos()
-                                                 + lMinion[i][j]->iHitBoxX
-                                    && ((lMinion[i][j]->getYPos()
-                                             <= lMinion[i + 1][k]->getYPos()
-                                                    + lMinion[i + 1][k]->iHitBoxY
-                                         && lMinion[i][j]->getYPos()
-                                                    + lMinion[i][j]->iHitBoxY
-                                                >= lMinion[i + 1][k]->getYPos()
-                                                       + lMinion[i + 1][k]->iHitBoxY)
-                                        || (lMinion[i + 1][k]->getYPos()
-                                                <= lMinion[i][j]->getYPos()
-                                                       + lMinion[i][j]->iHitBoxY
-                                            && lMinion[i + 1][k]->getYPos()
-                                                       + lMinion[i + 1][k]->iHitBoxY
-                                                   >= lMinion[i][j]->getYPos()
-                                                          + lMinion[i][j]
-                                                                ->iHitBoxY)))
+                                if (k->getXPos() + k->iHitBoxX >= current->getXPos()
+                                    && k->getXPos() + k->iHitBoxX
+                                           < current->getXPos() + current->iHitBoxX
+                                    && ((current->getYPos()
+                                             <= k->getYPos() + k->iHitBoxY
+                                         && current->getYPos() + current->iHitBoxY
+                                                >= k->getYPos() + k->iHitBoxY)
+                                        || (k->getYPos() <= current->getYPos()
+                                                                + current->iHitBoxY
+                                            && k->getYPos() + k->iHitBoxY
+                                                   >= current->getYPos()
+                                                          + current->iHitBoxY)))
                                 {
-                                    if (lMinion[i][j]->killOtherUnits
-                                        && lMinion[i][j]->moveSpeed > 0
-                                        && lMinion[i + 1][k]->minionSpawned)
+                                    if (current->killOtherUnits
+                                        && current->moveSpeed > 0
+                                        && k->minionSpawned)
                                     {
-                                        lMinion[i + 1][k]->setMinionState(-2);
-                                        lMinion[i][j]->collisionWithAnotherUnit();
+                                        k->setMinionState(-2);
+                                        current->collisionWithAnotherUnit();
                                     }
 
-                                    if (lMinion[i + 1][k]->killOtherUnits
-                                        && lMinion[i + 1][k]->moveSpeed > 0
-                                        && lMinion[i][j]->minionSpawned)
+                                    if (k->killOtherUnits && k->moveSpeed > 0
+                                        && current->minionSpawned)
                                     {
-                                        lMinion[i][j]->setMinionState(-2);
-                                        lMinion[i + 1][k]
-                                            ->collisionWithAnotherUnit();
+                                        current->setMinionState(-2);
+                                        k->collisionWithAnotherUnit();
                                     }
                                     /*
 									if(lMinion[i][j]->getYPos() + lMinion[i][j]->iHitBoxY < lMinion[i + 1][k]->getYPos() + lMinion[i + 1][k]->iHitBoxY) {
@@ -510,28 +458,26 @@ void Map::updateMinionsCollisions()
 										continue;
 									}*/
 
-                                    if (lMinion[i][j]->getYPos() - 4
-                                            <= lMinion[i + 1][k]->getYPos()
-                                                   + lMinion[i + 1][k]->iHitBoxY
-                                        && lMinion[i][j]->getYPos() + 4
-                                               >= lMinion[i + 1][k]->getYPos()
-                                                      + lMinion[i + 1][k]->iHitBoxY)
+                                    if (current->getYPos() - 4
+                                            <= k->getYPos() + k->iHitBoxY
+                                        && current->getYPos() + 4
+                                               >= k->getYPos() + k->iHitBoxY)
                                     {
-                                        lMinion[i + 1][k]->onAnotherMinion = true;
+                                        k->onAnotherMinion = true;
                                     }
-                                    else if (lMinion[i + 1][k]->getYPos() - 4
-                                                 <= lMinion[i][j]->getYPos()
-                                                        + lMinion[i][j]->iHitBoxY
-                                             && lMinion[i + 1][k]->getYPos() + 4
-                                                    >= lMinion[i][j]->getYPos()
-                                                           + lMinion[i][j]->iHitBoxY)
+                                    else if (k->getYPos() - 4
+                                                 <= current->getYPos()
+                                                        + current->iHitBoxY
+                                             && k->getYPos() + 4
+                                                    >= current->getYPos()
+                                                           + current->iHitBoxY)
                                     {
-                                        lMinion[i][j]->onAnotherMinion = true;
+                                        current->onAnotherMinion = true;
                                     }
                                     else
                                     {
-                                        lMinion[i][j]->collisionEffect();
-                                        lMinion[i + 1][k]->collisionEffect();
+                                        current->collisionEffect();
+                                        k->collisionEffect();
                                     }
                                 }
                             }
@@ -728,7 +674,7 @@ void Map::drawMap(SDL_Renderer* rR)
 
 void Map::drawMinions(SDL_Renderer* rR)
 {
-    for (int i = 0; i < iMinionListSize; i++)
+    for (int i = 0; i < lMinion.size(); i++)
     {
         for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
         {
@@ -934,7 +880,7 @@ void Map::checkCollisionOnTopOfTheBlock(int nX, int nY)
             break;
     }
 
-    for (int i = (nX - nX % 5) / 5, iEnd = i + 3; i < iEnd && i < iMinionListSize;
+    for (int i = (nX - nX % 5) / 5, iEnd = i + 3; i < iEnd && i < lMinion.size();
          i++)
     {
         for (unsigned int j = 0; j < lMinion[i].size(); j++)
@@ -3084,14 +3030,15 @@ void Map::clearMap()
 
 void Map::clearMinions()
 {
-    for (int i = 0; i < iMinionListSize; i++)
+    for (auto& minionList: lMinion)
     {
-        for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
+        for (int j = 0, jSize = minionList.size(); j < jSize; j++)
         {
-            delete lMinion[i][j];
-            jSize = lMinion[i].size();
+            delete minionList[j];
+            jSize = minionList.size();
         }
-        lMinion[i].clear();
+
+        minionList.clear();
     }
 
     clearPlatforms();
@@ -4130,8 +4077,6 @@ void Map::createMap()
         std::vector<Minion*> temp;
         lMinion.push_back(temp);
     }
-
-    iMinionListSize = lMinion.size();
 
     // ----- MIONION LIST -----
     // ----- CREATE MAP -----

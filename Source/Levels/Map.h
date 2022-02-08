@@ -239,7 +239,6 @@ private:
 
     // ----- MINIONS -----
     std::vector<std::vector<Minion*>> lMinion;
-    int iMinionListSize;
 
     int getListID(int nXPos);
 

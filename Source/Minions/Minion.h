@@ -29,6 +29,14 @@ public:
 
     virtual void minionDeathAnimation();
 
+    virtual void collisionWithPlayer(bool TOP);
+    virtual void points(int iPoints);
+
+    virtual void collisionWithAnotherUnit() {}
+
+    virtual void lockMinion() {};
+    virtual void setMinionState(int minionState);
+
     void jumpPhysics();
     void physicsLand();
 
@@ -36,21 +44,9 @@ public:
     void startJump(int iH);
     void resetJump();
 
-    // ----- COLLISON
-
-    virtual void collisionWithPlayer(bool TOP);
-    virtual void points(int iPoints);
-
-    virtual void collisionWithAnotherUnit() {}
-
-    virtual void lockMinion() {};
-
-    // ----- get & set -----
     int getBloockID() const;
     void setBlockID(int iBlockID);
     int getMinionState() const;
-
-    virtual void setMinionState(int minionState);
 
     int getXPos();
     int getYPos();
