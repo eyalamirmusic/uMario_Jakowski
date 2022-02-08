@@ -76,7 +76,6 @@ Map::~Map()
     delete oFlag;
 }
 
-
 void Map::update()
 {
     updateBlocks();
@@ -181,18 +180,15 @@ void Map::updatePlayer()
 
 void Map::updateMinions()
 {
-    for (int i = 0; i < lMinion.size(); i++)
+    for (auto& minionList: lMinion)
     {
-        for (auto& minion: lMinion[i])
+        for (auto& minion: minionList)
         {
             if (minion->updateMinion())
-            {
                 minion->update();
-            }
         }
     }
 
-    // ----- UPDATE MINION LIST ID
     for (int i = 0; i < lMinion.size(); i++)
     {
         for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
@@ -497,39 +493,35 @@ void Map::updateMinionsCollisions()
              i < iSize;
              i++)
         {
-            for (unsigned int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
+            for (auto& minion: lMinion[i])
             {
-                if (lMinion[i][j]->deadTime < 0)
+                if (minion->deadTime < 0)
                 {
-                    if ((oPlayer->getXPos() - fXPos >= lMinion[i][j]->getXPos()
+                    if ((oPlayer->getXPos() - fXPos >= minion->getXPos()
                          && oPlayer->getXPos() - fXPos
-                                <= lMinion[i][j]->getXPos()
-                                       + lMinion[i][j]->iHitBoxX)
+                                <= minion->getXPos() + minion->iHitBoxX)
                         || (oPlayer->getXPos() - fXPos + oPlayer->getHitBoxX()
-                                >= lMinion[i][j]->getXPos()
+                                >= minion->getXPos()
                             && oPlayer->getXPos() - fXPos + oPlayer->getHitBoxX()
-                                   <= lMinion[i][j]->getXPos()
-                                          + lMinion[i][j]->iHitBoxX))
+                                   <= minion->getXPos() + minion->iHitBoxX))
                     {
-                        if (lMinion[i][j]->getYPos() - 2
+                        if (minion->getYPos() - 2
                                 <= oPlayer->getYPos() + oPlayer->getHitBoxY()
-                            && lMinion[i][j]->getYPos() + 16
+                            && minion->getYPos() + 16
                                    >= oPlayer->getYPos() + oPlayer->getHitBoxY())
                         {
-                            lMinion[i][j]->collisionWithPlayer(true);
+                            minion->collisionWithPlayer(true);
                         }
-                        else if ((lMinion[i][j]->getYPos()
+                        else if ((minion->getYPos()
                                       <= oPlayer->getYPos() + oPlayer->getHitBoxY()
-                                  && lMinion[i][j]->getYPos()
-                                             + lMinion[i][j]->iHitBoxY
+                                  && minion->getYPos() + minion->iHitBoxY
                                          >= oPlayer->getYPos()
                                                 + oPlayer->getHitBoxY())
-                                 || (lMinion[i][j]->getYPos() <= oPlayer->getYPos()
-                                     && lMinion[i][j]->getYPos()
-                                                + lMinion[i][j]->iHitBoxY
+                                 || (minion->getYPos() <= oPlayer->getYPos()
+                                     && minion->getYPos() + minion->iHitBoxY
                                             >= oPlayer->getYPos()))
                         {
-                            lMinion[i][j]->collisionWithPlayer(false);
+                            minion->collisionWithPlayer(false);
                         }
                     }
                 }
@@ -628,10 +620,9 @@ void Map::draw(SDL_Renderer* rR)
 		DrawLines(rR);
 	}*/
 
-    for (unsigned int i = 0; i < lBubble.size(); i++)
+    for (auto& bubble: lBubble)
     {
-        lBubble[i]->draw(
-            rR, vBlock[lBubble[i]->getBlockID()]->getSprite()->getTexture());
+        bubble->draw(rR, vBlock[bubble->getBlockID()]->getSprite()->getTexture());
     }
 
     oPlayer->draw(rR);
@@ -674,85 +665,72 @@ void Map::drawMap(SDL_Renderer* rR)
 
 void Map::drawMinions(SDL_Renderer* rR)
 {
-    for (int i = 0; i < lMinion.size(); i++)
+    for (auto& minionList: lMinion)
     {
-        for (int j = 0, jSize = lMinion[i].size(); j < jSize; j++)
+        for (auto& minion: minionList)
         {
-            lMinion[i][j]->draw(
-                rR,
-                vMinion[lMinion[i][j]->getBloockID()]->getSprite()->getTexture());
-            //getCFG().getText()->DrawWS(rR, std::to_string(i), lMinion[i][j]->getXPos() + (int)fXPos, lMinion[i][j]->getYPos(), 0, 0, 0, 8);
+            auto img = vMinion[minion->getBloockID()]->getSprite()->getTexture();
+            minion->draw(rR, img);
         }
     }
+}
+
+std::string getScoreTextOffset(unsigned int score)
+{
+    if (score < 100)
+        return "00000";
+
+    if (score < 1000)
+        return "000";
+    if (score < 10000)
+        return "00";
+
+    if (score < 100000)
+        return "0";
+
+    return {};
 }
 
 void Map::drawGameLayout(SDL_Renderer* rR)
 {
-    getCFG().getText()->draw(rR, "MARIO", 54, 16);
+    auto text = getCFG().getText();
+    text->draw(rR, "MARIO", 54, 16);
 
-    if (oPlayer->getScore() < 100)
-    {
-        getCFG().getText()->draw(
-            rR, "00000" + std::to_string(oPlayer->getScore()), 54, 32);
-    }
-    else if (oPlayer->getScore() < 1000)
-    {
-        getCFG().getText()->draw(
-            rR, "000" + std::to_string(oPlayer->getScore()), 54, 32);
-    }
-    else if (oPlayer->getScore() < 10000)
-    {
-        getCFG().getText()->draw(
-            rR, "00" + std::to_string(oPlayer->getScore()), 54, 32);
-    }
-    else if (oPlayer->getScore() < 100000)
-    {
-        getCFG().getText()->draw(
-            rR, "0" + std::to_string(oPlayer->getScore()), 54, 32);
-    }
-    else
-    {
-        getCFG().getText()->draw(rR, std::to_string(oPlayer->getScore()), 54, 32);
-    }
+    auto score = oPlayer->getScore();
+    auto scoreText = std::to_string(score) + getScoreTextOffset(score);
 
-    getCFG().getText()->draw(rR, "WORLD", 462, 16);
-    getCFG().getText()->draw(rR, getLevelName(), 480, 32);
+    text->draw(rR, scoreText, 54, 32);
+    text->draw(rR, "WORLD", 462, 16);
+    text->draw(rR, getLevelName(), 480, 32);
 
     if (iLevelType != 1)
-    {
         vBlock[2]->draw(rR, 268, 32);
-    }
     else
-    {
         vBlock[57]->draw(rR, 268, 32);
-    }
-    getCFG().getText()->draw(rR, "y", 286, 32);
-    getCFG().getText()->draw(rR,
-                             (oPlayer->getCoins() < 10 ? "0" : "")
-                                 + std::to_string(oPlayer->getCoins()),
-                             302,
-                             32);
+    
+    text->draw(rR, "y", 286, 32);
+    text->draw(rR,
+               (oPlayer->getCoins() < 10 ? "0" : "")
+                   + std::to_string(oPlayer->getCoins()),
+               302,
+               32);
 
-    getCFG().getText()->draw(rR, "TIME", 672, 16);
-
+    text->draw(rR, "TIME", 672, 16);
+    
+    
     if (getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
     {
+        auto mapTimeText = std::to_string(iMapTime);
+
         if (iMapTime > 100)
-        {
-            getCFG().getText()->draw(rR, std::to_string(iMapTime), 680, 32);
-        }
+            text->draw(rR, mapTimeText, 680, 32);
         else if (iMapTime > 10)
-        {
-            getCFG().getText()->draw(rR, "0" + std::to_string(iMapTime), 680, 32);
-        }
+            text->draw(rR, "0" + mapTimeText, 680, 32);
         else
-        {
-            getCFG().getText()->draw(rR, "00" + std::to_string(iMapTime), 680, 32);
-        }
+            text->draw(rR, "00" + mapTimeText, 680, 32);
     }
 }
 
-/* ******************************************** */
 
 void Map::moveMap(int nX, int nY)
 {
