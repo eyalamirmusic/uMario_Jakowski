@@ -120,9 +120,9 @@ void Map::update()
             oEvent->animation();
         }
 
-        for (unsigned int i = 0; i < vPlatform.size(); i++)
+        for (auto& i: vPlatform)
         {
-            vPlatform[i]->update();
+            i->update();
         }
     }
     else
@@ -707,7 +707,7 @@ void Map::drawGameLayout(SDL_Renderer* rR)
         vBlock[2]->draw(rR, 268, 32);
     else
         vBlock[57]->draw(rR, 268, 32);
-    
+
     text->draw(rR, "y", 286, 32);
     text->draw(rR,
                (oPlayer->getCoins() < 10 ? "0" : "")
@@ -716,8 +716,7 @@ void Map::drawGameLayout(SDL_Renderer* rR)
                32);
 
     text->draw(rR, "TIME", 672, 16);
-    
-    
+
     if (getCFG().getMM()->getViewID() == Mario::MenuStates::Game)
     {
         auto mapTimeText = std::to_string(iMapTime);
@@ -730,7 +729,6 @@ void Map::drawGameLayout(SDL_Renderer* rR)
             text->draw(rR, "00" + mapTimeText, 680, 32);
     }
 }
-
 
 void Map::moveMap(int nX, int nY)
 {
@@ -4051,23 +4049,14 @@ void Map::createMap()
     // ----- MIONION LIST -----
 
     for (int i = 0; i < iMapWidth; i += 5)
-    {
-        std::vector<Minion*> temp;
-        lMinion.push_back(temp);
-    }
-
-    // ----- MIONION LIST -----
-    // ----- CREATE MAP -----
+        lMinion.create();
 
     for (int i = 0; i < iMapWidth; i++)
     {
-        std::vector<MapLevel*> temp;
-        for (int i = 0; i < iMapHeight; i++)
-        {
-            temp.push_back(new MapLevel(0));
-        }
+        auto& temp = lMap.create();
 
-        lMap.push_back(temp);
+        for (int h = 0; h < iMapHeight; h++)
+            temp.push_back(new MapLevel(0));
     }
 
     // ----- CREATE MAP -----

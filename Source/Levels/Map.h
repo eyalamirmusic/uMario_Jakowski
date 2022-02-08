@@ -206,19 +206,19 @@ public:
 private:
     float fXPos, fYPos;
 
-    std::vector<Block*> vBlock;
-    std::vector<Block*> vMinion;
+    EA::Vector<Block*> vBlock;
+    EA::Vector<Block*> vMinion;
 
-    std::vector<std::vector<MapLevel*>> lMap;
+    EA::Vector<EA::Vector<MapLevel*>> lMap;
     int iMapWidth, iMapHeight;
 
-    std::vector<BlockDebris*> lBlockDebris;
+    EA::Vector<BlockDebris*> lBlockDebris;
 
-    std::vector<Platform*> vPlatform;
+    EA::Vector<Platform*> vPlatform;
 
-    std::vector<LevelText*> vLevelText;
+    EA::Vector<LevelText*> vLevelText;
 
-    std::vector<Bubble*> lBubble;
+    EA::Vector<Bubble*> lBubble;
 
     int currentLevelID;
     int iLevelType; // 0, 1, 2;
@@ -238,7 +238,7 @@ private:
     Player* oPlayer;
 
     // ----- MINIONS -----
-    std::vector<std::vector<Minion*>> lMinion;
+    EA::Vector<EA::Vector<Minion*>> lMinion;
 
     int getListID(int nXPos);
 
@@ -247,14 +247,14 @@ private:
 
     // ----- POINTS & COIN -----
 
-    std::vector<Coin*> lCoin;
-    std::vector<Points*> lPoints;
+    EA::Vector<Coin*> lCoin;
+    EA::Vector<Points*> lPoints;
 
     // ----- POINTS & COIN -----
 
     // ----- PIPEEVENTS -----
 
-    std::vector<Pipe*> lPipe;
+    EA::Vector<Pipe*> lPipe;
 
     // ----- ENDEVENTS
 
