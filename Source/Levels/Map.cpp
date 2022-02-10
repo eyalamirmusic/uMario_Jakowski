@@ -4792,6 +4792,15 @@ void Map::loadLVL_1_1()
     // ---------- LOAD LISTS ----------
     createMap();
 
+
+    if constexpr (Mario::loadTestingLevel)
+    {
+        structGND(0, 0, 69, 2);
+        addGoombas(200, 368, false);
+        addGoombas(400, 368, true);
+        return;
+    }
+
     // ----- MINIONS
     loadMinionsLVL_1_1();
 

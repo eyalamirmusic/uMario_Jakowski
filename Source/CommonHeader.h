@@ -9,4 +9,6 @@
 namespace Mario
 {
 using namespace EA;
+
+constexpr bool loadTestingLevel = true;
 }

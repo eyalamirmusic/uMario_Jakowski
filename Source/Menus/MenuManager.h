@@ -10,6 +10,7 @@
 
 namespace Mario
 {
+
 enum class MenuStates
 {
     MainMenu,
@@ -19,6 +20,14 @@ enum class MenuStates
     Options,
     Pause
 };
+
+constexpr MenuStates getInitialGameState()
+{
+    if constexpr (loadTestingLevel)
+        return MenuStates::Game;
+
+    return MenuStates::MainMenu;
+}
 
 class MenuManager
 {
@@ -47,7 +56,7 @@ public:
     OptionsMenu* getOptions();
 
 private:
-    MenuStates currentGameState = MenuStates::MainMenu;
+    MenuStates currentGameState = getInitialGameState();
     CIMG* activeOption = nullptr;
 
     MainMenu oMainMenu;
