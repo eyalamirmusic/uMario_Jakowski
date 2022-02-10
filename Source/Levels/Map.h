@@ -238,7 +238,7 @@ private:
     Player* oPlayer;
 
     // ----- MINIONS -----
-    EA::Vector<EA::Vector<Minion*>> lMinion;
+    MinionsVector lMinion;
 
     int getListID(int nXPos);
 

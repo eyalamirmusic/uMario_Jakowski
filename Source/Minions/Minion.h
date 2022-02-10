@@ -79,3 +79,5 @@ public:
     float currentJumpDistance = 0.f;
     float currentFallingSpeed = 2.2f;
 };
+
+using MinionsVector = EA::Vector<EA::Vector<Minion*>>;
