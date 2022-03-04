@@ -4,6 +4,54 @@
 
 namespace Mario::Collisions
 {
+bool areColliding(Minion* current, Minion* next)
+{
+    auto hitX = current->getXPos() + current->iHitBoxX;
+    auto hitY = current->getYPos() + current->iHitBoxY;
+
+    auto nextHitY = next->getYPos() + next->iHitBoxY;
+    auto nextHitX = next->getXPos() + next->iHitBoxX;
+
+    if (hitX >= next->getXPos() && hitX <= nextHitX
+        && ((current->getYPos() <= nextHitY && hitY >= nextHitY)
+            || (next->getYPos() <= hitY && nextHitY >= hitY)))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+void handleCollision(Minion* current, Minion* next)
+{
+    if (current->killOtherUnits && current->moveSpeed > 0 && next->minionSpawned)
+    {
+        next->setMinionState(-2);
+        current->collisionWithAnotherUnit();
+    }
+
+    if (next->killOtherUnits && next->moveSpeed > 0 && current->minionSpawned)
+    {
+        current->setMinionState(-2);
+        next->collisionWithAnotherUnit();
+    }
+
+    if (current->getYPos() - 4 <= next->getYPos() + next->iHitBoxY
+        && current->getYPos() + 4 >= next->getYPos() + next->iHitBoxY)
+    {
+        next->onAnotherMinion = true;
+    }
+    else if (next->getYPos() - 4 <= current->getYPos() + current->iHitBoxY
+             && next->getYPos() + 4 >= current->getYPos() + current->iHitBoxY)
+    {
+        current->onAnotherMinion = true;
+    }
+    else
+    {
+        current->collisionEffect();
+        next->collisionEffect();
+    }
+}
 void updateMinionCollisions(MinionsVector& lMinion)
 {
     for (int i = 0; i < lMinion.size(); i++)
@@ -25,72 +73,12 @@ void updateMinionCollisions(MinionsVector& lMinion)
                     {
                         if (current->getXPos() < next->getXPos())
                         {
-                            if (current->getXPos() + current->iHitBoxX
-                                    >= next->getXPos()
-                                && current->getXPos() + current->iHitBoxX
-                                       <= next->getXPos() + next->iHitBoxX
-                                && ((current->getYPos()
-                                         <= next->getYPos() + next->iHitBoxY
-                                     && current->getYPos() + current->iHitBoxY
-                                            >= next->getYPos() + next->iHitBoxY)
-                                    || (next->getYPos()
-                                            <= current->getYPos() + current->iHitBoxY
-                                        && next->getYPos() + next->iHitBoxY
-                                               >= current->getYPos()
-                                                      + current->iHitBoxY)))
-                            {
-                                if (current->killOtherUnits && current->moveSpeed > 0
-                                    && next->minionSpawned)
-                                {
-                                    next->setMinionState(-2);
-                                    current->collisionWithAnotherUnit();
-                                }
-
-                                if (next->killOtherUnits && next->moveSpeed > 0
-                                    && current->minionSpawned)
-                                {
-                                    current->setMinionState(-2);
-                                    next->collisionWithAnotherUnit();
-                                }
-
-                                if (current->getYPos() - 4
-                                        <= next->getYPos() + next->iHitBoxY
-                                    && current->getYPos() + 4
-                                           >= next->getYPos() + next->iHitBoxY)
-                                {
-                                    next->onAnotherMinion = true;
-                                }
-                                else if (next->getYPos() - 4
-                                             <= current->getYPos()
-                                                    + current->iHitBoxY
-                                         && next->getYPos() + 4
-                                                >= current->getYPos()
-                                                       + current->iHitBoxY)
-                                {
-                                    current->onAnotherMinion = true;
-                                }
-                                else
-                                {
-                                    current->collisionEffect();
-                                    next->collisionEffect();
-                                }
-                            }
+                            if (areColliding(current, next))
+                                handleCollision(current, next);
                         }
                         else
                         {
-                            if (next->getXPos() + next->iHitBoxX
-                                    >= current->getXPos()
-                                && next->getXPos() + next->iHitBoxX
-                                       <= current->getXPos() + current->iHitBoxX
-                                && ((current->getYPos()
-                                         <= next->getYPos() + next->iHitBoxY
-                                     && current->getYPos() + current->iHitBoxY
-                                            >= next->getYPos() + next->iHitBoxY)
-                                    || (next->getYPos()
-                                            <= current->getYPos() + current->iHitBoxY
-                                        && next->getYPos() + next->iHitBoxY
-                                               >= current->getYPos()
-                                                      + current->iHitBoxY)))
+                            if (areColliding(current, next))
                             {
                                 if (current->killOtherUnits && current->moveSpeed > 0
                                     && next->minionSpawned)
@@ -262,4 +250,5 @@ void updateMinionCollisions(MinionsVector& lMinion)
         }
     }
 }
+
 } // namespace Mario::Collisions
